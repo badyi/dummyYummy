@@ -20,7 +20,6 @@
 		8105631A2675661D00106C65 /* OperationCompletion.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810563192675661D00106C65 /* OperationCompletion.swift */; };
 		81056321267566F300106C65 /* NetworkHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81056320267566F300106C65 /* NetworkHelper.swift */; };
 		810563242675671B00106C65 /* NetworkHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810563232675671B00106C65 /* NetworkHelperProtocol.swift */; };
-		810563272675674000106C65 /* CancellationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810563262675674000106C65 /* CancellationProtocol.swift */; };
 		8105632A2675678B00106C65 /* Resource+Codable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810563292675678B00106C65 /* Resource+Codable.swift */; };
 		8105632D267567A800106C65 /* URLRequest+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105632C267567A800106C65 /* URLRequest+Resource.swift */; };
 		8105633626756C7C00106C65 /* FeedService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105633526756C7C00106C65 /* FeedService.swift */; };
@@ -31,6 +30,7 @@
 		8105635126766BAE00106C65 /* UIImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105635026766BAE00106C65 /* UIImageViewBuilder.swift */; };
 		814A8C01267D247300F46E1F /* UIViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C00267D247300F46E1F /* UIViewExtension.swift */; };
 		814A8C04267D24B200F46E1F /* FeedCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C03267D24B200F46E1F /* FeedCellConstants.swift */; };
+		814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C06267D45FA00F46E1F /* CancelationProtocol.swift */; };
 		815C5A3E26741ECC004A8F09 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A3D26741ECC004A8F09 /* TabCoordinator.swift */; };
 		815C5A5A2675138A004A8F09 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A592675138A004A8F09 /* FeedPresenter.swift */; };
 		815C5A5E267513C5004A8F09 /* FeedProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A5D267513C5004A8F09 /* FeedProtocols.swift */; };
@@ -57,7 +57,6 @@
 		810563192675661D00106C65 /* OperationCompletion.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OperationCompletion.swift; sourceTree = "<group>"; };
 		81056320267566F300106C65 /* NetworkHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelper.swift; sourceTree = "<group>"; };
 		810563232675671B00106C65 /* NetworkHelperProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkHelperProtocol.swift; sourceTree = "<group>"; };
-		810563262675674000106C65 /* CancellationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CancellationProtocol.swift; path = ../../../../../../CancellationProtocol.swift; sourceTree = "<group>"; };
 		810563292675678B00106C65 /* Resource+Codable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Resource+Codable.swift"; sourceTree = "<group>"; };
 		8105632C267567A800106C65 /* URLRequest+Resource.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "URLRequest+Resource.swift"; sourceTree = "<group>"; };
 		8105633526756C7C00106C65 /* FeedService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedService.swift; sourceTree = "<group>"; wrapsLines = 0; };
@@ -68,6 +67,7 @@
 		8105635026766BAE00106C65 /* UIImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewBuilder.swift; sourceTree = "<group>"; };
 		814A8C00267D247300F46E1F /* UIViewExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIViewExtension.swift; sourceTree = "<group>"; };
 		814A8C03267D24B200F46E1F /* FeedCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellConstants.swift; sourceTree = "<group>"; };
+		814A8C06267D45FA00F46E1F /* CancelationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelationProtocol.swift; sourceTree = "<group>"; };
 		815C5A3D26741ECC004A8F09 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		815C5A592675138A004A8F09 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
 		815C5A5D267513C5004A8F09 /* FeedProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedProtocols.swift; sourceTree = "<group>"; };
@@ -194,8 +194,8 @@
 			children = (
 				81056309267564A400106C65 /* Networking.swift */,
 				8105630D267564E100106C65 /* ReachabilityProtocol.swift */,
+				814A8C06267D45FA00F46E1F /* CancelationProtocol.swift */,
 				810563232675671B00106C65 /* NetworkHelperProtocol.swift */,
-				810563262675674000106C65 /* CancellationProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -345,9 +345,9 @@
 				810562E62675304700106C65 /* AppCoordinator.swift in Sources */,
 				814A8C04267D24B200F46E1F /* FeedCellConstants.swift in Sources */,
 				810562FF2675625500106C65 /* FeedServiceModel.swift in Sources */,
-				810563272675674000106C65 /* CancellationProtocol.swift in Sources */,
 				81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */,
 				815E6E75267418DF00CE6CC1 /* FeedViewController.swift in Sources */,
+				814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */,
 				8105630A267564A400106C65 /* Networking.swift in Sources */,
 				815E6E71267418DF00CE6CC1 /* AppDelegate.swift in Sources */,
 				8105634A26762DB000106C65 /* FeedRecipe.swift in Sources */,

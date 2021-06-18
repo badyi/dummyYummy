@@ -8,6 +8,6 @@
 import Foundation
 
 final class Constants {
-    static let xRapidapiKey: String = "90f6f849cemshbadd11076bcf8adp1a6c11jsnf448c16a6874"
+    static let xRapidapiKey: String = "e1c3ebf203mshbac6869d18635b3p1d2734jsn549926ba9aeb"
     static let xRapidapiHost: String = "spoonacular-recipe-food-nutrition-v1.p.rapidapi.com"
 }
