@@ -1,18 +1,19 @@
 //
-//  UIViewExtension.swift
+//  ShimmerUIImageView.swift
 //  dummyYummy
 //
-//  Created by badyi on 18.06.2021.
+//  Created by badyi on 19.06.2021.
 //
 
 import UIKit
 
-extension UIView {
+final class ShimmerUIImageView: UIImageView {
+    var gradientLayer: CAGradientLayer = CAGradientLayer()
+    
     func startShimmerAnimation() {
         let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 1.0).cgColor
         let gradientColorTwo : CGColor = UIColor(white: 0.95, alpha: 1.0).cgColor
         
-        let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.bounds
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 1.0)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
@@ -29,7 +30,7 @@ extension UIView {
         self.layer.addSublayer(gradientLayer)
     }
     
-    func removeAllSublayers() {
-        self.layer.sublayers?.removeAll()
+    func removeShimmerAnimation() {
+        gradientLayer.removeFromSuperlayer()
     }
 }
