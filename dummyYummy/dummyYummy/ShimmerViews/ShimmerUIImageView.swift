@@ -8,7 +8,7 @@
 import UIKit
 
 final class ShimmerUIImageView: UIImageView {
-    var gradientLayer: CAGradientLayer = CAGradientLayer()
+    let gradientLayer: CAGradientLayer = CAGradientLayer()
     
     func startShimmerAnimation() {
         let gradientColorOne : CGColor = UIColor(white: 0.85, alpha: 1.0).cgColor

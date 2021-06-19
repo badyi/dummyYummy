@@ -53,5 +53,20 @@ extension UIButtonBuilder {
         }
         return button
     }
+    
+    public func buildWithShimmer() -> ShimmerUIButton {
+        let button = ShimmerUIButton()
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.backgroundColor = backgroundColor
+        if let image = self.image {
+            button.contentMode = .center
+            button.setImage(image, for: .normal)
+        }
+        if largeConfig {
+            let largeConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .medium)
+            button.setPreferredSymbolConfiguration(largeConfig, forImageIn: .normal)
+        }
+        return button
+    }
 }
 

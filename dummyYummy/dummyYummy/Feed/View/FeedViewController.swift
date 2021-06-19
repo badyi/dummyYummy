@@ -80,7 +80,7 @@ extension FeedViewController: UICollectionViewDelegate {
 extension FeedViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        /// Если у нас еще не загрузились рецептики, то мы добавляем 10 пустых ячеек с анимацией
+        /// I
         presenter.recipesCount() == 0 ? 10 : presenter.recipesCount()
     }
     
@@ -91,6 +91,7 @@ extension FeedViewController: UICollectionViewDataSource {
         cell.startAnimation()
         if let recipe = presenter.recipe(at: indexPath) {
             cell.configView(with: recipe)
+            cell.stopAnimation()
         }
         return cell
     }

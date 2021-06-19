@@ -13,11 +13,8 @@ protocol FeedCoordinatorProtocol: Coordinator {
 
 final class FeedCoordinator: FeedCoordinatorProtocol {
     var finishDelegate: CoordinatorFinishDelegate?
-    
     var navigationController: UINavigationController
-    
     var childCoordinators: [Coordinator] = []
-    
     var type: CoordinatorType { .feed }
     
     func start() {
@@ -35,5 +32,6 @@ final class FeedCoordinator: FeedCoordinatorProtocol {
         presenter.view = feedViewController
         
         navigationController.pushViewController(feedViewController, animated: true)
+        
     }
 }

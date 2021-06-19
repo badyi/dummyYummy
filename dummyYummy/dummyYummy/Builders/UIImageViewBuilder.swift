@@ -43,4 +43,14 @@ extension UIImageViewBuilder {
         imageView.layer.cornerRadius = cornerRadius
         return imageView
     }
+    
+    public func buildWithShimmer() -> ShimmerUIImageView {
+        let imageView = ShimmerUIImageView()
+        imageView.translatesAutoresizingMaskIntoConstraints = translatesAutoresizingMaskIntoConstraints
+        imageView.backgroundColor = backgroundColor
+        imageView.clipsToBounds = clipToBounds
+        imageView.contentMode = contentMode
+        imageView.layer.cornerRadius = cornerRadius
+        return imageView
+    }
 }

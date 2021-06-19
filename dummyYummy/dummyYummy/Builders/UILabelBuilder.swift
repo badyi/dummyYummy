@@ -65,5 +65,18 @@ extension UILabelBuilder {
         }
         return label
     }
+    
+    public func buildWithShimmer() -> ShimmerUILabel {
+        let label = ShimmerUILabel()
+        label.numberOfLines = 0
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.backgroundColor = backgroundColor
+        label.textColor = textColor
+        label.text = text
+        if let font = self.font {
+            label.font = font
+        }
+        return label
+    }
 }
 

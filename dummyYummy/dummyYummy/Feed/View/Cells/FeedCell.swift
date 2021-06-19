@@ -13,48 +13,48 @@ final class FeedCell: UICollectionViewCell {
         return UIFont(name: "Helvetica-Bold", size: 17)!
     }
     
-    private lazy var imageView: UIImageView = {
+    private lazy var imageView: ShimmerUIImageView = {
         return UIImageViewBuilder()
             .backgroundColor(.white)
-            .build()
+            .buildWithShimmer()
     }()
     
-    lazy var title: UILabel = {
+    lazy var title: ShimmerUILabel = {
         return UILabelBuilder()
             .setFont(FeedCell.titleFont)
             .backgroundColor(.white)
             .textColor(.black)
-            .build()
+            .buildWithShimmer()
     }()
     
-    private lazy var healthScore: UILabel = {
+    private lazy var healthScore: ShimmerUILabel = {
         return UILabelBuilder()
             .backgroundColor(.white)
             .textColor(.black)
-            .build()
+            .buildWithShimmer()
     }()
     
-    private lazy var minutes: UILabel = {
+    private lazy var minutes: ShimmerUILabel = {
         return UILabelBuilder()
             .backgroundColor(.white)
             .textColor(.black)
-            .build()
+            .buildWithShimmer()
     }()
     
-    private lazy var favorite: UIButton = {
+    private lazy var favorite: ShimmerUIButton = {
         return UIButtonBuilder()
             .backgroundColor(.white)
             .setImage(UIImage(systemName: "suit.heart")!)
             .largeConfig(true)
-            .build()
+            .buildWithShimmer()
     }()
     
-    private lazy var share: UIButton = {
+    private lazy var share: ShimmerUIButton = {
         return UIButtonBuilder()
             .backgroundColor(.white)
             .largeConfig(true)
             .setImage(UIImage(systemName: "square.and.arrow.up")!)
-            .build()
+            .buildWithShimmer()
     }()
     
     // MARK: - View lifecycle methods
@@ -94,10 +94,12 @@ final class FeedCell: UICollectionViewCell {
 // MARK: - View setup methods
 extension FeedCell {
     func stopAnimation() {
-        imageView.removeAllSublayers()
-        title.removeAllSublayers()
-        healthScore.removeAllSublayers()
-        minutes.removeAllSublayers()
+        title.removeShimmerAnimation()
+        healthScore.removeShimmerAnimation()
+        minutes.removeShimmerAnimation()
+        
+        favorite.removeShimmerAnimation()
+        share.removeShimmerAnimation()
     }
     
     func startAnimation() {
@@ -105,6 +107,7 @@ extension FeedCell {
         title.startShimmerAnimation()
         healthScore.startShimmerAnimation()
         minutes.startShimmerAnimation()
+        
         favorite.startShimmerAnimation()
         share.startShimmerAnimation()
     }
@@ -114,24 +117,17 @@ extension FeedCell {
         title.text = recipe.title
         healthScore.text = "Health score: \(recipe.healthScore)"
         minutes.text = "Cooking minutes: \(recipe.readyInMinutes)"
-        
-        /// removeAllSublayers is method for deleting the shimmer animation from views
-        title.removeAllSublayers()
-        healthScore.removeAllSublayers()
-        minutes.removeAllSublayers()
-        //favorite.removeAllSublayers()
-        //share.removeAllSublayers()
     
         /// set default image if recipe dont have image url and remove shimmer animation
         if recipe.image == nil {
             imageView.image = UIImage(named: "noimage")!
-            imageView.removeAllSublayers()
+            imageView.removeShimmerAnimation()
             return
         }
         guard let imageData = recipe.imageData else { return }
         guard let image = UIImage(data: imageData) else { return }
         imageView.image = image
-        imageView.removeAllSublayers()
+        imageView.removeShimmerAnimation()
     }
     
     static func heightForCell(with title: String, width: CGFloat) -> CGFloat {
