@@ -10,7 +10,7 @@ import UIKit
 final class FeedViewController: UIViewController {
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionViewBuilder()
-            .backgroundColor(.white)
+            .backgroundColor(FeedViewControllerColors.backgroundColor)
             .delegate(self)
             .dataSource(self)
             .setInsets(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
@@ -34,6 +34,7 @@ final class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
+        //definesPresentationContext = true
     }
 }
 

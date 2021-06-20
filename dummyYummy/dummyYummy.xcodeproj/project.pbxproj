@@ -33,6 +33,12 @@
 		814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C06267D45FA00F46E1F /* CancelationProtocol.swift */; };
 		814A8C09267DFAC900F46E1F /* ShimmerUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C08267DFAC900F46E1F /* ShimmerUIImageView.swift */; };
 		814A8C0B267DFAD300F46E1F /* ShimmerUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0A267DFAD300F46E1F /* ShimmerUILabel.swift */; };
+		814A8C0D267F773700F46E1F /* UIColorHexExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0C267F773700F46E1F /* UIColorHexExtension.swift */; };
+		814A8C11267FB6DB00F46E1F /* FeedCellColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C10267FB6DB00F46E1F /* FeedCellColors.swift */; };
+		814A8C13267FB85C00F46E1F /* FeedViewControllerColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */; };
+		814A8C15267FB86D00F46E1F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C14267FB86D00F46E1F /* Colors.swift */; };
+		814A8C17267FD14900F46E1F /* ShimmerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C16267FD14900F46E1F /* ShimmerProtocol.swift */; };
+		814A8C19267FD91C00F46E1F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C18267FD91C00F46E1F /* SearchViewController.swift */; };
 		815C5A3E26741ECC004A8F09 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A3D26741ECC004A8F09 /* TabCoordinator.swift */; };
 		815C5A5A2675138A004A8F09 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A592675138A004A8F09 /* FeedPresenter.swift */; };
 		815C5A5E267513C5004A8F09 /* FeedProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A5D267513C5004A8F09 /* FeedProtocols.swift */; };
@@ -72,6 +78,12 @@
 		814A8C06267D45FA00F46E1F /* CancelationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelationProtocol.swift; sourceTree = "<group>"; };
 		814A8C08267DFAC900F46E1F /* ShimmerUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerUIImageView.swift; sourceTree = "<group>"; };
 		814A8C0A267DFAD300F46E1F /* ShimmerUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerUILabel.swift; sourceTree = "<group>"; };
+		814A8C0C267F773700F46E1F /* UIColorHexExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHexExtension.swift; sourceTree = "<group>"; };
+		814A8C10267FB6DB00F46E1F /* FeedCellColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellColors.swift; sourceTree = "<group>"; };
+		814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewControllerColors.swift; sourceTree = "<group>"; };
+		814A8C14267FB86D00F46E1F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		814A8C16267FD14900F46E1F /* ShimmerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerProtocol.swift; sourceTree = "<group>"; };
+		814A8C18267FD91C00F46E1F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
 		815C5A3D26741ECC004A8F09 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		815C5A592675138A004A8F09 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
 		815C5A5D267513C5004A8F09 /* FeedProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedProtocols.swift; sourceTree = "<group>"; };
@@ -129,6 +141,7 @@
 		810562F626754FC500106C65 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				814A8C10267FB6DB00F46E1F /* FeedCellColors.swift */,
 				814A8C03267D24B200F46E1F /* FeedCellConstants.swift */,
 				810562DE2675210300106C65 /* FeedCell.swift */,
 			);
@@ -215,6 +228,7 @@
 		814A8C02267D249100F46E1F /* ShimmerViews */ = {
 			isa = PBXGroup;
 			children = (
+				814A8C16267FD14900F46E1F /* ShimmerProtocol.swift */,
 				814A8C00267D247300F46E1F /* ShimmerUIButton.swift */,
 				814A8C08267DFAC900F46E1F /* ShimmerUIImageView.swift */,
 				814A8C0A267DFAD300F46E1F /* ShimmerUILabel.swift */,
@@ -233,6 +247,7 @@
 		815C5A582675136E004A8F09 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */,
 				815C5A5D267513C5004A8F09 /* FeedProtocols.swift */,
 				810562EB2675323B00106C65 /* Coordinator */,
 				8105634C26762DB500106C65 /* Model */,
@@ -262,8 +277,11 @@
 		815E6E6F267418DF00CE6CC1 /* dummyYummy */ = {
 			isa = PBXGroup;
 			children = (
+				814A8C18267FD91C00F46E1F /* SearchViewController.swift */,
 				81056341267573FD00106C65 /* Constants.swift */,
+				814A8C14267FB86D00F46E1F /* Colors.swift */,
 				810562E226752F8700106C65 /* CoordinatorProtocol.swift */,
+				814A8C0C267F773700F46E1F /* UIColorHexExtension.swift */,
 				814A8C02267D249100F46E1F /* ShimmerViews */,
 				810563082675646400106C65 /* ResourceNetworking */,
 				810562DC26751B7100106C65 /* Builders */,
@@ -347,12 +365,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				8105630E267564E100106C65 /* ReachabilityProtocol.swift in Sources */,
+				814A8C11267FB6DB00F46E1F /* FeedCellColors.swift in Sources */,
+				814A8C17267FD14900F46E1F /* ShimmerProtocol.swift in Sources */,
 				81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */,
 				810562E62675304700106C65 /* AppCoordinator.swift in Sources */,
 				814A8C04267D24B200F46E1F /* FeedCellConstants.swift in Sources */,
 				814A8C09267DFAC900F46E1F /* ShimmerUIImageView.swift in Sources */,
+				814A8C13267FB85C00F46E1F /* FeedViewControllerColors.swift in Sources */,
 				810562FF2675625500106C65 /* FeedServiceModel.swift in Sources */,
 				81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */,
+				814A8C19267FD91C00F46E1F /* SearchViewController.swift in Sources */,
 				815E6E75267418DF00CE6CC1 /* FeedViewController.swift in Sources */,
 				814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */,
 				8105630A267564A400106C65 /* Networking.swift in Sources */,
@@ -375,10 +397,12 @@
 				810562F0267537AE00106C65 /* FeedCoordinator.swift in Sources */,
 				815C5A5A2675138A004A8F09 /* FeedPresenter.swift in Sources */,
 				810562DF2675210300106C65 /* FeedCell.swift in Sources */,
+				814A8C15267FB86D00F46E1F /* Colors.swift in Sources */,
 				810563462675FFFE00106C65 /* FakeReachability.swift in Sources */,
 				814A8C0B267DFAD300F46E1F /* ShimmerUILabel.swift in Sources */,
 				810563112675657200106C65 /* Resource.swift in Sources */,
 				8105631A2675661D00106C65 /* OperationCompletion.swift in Sources */,
+				814A8C0D267F773700F46E1F /* UIColorHexExtension.swift in Sources */,
 				81056342267573FD00106C65 /* Constants.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

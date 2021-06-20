@@ -11,7 +11,7 @@ import UIKit
 struct FeedCellConstants {
     
     static let horizontalSpace: CGFloat = 5
-    static let verticalSpace: CGFloat = 5
+    static let verticalSpace: CGFloat = 1
     static let bottomSpace: CGFloat = 10
     static let topSpace: CGFloat = 10
     static let leadingSpace: CGFloat = 10
@@ -26,7 +26,7 @@ struct FeedCellConstants {
     
     /// Shadow and corner
     static let cornerRadius: CGFloat = 10
-    static let shadowRadius: CGFloat = 3
+    static let shadowRadius: CGFloat = 6
     static let shadowOpacity: Float = 0.4
     static let shadowOffsetWidth: CGFloat = 0
     static let shadowOffsetHeight: CGFloat = 5

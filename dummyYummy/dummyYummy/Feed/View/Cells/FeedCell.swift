@@ -15,44 +15,46 @@ final class FeedCell: UICollectionViewCell {
     
     private lazy var imageView: ShimmerUIImageView = {
         return UIImageViewBuilder()
-            .backgroundColor(.white)
+            .backgroundColor(FeedCellColors.backgroundColor)
             .buildWithShimmer()
     }()
     
     lazy var title: ShimmerUILabel = {
         return UILabelBuilder()
             .setFont(FeedCell.titleFont)
-            .backgroundColor(.white)
-            .textColor(.black)
+            .backgroundColor(FeedCellColors.backgroundColor)
+            .textColor(FeedCellColors.titleColor)
             .buildWithShimmer()
     }()
     
     private lazy var healthScore: ShimmerUILabel = {
         return UILabelBuilder()
-            .backgroundColor(.white)
-            .textColor(.black)
+            .backgroundColor(FeedCellColors.backgroundColor)
+            .textColor(FeedCellColors.additinalTextColor)
             .buildWithShimmer()
     }()
     
     private lazy var minutes: ShimmerUILabel = {
         return UILabelBuilder()
-            .backgroundColor(.white)
-            .textColor(.black)
+            .backgroundColor(FeedCellColors.backgroundColor)
+            .textColor(FeedCellColors.additinalTextColor)
             .buildWithShimmer()
     }()
     
     private lazy var favorite: ShimmerUIButton = {
         return UIButtonBuilder()
-            .backgroundColor(.white)
+            .backgroundColor(FeedCellColors.backgroundColor)
             .setImage(UIImage(systemName: "suit.heart")!)
             .largeConfig(true)
+            .tintColor(FeedCellColors.buttonTintColor)
             .buildWithShimmer()
     }()
     
     private lazy var share: ShimmerUIButton = {
         return UIButtonBuilder()
-            .backgroundColor(.white)
+            .backgroundColor(FeedCellColors.backgroundColor)
             .largeConfig(true)
+            .tintColor(FeedCellColors.buttonTintColor)
             .setImage(UIImage(systemName: "square.and.arrow.up")!)
             .buildWithShimmer()
     }()
@@ -113,7 +115,6 @@ extension FeedCell {
     }
     
     func configView(with recipe: FeedRecipe) {
-        contentView.backgroundColor = .white
         title.text = recipe.title
         healthScore.text = "Health score: \(recipe.healthScore)"
         minutes.text = "Cooking minutes: \(recipe.readyInMinutes)"
@@ -134,14 +135,16 @@ extension FeedCell {
         let attributedString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: titleFont])
         let horizontalInsets = FeedCellConstants.leadingSpace + FeedCellConstants.trailingSpace
         
-        let rect = attributedString.boundingRect(with: CGSize(width: width - horizontalInsets,
-                                                 height: .greatestFiniteMagnitude),
-                                                 options: .usesLineFragmentOrigin, context: nil)
+        let rect = attributedString.boundingRect(with:
+                CGSize(width: width - horizontalInsets, height: .greatestFiniteMagnitude),
+                options: .usesLineFragmentOrigin, context: nil)
+        
         var height = rect.height + FeedCellConstants.imageHeight +
-            (FeedCellConstants.verticalSpace * 3) +
+            (FeedCellConstants.verticalSpace * 2) +
             FeedCellConstants.minutesHeight +
             FeedCellConstants.healthScoreHeight +
-            FeedCellConstants.bottomSpace
+            FeedCellConstants.bottomSpace +
+            FeedCellConstants.topSpace
         
         if title == "" {
             height += FeedCellConstants.minimalTitleHeight - rect.height
@@ -166,6 +169,7 @@ extension FeedCell {
     }
     
     private func configView() {
+        contentView.backgroundColor = FeedCellColors.backgroundColor
         // Apply rounded corners to contentView
         contentView.layer.cornerRadius = FeedCellConstants.cornerRadius
         contentView.layer.masksToBounds = true
@@ -177,7 +181,7 @@ extension FeedCell {
         /// Apply a shadow
         layer.shadowRadius = FeedCellConstants.shadowRadius
         layer.shadowOpacity = FeedCellConstants.shadowOpacity
-        layer.shadowColor = UIColor.black.cgColor
+        layer.shadowColor = FeedCellColors.shadowColor.cgColor
         layer.shadowOffset = CGSize(width: FeedCellConstants.shadowOffsetWidth, height: FeedCellConstants.shadowOffsetHeight)
     }
     

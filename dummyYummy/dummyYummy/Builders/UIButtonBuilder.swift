@@ -12,9 +12,16 @@ final class UIButtonBuilder {
     public private(set) var backgroundColor: UIColor = .white
     public private(set) var image: UIImage?
     public private(set) var largeConfig: Bool = false
+    public private(set) var tintColor: UIColor = .systemBlue
 }
 
 extension UIButtonBuilder {
+    @discardableResult
+    public func tintColor(_ color: UIColor) -> UIButtonBuilder {
+        self.tintColor = color
+        return self
+    }
+    
     @discardableResult
     public func setImage(_ image: UIImage) -> UIButtonBuilder {
         self.image = image
@@ -40,30 +47,24 @@ extension UIButtonBuilder {
     }
     
     public func build() -> UIButton {
-        let button = UIButton()
-        button.translatesAutoresizingMaskIntoConstraints = false
-        button.backgroundColor = backgroundColor
-        if let image = self.image {
-            button.contentMode = .center
-            button.setImage(image, for: .normal)
-        }
-        if largeConfig {
-            let largeConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .medium)
-            button.setPreferredSymbolConfiguration(largeConfig, forImageIn: .normal)
-        }
-        return button
+        return build(UIButton())
     }
     
     public func buildWithShimmer() -> ShimmerUIButton {
-        let button = ShimmerUIButton()
+        return build(ShimmerUIButton()) as! ShimmerUIButton
+    }
+    
+    private func build(_ button: UIButton) -> UIButton {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = backgroundColor
+        button.tintColor = tintColor
+        
         if let image = self.image {
             button.contentMode = .center
             button.setImage(image, for: .normal)
         }
         if largeConfig {
-            let largeConfig = UIImage.SymbolConfiguration(pointSize: 25, weight: .medium, scale: .medium)
+            let largeConfig = UIImage.SymbolConfiguration(pointSize: 22, weight: .medium, scale: .medium)
             button.setPreferredSymbolConfiguration(largeConfig, forImageIn: .normal)
         }
         return button

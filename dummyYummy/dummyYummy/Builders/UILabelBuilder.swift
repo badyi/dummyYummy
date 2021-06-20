@@ -54,20 +54,14 @@ extension UILabelBuilder {
     }
     
     public func build() -> UILabel {
-        let label = UILabel()
-        label.numberOfLines = 0
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.backgroundColor = backgroundColor
-        label.textColor = textColor
-        label.text = text
-        if let font = self.font {
-            label.font = font
-        }
-        return label
+        return build(UILabel())
     }
     
     public func buildWithShimmer() -> ShimmerUILabel {
-        let label = ShimmerUILabel()
+        return build(ShimmerUILabel()) as! ShimmerUILabel
+    }
+    
+    private func build(_ label: UILabel) -> UILabel {
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = backgroundColor
