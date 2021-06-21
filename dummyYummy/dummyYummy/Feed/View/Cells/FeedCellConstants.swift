@@ -11,7 +11,7 @@ import UIKit
 struct FeedCellConstants {
     
     static let horizontalSpace: CGFloat = 5
-    static let verticalSpace: CGFloat = 1
+    static let verticalSpace: CGFloat = 2
     static let bottomSpace: CGFloat = 10
     static let topSpace: CGFloat = 10
     static let leadingSpace: CGFloat = 10

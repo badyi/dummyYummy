@@ -15,9 +15,16 @@ final class UICollectionViewBuilder {
     public private(set) var layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
     public private(set) var alwaysBounceVertical: Bool = true
     public private(set) var insets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
+    public private(set) var showsVerticalScrollIndicator: Bool = false
 }
 
 extension UICollectionViewBuilder {
+    @discardableResult
+    public func showsVerticalScrollIndicator(_ flag: Bool) -> UICollectionViewBuilder {
+        self.showsVerticalScrollIndicator = flag
+        return self
+    }
+    
     @discardableResult
     public func setInsets(_ insets: UIEdgeInsets) -> UICollectionViewBuilder {
         self.insets = insets
@@ -62,7 +69,7 @@ extension UICollectionViewBuilder {
 
     public func build() -> UICollectionView {
         let collectionView = UICollectionView(frame: .zero, collectionViewLayout: layout)
-        
+        collectionView.showsVerticalScrollIndicator = showsVerticalScrollIndicator
         collectionView.translatesAutoresizingMaskIntoConstraints = translatesAutoresizingMaskIntoConstraints
         collectionView.backgroundColor = backgroundColor
         collectionView.alwaysBounceVertical = alwaysBounceVertical
