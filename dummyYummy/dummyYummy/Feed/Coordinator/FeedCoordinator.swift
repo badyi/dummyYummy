@@ -26,29 +26,24 @@ final class FeedCoordinator: FeedCoordinatorProtocol {
     }
     
     func showFeedViewController() {
-        let service = FeedService()
-        let presenter = FeedPresenter(with: service)
-        let feedViewController = FeedViewController(with: presenter)
-        presenter.view = feedViewController
-        feedViewController.title = "Browes food"
-        feedViewController.navigationItem.largeTitleDisplayMode = .always
-        navigationController.navigationBar.prefersLargeTitles = true
+        let feedService = FeedService()
+        let feedPresenter = FeedPresenter(with: feedService)
+        let feedViewController = FeedViewController(with: feedPresenter)
+        feedPresenter.view = feedViewController
+
+        let searchService = SearchService()
+        let searchPresenter = SearchPresenter(with: searchService)
+        let result = SearchViewController(with: searchPresenter)
+        searchPresenter.view = result
         
-        let searchController = UISearchController(searchResultsController: SearchViewController())
+        let searchController = UISearchController(searchResultsController: result)
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.searchBarStyle = .minimal
         searchController.definesPresentationContext = true
-        feedViewController.navigationController?.navigationBar.isTranslucent = false
-        navigationController.navigationBar.backgroundColor = UIColor(hexString: "#121212")
-        navigationController.navigationBar.barTintColor = UIColor(hexString: "#121212")
-        navigationController.navigationBar.tintColor = Colors.wisteria
-        navigationController.navigationBar.isTranslucent = false
-        let textAttributes = [NSAttributedString.Key.foregroundColor: Colors.wisteria]
-        navigationController.navigationBar.titleTextAttributes = textAttributes
-        navigationController.navigationBar.largeTitleTextAttributes = textAttributes
+        searchController.searchResultsUpdater = result
         
-        feedViewController.navigationItem.hidesSearchBarWhenScrolling = false
         feedViewController.navigationItem.searchController = searchController
+        //result.delegate = feedViewController
         
         navigationController.pushViewController(feedViewController, animated: true)
     }

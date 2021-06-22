@@ -9,9 +9,6 @@ import UIKit
 
 final class FeedCell: UICollectionViewCell {
     static let id = "FeedCell"
-    static var titleFont: UIFont {
-        return UIFont(name: "Helvetica-Bold", size: 17)!
-    }
     
     private lazy var imageView: ShimmerUIImageView = {
         return UIImageViewBuilder()
@@ -21,7 +18,7 @@ final class FeedCell: UICollectionViewCell {
     
     lazy var title: ShimmerUILabel = {
         return UILabelBuilder()
-            .setFont(FeedCell.titleFont)
+            .setFont(FeedCellConstants.titleFont)
             .backgroundColor(FeedCellColors.backgroundColor)
             .textColor(FeedCellColors.titleColor)
             .buildWithShimmer()
@@ -125,20 +122,24 @@ extension FeedCell {
             imageView.removeShimmerAnimation()
             return
         }
+        
         guard let imageData = recipe.imageData else { return }
         guard let image = UIImage(data: imageData) else { return }
+        
         imageView.image = image
         imageView.removeShimmerAnimation()
     }
     
     static func heightForCell(with title: String, width: CGFloat) -> CGFloat {
-        let attributedString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: titleFont])
+        /// insets from left and right edges
         let horizontalInsets = FeedCellConstants.leadingSpace + FeedCellConstants.trailingSpace
         
+        let attributedString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: FeedCellConstants.titleFont])
         let rect = attributedString.boundingRect(with:
                 CGSize(width: width - horizontalInsets, height: .greatestFiniteMagnitude),
                 options: .usesLineFragmentOrigin, context: nil)
         
+        /// the computed height needed for the titleLabel
         var height = rect.height + FeedCellConstants.imageHeight +
             (FeedCellConstants.verticalSpace * 2) +
             FeedCellConstants.minutesHeight +
@@ -146,6 +147,7 @@ extension FeedCell {
             FeedCellConstants.bottomSpace +
             FeedCellConstants.topSpace
         
+        /// in case  title is empty, we set the default size
         if title == "" {
             height += FeedCellConstants.minimalTitleHeight - rect.height
         }

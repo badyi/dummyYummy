@@ -7,12 +7,6 @@
 
 import UIKit
 
-protocol FeedServiceProtocol {
-    func loadRandomRecipes(_ count: Int, completion: @escaping(OperationCompletion<FeedRecipeResponse>) -> ())
-    func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> ())
-    func cancelRequest(at index: IndexPath)
-}
-
 enum CancelType {
     case imageLoad
 }

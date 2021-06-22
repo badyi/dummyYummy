@@ -21,6 +21,15 @@ final class FeedPresenter {
 
 // MARK: - FeedPresenterProtocol
 extension FeedPresenter: FeedPresenterProtocol {
+    func viewWillAppear() {
+        view?.configNavigation()
+    }
+    
+    func viewDidLoad() {
+        view?.setupView()
+        loadRandomRecipes()
+    }
+    
     func recipe(at index: IndexPath) -> FeedRecipe? {
         if index.row < 0 || index.row >= recipes.count {
             return nil
@@ -30,11 +39,6 @@ extension FeedPresenter: FeedPresenterProtocol {
     
     func recipesCount() -> Int {
         return recipes.count
-    }
-    
-    func viewDidLoad() {
-        view?.setupView()
-        loadRandomRecipes()
     }
     
     func willDisplayCell(at index: IndexPath) {

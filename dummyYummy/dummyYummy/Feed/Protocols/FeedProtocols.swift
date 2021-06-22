@@ -12,13 +12,21 @@ protocol FeedViewProtocol: AnyObject {
     func setupView()
     func reloadCollection()
     func reloadItems(at indexPaths: [IndexPath])
+    func configNavigation()
 }
 
 protocol FeedPresenterProtocol: AnyObject {
     init (with service: FeedServiceProtocol)
     func viewDidLoad()
+    func viewWillAppear()
     func willDisplayCell(at index: IndexPath)
     func didEndDisplayCell(at index: IndexPath)
     func recipesCount() -> Int
     func recipe(at index: IndexPath) -> FeedRecipe?
+}
+
+protocol FeedServiceProtocol {
+    func loadRandomRecipes(_ count: Int, completion: @escaping(OperationCompletion<FeedRecipeResponse>) -> ())
+    func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> ())
+    func cancelRequest(at index: IndexPath)
 }

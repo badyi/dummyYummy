@@ -17,6 +17,7 @@ final class Colors {
     static let eclipse = UIColor(hexString: "#393939")
     static let pureBlack = UIColor(hexString: "#000000")
     static let veryLightGray = UIColor(hexString: "#CBCBCB")
+    static let black = UIColor(hexString: "#121212")
     
     /// kinda white colors
     static let white = UIColor.white

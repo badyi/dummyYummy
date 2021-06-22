@@ -46,6 +46,9 @@
 		815E6E75267418DF00CE6CC1 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815E6E74267418DF00CE6CC1 /* FeedViewController.swift */; };
 		815E6E7A267418E600CE6CC1 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 815E6E79267418E600CE6CC1 /* Assets.xcassets */; };
 		815E6E7D267418E600CE6CC1 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 815E6E7B267418E600CE6CC1 /* LaunchScreen.storyboard */; };
+		81940BED268268080031210C /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BEC268268080031210C /* SearchPresenter.swift */; };
+		81940BEF2682689D0031210C /* SearchProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BEE2682689D0031210C /* SearchProtocols.swift */; };
+		81940BF22682735C0031210C /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BF12682735C0031210C /* SearchService.swift */; };
 		81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */; };
 		81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */; };
 		81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */; };
@@ -93,6 +96,9 @@
 		815E6E79267418E600CE6CC1 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		815E6E7C267418E600CE6CC1 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		815E6E7E267418E600CE6CC1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		81940BEC268268080031210C /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
+		81940BEE2682689D0031210C /* SearchProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocols.swift; sourceTree = "<group>"; };
+		81940BF12682735C0031210C /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
 		81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldBuilder.swift; sourceTree = "<group>"; };
 		81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelBuilder.swift; sourceTree = "<group>"; };
 		81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonBuilder.swift; sourceTree = "<group>"; };
@@ -159,8 +165,9 @@
 		810562FA26754FDB00106C65 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				810562F626754FC500106C65 /* Cells */,
+				814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */,
 				815E6E74267418DF00CE6CC1 /* FeedViewController.swift */,
+				810562F626754FC500106C65 /* Cells */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -247,8 +254,7 @@
 		815C5A582675136E004A8F09 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
-				814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */,
-				815C5A5D267513C5004A8F09 /* FeedProtocols.swift */,
+				81940BF0268268AB0031210C /* Protocols */,
 				810562EB2675323B00106C65 /* Coordinator */,
 				8105634C26762DB500106C65 /* Model */,
 				81056303267562BA00106C65 /* Service */,
@@ -277,7 +283,6 @@
 		815E6E6F267418DF00CE6CC1 /* dummyYummy */ = {
 			isa = PBXGroup;
 			children = (
-				814A8C18267FD91C00F46E1F /* SearchViewController.swift */,
 				81056341267573FD00106C65 /* Constants.swift */,
 				814A8C14267FB86D00F46E1F /* Colors.swift */,
 				810562E226752F8700106C65 /* CoordinatorProtocol.swift */,
@@ -287,12 +292,32 @@
 				810562DC26751B7100106C65 /* Builders */,
 				810562E9267531B800106C65 /* Application */,
 				815C5A562675134D004A8F09 /* Coordinator */,
+				81940BEB268267F00031210C /* Search */,
 				815C5A582675136E004A8F09 /* Feed */,
 				815E6E79267418E600CE6CC1 /* Assets.xcassets */,
 				815E6E7B267418E600CE6CC1 /* LaunchScreen.storyboard */,
 				815E6E7E267418E600CE6CC1 /* Info.plist */,
 			);
 			path = dummyYummy;
+			sourceTree = "<group>";
+		};
+		81940BEB268267F00031210C /* Search */ = {
+			isa = PBXGroup;
+			children = (
+				81940BEE2682689D0031210C /* SearchProtocols.swift */,
+				81940BEC268268080031210C /* SearchPresenter.swift */,
+				814A8C18267FD91C00F46E1F /* SearchViewController.swift */,
+				81940BF12682735C0031210C /* SearchService.swift */,
+			);
+			path = Search;
+			sourceTree = "<group>";
+		};
+		81940BF0268268AB0031210C /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				815C5A5D267513C5004A8F09 /* FeedProtocols.swift */,
+			);
+			path = Protocols;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -367,12 +392,14 @@
 				8105630E267564E100106C65 /* ReachabilityProtocol.swift in Sources */,
 				814A8C11267FB6DB00F46E1F /* FeedCellColors.swift in Sources */,
 				814A8C17267FD14900F46E1F /* ShimmerProtocol.swift in Sources */,
+				81940BF22682735C0031210C /* SearchService.swift in Sources */,
 				81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */,
 				810562E62675304700106C65 /* AppCoordinator.swift in Sources */,
 				814A8C04267D24B200F46E1F /* FeedCellConstants.swift in Sources */,
 				814A8C09267DFAC900F46E1F /* ShimmerUIImageView.swift in Sources */,
 				814A8C13267FB85C00F46E1F /* FeedViewControllerColors.swift in Sources */,
 				810562FF2675625500106C65 /* FeedServiceModel.swift in Sources */,
+				81940BEF2682689D0031210C /* SearchProtocols.swift in Sources */,
 				81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */,
 				814A8C19267FD91C00F46E1F /* SearchViewController.swift in Sources */,
 				815E6E75267418DF00CE6CC1 /* FeedViewController.swift in Sources */,
@@ -385,6 +412,7 @@
 				814A8C01267D247300F46E1F /* ShimmerUIButton.swift in Sources */,
 				810563142675659600106C65 /* HttpMethod.swift in Sources */,
 				8105633626756C7C00106C65 /* FeedService.swift in Sources */,
+				81940BED268268080031210C /* SearchPresenter.swift in Sources */,
 				815C5A3E26741ECC004A8F09 /* TabCoordinator.swift in Sources */,
 				81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */,
 				81056321267566F300106C65 /* NetworkHelper.swift in Sources */,

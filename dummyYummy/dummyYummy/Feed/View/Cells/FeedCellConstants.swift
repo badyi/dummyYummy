@@ -30,4 +30,7 @@ struct FeedCellConstants {
     static let shadowOpacity: Float = 0.4
     static let shadowOffsetWidth: CGFloat = 0
     static let shadowOffsetHeight: CGFloat = 5
+    
+    /// Fonts
+    static let titleFont: UIFont = UIFont(name: "Helvetica-Bold", size: 17)!
 }

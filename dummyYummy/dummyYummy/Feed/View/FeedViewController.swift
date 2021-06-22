@@ -8,6 +8,7 @@
 import UIKit
 
 final class FeedViewController: UIViewController {
+    
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionViewBuilder()
             .backgroundColor(FeedViewControllerColors.backgroundColor)
@@ -34,14 +35,21 @@ final class FeedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
-        //definesPresentationContext = true
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        presenter.viewWillAppear()
     }
 }
 
 // MARK: - FeedViewProtocol
 extension FeedViewController: FeedViewProtocol {
     func setupView() {
+        title = "Browes food"
+        definesPresentationContext = true
         setupCollectionView()
+        setupNavigation()
     }
     
     func reloadCollection() {
@@ -64,6 +72,28 @@ extension FeedViewController {
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
+    
+    private func setupNavigation() {
+    }
+    
+    func configNavigation() {
+        let textAttributes = [NSAttributedString.Key.foregroundColor: Colors.wisteria]
+        navigationController?.navigationBar.titleTextAttributes = textAttributes
+        navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
+        navigationController?.navigationBar.backgroundColor = FeedViewControllerColors.navBarBackgroundColor
+        
+        navigationController?.navigationBar.barTintColor = FeedViewControllerColors.navBarBarTintColor
+        navigationController?.navigationBar.tintColor = FeedViewControllerColors.navBarTintColor
+        navigationController?.navigationBar.prefersLargeTitles = true
+        
+        /// need nav bar back view image to avoid some ios bag with search result controller frame on search bar tap
+        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
+        navigationController?.navigationBar.shadowImage = UIImage()
+        navigationController?.view.backgroundColor = FeedViewControllerColors.navBarBarTintColor
+        
+        navigationItem.hidesSearchBarWhenScrolling = false
+        navigationItem.largeTitleDisplayMode = .always
+    }
 }
 
 // MARK: - UICollectionViewDelegate
@@ -81,7 +111,8 @@ extension FeedViewController: UICollectionViewDelegate {
 extension FeedViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        /// I
+        /// in case the recipes haven't loaded yet
+        /// we put a few fake cells with animations
         presenter.recipesCount() == 0 ? 10 : presenter.recipesCount()
     }
     
@@ -120,3 +151,10 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
         return 15
     }
 }
+
+// MARK: - UISearchBarDelegate
+//extension FeedViewController: UISearchBarDelegate {
+//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+//        navigationController?.pushViewController(SearchViewController(), animated: false)
+//    }
+//}
