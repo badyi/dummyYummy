@@ -33,4 +33,7 @@ struct FeedCellConstants {
     
     /// Fonts
     static let titleFont: UIFont = UIFont(name: "Helvetica-Bold", size: 17)!
+    
+    /// images
+    static let defaultCellImage = UIImage(named: "defaultFoodImage")!
 }

@@ -5,7 +5,7 @@
 //  Created by badyi on 13.06.2021.
 //
 
-import Foundation
+import UIKit
 
 final class Constants {
     static let xRapidapiKey: String = "e1c3ebf203mshbac6869d18635b3p1d2734jsn549926ba9aeb"

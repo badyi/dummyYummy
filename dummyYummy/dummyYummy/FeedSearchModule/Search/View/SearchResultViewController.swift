@@ -7,7 +7,9 @@
 
 import UIKit
 
-final class SearchViewController: UIViewController {
+final class SearchResultViewController: UIViewController {
+    
+    var navigationDelegate: SearchNavigationDelegate?
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionViewBuilder()
@@ -20,15 +22,16 @@ final class SearchViewController: UIViewController {
     }()
     
     var presenter: SearchPresenterProtocol
-    
+
     required init(with presenter: SearchPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
-    
+
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,7 +47,7 @@ final class SearchViewController: UIViewController {
     }
 }
 
-extension SearchViewController: SearchViewProtocol {
+extension SearchResultViewController: SearchViewProtocol {
     func setupView() {
         view.backgroundColor = .systemBlue
         setupCollectionView()
@@ -63,7 +66,7 @@ extension SearchViewController: SearchViewProtocol {
     }
 }
 
-extension SearchViewController {
+extension SearchResultViewController {
     private func setupCollectionView() {
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
@@ -75,10 +78,10 @@ extension SearchViewController {
     }
 }
 
-extension SearchViewController: UICollectionViewDelegate {
+extension SearchResultViewController: UICollectionViewDelegate {
 }
 
-extension SearchViewController: UICollectionViewDataSource {
+extension SearchResultViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         1
     }
@@ -88,11 +91,17 @@ extension SearchViewController: UICollectionViewDataSource {
     }
 }
 
-extension SearchViewController: UISearchResultsUpdating {
+extension SearchResultViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
             return
         }
         print(text)
+    }
+}
+
+extension SearchResultViewController: UISearchBarDelegate {
+    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
+        navigationDelegate?.didTapSearchSettingsButton(presenter.refinements)
     }
 }

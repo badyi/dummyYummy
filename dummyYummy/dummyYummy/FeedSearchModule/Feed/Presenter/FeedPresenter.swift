@@ -13,7 +13,7 @@ final class FeedPresenter {
     var recipes: [FeedRecipe]
     private let randomRecipesCount: Int = 100
     
-    required init(with service: FeedServiceProtocol) {
+    init(with service: FeedServiceProtocol) {
         self.service = service
         recipes = []
     }
@@ -23,6 +23,10 @@ final class FeedPresenter {
 extension FeedPresenter: FeedPresenterProtocol {
     func viewWillAppear() {
         view?.configNavigation()
+        view?.reloadCollection()
+    }
+    
+    func viewWillDisappear() {
     }
     
     func viewDidLoad() {

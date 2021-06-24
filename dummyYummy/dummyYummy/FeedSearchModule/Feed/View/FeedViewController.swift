@@ -22,7 +22,7 @@ final class FeedViewController: UIViewController {
     
     var presenter: FeedPresenterProtocol
     
-    required init(with presenter: FeedPresenterProtocol) {
+    init(with presenter: FeedPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -41,12 +41,18 @@ final class FeedViewController: UIViewController {
         super.viewWillAppear(animated)
         presenter.viewWillAppear()
     }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        presenter.viewWillDisappear()
+    }
 }
 
 // MARK: - FeedViewProtocol
 extension FeedViewController: FeedViewProtocol {
+    
     func setupView() {
-        title = "Browes food"
+        title = "Browes recipes"
         definesPresentationContext = true
         setupCollectionView()
         setupNavigation()
@@ -68,7 +74,7 @@ extension FeedViewController {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
     }
@@ -98,6 +104,7 @@ extension FeedViewController {
 
 // MARK: - UICollectionViewDelegate
 extension FeedViewController: UICollectionViewDelegate {
+    
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         presenter.willDisplayCell(at: indexPath)
     }

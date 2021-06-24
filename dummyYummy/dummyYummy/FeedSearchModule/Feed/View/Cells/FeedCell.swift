@@ -118,7 +118,7 @@ extension FeedCell {
     
         /// set default image if recipe dont have image url and remove shimmer animation
         if recipe.image == nil {
-            imageView.image = UIImage(named: "noimage")!
+            imageView.image = FeedCellConstants.defaultCellImage
             imageView.removeShimmerAnimation()
             return
         }

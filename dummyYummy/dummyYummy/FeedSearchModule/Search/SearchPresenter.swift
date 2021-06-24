@@ -9,12 +9,14 @@ import UIKit
 
 final class SearchPresenter {
     weak var view: SearchViewProtocol?
-    var service: SearchServiceProtocol
+    private var service: SearchServiceProtocol
+    public private(set) var refinements: SearchRefinements
     //var recipes: [FeedRecipe]
     //private let randomRecipesCount: Int = 100
     
-    required init(with service: SearchServiceProtocol) {
+    init(with service: SearchServiceProtocol) {
         self.service = service
+        refinements = SearchRefinements()
     }
 }
 

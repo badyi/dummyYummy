@@ -19,6 +19,7 @@ protocol FeedPresenterProtocol: AnyObject {
     init (with service: FeedServiceProtocol)
     func viewDidLoad()
     func viewWillAppear()
+    func viewWillDisappear()
     func willDisplayCell(at index: IndexPath)
     func didEndDisplayCell(at index: IndexPath)
     func recipesCount() -> Int

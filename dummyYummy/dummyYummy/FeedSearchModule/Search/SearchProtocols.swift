@@ -16,6 +16,7 @@ protocol SearchViewProtocol: AnyObject {
 }
 
 protocol SearchPresenterProtocol: AnyObject {
+    var refinements: SearchRefinements { get }
     init (with service: SearchServiceProtocol)
     func viewDidLoad()
     func viewWillAppear()
@@ -27,4 +28,8 @@ protocol SearchPresenterProtocol: AnyObject {
 
 protocol SearchServiceProtocol {
     
+}
+
+protocol SearchNavigationDelegate {
+    func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements)
 }

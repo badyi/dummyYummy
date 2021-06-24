@@ -11,7 +11,7 @@
 		810562DF2675210300106C65 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562DE2675210300106C65 /* FeedCell.swift */; };
 		810562E326752F8700106C65 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562E226752F8700106C65 /* CoordinatorProtocol.swift */; };
 		810562E62675304700106C65 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562E52675304700106C65 /* AppCoordinator.swift */; };
-		810562F0267537AE00106C65 /* FeedCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562EF267537AE00106C65 /* FeedCoordinator.swift */; };
+		810562F0267537AE00106C65 /* FeedSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562EF267537AE00106C65 /* FeedSearchCoordinator.swift */; };
 		810562FF2675625500106C65 /* FeedServiceModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562FE2675625500106C65 /* FeedServiceModel.swift */; };
 		8105630A267564A400106C65 /* Networking.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81056309267564A400106C65 /* Networking.swift */; };
 		8105630E267564E100106C65 /* ReachabilityProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105630D267564E100106C65 /* ReachabilityProtocol.swift */; };
@@ -38,7 +38,7 @@
 		814A8C13267FB85C00F46E1F /* FeedViewControllerColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */; };
 		814A8C15267FB86D00F46E1F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C14267FB86D00F46E1F /* Colors.swift */; };
 		814A8C17267FD14900F46E1F /* ShimmerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C16267FD14900F46E1F /* ShimmerProtocol.swift */; };
-		814A8C19267FD91C00F46E1F /* SearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C18267FD91C00F46E1F /* SearchViewController.swift */; };
+		814A8C19267FD91C00F46E1F /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C18267FD91C00F46E1F /* SearchResultViewController.swift */; };
 		815C5A3E26741ECC004A8F09 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A3D26741ECC004A8F09 /* TabCoordinator.swift */; };
 		815C5A5A2675138A004A8F09 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A592675138A004A8F09 /* FeedPresenter.swift */; };
 		815C5A5E267513C5004A8F09 /* FeedProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A5D267513C5004A8F09 /* FeedProtocols.swift */; };
@@ -49,6 +49,12 @@
 		81940BED268268080031210C /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BEC268268080031210C /* SearchPresenter.swift */; };
 		81940BEF2682689D0031210C /* SearchProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BEE2682689D0031210C /* SearchProtocols.swift */; };
 		81940BF22682735C0031210C /* SearchService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BF12682735C0031210C /* SearchService.swift */; };
+		81940BF726834ACB0031210C /* FeedSearchCoordinatorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BF626834ACB0031210C /* FeedSearchCoordinatorConstants.swift */; };
+		81940BF9268360250031210C /* RefinementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BF8268360250031210C /* RefinementsViewController.swift */; };
+		81940C242684B2650031210C /* Refinements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C232684B2650031210C /* Refinements.swift */; };
+		81940C282685249C0031210C /* RefinementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C272685249C0031210C /* RefinementCell.swift */; };
+		81940C2A2685259F0031210C /* RefinementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C292685259F0031210C /* RefinementsView.swift */; };
+		81940C2C268527FB0031210C /* RefinementsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C2B268527FB0031210C /* RefinementsProtocols.swift */; };
 		81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */; };
 		81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */; };
 		81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */; };
@@ -59,7 +65,7 @@
 		810562DE2675210300106C65 /* FeedCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
 		810562E226752F8700106C65 /* CoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoordinatorProtocol.swift; sourceTree = "<group>"; };
 		810562E52675304700106C65 /* AppCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppCoordinator.swift; sourceTree = "<group>"; };
-		810562EF267537AE00106C65 /* FeedCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCoordinator.swift; sourceTree = "<group>"; };
+		810562EF267537AE00106C65 /* FeedSearchCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSearchCoordinator.swift; sourceTree = "<group>"; };
 		810562FE2675625500106C65 /* FeedServiceModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedServiceModel.swift; sourceTree = "<group>"; };
 		81056309267564A400106C65 /* Networking.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Networking.swift; sourceTree = "<group>"; };
 		8105630D267564E100106C65 /* ReachabilityProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReachabilityProtocol.swift; sourceTree = "<group>"; };
@@ -86,7 +92,7 @@
 		814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewControllerColors.swift; sourceTree = "<group>"; };
 		814A8C14267FB86D00F46E1F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		814A8C16267FD14900F46E1F /* ShimmerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerProtocol.swift; sourceTree = "<group>"; };
-		814A8C18267FD91C00F46E1F /* SearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchViewController.swift; sourceTree = "<group>"; };
+		814A8C18267FD91C00F46E1F /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
 		815C5A3D26741ECC004A8F09 /* TabCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinator.swift; sourceTree = "<group>"; };
 		815C5A592675138A004A8F09 /* FeedPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenter.swift; sourceTree = "<group>"; };
 		815C5A5D267513C5004A8F09 /* FeedProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedProtocols.swift; sourceTree = "<group>"; };
@@ -99,6 +105,12 @@
 		81940BEC268268080031210C /* SearchPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchPresenter.swift; sourceTree = "<group>"; };
 		81940BEE2682689D0031210C /* SearchProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchProtocols.swift; sourceTree = "<group>"; };
 		81940BF12682735C0031210C /* SearchService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchService.swift; sourceTree = "<group>"; };
+		81940BF626834ACB0031210C /* FeedSearchCoordinatorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSearchCoordinatorConstants.swift; sourceTree = "<group>"; };
+		81940BF8268360250031210C /* RefinementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsViewController.swift; sourceTree = "<group>"; };
+		81940C232684B2650031210C /* Refinements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refinements.swift; sourceTree = "<group>"; };
+		81940C272685249C0031210C /* RefinementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementCell.swift; sourceTree = "<group>"; };
+		81940C292685259F0031210C /* RefinementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsView.swift; sourceTree = "<group>"; };
+		81940C2B268527FB0031210C /* RefinementsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsProtocols.swift; sourceTree = "<group>"; };
 		81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldBuilder.swift; sourceTree = "<group>"; };
 		81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelBuilder.swift; sourceTree = "<group>"; };
 		81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonBuilder.swift; sourceTree = "<group>"; };
@@ -139,7 +151,8 @@
 		810562EB2675323B00106C65 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				810562EF267537AE00106C65 /* FeedCoordinator.swift */,
+				81940BF626834ACB0031210C /* FeedSearchCoordinatorConstants.swift */,
+				810562EF267537AE00106C65 /* FeedSearchCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -255,7 +268,6 @@
 			isa = PBXGroup;
 			children = (
 				81940BF0268268AB0031210C /* Protocols */,
-				810562EB2675323B00106C65 /* Coordinator */,
 				8105634C26762DB500106C65 /* Model */,
 				81056303267562BA00106C65 /* Service */,
 				810562F826754FD200106C65 /* Presenter */,
@@ -292,8 +304,7 @@
 				810562DC26751B7100106C65 /* Builders */,
 				810562E9267531B800106C65 /* Application */,
 				815C5A562675134D004A8F09 /* Coordinator */,
-				81940BEB268267F00031210C /* Search */,
-				815C5A582675136E004A8F09 /* Feed */,
+				81940BF3268349200031210C /* FeedSearchModule */,
 				815E6E79267418E600CE6CC1 /* Assets.xcassets */,
 				815E6E7B267418E600CE6CC1 /* LaunchScreen.storyboard */,
 				815E6E7E267418E600CE6CC1 /* Info.plist */,
@@ -306,8 +317,9 @@
 			children = (
 				81940BEE2682689D0031210C /* SearchProtocols.swift */,
 				81940BEC268268080031210C /* SearchPresenter.swift */,
-				814A8C18267FD91C00F46E1F /* SearchViewController.swift */,
 				81940BF12682735C0031210C /* SearchService.swift */,
+				81940C26268524220031210C /* View */,
+				81940C25268524150031210C /* Refinements */,
 			);
 			path = Search;
 			sourceTree = "<group>";
@@ -318,6 +330,36 @@
 				815C5A5D267513C5004A8F09 /* FeedProtocols.swift */,
 			);
 			path = Protocols;
+			sourceTree = "<group>";
+		};
+		81940BF3268349200031210C /* FeedSearchModule */ = {
+			isa = PBXGroup;
+			children = (
+				810562EB2675323B00106C65 /* Coordinator */,
+				815C5A582675136E004A8F09 /* Feed */,
+				81940BEB268267F00031210C /* Search */,
+			);
+			path = FeedSearchModule;
+			sourceTree = "<group>";
+		};
+		81940C25268524150031210C /* Refinements */ = {
+			isa = PBXGroup;
+			children = (
+				81940C2B268527FB0031210C /* RefinementsProtocols.swift */,
+				81940C292685259F0031210C /* RefinementsView.swift */,
+				81940BF8268360250031210C /* RefinementsViewController.swift */,
+				81940C232684B2650031210C /* Refinements.swift */,
+				81940C272685249C0031210C /* RefinementCell.swift */,
+			);
+			path = Refinements;
+			sourceTree = "<group>";
+		};
+		81940C26268524220031210C /* View */ = {
+			isa = PBXGroup;
+			children = (
+				814A8C18267FD91C00F46E1F /* SearchResultViewController.swift */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -397,13 +439,18 @@
 				810562E62675304700106C65 /* AppCoordinator.swift in Sources */,
 				814A8C04267D24B200F46E1F /* FeedCellConstants.swift in Sources */,
 				814A8C09267DFAC900F46E1F /* ShimmerUIImageView.swift in Sources */,
+				81940C2C268527FB0031210C /* RefinementsProtocols.swift in Sources */,
 				814A8C13267FB85C00F46E1F /* FeedViewControllerColors.swift in Sources */,
+				81940BF9268360250031210C /* RefinementsViewController.swift in Sources */,
 				810562FF2675625500106C65 /* FeedServiceModel.swift in Sources */,
+				81940C2A2685259F0031210C /* RefinementsView.swift in Sources */,
 				81940BEF2682689D0031210C /* SearchProtocols.swift in Sources */,
 				81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */,
-				814A8C19267FD91C00F46E1F /* SearchViewController.swift in Sources */,
+				814A8C19267FD91C00F46E1F /* SearchResultViewController.swift in Sources */,
 				815E6E75267418DF00CE6CC1 /* FeedViewController.swift in Sources */,
 				814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */,
+				81940C242684B2650031210C /* Refinements.swift in Sources */,
+				81940C282685249C0031210C /* RefinementCell.swift in Sources */,
 				8105630A267564A400106C65 /* Networking.swift in Sources */,
 				815E6E71267418DF00CE6CC1 /* AppDelegate.swift in Sources */,
 				8105634A26762DB000106C65 /* FeedRecipe.swift in Sources */,
@@ -419,10 +466,11 @@
 				810563242675671B00106C65 /* NetworkHelperProtocol.swift in Sources */,
 				8105632D267567A800106C65 /* URLRequest+Resource.swift in Sources */,
 				8105632A2675678B00106C65 /* Resource+Codable.swift in Sources */,
+				81940BF726834ACB0031210C /* FeedSearchCoordinatorConstants.swift in Sources */,
 				810562DA26751B6D00106C65 /* UICollectionViewBuilder.swift in Sources */,
 				815C5A5E267513C5004A8F09 /* FeedProtocols.swift in Sources */,
 				8105635126766BAE00106C65 /* UIImageViewBuilder.swift in Sources */,
-				810562F0267537AE00106C65 /* FeedCoordinator.swift in Sources */,
+				810562F0267537AE00106C65 /* FeedSearchCoordinator.swift in Sources */,
 				815C5A5A2675138A004A8F09 /* FeedPresenter.swift in Sources */,
 				810562DF2675210300106C65 /* FeedCell.swift in Sources */,
 				814A8C15267FB86D00F46E1F /* Colors.swift in Sources */,
