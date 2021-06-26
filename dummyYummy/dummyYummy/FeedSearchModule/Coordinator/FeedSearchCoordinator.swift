@@ -8,31 +8,31 @@
 import UIKit
 
 protocol FeedSearchCoordinatorProtocol: Coordinator {
-    func showFeedSearchViewController()
+    func showFeedSearch()
 }
 
 final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
     var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
-    var type: CoordinatorType { .feed }
+    var type: CoordinatorType { .feedSearch }
     
     func start() {
-        showFeedSearchViewController()
+        showFeedSearch()
     }
     
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
     }
     
-    func showFeedSearchViewController() {
-        let feedService = FeedService()
-        let feedPresenter = FeedPresenter(with: feedService)
+    func showFeedSearch() {
+        let feedNetworkService = FeedService()
+        let feedPresenter = FeedPresenter(with: feedNetworkService)
         let feedViewController = FeedViewController(with: feedPresenter)
         feedPresenter.view = feedViewController
-
-        let searchService = SearchService()
-        let searchPresenter = SearchPresenter(with: searchService)
+        
+        let searchNetworkService = SearchService()
+        let searchPresenter = SearchPresenter(with: searchNetworkService)
         let result = SearchResultViewController(with: searchPresenter)
         result.navigationDelegate = self
         searchPresenter.view = result
@@ -44,7 +44,7 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
         searchController.searchResultsUpdater = result
         searchController.searchBar.delegate = result
         searchController.searchBar.showsBookmarkButton = true
-        searchController.searchBar.setImage(FeedSearchConstants.searchSettingsButtonImage, for: .bookmark, state: .normal)
+        searchController.searchBar.setImage(FeedSearchConstants.Image.searchSettingsButtonImage, for: .bookmark, state: .normal)
         
         feedViewController.navigationItem.searchController = searchController
         
@@ -54,8 +54,7 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
 
 extension FeedSearchCoordinator: SearchNavigationDelegate {
     func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements) {
-        let view = RefinementsView()
-        let settings = RefinementsViewController(with: view, currentRefinements)
+        let settings = RefinementsViewController(with: currentRefinements)
         settings.hidesBottomBarWhenPushed = true
         navigationController.pushViewController(settings, animated: true)
     }

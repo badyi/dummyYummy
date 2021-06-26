@@ -5,16 +5,22 @@
 //  Created by badyi on 12.06.2021.
 //
 
-import Foundation
+import UIKit
 
-final class FeedPresenter {
+final class FeedPresenter: NSObject {
     weak var view: FeedViewProtocol?
-    var service: FeedServiceProtocol
-    var recipes: [FeedRecipe]
+    var networkService: FeedServiceProtocol
+    
+    var recipes: [FeedRecipe] {
+        didSet {
+            recipesDidSet()
+        }
+    }
+    
     private let randomRecipesCount: Int = 100
     
     init(with service: FeedServiceProtocol) {
-        self.service = service
+        self.networkService = service
         recipes = []
     }
 }
@@ -27,6 +33,7 @@ extension FeedPresenter: FeedPresenterProtocol {
     }
     
     func viewWillDisappear() {
+        view?.stopCellsAnimation()
     }
     
     func viewDidLoad() {
@@ -41,10 +48,6 @@ extension FeedPresenter: FeedPresenterProtocol {
         return recipes[index.row]
     }
     
-    func recipesCount() -> Int {
-        return recipes.count
-    }
-    
     func willDisplayCell(at index: IndexPath) {
         if index.row < 0 || index.row >= recipes.count {
             return 
@@ -54,7 +57,7 @@ extension FeedPresenter: FeedPresenterProtocol {
         }
     }
     
-    func didEndDisplayCell(at index: IndexPath) {
+    func didEndDisplayingCell(at index: IndexPath) {
         if index.row < 0 || index.row >= recipes.count {
             return
         }
@@ -63,52 +66,74 @@ extension FeedPresenter: FeedPresenterProtocol {
 }
 
 // MARK: - Working with service layer methods
-extension FeedPresenter {
-    private func recipesDidLoad() {
+private extension FeedPresenter {
+    
+    func recipesDidSet() {
         DispatchQueue.main.async { [weak self] in
             self?.view?.reloadCollection()
         }
     }
     
-    private func imageDidLoad(at index: IndexPath) {
+    func imageDidLoad(at index: IndexPath) {
         DispatchQueue.main.async { [weak self] in
             self?.view?.reloadItems(at: [index])
         }
     }
     
-    private func loadRandomRecipes() {
-        service.loadRandomRecipes(randomRecipesCount, completion: { [weak self] result in
+    func loadRandomRecipes() {
+        networkService.loadRandomRecipes(randomRecipesCount, completion: { [weak self] result in
             switch result {
             case let .success(result):
                 self?.recipes = result.recipes.map { FeedRecipe(with: $0) }
-                self?.recipesDidLoad()
             case let .failure(error):
-                print(error)
+                print(error.localizedDescription)
             }
         })
     }
     
-    private func loadImage(at index: IndexPath) {
+    func loadImage(at index: IndexPath) {
         guard let url = recipes[index.row].image else {
             return
         }
         
-        service.loadImage(at: index, with: url, completion: { [weak self] result in
+        networkService.loadImage(at: index, with: url, completion: { [weak self] result in
             switch result {
             case let .success(result):
                 self?.setImageData(at: index, result)
                 self?.imageDidLoad(at: index)
             case let .failure(error):
-                print(error)
+                print(error.localizedDescription)
             }
         })
     }
     
-    private func cancelLoad(at index: IndexPath) {
-        service.cancelRequest(at: index)
+    func cancelLoad(at index: IndexPath) {
+        networkService.cancelRequest(at: index)
     }
     
-    private func setImageData(at index: IndexPath, _ data: Data) {
+    func setImageData(at index: IndexPath, _ data: Data) {
         recipes[index.row].imageData = data
+    }
+}
+
+// MARK: - UICollectionViewDataSource
+extension FeedPresenter: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        /// in case the recipes haven't loaded yet
+        /// we put a few fake cells with animations
+        let count = recipes.count
+        return count == 0 ? FeedVCConstants.Layout.emptyCellsCount : count
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.id, for: indexPath) as! FeedCell
+        
+        cell.startAnimation()
+        if let recipe = recipe(at: indexPath) {
+            cell.configView(with: recipe)
+            cell.stopAnimation()
+        }
+        return cell
     }
 }

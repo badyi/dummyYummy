@@ -34,8 +34,6 @@
 		814A8C09267DFAC900F46E1F /* ShimmerUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C08267DFAC900F46E1F /* ShimmerUIImageView.swift */; };
 		814A8C0B267DFAD300F46E1F /* ShimmerUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0A267DFAD300F46E1F /* ShimmerUILabel.swift */; };
 		814A8C0D267F773700F46E1F /* UIColorHexExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0C267F773700F46E1F /* UIColorHexExtension.swift */; };
-		814A8C11267FB6DB00F46E1F /* FeedCellColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C10267FB6DB00F46E1F /* FeedCellColors.swift */; };
-		814A8C13267FB85C00F46E1F /* FeedViewControllerColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */; };
 		814A8C15267FB86D00F46E1F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C14267FB86D00F46E1F /* Colors.swift */; };
 		814A8C17267FD14900F46E1F /* ShimmerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C16267FD14900F46E1F /* ShimmerProtocol.swift */; };
 		814A8C19267FD91C00F46E1F /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C18267FD91C00F46E1F /* SearchResultViewController.swift */; };
@@ -53,8 +51,9 @@
 		81940BF9268360250031210C /* RefinementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BF8268360250031210C /* RefinementsViewController.swift */; };
 		81940C242684B2650031210C /* Refinements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C232684B2650031210C /* Refinements.swift */; };
 		81940C282685249C0031210C /* RefinementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C272685249C0031210C /* RefinementCell.swift */; };
-		81940C2A2685259F0031210C /* RefinementsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C292685259F0031210C /* RefinementsView.swift */; };
 		81940C2C268527FB0031210C /* RefinementsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C2B268527FB0031210C /* RefinementsProtocols.swift */; };
+		81940C32268694290031210C /* FeedVCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C31268694290031210C /* FeedVCConstants.swift */; };
+		81940C3426876A630031210C /* RefinementsTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C3326876A630031210C /* RefinementsTableView.swift */; };
 		81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */; };
 		81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */; };
 		81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */; };
@@ -88,8 +87,6 @@
 		814A8C08267DFAC900F46E1F /* ShimmerUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerUIImageView.swift; sourceTree = "<group>"; };
 		814A8C0A267DFAD300F46E1F /* ShimmerUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerUILabel.swift; sourceTree = "<group>"; };
 		814A8C0C267F773700F46E1F /* UIColorHexExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIColorHexExtension.swift; sourceTree = "<group>"; };
-		814A8C10267FB6DB00F46E1F /* FeedCellColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellColors.swift; sourceTree = "<group>"; };
-		814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedViewControllerColors.swift; sourceTree = "<group>"; };
 		814A8C14267FB86D00F46E1F /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
 		814A8C16267FD14900F46E1F /* ShimmerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerProtocol.swift; sourceTree = "<group>"; };
 		814A8C18267FD91C00F46E1F /* SearchResultViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultViewController.swift; sourceTree = "<group>"; };
@@ -109,8 +106,9 @@
 		81940BF8268360250031210C /* RefinementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsViewController.swift; sourceTree = "<group>"; };
 		81940C232684B2650031210C /* Refinements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refinements.swift; sourceTree = "<group>"; };
 		81940C272685249C0031210C /* RefinementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementCell.swift; sourceTree = "<group>"; };
-		81940C292685259F0031210C /* RefinementsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsView.swift; sourceTree = "<group>"; };
 		81940C2B268527FB0031210C /* RefinementsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsProtocols.swift; sourceTree = "<group>"; };
+		81940C31268694290031210C /* FeedVCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVCConstants.swift; sourceTree = "<group>"; };
+		81940C3326876A630031210C /* RefinementsTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsTableView.swift; sourceTree = "<group>"; };
 		81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldBuilder.swift; sourceTree = "<group>"; };
 		81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelBuilder.swift; sourceTree = "<group>"; };
 		81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonBuilder.swift; sourceTree = "<group>"; };
@@ -160,7 +158,6 @@
 		810562F626754FC500106C65 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				814A8C10267FB6DB00F46E1F /* FeedCellColors.swift */,
 				814A8C03267D24B200F46E1F /* FeedCellConstants.swift */,
 				810562DE2675210300106C65 /* FeedCell.swift */,
 			);
@@ -178,7 +175,7 @@
 		810562FA26754FDB00106C65 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				814A8C12267FB85C00F46E1F /* FeedViewControllerColors.swift */,
+				81940C31268694290031210C /* FeedVCConstants.swift */,
 				815E6E74267418DF00CE6CC1 /* FeedViewController.swift */,
 				810562F626754FC500106C65 /* Cells */,
 			);
@@ -346,7 +343,7 @@
 			isa = PBXGroup;
 			children = (
 				81940C2B268527FB0031210C /* RefinementsProtocols.swift */,
-				81940C292685259F0031210C /* RefinementsView.swift */,
+				81940C3326876A630031210C /* RefinementsTableView.swift */,
 				81940BF8268360250031210C /* RefinementsViewController.swift */,
 				81940C232684B2650031210C /* Refinements.swift */,
 				81940C272685249C0031210C /* RefinementCell.swift */,
@@ -432,7 +429,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				8105630E267564E100106C65 /* ReachabilityProtocol.swift in Sources */,
-				814A8C11267FB6DB00F46E1F /* FeedCellColors.swift in Sources */,
 				814A8C17267FD14900F46E1F /* ShimmerProtocol.swift in Sources */,
 				81940BF22682735C0031210C /* SearchService.swift in Sources */,
 				81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */,
@@ -440,10 +436,8 @@
 				814A8C04267D24B200F46E1F /* FeedCellConstants.swift in Sources */,
 				814A8C09267DFAC900F46E1F /* ShimmerUIImageView.swift in Sources */,
 				81940C2C268527FB0031210C /* RefinementsProtocols.swift in Sources */,
-				814A8C13267FB85C00F46E1F /* FeedViewControllerColors.swift in Sources */,
 				81940BF9268360250031210C /* RefinementsViewController.swift in Sources */,
 				810562FF2675625500106C65 /* FeedServiceModel.swift in Sources */,
-				81940C2A2685259F0031210C /* RefinementsView.swift in Sources */,
 				81940BEF2682689D0031210C /* SearchProtocols.swift in Sources */,
 				81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */,
 				814A8C19267FD91C00F46E1F /* SearchResultViewController.swift in Sources */,
@@ -464,6 +458,7 @@
 				81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */,
 				81056321267566F300106C65 /* NetworkHelper.swift in Sources */,
 				810563242675671B00106C65 /* NetworkHelperProtocol.swift in Sources */,
+				81940C3426876A630031210C /* RefinementsTableView.swift in Sources */,
 				8105632D267567A800106C65 /* URLRequest+Resource.swift in Sources */,
 				8105632A2675678B00106C65 /* Resource+Codable.swift in Sources */,
 				81940BF726834ACB0031210C /* FeedSearchCoordinatorConstants.swift in Sources */,
@@ -475,6 +470,7 @@
 				810562DF2675210300106C65 /* FeedCell.swift in Sources */,
 				814A8C15267FB86D00F46E1F /* Colors.swift in Sources */,
 				810563462675FFFE00106C65 /* FakeReachability.swift in Sources */,
+				81940C32268694290031210C /* FeedVCConstants.swift in Sources */,
 				814A8C0B267DFAD300F46E1F /* ShimmerUILabel.swift in Sources */,
 				810563112675657200106C65 /* Resource.swift in Sources */,
 				8105631A2675661D00106C65 /* OperationCompletion.swift in Sources */,

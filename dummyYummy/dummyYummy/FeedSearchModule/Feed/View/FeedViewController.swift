@@ -11,10 +11,10 @@ final class FeedViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionViewBuilder()
-            .backgroundColor(FeedViewControllerColors.backgroundColor)
+            .backgroundColor(FeedVCConstants.Design.backgroundColor)
             .delegate(self)
-            .dataSource(self)
-            .setInsets(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+            .dataSource(presenter as? UICollectionViewDataSource)
+            .setInsets(FeedVCConstants.Layout.collectionInsets)
             .build()
         cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
         return cv
@@ -34,6 +34,7 @@ final class FeedViewController: UIViewController {
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        //collectionView.dataSource = presenter as? UICollectionViewDataSource
         presenter.viewDidLoad()
     }
     
@@ -50,12 +51,17 @@ final class FeedViewController: UIViewController {
 
 // MARK: - FeedViewProtocol
 extension FeedViewController: FeedViewProtocol {
+    func stopCellsAnimation() {
+        collectionView.visibleCells.forEach {
+            ($0 as? FeedCell)?.stopAnimation()
+            ($0 as? FeedCell)?.stopImageViewAnimation()
+        }
+    }
     
     func setupView() {
         title = "Browes recipes"
         definesPresentationContext = true
         setupCollectionView()
-        setupNavigation()
     }
     
     func reloadCollection() {
@@ -72,30 +78,27 @@ extension FeedViewController {
     private func setupCollectionView() {
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
             collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
     
-    private func setupNavigation() {
-    }
-    
     func configNavigation() {
-        let textAttributes = [NSAttributedString.Key.foregroundColor: Colors.wisteria]
+        let textAttributes = [NSAttributedString.Key.foregroundColor: FeedVCConstants.Design.navigationTextColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
-        navigationController?.navigationBar.backgroundColor = FeedViewControllerColors.navBarBackgroundColor
+        navigationController?.navigationBar.backgroundColor = FeedVCConstants.Design.navBarBackgroundColor
         
-        navigationController?.navigationBar.barTintColor = FeedViewControllerColors.navBarBarTintColor
-        navigationController?.navigationBar.tintColor = FeedViewControllerColors.navBarTintColor
+        navigationController?.navigationBar.barTintColor = FeedVCConstants.Design.navBarBarTintColor
+        navigationController?.navigationBar.tintColor = FeedVCConstants.Design.navBarTintColor
         navigationController?.navigationBar.prefersLargeTitles = true
         
         /// need nav bar back view image to avoid some ios bag with search result controller frame on search bar tap
-        navigationController?.navigationBar.setBackgroundImage(UIImage(), for: .default)
-        navigationController?.navigationBar.shadowImage = UIImage()
-        navigationController?.view.backgroundColor = FeedViewControllerColors.navBarBarTintColor
+        navigationController?.navigationBar.setBackgroundImage(FeedVCConstants.Image.navBarBackground, for: .default)
+        navigationController?.navigationBar.shadowImage = FeedVCConstants.Image.navBarShadowImage
+        navigationController?.view.backgroundColor = FeedVCConstants.Design.navBarBarTintColor
         
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.largeTitleDisplayMode = .always
@@ -110,39 +113,40 @@ extension FeedViewController: UICollectionViewDelegate {
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        presenter.didEndDisplayCell(at: indexPath)
+        presenter.didEndDisplayingCell(at: indexPath)
     }
 }
 
 // MARK: - UICollectionViewDataSource
-extension FeedViewController: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        /// in case the recipes haven't loaded yet
-        /// we put a few fake cells with animations
-        presenter.recipesCount() == 0 ? 10 : presenter.recipesCount()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.id, for: indexPath) as! FeedCell
-        
-        cell.startAnimation()
-        if let recipe = presenter.recipe(at: indexPath) {
-            cell.configView(with: recipe)
-            cell.stopAnimation()
-        }
-        return cell
-    }
-}
+//extension FeedViewController: UICollectionViewDataSource {
+//
+//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+//        /// in case the recipes haven't loaded yet
+//        /// we put a few fake cells with animations
+//        let count = presenter.recipesCount()
+//        return count == 0 ? FeedVCConstants.Layout.emptyCellsCount : count
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+//
+//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.id, for: indexPath) as! FeedCell
+//
+//        cell.startAnimation()
+//        if let recipe = presenter.recipe(at: indexPath) {
+//            cell.configView(with: recipe)
+//            cell.stopAnimation()
+//        }
+//        return cell
+//    }
+//}
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        /// Вычисление размера ячейки
-        /// Расчет в основном направлен на расчет размера  тайтла в ячейке
-        /// и исходя из его размера он добавляет его размер
+        /// Calculating cell size
+        /// The calculation is mainly aimed at calculating the size of the title in the cell
+        /// based on this, we calculate the entire size of cell
         var title = ""
         if let recipe = presenter.recipe(at: indexPath) {
             title = recipe.title
@@ -155,13 +159,6 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 15
+        return FeedVCConstants.Layout.minimumLineSpacing
     }
 }
-
-// MARK: - UISearchBarDelegate
-//extension FeedViewController: UISearchBarDelegate {
-//    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
-//        navigationController?.pushViewController(SearchViewController(), animated: false)
-//    }
-//}

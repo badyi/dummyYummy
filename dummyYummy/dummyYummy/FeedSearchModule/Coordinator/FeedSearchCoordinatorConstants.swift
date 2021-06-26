@@ -8,5 +8,7 @@
 import UIKit
 
 final class FeedSearchConstants {
-    static let searchSettingsButtonImage = UIImage(systemName: "slider.horizontal.3")
+    struct Image {
+        static let searchSettingsButtonImage = UIImage(systemName: "slider.horizontal.3")
+    }
 }

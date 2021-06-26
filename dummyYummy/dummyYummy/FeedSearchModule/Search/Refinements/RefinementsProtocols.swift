@@ -11,7 +11,7 @@ protocol RefinementsViewProtocol {
     func setupView()
 }
 
-protocol RefinementsControllerProtocol: AnyObject {
-    func sectionsCount() -> Int
-    func numberOfRowsIn(_ section: Int) -> Int
-}
+//protocol RefinementsViewControllerDelegate: AnyObject {
+//    func sectionsCount() -> Int
+//    func numberOfRowsIn(_ section: Int) -> Int
+//}

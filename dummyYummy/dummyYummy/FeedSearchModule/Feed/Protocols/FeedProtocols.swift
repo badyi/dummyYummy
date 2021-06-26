@@ -13,16 +13,17 @@ protocol FeedViewProtocol: AnyObject {
     func reloadCollection()
     func reloadItems(at indexPaths: [IndexPath])
     func configNavigation()
+    func stopCellsAnimation()
 }
 
 protocol FeedPresenterProtocol: AnyObject {
-    init (with service: FeedServiceProtocol)
+    init (with networkService: FeedServiceProtocol)
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
     func willDisplayCell(at index: IndexPath)
-    func didEndDisplayCell(at index: IndexPath)
-    func recipesCount() -> Int
+    func didEndDisplayingCell(at index: IndexPath)
+    //func recipesCount() -> Int
     func recipe(at index: IndexPath) -> FeedRecipe?
 }
 

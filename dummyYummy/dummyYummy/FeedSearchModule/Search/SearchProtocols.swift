@@ -17,7 +17,7 @@ protocol SearchViewProtocol: AnyObject {
 
 protocol SearchPresenterProtocol: AnyObject {
     var refinements: SearchRefinements { get }
-    init (with service: SearchServiceProtocol)
+    init (with networkService: SearchServiceProtocol)
     func viewDidLoad()
     func viewWillAppear()
     func willDisplayCell(at index: IndexPath)

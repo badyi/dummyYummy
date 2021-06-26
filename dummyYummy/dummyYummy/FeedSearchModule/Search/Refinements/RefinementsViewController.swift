@@ -9,17 +9,14 @@ import UIKit
 
 final class RefinementsViewController: UIViewController {
     
-    var refinementsView: RefinementsViewProtocol
-    
     let refinementsSections: [RefinementsSection : Int] = [.time : 1, .cuisine : 2, .diet : 1, .intolearns : 1]
     
     let refinementsOrder: [RefinementsSection] = [.time, .cuisine, .diet, .intolearns]
     
     var refinements: SearchRefinements
     
-    init(with view: RefinementsViewProtocol, _ refinements: SearchRefinements) {
+    init(with refinements: SearchRefinements) {
         self.refinements = refinements
-        refinementsView = view
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -27,13 +24,9 @@ final class RefinementsViewController: UIViewController {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func loadView() {
-        self.view = (refinementsView as! UIView)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        refinementsView.setupView()
+        setupChilds()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -46,20 +39,44 @@ final class RefinementsViewController: UIViewController {
     }
 }
 
-extension RefinementsViewController {    
-    private func configNavigation() {
+extension RefinementsViewController {
+    func setupChilds() {
+        let childViewController = RefinementsTableViewController()
+        childViewController.view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.addSubview(childViewController.view)
+        addChild(childViewController)
+        
+        childViewController.didMove(toParent: self)
+        childViewController.tableView.dataSource = self
+
+
+        NSLayoutConstraint.activate([
+            childViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
+            childViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            childViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            childViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
+        ])
+    }
+    
+    func configNavigation() {
         navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.backgroundColor = FeedViewControllerColors.navBarBackgroundColor
-        //tabBarController?.tabBar.isHidden = true
+        navigationController?.navigationBar.backgroundColor = FeedVCConstants.Design.navBarBackgroundColor
     }
 }
 
-extension RefinementsViewController: RefinementsControllerProtocol {
-    func sectionsCount() -> Int {
-        refinementsSections.count
+extension RefinementsViewController: UITableViewDataSource {
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return refinementsSections.count
     }
     
-    func numberOfRowsIn(_ section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         refinementsSections[refinementsOrder[section]] ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: RefinementCell.id, for: indexPath)
+        cell.backgroundColor = .systemBlue
+        return cell
     }
 }

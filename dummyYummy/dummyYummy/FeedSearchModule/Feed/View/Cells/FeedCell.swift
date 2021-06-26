@@ -12,47 +12,47 @@ final class FeedCell: UICollectionViewCell {
     
     private lazy var imageView: ShimmerUIImageView = {
         return UIImageViewBuilder()
-            .backgroundColor(FeedCellColors.backgroundColor)
+            .backgroundColor(FeedCellConstants.Design.backgroundColor)
             .buildWithShimmer()
     }()
     
     lazy var title: ShimmerUILabel = {
         return UILabelBuilder()
-            .setFont(FeedCellConstants.titleFont)
-            .backgroundColor(FeedCellColors.backgroundColor)
-            .textColor(FeedCellColors.titleColor)
+            .setFont(FeedCellConstants.Font.titleFont)
+            .backgroundColor(FeedCellConstants.Design.backgroundColor)
+            .textColor(FeedCellConstants.Design.titleColor)
             .buildWithShimmer()
     }()
     
     private lazy var healthScore: ShimmerUILabel = {
         return UILabelBuilder()
-            .backgroundColor(FeedCellColors.backgroundColor)
-            .textColor(FeedCellColors.additinalTextColor)
+            .backgroundColor(FeedCellConstants.Design.backgroundColor)
+            .textColor(FeedCellConstants.Design.additinalTextColor)
             .buildWithShimmer()
     }()
     
     private lazy var minutes: ShimmerUILabel = {
         return UILabelBuilder()
-            .backgroundColor(FeedCellColors.backgroundColor)
-            .textColor(FeedCellColors.additinalTextColor)
+            .backgroundColor(FeedCellConstants.Design.backgroundColor)
+            .textColor(FeedCellConstants.Design.additinalTextColor)
             .buildWithShimmer()
     }()
     
     private lazy var favorite: ShimmerUIButton = {
         return UIButtonBuilder()
-            .backgroundColor(FeedCellColors.backgroundColor)
-            .setImage(UIImage(systemName: "suit.heart")!)
+            .backgroundColor(FeedCellConstants.Design.backgroundColor)
+            .setImage(FeedCellConstants.Image.favoriteImage)
             .largeConfig(true)
-            .tintColor(FeedCellColors.buttonTintColor)
+            .tintColor(FeedCellConstants.Design.buttonTintColor)
             .buildWithShimmer()
     }()
     
     private lazy var share: ShimmerUIButton = {
         return UIButtonBuilder()
-            .backgroundColor(FeedCellColors.backgroundColor)
+            .backgroundColor(FeedCellConstants.Design.backgroundColor)
             .largeConfig(true)
-            .tintColor(FeedCellColors.buttonTintColor)
-            .setImage(UIImage(systemName: "square.and.arrow.up")!)
+            .tintColor(FeedCellConstants.Design.buttonTintColor)
+            .setImage(FeedCellConstants.Image.shareImage)
             .buildWithShimmer()
     }()
     
@@ -80,7 +80,7 @@ final class FeedCell: UICollectionViewCell {
         // Improve scrolling performance with an explicit shadowPath
         layer.shadowPath = UIBezierPath(
             roundedRect: bounds,
-            cornerRadius: FeedCellConstants.cornerRadius
+            cornerRadius: FeedCellConstants.Layout.cornerRadius
         ).cgPath
     }
     
@@ -101,6 +101,10 @@ extension FeedCell {
         share.removeShimmerAnimation()
     }
     
+    func stopImageViewAnimation() {
+        imageView.removeShimmerAnimation()
+    }
+    
     func startAnimation() {
         imageView.startShimmerAnimation()
         title.startShimmerAnimation()
@@ -118,7 +122,7 @@ extension FeedCell {
     
         /// set default image if recipe dont have image url and remove shimmer animation
         if recipe.image == nil {
-            imageView.image = FeedCellConstants.defaultCellImage
+            imageView.image = FeedCellConstants.Image.defaultCellImage
             imageView.removeShimmerAnimation()
             return
         }
@@ -132,31 +136,32 @@ extension FeedCell {
     
     static func heightForCell(with title: String, width: CGFloat) -> CGFloat {
         /// insets from left and right edges
-        let horizontalInsets = FeedCellConstants.leadingSpace + FeedCellConstants.trailingSpace
+        let layoutConstants = FeedCellConstants.Layout.self
+        let horizontalInsets = layoutConstants.leadingSpace + layoutConstants.trailingSpace
         
-        let attributedString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: FeedCellConstants.titleFont])
+        let attributedString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: FeedCellConstants.Font.titleFont])
         let rect = attributedString.boundingRect(with:
                 CGSize(width: width - horizontalInsets, height: .greatestFiniteMagnitude),
                 options: .usesLineFragmentOrigin, context: nil)
         
         /// the computed height needed for the titleLabel
-        var height = rect.height + FeedCellConstants.imageHeight +
-            (FeedCellConstants.verticalSpace * 2) +
-            FeedCellConstants.minutesHeight +
-            FeedCellConstants.healthScoreHeight +
-            FeedCellConstants.bottomSpace +
-            FeedCellConstants.topSpace
+        var height = rect.height + layoutConstants.imageHeight +
+            (layoutConstants.verticalSpace * 2) +
+            layoutConstants.minutesHeight +
+            layoutConstants.healthScoreHeight +
+            layoutConstants.bottomSpace +
+            layoutConstants.topSpace
         
         /// in case  title is empty, we set the default size
         if title == "" {
-            height += FeedCellConstants.minimalTitleHeight - rect.height
+            height += layoutConstants.minimalTitleHeight - rect.height
         }
         return height
     }
 }
 
-extension FeedCell {
-    private func setupView() {
+private extension FeedCell {
+    func setupView() {
         configView()
         contentView.addSubview(imageView)
         contentView.addSubview(title)
@@ -170,67 +175,67 @@ extension FeedCell {
         startAnimation()
     }
     
-    private func configView() {
-        contentView.backgroundColor = FeedCellColors.backgroundColor
+    func configView() {
+        contentView.backgroundColor = FeedCellConstants.Design.backgroundColor
         // Apply rounded corners to contentView
-        contentView.layer.cornerRadius = FeedCellConstants.cornerRadius
+        contentView.layer.cornerRadius = FeedCellConstants.Layout.cornerRadius
         contentView.layer.masksToBounds = true
         
         // Set masks to bounds to false to avoid the shadow
         // from being clipped to the corner radius
-        layer.cornerRadius = FeedCellConstants.cornerRadius
+        layer.cornerRadius = FeedCellConstants.Layout.cornerRadius
         layer.masksToBounds = false
         /// Apply a shadow
-        layer.shadowRadius = FeedCellConstants.shadowRadius
-        layer.shadowOpacity = FeedCellConstants.shadowOpacity
-        layer.shadowColor = FeedCellColors.shadowColor.cgColor
-        layer.shadowOffset = CGSize(width: FeedCellConstants.shadowOffsetWidth, height: FeedCellConstants.shadowOffsetHeight)
+        layer.shadowRadius = FeedCellConstants.Layout.shadowRadius
+        layer.shadowOpacity = FeedCellConstants.Layout.shadowOpacity
+        layer.shadowColor = FeedCellConstants.Design.shadowColor.cgColor
+        layer.shadowOffset = CGSize(width: FeedCellConstants.Layout.shadowOffsetWidth, height: FeedCellConstants.Layout.shadowOffsetHeight)
     }
     
-    private func setupImageViews() {
+    func setupImageViews() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: FeedCellConstants.imageHeight)
+            imageView.heightAnchor.constraint(equalToConstant: FeedCellConstants.Layout.imageHeight)
         ])
     }
     
-    private func setupLabels() {
+    func setupLabels() {
         NSLayoutConstraint.activate([
-            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: FeedCellConstants.leadingSpace),
-            title.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: FeedCellConstants.topSpace),
-            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -FeedCellConstants.trailingSpace),
-            title.heightAnchor.constraint(greaterThanOrEqualToConstant: FeedCellConstants.minimalTitleHeight)
+            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: FeedCellConstants.Layout.leadingSpace),
+            title.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: FeedCellConstants.Layout.topSpace),
+            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -FeedCellConstants.Layout.trailingSpace),
+            title.heightAnchor.constraint(greaterThanOrEqualToConstant: FeedCellConstants.Layout.minimalTitleHeight)
         ])
         
         NSLayoutConstraint.activate([
             healthScore.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            healthScore.topAnchor.constraint(equalTo: title.bottomAnchor, constant: FeedCellConstants.verticalSpace),
-            healthScore.trailingAnchor.constraint(equalTo: share.leadingAnchor, constant: -FeedCellConstants.horizontalSpace),
-            healthScore.heightAnchor.constraint(equalToConstant: FeedCellConstants.healthScoreHeight)
+            healthScore.topAnchor.constraint(equalTo: title.bottomAnchor, constant: FeedCellConstants.Layout.verticalSpace),
+            healthScore.trailingAnchor.constraint(equalTo: share.leadingAnchor, constant: -FeedCellConstants.Layout.horizontalSpace),
+            healthScore.heightAnchor.constraint(equalToConstant: FeedCellConstants.Layout.healthScoreHeight)
         ])
         
         NSLayoutConstraint.activate([
             minutes.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            minutes.topAnchor.constraint(equalTo: healthScore.bottomAnchor, constant: FeedCellConstants.verticalSpace),
-            minutes.trailingAnchor.constraint(equalTo: share.leadingAnchor, constant: -FeedCellConstants.horizontalSpace),
-            minutes.heightAnchor.constraint(equalToConstant: FeedCellConstants.minutesHeight)
+            minutes.topAnchor.constraint(equalTo: healthScore.bottomAnchor, constant: FeedCellConstants.Layout.verticalSpace),
+            minutes.trailingAnchor.constraint(equalTo: share.leadingAnchor, constant: -FeedCellConstants.Layout.horizontalSpace),
+            minutes.heightAnchor.constraint(equalToConstant: FeedCellConstants.Layout.minutesHeight)
         ])
     }
     
-    private func setupButtons() {
+    func setupButtons() {
         NSLayoutConstraint.activate([
             favorite.topAnchor.constraint(equalTo: healthScore.topAnchor),
-            favorite.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -FeedCellConstants.trailingSpace),
-            favorite.widthAnchor.constraint(equalToConstant: FeedCellConstants.buttonWidth),
+            favorite.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -FeedCellConstants.Layout.trailingSpace),
+            favorite.widthAnchor.constraint(equalToConstant: FeedCellConstants.Layout.buttonWidth),
             favorite.heightAnchor.constraint(equalTo: favorite.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
             share.topAnchor.constraint(equalTo: healthScore.topAnchor),
-            share.trailingAnchor.constraint(equalTo: favorite.leadingAnchor, constant: -FeedCellConstants.horizontalSpace),
-            share.widthAnchor.constraint(equalToConstant: FeedCellConstants.buttonWidth),
+            share.trailingAnchor.constraint(equalTo: favorite.leadingAnchor, constant: -FeedCellConstants.Layout.horizontalSpace),
+            share.widthAnchor.constraint(equalToConstant: FeedCellConstants.Layout.buttonWidth),
             share.heightAnchor.constraint(equalTo: share.widthAnchor)
         ])
     }
