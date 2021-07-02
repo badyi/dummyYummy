@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FeedCell: UICollectionViewCell {
+final class FeedCell: RoundedCollectionCellWithShadow {
     static let id = "FeedCell"
     
     private lazy var imageView: ShimmerUIImageView = {
@@ -56,6 +56,8 @@ final class FeedCell: UICollectionViewCell {
             .buildWithShimmer()
     }()
     
+    var isShimmerAnimatin: Bool = false
+    
     // MARK: - View lifecycle methods
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -72,21 +74,6 @@ final class FeedCell: UICollectionViewCell {
         title.text = ""
         minutes.text = ""
         healthScore.text = ""
-    }
-    var isShimmerAnimatin: Bool = false
-    
-    override func layoutSubviews() {
-        super.layoutSubviews()
-        // Improve scrolling performance with an explicit shadowPath
-        layer.shadowPath = UIBezierPath(
-            roundedRect: bounds,
-            cornerRadius: FeedCellConstants.Layout.cornerRadius
-        ).cgPath
-    }
-    
-    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
-        super.apply(layoutAttributes)
-        layoutIfNeeded()
     }
 }
 
@@ -162,7 +149,16 @@ extension FeedCell {
 
 private extension FeedCell {
     func setupView() {
-        configView()
+        shadowColor = FeedCellConstants.Design.shadowColor
+        cornerRadius = FeedCellConstants.Layout.cornerRadius
+        shadowRadius = FeedCellConstants.Layout.shadowRadius
+        shadowOpacity = FeedCellConstants.Layout.shadowOpacity
+        shadowOffsetWidth = FeedCellConstants.Layout.shadowOffsetWidth
+        shadowOffsetHeight = FeedCellConstants.Layout.shadowOffsetHeight
+        setupShadow()
+        
+        contentView.backgroundColor = FeedCellConstants.Design.backgroundColor
+
         contentView.addSubview(imageView)
         contentView.addSubview(title)
         contentView.addSubview(healthScore)
@@ -173,23 +169,6 @@ private extension FeedCell {
         setupLabels()
         setupButtons()
         startAnimation()
-    }
-    
-    func configView() {
-        contentView.backgroundColor = FeedCellConstants.Design.backgroundColor
-        // Apply rounded corners to contentView
-        contentView.layer.cornerRadius = FeedCellConstants.Layout.cornerRadius
-        contentView.layer.masksToBounds = true
-        
-        // Set masks to bounds to false to avoid the shadow
-        // from being clipped to the corner radius
-        layer.cornerRadius = FeedCellConstants.Layout.cornerRadius
-        layer.masksToBounds = false
-        /// Apply a shadow
-        layer.shadowRadius = FeedCellConstants.Layout.shadowRadius
-        layer.shadowOpacity = FeedCellConstants.Layout.shadowOpacity
-        layer.shadowColor = FeedCellConstants.Design.shadowColor.cgColor
-        layer.shadowOffset = CGSize(width: FeedCellConstants.Layout.shadowOffsetWidth, height: FeedCellConstants.Layout.shadowOffsetHeight)
     }
     
     func setupImageViews() {

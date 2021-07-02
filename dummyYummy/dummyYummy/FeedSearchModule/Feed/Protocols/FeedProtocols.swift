@@ -10,10 +10,19 @@ import Foundation
 protocol FeedViewProtocol: AnyObject {
     init(with presenter: FeedPresenterProtocol)
     func setupView()
+    func configNavigation()
+    
     func reloadCollection()
     func reloadItems(at indexPaths: [IndexPath])
-    func configNavigation()
-    func stopCellsAnimation()
+    
+    /// need this method to stop
+    /// animtion in visible cells when new view controller is pushed
+    func stopVisibleCellsAnimation()
+    
+    /// need this method in case
+    /// cells with animation were stopped by pushing a new view controller
+    /// and we need to restore the animation
+    func reloadVisibleCells()
 }
 
 protocol FeedPresenterProtocol: AnyObject {
@@ -23,7 +32,6 @@ protocol FeedPresenterProtocol: AnyObject {
     func viewWillDisappear()
     func willDisplayCell(at index: IndexPath)
     func didEndDisplayingCell(at index: IndexPath)
-    //func recipesCount() -> Int
     func recipe(at index: IndexPath) -> FeedRecipe?
 }
 

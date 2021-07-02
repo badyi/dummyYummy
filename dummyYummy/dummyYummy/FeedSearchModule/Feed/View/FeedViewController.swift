@@ -34,7 +34,6 @@ final class FeedViewController: UIViewController {
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        //collectionView.dataSource = presenter as? UICollectionViewDataSource
         presenter.viewDidLoad()
     }
     
@@ -51,7 +50,15 @@ final class FeedViewController: UIViewController {
 
 // MARK: - FeedViewProtocol
 extension FeedViewController: FeedViewProtocol {
-    func stopCellsAnimation() {
+    
+    func reloadVisibleCells() {
+        /// if we don't use perform batch, large title is hidden after reloading visible items
+        collectionView.performBatchUpdates({
+            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
+        }, completion: nil)
+    }
+    
+    func stopVisibleCellsAnimation() {
         collectionView.visibleCells.forEach {
             ($0 as? FeedCell)?.stopAnimation()
             ($0 as? FeedCell)?.stopImageViewAnimation()
@@ -90,16 +97,16 @@ extension FeedViewController {
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
         navigationController?.navigationBar.backgroundColor = FeedVCConstants.Design.navBarBackgroundColor
-        
+
         navigationController?.navigationBar.barTintColor = FeedVCConstants.Design.navBarBarTintColor
         navigationController?.navigationBar.tintColor = FeedVCConstants.Design.navBarTintColor
         navigationController?.navigationBar.prefersLargeTitles = true
-        
+
         /// need nav bar back view image to avoid some ios bag with search result controller frame on search bar tap
         navigationController?.navigationBar.setBackgroundImage(FeedVCConstants.Image.navBarBackground, for: .default)
         navigationController?.navigationBar.shadowImage = FeedVCConstants.Image.navBarShadowImage
         navigationController?.view.backgroundColor = FeedVCConstants.Design.navBarBarTintColor
-        
+
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.largeTitleDisplayMode = .always
     }
@@ -116,29 +123,6 @@ extension FeedViewController: UICollectionViewDelegate {
         presenter.didEndDisplayingCell(at: indexPath)
     }
 }
-
-// MARK: - UICollectionViewDataSource
-//extension FeedViewController: UICollectionViewDataSource {
-//
-//    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-//        /// in case the recipes haven't loaded yet
-//        /// we put a few fake cells with animations
-//        let count = presenter.recipesCount()
-//        return count == 0 ? FeedVCConstants.Layout.emptyCellsCount : count
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-//
-//        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.id, for: indexPath) as! FeedCell
-//
-//        cell.startAnimation()
-//        if let recipe = presenter.recipe(at: indexPath) {
-//            cell.configView(with: recipe)
-//            cell.stopAnimation()
-//        }
-//        return cell
-//    }
-//}
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension FeedViewController: UICollectionViewDelegateFlowLayout {

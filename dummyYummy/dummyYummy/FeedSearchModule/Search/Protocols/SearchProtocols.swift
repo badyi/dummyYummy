@@ -22,12 +22,15 @@ protocol SearchPresenterProtocol: AnyObject {
     func viewWillAppear()
     func willDisplayCell(at index: IndexPath)
     func didEndDisplayCell(at index: IndexPath)
-//    func recipesCount() -> Int
+    func updateRefinements(_ refinements: SearchRefinements)
+    func resultCount() -> Int
+    func updateSearchResult(_ query: String)
 //    func recipe(at index: IndexPath) -> FeedRecipe?
 }
 
 protocol SearchServiceProtocol {
-    
+    func loadSearch(_ query: String, completion: @escaping(OperationCompletion<SearchResponse>) -> ())
+    func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> ())
 }
 
 protocol SearchNavigationDelegate {

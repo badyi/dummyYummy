@@ -26,12 +26,12 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
     }
     
     func showFeedSearch() {
-        let feedNetworkService = FeedService()
+        let feedNetworkService = FeedNetworkService()
         let feedPresenter = FeedPresenter(with: feedNetworkService)
         let feedViewController = FeedViewController(with: feedPresenter)
         feedPresenter.view = feedViewController
         
-        let searchNetworkService = SearchService()
+        let searchNetworkService = SearchNetworkService()
         let searchPresenter = SearchPresenter(with: searchNetworkService)
         let result = SearchResultViewController(with: searchPresenter)
         result.navigationDelegate = self
@@ -54,8 +54,16 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
 
 extension FeedSearchCoordinator: SearchNavigationDelegate {
     func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements) {
-        let settings = RefinementsViewController(with: currentRefinements)
+        let presenter = RefinementsPresenter(with: currentRefinements)
+        let settings = RefinementsViewController(with: presenter)
+        presenter.view = settings
         settings.hidesBottomBarWhenPushed = true
+        settings.willFinish = { [weak self] refinements in
+            guard let searchReslutVC = (self?.navigationController.visibleViewController as? FeedViewController)?.navigationItem.searchController?.searchResultsController as? SearchResultViewController else {
+                return
+            }
+            searchReslutVC.presenter.updateRefinements(refinements)
+        }
         navigationController.pushViewController(settings, animated: true)
     }
 }

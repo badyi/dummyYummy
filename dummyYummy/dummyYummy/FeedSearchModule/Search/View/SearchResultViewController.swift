@@ -15,15 +15,16 @@ final class SearchResultViewController: UIViewController {
         let cv = UICollectionViewBuilder()
             .backgroundColor(.red)
             .delegate(self)
-            //.dataSource(self)
-            .setInsets(UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20))
+            .dataSource(presenter as? UICollectionViewDataSource)
+            .setInsets(UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
             .build()
+        cv.register(SearchResultCell.self, forCellWithReuseIdentifier: SearchResultCell.id)
         return cv
     }()
     
     var presenter: SearchPresenterProtocol
 
-    required init(with presenter: SearchPresenterProtocol) {
+    init(with presenter: SearchPresenterProtocol) {
         self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
@@ -54,11 +55,11 @@ extension SearchResultViewController: SearchViewProtocol {
     }
     
     func reloadCollection() {
-        
+        collectionView.reloadData()
     }
     
     func reloadItems(at indexPaths: [IndexPath]) {
-        
+        collectionView.reloadItems(at: indexPaths)
     }
     
     func configNavigation() {
@@ -79,15 +80,29 @@ extension SearchResultViewController {
 }
 
 extension SearchResultViewController: UICollectionViewDelegate {
-}
-
-extension SearchResultViewController: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        1
+    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        presenter.willDisplayCell(at: indexPath)
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        return UICollectionViewCell()
+    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+        presenter.didEndDisplayCell(at: indexPath)
+    }
+}
+
+extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        let width = (collectionView.bounds.width - 24) / 2
+        let height =  (collectionView.bounds.width - 24) / 2
+        return CGSize(width: width, height: height)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        return 4
     }
 }
 
@@ -96,7 +111,7 @@ extension SearchResultViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else {
             return
         }
-        print(text)
+        presenter.updateSearchResult(text)
     }
 }
 

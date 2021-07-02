@@ -29,11 +29,11 @@ final class FeedPresenter: NSObject {
 extension FeedPresenter: FeedPresenterProtocol {
     func viewWillAppear() {
         view?.configNavigation()
-        view?.reloadCollection()
+        view?.reloadVisibleCells()
     }
     
     func viewWillDisappear() {
-        view?.stopCellsAnimation()
+        view?.stopVisibleCellsAnimation()
     }
     
     func viewDidLoad() {

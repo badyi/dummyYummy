@@ -9,14 +9,20 @@ import UIKit
 
 final class RefinementsViewController: UIViewController {
     
-    let refinementsSections: [RefinementsSection : Int] = [.time : 1, .cuisine : 2, .diet : 1, .intolearns : 1]
+    private lazy var tableView: UITableView = {
+        let tv = UITableView()
+        tv.translatesAutoresizingMaskIntoConstraints = false
+        tv.delegate = self
+        tv.dataSource = presenter as? UITableViewDataSource
+        return tv
+    }()
     
-    let refinementsOrder: [RefinementsSection] = [.time, .cuisine, .diet, .intolearns]
+    var willFinish: ((SearchRefinements) -> ())?
     
-    var refinements: SearchRefinements
+    var presenter: RefinementsPresenterProtocol
     
-    init(with refinements: SearchRefinements) {
-        self.refinements = refinements
+    init(with presenter: RefinementsPresenterProtocol) {
+        self.presenter = presenter
         super.init(nibName: nil, bundle: nil)
     }
     
@@ -26,37 +32,66 @@ final class RefinementsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setupChilds()
+        presenter.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configNavigation()
+        presenter.viewWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+        super.viewWillDisappear(animated)
+        presenter.viewWillDisappear()
+    }
+}
+
+extension RefinementsViewController: RefinementsViewProtocol {
+    func setupView() {
+        tableView.register(RefinementInputCell.self, forCellReuseIdentifier: RefinementInputCell.id)
+        tableView.sectionFooterHeight = 0
+        tableView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        view.backgroundColor = .orange
+        
+        let gesture = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
+        gesture.cancelsTouchesInView = false
+        view.addGestureRecognizer(gesture)
+        
+        view.addSubview(tableView)
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
+    
+    func endEditing(_ flag: Bool) {
+        view.endEditing(flag)
+    }
+}
+
+extension RefinementsViewController: UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        return 50
+    }
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
+    }
+    
+   func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if let cell = tableView.cellForRow(at: indexPath) as? RefinementInputCell, cell.canBecomeFirstResponder {
+           cell.becomeFirstResponder()
+        }
+        presenter.didSelectAt(indexPath)
     }
 }
 
 extension RefinementsViewController {
-    func setupChilds() {
-        let childViewController = RefinementsTableViewController()
-        childViewController.view.translatesAutoresizingMaskIntoConstraints = false
-
-        view.addSubview(childViewController.view)
-        addChild(childViewController)
-        
-        childViewController.didMove(toParent: self)
-        childViewController.tableView.dataSource = self
-
-
-        NSLayoutConstraint.activate([
-            childViewController.view.topAnchor.constraint(equalTo: self.view.safeAreaLayoutGuide.topAnchor),
-            childViewController.view.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            childViewController.view.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            childViewController.view.bottomAnchor.constraint(equalTo: view.bottomAnchor),
-        ])
+    @objc func backgroundTapped(_ sender: UIGestureRecognizer) {
+        self.view.endEditing(true)
     }
     
     func configNavigation() {
@@ -65,18 +100,3 @@ extension RefinementsViewController {
     }
 }
 
-extension RefinementsViewController: UITableViewDataSource {
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return refinementsSections.count
-    }
-    
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        refinementsSections[refinementsOrder[section]] ?? 0
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RefinementCell.id, for: indexPath)
-        cell.backgroundColor = .systemBlue
-        return cell
-    }
-}
