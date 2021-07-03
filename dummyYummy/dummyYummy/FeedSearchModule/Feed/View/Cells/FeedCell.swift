@@ -59,14 +59,6 @@ final class FeedCell: RoundedCollectionCellWithShadow {
     var isShimmerAnimatin: Bool = false
     
     // MARK: - View lifecycle methods
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
     
     override func prepareForReuse() {
         super.prepareForReuse()
@@ -74,6 +66,28 @@ final class FeedCell: RoundedCollectionCellWithShadow {
         title.text = ""
         minutes.text = ""
         healthScore.text = ""
+    }
+    
+    override func setupView() {
+        shadowColor = FeedCellConstants.Design.shadowColor
+        cornerRadius = FeedCellConstants.Layout.cornerRadius
+        shadowRadius = FeedCellConstants.Layout.shadowRadius
+        shadowOpacity = FeedCellConstants.Layout.shadowOpacity
+        shadowOffsetWidth = FeedCellConstants.Layout.shadowOffsetWidth
+        shadowOffsetHeight = FeedCellConstants.Layout.shadowOffsetHeight
+        
+        contentView.backgroundColor = FeedCellConstants.Design.backgroundColor
+
+        contentView.addSubview(imageView)
+        contentView.addSubview(title)
+        contentView.addSubview(healthScore)
+        contentView.addSubview(minutes)
+        contentView.addSubview(favorite)
+        contentView.addSubview(share)
+        setupImageViews()
+        setupLabels()
+        setupButtons()
+        startAnimation()
     }
 }
 
@@ -148,28 +162,7 @@ extension FeedCell {
 }
 
 private extension FeedCell {
-    func setupView() {
-        shadowColor = FeedCellConstants.Design.shadowColor
-        cornerRadius = FeedCellConstants.Layout.cornerRadius
-        shadowRadius = FeedCellConstants.Layout.shadowRadius
-        shadowOpacity = FeedCellConstants.Layout.shadowOpacity
-        shadowOffsetWidth = FeedCellConstants.Layout.shadowOffsetWidth
-        shadowOffsetHeight = FeedCellConstants.Layout.shadowOffsetHeight
-        setupShadow()
-        
-        contentView.backgroundColor = FeedCellConstants.Design.backgroundColor
 
-        contentView.addSubview(imageView)
-        contentView.addSubview(title)
-        contentView.addSubview(healthScore)
-        contentView.addSubview(minutes)
-        contentView.addSubview(favorite)
-        contentView.addSubview(share)
-        setupImageViews()
-        setupLabels()
-        setupButtons()
-        startAnimation()
-    }
     
     func setupImageViews() {
         NSLayoutConstraint.activate([

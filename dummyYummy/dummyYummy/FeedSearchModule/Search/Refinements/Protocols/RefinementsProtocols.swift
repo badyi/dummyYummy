@@ -23,7 +23,3 @@ protocol RefinementsPresenterProtocol {
     func didEndDisplayCell(at index: IndexPath)
     func didSelectAt(_ indexPath: IndexPath)
 }
-//protocol RefinementsViewControllerDelegate: AnyObject {
-//    func sectionsCount() -> Int
-//    func numberOfRowsIn(_ section: Int) -> Int
-//}

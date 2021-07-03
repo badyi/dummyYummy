@@ -13,10 +13,10 @@ final class SearchResultViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionViewBuilder()
-            .backgroundColor(.red)
+            .backgroundColor(SearchResultConstants.VC.Design.backgroundColor)
             .delegate(self)
             .dataSource(presenter as? UICollectionViewDataSource)
-            .setInsets(UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10))
+            .setInsets(SearchResultConstants.VC.Layout.collectionViewInsets)
             .build()
         cv.register(SearchResultCell.self, forCellWithReuseIdentifier: SearchResultCell.id)
         return cv
@@ -50,7 +50,7 @@ final class SearchResultViewController: UIViewController {
 
 extension SearchResultViewController: SearchViewProtocol {
     func setupView() {
-        view.backgroundColor = .systemBlue
+        view.backgroundColor = SearchResultConstants.VC.Design.backgroundColor
         setupCollectionView()
     }
     
@@ -92,17 +92,24 @@ extension SearchResultViewController: UICollectionViewDelegate {
 extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        let width = (collectionView.bounds.width - 24) / 2
-        let height =  (collectionView.bounds.width - 24) / 2
+        let horizontalInsets = collectionView.contentInset.left + collectionView.contentInset.right
+        let lineSpace = SearchResultConstants.VC.Layout.minimumLineSpacingForSection
+        let interSpace = SearchResultConstants.VC.Layout.minimumInteritemSpacingForSection
+        let cellsPerLine = SearchResultConstants.VC.Layout.cellsPerLine
+        
+        let width = (collectionView.bounds.width - (horizontalInsets + interSpace)) / cellsPerLine
+        let height =  (collectionView.bounds.width - (horizontalInsets + lineSpace)) / cellsPerLine
         return CGSize(width: width, height: height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 4
+        
+        SearchResultConstants.VC.Layout.minimumInteritemSpacingForSection
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        return 4
+        
+        SearchResultConstants.VC.Layout.minimumInteritemSpacingForSection
     }
 }
 

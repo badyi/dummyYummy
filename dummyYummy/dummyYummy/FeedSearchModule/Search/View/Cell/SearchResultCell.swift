@@ -12,30 +12,39 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
     
     private var imageView: ShimmerUIImageView = {
         UIImageViewBuilder()
-            .backgroundColor(.blue)
+            .backgroundColor(SearchResultConstants.Cell.Design.backgroundColor)
             .buildWithShimmer()
     }()
     
     private var title: ShimmerUILabel = {
         UILabelBuilder()
-            .backgroundColor(.systemRed.withAlphaComponent(0.5))
+            .backgroundColor(SearchResultConstants.Cell.Design.titleBackgroundColor)
+            .textColor(SearchResultConstants.Cell.Design.titleColor)
             .buildWithShimmer()
     }()
     
+    var isShimmerAnimatin: Bool = false
+    
     // MARK: - View lifecycle methods
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        setupView()
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
-    
+
     override func prepareForReuse() {
         super.prepareForReuse()
         imageView.image = nil
         title.text = ""
+    }
+    
+    override func setupView() {
+        shadowColor = SearchResultConstants.Cell.Design.shadowColor
+        cornerRadius = SearchResultConstants.Cell.Layout.cornerRadius
+        shadowRadius = SearchResultConstants.Cell.Layout.shadowRadius
+        shadowOpacity = SearchResultConstants.Cell.Layout.shadowOpacity
+        shadowOffsetWidth = SearchResultConstants.Cell.Layout.shadowOffsetWidth
+        shadowOffsetHeight = SearchResultConstants.Cell.Layout.shadowOffsetHeight
+        
+        contentView.addSubview(imageView)
+        contentView.addSubview(title)
+        setupImageView()
+        setupTitle()
     }
 }
 
@@ -43,31 +52,18 @@ extension SearchResultCell {
     func config(with recipe: SearchRecipe) {
         self.title.text = recipe.title
         guard let imageData = recipe.imageData else {
+            imageView.startShimmerAnimation()
             return
         }
         guard let image = UIImage(data: imageData) else {
             return
         }
+        imageView.removeShimmerAnimation()
         self.imageView.image = image
     }
 }
 
 private extension SearchResultCell {
-    func setupView() {
-        shadowColor = FeedCellConstants.Design.shadowColor
-        cornerRadius = FeedCellConstants.Layout.cornerRadius
-        shadowRadius = FeedCellConstants.Layout.shadowRadius
-        shadowOpacity = FeedCellConstants.Layout.shadowOpacity
-        shadowOffsetWidth = FeedCellConstants.Layout.shadowOffsetWidth
-        shadowOffsetHeight = FeedCellConstants.Layout.shadowOffsetHeight
-        setupShadow()
-        
-        title.text = "hello lorem lorem loerm lorem"
-        contentView.addSubview(imageView)
-        contentView.addSubview(title)
-        setupImageView()
-        setupTitle()
-    }
     
     func setupImageView() {
         NSLayoutConstraint.activate([

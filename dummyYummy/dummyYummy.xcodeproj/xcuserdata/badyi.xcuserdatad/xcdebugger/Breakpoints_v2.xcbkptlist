@@ -1210,8 +1210,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Refinements/RefinementsProtocols.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "30"
-            endingLineNumber = "30">
+            startingLineNumber = "26"
+            endingLineNumber = "26">
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1684,8 +1684,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/View/SearchResultViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "95"
-            endingLineNumber = "95"
+            startingLineNumber = "100"
+            endingLineNumber = "100"
             landmarkName = "collectionView(_:layout:sizeForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1700,8 +1700,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Presenter/SearchPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "102"
-            endingLineNumber = "102"
+            startingLineNumber = "101"
+            endingLineNumber = "101"
             landmarkName = "loadImageIfNeeded(for:at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1716,8 +1716,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Presenter/SearchPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "117"
-            endingLineNumber = "117"
+            startingLineNumber = "116"
+            endingLineNumber = "116"
             landmarkName = "imageDidLoad(at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1748,8 +1748,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Presenter/SearchPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "86"
-            endingLineNumber = "86"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "loadRecipes(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1764,8 +1764,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Presenter/SearchPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "84"
-            endingLineNumber = "84"
+            startingLineNumber = "83"
+            endingLineNumber = "83"
             landmarkName = "loadRecipes(with:)"
             landmarkType = "7">
             <Locations>
@@ -1800,6 +1800,70 @@
                   offsetFromSymbolStart = "30">
                </Location>
             </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F71933BA-CD91-4392-9ACD-35D5BA883332"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FeedSearchModule/Search/Refinements/View/RefinementsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "74"
+            endingLineNumber = "74"
+            landmarkName = "tableView(_:heightForFooterInSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "4503F46F-819F-4ADF-B846-18F0EC9113DC"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FeedSearchModule/Search/Refinements/View/RefinementsViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
+            landmarkName = "tableView(_:willDisplayFooterView:forSection:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "AAFD715D-150F-4844-A825-3E1130B2FCAF"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FeedSearchModule/Search/View/SearchResultViewController.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "collectionView(_:layout:sizeForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D5A856A1-0417-4EB7-805E-83E8774AFC11"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FeedSearchModule/Feed/View/Cells/FeedCell.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
+            landmarkName = "setupView()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>

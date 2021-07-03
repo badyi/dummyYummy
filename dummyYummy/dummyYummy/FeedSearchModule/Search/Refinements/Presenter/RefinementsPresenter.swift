@@ -81,12 +81,11 @@ extension RefinementsPresenter: UITableViewDataSource {
     func configCellForTime(_ cell: RefinementInputCell) {
         cell.isUsingKeyBoard = true
         var isActive = false
-        var text = "Max ready minutes: "
         if let time = refinements.maxReadyTime {
             isActive = true
-            text += "\(time)"
+            cell.configInput(with: "\(time)")
         }
-        cell.configCell(with: text, isActive)
+        cell.configCell(with: "Max ready minutes: ", isActive)
     }
     
     func configCellForCuisine(_ cell: RefinementInputCell) {

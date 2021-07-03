@@ -14,19 +14,23 @@ final class RefinementInputCell: BaseInputTableViewCell {
     
     private let label: UILabel = {
         return UILabelBuilder()
-            .backgroundColor(.orange)
+            .backgroundColor(RefinementsConstants.Cell.Design.backgroundColor)
+            .textColor(RefinementsConstants.Cell.Design.titleColor)
             .build()
     }()
     
     private let inputLabel: UILabel = {
         return UILabelBuilder()
-            .backgroundColor(.red)
+            .backgroundColor(RefinementsConstants.Cell.Design.backgroundColor)
+            .textColor(Colors.wisteria)//RefinementsConstants.Cell.Design.additinalTextColor)
             .build()
     }()
     
-    private lazy var activateButton: UIButton = {
+    private lazy var deleteButton: UIButton = {
         let button = UIButtonBuilder()
-            .backgroundColor(.cyan)
+            .backgroundColor(RefinementsConstants.Cell.Design.backgroundColor)
+            .setImage(RefinementsConstants.Cell.Image.deleteButtonImage)
+            .tintColor(.red)
             .build()
         button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         return button
@@ -47,9 +51,11 @@ final class RefinementInputCell: BaseInputTableViewCell {
         super.update(using: data)
         if data > 0 {
             inputLabel.text = " \(data)"
+            deleteButton.isHidden = false
             return
         }
         inputLabel.text = ""
+        deleteButton.isHidden = true
     }
 }
 
@@ -60,42 +66,46 @@ extension RefinementInputCell {
     
     func configCell(with text: String, _ isActive: Bool) {
         label.text = text
+        deleteButton.isHidden = !isActive
+    }
+    
+    func configInput(with text: String) {
+        inputLabel.text = text
     }
 }
 
 private extension RefinementInputCell {
     @objc func deleteButtonTapped() {
         inputLabel.text = ""
+        deleteButton.isHidden = true
         deleteTapped?(indexPath)
     }
     
     func setupView() {
-        contentView.backgroundColor = .yellow
+        contentView.backgroundColor = RefinementsConstants.Cell.Design.backgroundColor
         contentView.addSubview(label)
-        contentView.addSubview(activateButton)
+        contentView.addSubview(deleteButton)
         setupTextFiled()
         contentView.addSubview(inputLabel)
-        label.backgroundColor = .black
-        label.textColor = .white
         
         NSLayoutConstraint.activate([
-            label.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 10),
-            label.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: 10),
-            label.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -10)
+            label.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: RefinementsConstants.Cell.Layout.verticalSpace),
+            label.leadingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.leadingAnchor, constant: RefinementsConstants.Cell.Layout.horizontalSpace),
+            label.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -RefinementsConstants.Cell.Layout.horizontalSpace)
         ])
         
         NSLayoutConstraint.activate([
             inputLabel.leadingAnchor.constraint(equalTo: label.trailingAnchor),
             inputLabel.topAnchor.constraint(equalTo: label.topAnchor),
             inputLabel.bottomAnchor.constraint(equalTo: label.bottomAnchor),
-            inputLabel.trailingAnchor.constraint(equalTo: activateButton.safeAreaLayoutGuide.leadingAnchor),
+            inputLabel.trailingAnchor.constraint(equalTo: deleteButton.safeAreaLayoutGuide.leadingAnchor),
         ])
         
         NSLayoutConstraint.activate([
-            activateButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: 10),
-            activateButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -10),
-            activateButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -10),
-            activateButton.widthAnchor.constraint(equalToConstant: 50)
+            deleteButton.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor, constant: RefinementsConstants.Cell.Layout.verticalSpace),
+            deleteButton.trailingAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.trailingAnchor, constant: -RefinementsConstants.Cell.Layout.horizontalSpace),
+            deleteButton.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor, constant: -RefinementsConstants.Cell.Layout.horizontalSpace),
+            deleteButton.widthAnchor.constraint(equalToConstant: RefinementsConstants.Cell.Layout.buttonWidth)
         ])
     }
 }

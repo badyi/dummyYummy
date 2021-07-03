@@ -60,6 +60,7 @@
 		81A09767268E0586003E8B61 /* SearchResultConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A09766268E0586003E8B61 /* SearchResultConstants.swift */; };
 		81A09769268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A09768268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift */; };
 		81A49DBA268FA7BF0024C20E /* RefinementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A49DB9268FA7BF0024C20E /* RefinementsPresenter.swift */; };
+		81D631D32690B680004CF695 /* RefinementsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D22690B680004CF695 /* RefinementsConstants.swift */; };
 		81FED623268BD2C50053AD1C /* SearchRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FED622268BD2C50053AD1C /* SearchRecipe.swift */; };
 		81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */; };
 		81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */; };
@@ -122,6 +123,7 @@
 		81A09766268E0586003E8B61 /* SearchResultConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultConstants.swift; sourceTree = "<group>"; };
 		81A09768268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCollectionCellWithShadow.swift; sourceTree = "<group>"; };
 		81A49DB9268FA7BF0024C20E /* RefinementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsPresenter.swift; sourceTree = "<group>"; };
+		81D631D22690B680004CF695 /* RefinementsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsConstants.swift; sourceTree = "<group>"; };
 		81FED622268BD2C50053AD1C /* SearchRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipe.swift; sourceTree = "<group>"; };
 		81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldBuilder.swift; sourceTree = "<group>"; };
 		81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelBuilder.swift; sourceTree = "<group>"; };
@@ -367,11 +369,11 @@
 		81940C25268524150031210C /* Refinements */ = {
 			isa = PBXGroup;
 			children = (
-				81940C2B268527FB0031210C /* RefinementsProtocols.swift */,
-				81A49DB9268FA7BF0024C20E /* RefinementsPresenter.swift */,
-				81940BF8268360250031210C /* RefinementsViewController.swift */,
+				81D631D22690B680004CF695 /* RefinementsConstants.swift */,
+				81D631CF2690B62C004CF695 /* Protocols */,
+				81D631D02690B635004CF695 /* Presenter */,
+				81D631D12690B63E004CF695 /* View */,
 				81940C232684B2650031210C /* Refinements.swift */,
-				81616AD7268B5215002DF12F /* Cells */,
 			);
 			path = Refinements;
 			sourceTree = "<group>";
@@ -434,6 +436,31 @@
 				81A09764268E0553003E8B61 /* SearchResultCell.swift */,
 			);
 			path = Cell;
+			sourceTree = "<group>";
+		};
+		81D631CF2690B62C004CF695 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				81940C2B268527FB0031210C /* RefinementsProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		81D631D02690B635004CF695 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				81A49DB9268FA7BF0024C20E /* RefinementsPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		81D631D12690B63E004CF695 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81940BF8268360250031210C /* RefinementsViewController.swift */,
+				81616AD7268B5215002DF12F /* Cells */,
+			);
+			path = View;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -547,6 +574,7 @@
 				810562F0267537AE00106C65 /* FeedSearchCoordinator.swift in Sources */,
 				815C5A5A2675138A004A8F09 /* FeedPresenter.swift in Sources */,
 				810562DF2675210300106C65 /* FeedCell.swift in Sources */,
+				81D631D32690B680004CF695 /* RefinementsConstants.swift in Sources */,
 				814A8C15267FB86D00F46E1F /* Colors.swift in Sources */,
 				81A09767268E0586003E8B61 /* SearchResultConstants.swift in Sources */,
 				81A49DBA268FA7BF0024C20E /* RefinementsPresenter.swift in Sources */,

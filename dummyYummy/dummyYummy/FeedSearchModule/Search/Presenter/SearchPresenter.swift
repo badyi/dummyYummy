@@ -69,9 +69,8 @@ extension SearchPresenter: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCell.id, for: indexPath) as! SearchResultCell
-        cell.backgroundColor = .cyan
-        
         cell.config(with: recipes[indexPath.row])
+        
         return cell
     }
 }

@@ -16,6 +16,16 @@ class RoundedCollectionCellWithShadow: UICollectionViewCell {
     var shadowOffsetWidth: CGFloat = 0
     var shadowOffsetHeight: CGFloat = 0
     
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        setupView()
+        setupShadow()
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func layoutSubviews() {
         super.layoutSubviews()
         // Improve scrolling performance with an explicit shadowPath
@@ -44,5 +54,9 @@ class RoundedCollectionCellWithShadow: UICollectionViewCell {
         layer.shadowColor = shadowColor.cgColor
         
         layer.shadowOffset = CGSize(width: shadowOffsetWidth, height: shadowOffsetHeight)
+    }
+    
+    func setupView() {
+        
     }
 }
