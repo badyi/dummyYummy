@@ -37,7 +37,7 @@ struct SearchResultConstants {
         
         struct Design {
             static var backgroundColor = Colors.eclipse
-            static var titleBackgroundColor = Colors.wisteria.withAlphaComponent(0.5)
+            static var titleBackgroundColor = Colors.wisteria.withAlphaComponent(0.8)
             static var titleColor = Colors.almostPureWhite
             static var additinalTextColor = Colors.mediumPureWhite
             static var shadowColor = Colors.pureBlack

@@ -61,6 +61,7 @@
 		81A09769268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A09768268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift */; };
 		81A49DBA268FA7BF0024C20E /* RefinementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A49DB9268FA7BF0024C20E /* RefinementsPresenter.swift */; };
 		81D631D32690B680004CF695 /* RefinementsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D22690B680004CF695 /* RefinementsConstants.swift */; };
+		81D631D52691D86E004CF695 /* UILabelWithInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D42691D86E004CF695 /* UILabelWithInsets.swift */; };
 		81FED623268BD2C50053AD1C /* SearchRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FED622268BD2C50053AD1C /* SearchRecipe.swift */; };
 		81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */; };
 		81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */; };
@@ -124,6 +125,7 @@
 		81A09768268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCollectionCellWithShadow.swift; sourceTree = "<group>"; };
 		81A49DB9268FA7BF0024C20E /* RefinementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsPresenter.swift; sourceTree = "<group>"; };
 		81D631D22690B680004CF695 /* RefinementsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsConstants.swift; sourceTree = "<group>"; };
+		81D631D42691D86E004CF695 /* UILabelWithInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelWithInsets.swift; sourceTree = "<group>"; };
 		81FED622268BD2C50053AD1C /* SearchRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipe.swift; sourceTree = "<group>"; };
 		81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldBuilder.swift; sourceTree = "<group>"; };
 		81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelBuilder.swift; sourceTree = "<group>"; };
@@ -310,6 +312,7 @@
 				81056341267573FD00106C65 /* Constants.swift */,
 				814A8C14267FB86D00F46E1F /* Colors.swift */,
 				810563452675FFFE00106C65 /* FakeReachability.swift */,
+				81D631D42691D86E004CF695 /* UILabelWithInsets.swift */,
 				810562E226752F8700106C65 /* CoordinatorProtocol.swift */,
 				814A8C0C267F773700F46E1F /* UIColorHexExtension.swift */,
 				81A09768268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift */,
@@ -549,6 +552,7 @@
 				815E6E75267418DF00CE6CC1 /* FeedViewController.swift in Sources */,
 				814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */,
 				81940C242684B2650031210C /* Refinements.swift in Sources */,
+				81D631D52691D86E004CF695 /* UILabelWithInsets.swift in Sources */,
 				81940C282685249C0031210C /* RefinementInputCell.swift in Sources */,
 				8105630A267564A400106C65 /* Networking.swift in Sources */,
 				815E6E71267418DF00CE6CC1 /* AppDelegate.swift in Sources */,

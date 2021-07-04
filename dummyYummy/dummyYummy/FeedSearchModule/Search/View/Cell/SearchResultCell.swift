@@ -16,11 +16,11 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
             .buildWithShimmer()
     }()
     
-    private var title: ShimmerUILabel = {
+    private var title: UILabelWithInsets = {
         UILabelBuilder()
             .backgroundColor(SearchResultConstants.Cell.Design.titleBackgroundColor)
             .textColor(SearchResultConstants.Cell.Design.titleColor)
-            .buildWithShimmer()
+            .buildWithInsets()
     }()
     
     var isShimmerAnimatin: Bool = false
@@ -40,7 +40,7 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
         shadowOpacity = SearchResultConstants.Cell.Layout.shadowOpacity
         shadowOffsetWidth = SearchResultConstants.Cell.Layout.shadowOffsetWidth
         shadowOffsetHeight = SearchResultConstants.Cell.Layout.shadowOffsetHeight
-        
+       
         contentView.addSubview(imageView)
         contentView.addSubview(title)
         setupImageView()

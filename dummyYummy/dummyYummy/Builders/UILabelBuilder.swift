@@ -17,6 +17,7 @@ final class UILabelBuilder {
 }
 
 extension UILabelBuilder {
+    
     @discardableResult
     public func setFont(_ font: UIFont) -> UILabelBuilder {
         self.font = font
@@ -54,14 +55,21 @@ extension UILabelBuilder {
     }
     
     public func build() -> UILabel {
-        return build(UILabel())
+        return build(label: UILabel())
     }
     
     public func buildWithShimmer() -> ShimmerUILabel {
-        return build(ShimmerUILabel()) as! ShimmerUILabel
+        return build(label: ShimmerUILabel())
     }
     
-    private func build(_ label: UILabel) -> UILabel {
+    public func buildWithInsets() -> UILabelWithInsets {
+        return build(label: UILabelWithInsets())
+    }
+    
+}
+
+private extension UILabelBuilder {
+    func build<T: UILabel>(label: T) -> T {
         label.numberOfLines = 0
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = backgroundColor
@@ -73,4 +81,3 @@ extension UILabelBuilder {
         return label
     }
 }
-
