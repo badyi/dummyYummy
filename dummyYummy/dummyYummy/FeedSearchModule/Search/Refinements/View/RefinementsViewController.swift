@@ -20,16 +20,7 @@ final class RefinementsViewController: UIViewController {
     
     var willFinish: ((SearchRefinements) -> ())?
     
-    var presenter: RefinementsPresenterProtocol
-    
-    init(with presenter: RefinementsPresenterProtocol) {
-        self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var presenter: RefinementsPresenterProtocol!
     
     override func viewDidLoad() {
         super.viewDidLoad()

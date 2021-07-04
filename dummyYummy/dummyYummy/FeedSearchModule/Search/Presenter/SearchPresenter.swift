@@ -9,22 +9,31 @@ import UIKit
 
 final class SearchPresenter: NSObject {
     weak var view: SearchViewProtocol?
-    private var service: SearchServiceProtocol
+    private var service: SearchNetworkServiceProtocol
     public private(set) var refinements: SearchRefinements
+    
+    var navigationDelegate: SearchNavigationDelegate?
+    
     var recipes: [FeedRecipe] {
         didSet {
             reloadCollection()
         }
     }
     
-    init(with service: SearchServiceProtocol) {
-        self.service = service
+    init(with view: SearchViewProtocol, _ networkService: SearchNetworkServiceProtocol) {
+        self.service = networkService
         recipes = []
+        self.view = view
         refinements = SearchRefinements()
     }
 }
 
 extension SearchPresenter: SearchPresenterProtocol {
+    
+    func searchRefinementsTapped() {
+        navigationDelegate?.didTapSearchSettingsButton(refinements)
+    }
+    
     func resultCount() -> Int {
         recipes.count
     }

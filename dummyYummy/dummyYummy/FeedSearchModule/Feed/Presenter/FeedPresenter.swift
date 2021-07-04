@@ -8,8 +8,11 @@
 import UIKit
 
 final class FeedPresenter: NSObject {
+    
     weak var view: FeedViewProtocol?
-    var networkService: FeedServiceProtocol
+    private var networkService: FeedServiceProtocol
+    
+    var navigationDelegate: FeedNavigationDelegate?
     
     var recipes: [FeedRecipe] {
         didSet {
@@ -19,7 +22,9 @@ final class FeedPresenter: NSObject {
     
     private let randomRecipesCount: Int = 100
     
-    init(with service: FeedServiceProtocol) {
+    
+    init(with view: FeedViewProtocol, _ service: FeedServiceProtocol) {
+        self.view = view
         self.networkService = service
         recipes = []
     }
@@ -62,6 +67,10 @@ extension FeedPresenter: FeedPresenterProtocol {
             return
         }
         self.cancelLoad(at: index)
+    }
+    
+    func didSelectCellAt(_ indexPath: IndexPath) {
+        navigationDelegate?.feedDidTapCell()
     }
 }
 

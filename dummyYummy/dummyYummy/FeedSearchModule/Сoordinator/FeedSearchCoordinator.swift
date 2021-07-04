@@ -27,22 +27,28 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
     
     func showFeedSearch() {
         let feedNetworkService = FeedNetworkService()
-        let feedPresenter = FeedPresenter(with: feedNetworkService)
-        let feedViewController = FeedViewController(with: feedPresenter)
+        let feedViewController = FeedViewController()
+        let feedPresenter = FeedPresenter(with: feedViewController, feedNetworkService)
+        
+        feedViewController.presenter = feedPresenter
         feedPresenter.view = feedViewController
+        feedPresenter.navigationDelegate = self
         
         let searchNetworkService = SearchNetworkService()
-        let searchPresenter = SearchPresenter(with: searchNetworkService)
-        let result = SearchResultViewController(with: searchPresenter)
-        result.navigationDelegate = self
-        searchPresenter.view = result
+        let searchResultViewController = SearchResultViewController()
+        let searchPresenter = SearchPresenter(with: searchResultViewController, searchNetworkService)
         
-        let searchController = UISearchController(searchResultsController: result)
+        searchPresenter.navigationDelegate = self
+        searchResultViewController.presenter = searchPresenter
+        
+        searchPresenter.view = searchResultViewController
+        
+        let searchController = UISearchController(searchResultsController: searchResultViewController)
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.searchBarStyle = .minimal
         searchController.definesPresentationContext = true
-        searchController.searchResultsUpdater = result
-        searchController.searchBar.delegate = result
+        searchController.searchResultsUpdater = searchResultViewController
+        searchController.searchBar.delegate = searchResultViewController
         searchController.searchBar.showsBookmarkButton = true
         searchController.searchBar.setImage(FeedSearchConstants.Image.searchSettingsButtonImage, for: .bookmark, state: .normal)
         
@@ -50,20 +56,43 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
         
         navigationController.pushViewController(feedViewController, animated: true)
     }
-}
-
-extension FeedSearchCoordinator: SearchNavigationDelegate {
-    func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements) {
-        let presenter = RefinementsPresenter(with: currentRefinements)
-        let settings = RefinementsViewController(with: presenter)
-        presenter.view = settings
-        settings.hidesBottomBarWhenPushed = true
-        settings.willFinish = { [weak self] refinements in
+    
+    func showRefinements(with refinements: SearchRefinements) {
+        let refinementsViewController = RefinementsViewController()
+        let presenter = RefinementsPresenter(with: refinements)
+        
+        refinementsViewController.presenter = presenter
+        presenter.view = refinementsViewController
+        
+        refinementsViewController.hidesBottomBarWhenPushed = true
+        refinementsViewController.willFinish = { [weak self] refinements in
             guard let searchReslutVC = (self?.navigationController.visibleViewController as? FeedViewController)?.navigationItem.searchController?.searchResultsController as? SearchResultViewController else {
                 return
             }
             searchReslutVC.presenter.updateRefinements(refinements)
         }
-        navigationController.pushViewController(settings, animated: true)
+        navigationController.pushViewController(refinementsViewController, animated: true)
+    }
+    
+    func showDetail() {
+        
+    }
+}
+
+extension FeedSearchCoordinator: SearchNavigationDelegate {
+
+    func searchDidTapCell() {
+        #warning("didtap")
+    }
+    
+    func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements) {
+        showRefinements(with: currentRefinements)
+    }
+}
+
+extension FeedSearchCoordinator: FeedNavigationDelegate {
+    
+    func feedDidTapCell() {
+        showDetail()
     }
 }

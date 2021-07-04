@@ -61,6 +61,8 @@
 		81D631D32690B680004CF695 /* RefinementsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D22690B680004CF695 /* RefinementsConstants.swift */; };
 		81D631D52691D86E004CF695 /* UILabelWithInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D42691D86E004CF695 /* UILabelWithInsets.swift */; };
 		81D631D72691DDA8004CF695 /* FeedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D62691DDA8004CF695 /* FeedConstants.swift */; };
+		81D631DD269211B7004CF695 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631DC269211B7004CF695 /* DetailViewController.swift */; };
+		81D631DF2692127F004CF695 /* DetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631DE2692127F004CF695 /* DetailProtocols.swift */; };
 		81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */; };
 		81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */; };
 		81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */; };
@@ -123,6 +125,8 @@
 		81D631D22690B680004CF695 /* RefinementsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsConstants.swift; sourceTree = "<group>"; };
 		81D631D42691D86E004CF695 /* UILabelWithInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelWithInsets.swift; sourceTree = "<group>"; };
 		81D631D62691DDA8004CF695 /* FeedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedConstants.swift; sourceTree = "<group>"; };
+		81D631DC269211B7004CF695 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
+		81D631DE2692127F004CF695 /* DetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProtocols.swift; sourceTree = "<group>"; };
 		81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldBuilder.swift; sourceTree = "<group>"; };
 		81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelBuilder.swift; sourceTree = "<group>"; };
 		81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonBuilder.swift; sourceTree = "<group>"; };
@@ -359,6 +363,7 @@
 				810562EB2675323B00106C65 /* Сoordinator */,
 				815C5A582675136E004A8F09 /* Feed */,
 				81940BEB268267F00031210C /* Search */,
+				81D631DB26921163004CF695 /* Detail */,
 			);
 			path = FeedSearchModule;
 			sourceTree = "<group>";
@@ -450,6 +455,15 @@
 				81616AD7268B5215002DF12F /* Cells */,
 			);
 			path = View;
+			sourceTree = "<group>";
+		};
+		81D631DB26921163004CF695 /* Detail */ = {
+			isa = PBXGroup;
+			children = (
+				81D631DE2692127F004CF695 /* DetailProtocols.swift */,
+				81D631DC269211B7004CF695 /* DetailViewController.swift */,
+			);
+			path = Detail;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -567,6 +581,7 @@
 				814A8C15267FB86D00F46E1F /* Colors.swift in Sources */,
 				81A09767268E0586003E8B61 /* SearchResultConstants.swift in Sources */,
 				81A49DBA268FA7BF0024C20E /* RefinementsPresenter.swift in Sources */,
+				81D631DF2692127F004CF695 /* DetailProtocols.swift in Sources */,
 				810563462675FFFE00106C65 /* FakeReachability.swift in Sources */,
 				81616AD6268B1DAB002DF12F /* BaseInputTableViewCell.swift in Sources */,
 				81A09769268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift in Sources */,
@@ -576,6 +591,7 @@
 				8105631A2675661D00106C65 /* OperationCompletion.swift in Sources */,
 				814A8C0D267F773700F46E1F /* UIColorHexExtension.swift in Sources */,
 				81056342267573FD00106C65 /* Constants.swift in Sources */,
+				81D631DD269211B7004CF695 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

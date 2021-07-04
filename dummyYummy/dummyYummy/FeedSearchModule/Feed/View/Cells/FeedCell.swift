@@ -118,8 +118,11 @@ extension FeedCell {
     
     func configView(with recipe: FeedRecipe) {
         title.text = recipe.title
-        healthScore.text = "Health score: \(recipe.healthScore)"
-        minutes.text = "Cooking minutes: \(recipe.readyInMinutes)"
+        
+        if let score = recipe.healthScore, let time = recipe.readyInMinutes {
+            healthScore.text = "Health score: \(score)"
+            minutes.text = "Cooking minutes: \(time)"
+        }
     
         /// set default image if recipe dont have image url and remove shimmer animation
         if recipe.imageURL == nil {

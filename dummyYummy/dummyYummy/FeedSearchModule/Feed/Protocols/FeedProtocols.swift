@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FeedViewProtocol: AnyObject {
-    init(with presenter: FeedPresenterProtocol)
+    
     func setupView()
     func configNavigation()
     
@@ -26,17 +26,22 @@ protocol FeedViewProtocol: AnyObject {
 }
 
 protocol FeedPresenterProtocol: AnyObject {
-    init (with networkService: FeedServiceProtocol)
+    init (with view: FeedViewProtocol, _ service: FeedServiceProtocol)
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
     func willDisplayCell(at index: IndexPath)
     func didEndDisplayingCell(at index: IndexPath)
     func recipe(at index: IndexPath) -> FeedRecipe?
+    func didSelectCellAt(_ indexPath: IndexPath)
 }
 
 protocol FeedServiceProtocol {
     func loadRandomRecipes(_ count: Int, completion: @escaping(OperationCompletion<FeedRecipeResponse>) -> ())
     func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> ())
     func cancelRequest(at index: IndexPath)
+}
+
+protocol FeedNavigationDelegate {
+    func feedDidTapCell()
 }

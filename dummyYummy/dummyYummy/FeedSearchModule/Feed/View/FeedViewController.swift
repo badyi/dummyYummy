@@ -20,16 +20,7 @@ final class FeedViewController: UIViewController {
         return cv
     }()
     
-    var presenter: FeedPresenterProtocol
-    
-    init(with presenter: FeedPresenterProtocol) {
-        self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
-    }
-    
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var presenter: FeedPresenterProtocol!
     
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
@@ -121,6 +112,10 @@ extension FeedViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         presenter.didEndDisplayingCell(at: indexPath)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.didSelectCellAt(indexPath)
     }
 }
 

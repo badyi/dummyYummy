@@ -17,7 +17,7 @@ final class SearchNetworkService {
     var imageLoadRequests = [IndexPath: Cancellation]()
 }
 
-extension SearchNetworkService: SearchServiceProtocol {
+extension SearchNetworkService: SearchNetworkServiceProtocol {
     func loadSearch(_ query: String, completion: @escaping(OperationCompletion<SearchResponse>) -> ()) {
         guard let resource = SearchNetworkResourceFactory().createSearchRecipesResource(query) else {
             let error = NSError(domain: "Search recipe resource create error", code: 0, userInfo: nil)

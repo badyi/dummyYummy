@@ -8,7 +8,7 @@
 import UIKit
 
 protocol SearchViewProtocol: AnyObject {
-    init(with presenter: SearchPresenterProtocol)
+    
     func setupView()
     func reloadCollection()
     func reloadItems(at indexPaths: [IndexPath])
@@ -17,7 +17,9 @@ protocol SearchViewProtocol: AnyObject {
 
 protocol SearchPresenterProtocol: AnyObject {
     var refinements: SearchRefinements { get }
-    init (with networkService: SearchServiceProtocol)
+    
+    init (with view: SearchViewProtocol, _ networkService: SearchNetworkServiceProtocol)
+    
     func viewDidLoad()
     func viewWillAppear()
     func willDisplayCell(at index: IndexPath)
@@ -25,14 +27,15 @@ protocol SearchPresenterProtocol: AnyObject {
     func updateRefinements(_ refinements: SearchRefinements)
     func resultCount() -> Int
     func updateSearchResult(_ query: String)
-//    func recipe(at index: IndexPath) -> FeedRecipe?
+    func searchRefinementsTapped()
 }
 
-protocol SearchServiceProtocol {
+protocol SearchNetworkServiceProtocol {
     func loadSearch(_ query: String, completion: @escaping(OperationCompletion<SearchResponse>) -> ())
     func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> ())
 }
 
 protocol SearchNavigationDelegate {
     func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements)
+    func searchDidTapCell()
 }

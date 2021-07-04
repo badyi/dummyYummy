@@ -9,8 +9,6 @@ import UIKit
 
 final class SearchResultViewController: UIViewController {
     
-    var navigationDelegate: SearchNavigationDelegate?
-    
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionViewBuilder()
             .backgroundColor(SearchResultConstants.VC.Design.backgroundColor)
@@ -22,16 +20,7 @@ final class SearchResultViewController: UIViewController {
         return cv
     }()
     
-    var presenter: SearchPresenterProtocol
-
-    init(with presenter: SearchPresenterProtocol) {
-        self.presenter = presenter
-        super.init(nibName: nil, bundle: nil)
-    }
-
-    required init?(coder: NSCoder) {
-        fatalError("init(coder:) has not been implemented")
-    }
+    var presenter: SearchPresenterProtocol!
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
@@ -124,6 +113,6 @@ extension SearchResultViewController: UISearchResultsUpdating {
 
 extension SearchResultViewController: UISearchBarDelegate {
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        navigationDelegate?.didTapSearchSettingsButton(presenter.refinements)
+        presenter.searchRefinementsTapped()
     }
 }

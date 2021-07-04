@@ -1684,8 +1684,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/View/SearchResultViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "100"
-            endingLineNumber = "100"
+            startingLineNumber = "89"
+            endingLineNumber = "89"
             landmarkName = "collectionView(_:layout:sizeForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1700,8 +1700,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Presenter/SearchPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "101"
-            endingLineNumber = "101"
+            startingLineNumber = "110"
+            endingLineNumber = "110"
             landmarkName = "loadImageIfNeeded(for:at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1716,8 +1716,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Presenter/SearchPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "116"
-            endingLineNumber = "116"
+            startingLineNumber = "125"
+            endingLineNumber = "125"
             landmarkName = "imageDidLoad(at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1748,8 +1748,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Presenter/SearchPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "85"
-            endingLineNumber = "85"
+            startingLineNumber = "94"
+            endingLineNumber = "94"
             landmarkName = "loadRecipes(with:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1764,8 +1764,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Presenter/SearchPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "83"
-            endingLineNumber = "83"
+            startingLineNumber = "92"
+            endingLineNumber = "92"
             landmarkName = "loadRecipes(with:)"
             landmarkType = "7">
             <Locations>
@@ -1812,8 +1812,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Refinements/View/RefinementsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "65"
+            endingLineNumber = "65"
             landmarkName = "tableView(_:heightForFooterInSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1828,8 +1828,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Refinements/View/RefinementsViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "89"
-            endingLineNumber = "89"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "tableView(_:willDisplayFooterView:forSection:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1844,8 +1844,8 @@
             filePath = "dummyYummy/FeedSearchModule/Search/View/SearchResultViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "96"
-            endingLineNumber = "96"
+            startingLineNumber = "85"
+            endingLineNumber = "85"
             landmarkName = "collectionView(_:layout:sizeForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1876,10 +1876,26 @@
             filePath = "dummyYummy/FeedSearchModule/Search/Presenter/SearchPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "16"
-            endingLineNumber = "16"
+            startingLineNumber = "19"
+            endingLineNumber = "19"
             landmarkName = "recipes"
             landmarkType = "24">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "134EF1EC-4DD1-4A88-875D-4AC5AA484005"
+            shouldBeEnabled = "Yes"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FeedSearchModule/&#x421;oordinator/FeedSearchCoordinator.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "96"
+            endingLineNumber = "96"
+            landmarkName = "feedDidTapCell()"
+            landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
