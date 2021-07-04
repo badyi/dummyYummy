@@ -29,7 +29,6 @@
 		8105634A26762DB000106C65 /* FeedRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105634926762DB000106C65 /* FeedRecipe.swift */; };
 		8105635126766BAE00106C65 /* UIImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105635026766BAE00106C65 /* UIImageViewBuilder.swift */; };
 		814A8C01267D247300F46E1F /* ShimmerUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C00267D247300F46E1F /* ShimmerUIButton.swift */; };
-		814A8C04267D24B200F46E1F /* FeedCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C03267D24B200F46E1F /* FeedCellConstants.swift */; };
 		814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C06267D45FA00F46E1F /* CancelationProtocol.swift */; };
 		814A8C09267DFAC900F46E1F /* ShimmerUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C08267DFAC900F46E1F /* ShimmerUIImageView.swift */; };
 		814A8C0B267DFAD300F46E1F /* ShimmerUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0A267DFAD300F46E1F /* ShimmerUILabel.swift */; };
@@ -53,16 +52,15 @@
 		81940BF726834ACB0031210C /* FeedSearchCoordinatorConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BF626834ACB0031210C /* FeedSearchCoordinatorConstants.swift */; };
 		81940BF9268360250031210C /* RefinementsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BF8268360250031210C /* RefinementsViewController.swift */; };
 		81940C242684B2650031210C /* Refinements.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C232684B2650031210C /* Refinements.swift */; };
-		81940C282685249C0031210C /* RefinementInputCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C272685249C0031210C /* RefinementInputCell.swift */; };
+		81940C282685249C0031210C /* RefinementCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C272685249C0031210C /* RefinementCell.swift */; };
 		81940C2C268527FB0031210C /* RefinementsProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C2B268527FB0031210C /* RefinementsProtocols.swift */; };
-		81940C32268694290031210C /* FeedVCConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940C31268694290031210C /* FeedVCConstants.swift */; };
 		81A09765268E0553003E8B61 /* SearchResultCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A09764268E0553003E8B61 /* SearchResultCell.swift */; };
 		81A09767268E0586003E8B61 /* SearchResultConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A09766268E0586003E8B61 /* SearchResultConstants.swift */; };
 		81A09769268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A09768268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift */; };
 		81A49DBA268FA7BF0024C20E /* RefinementsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A49DB9268FA7BF0024C20E /* RefinementsPresenter.swift */; };
 		81D631D32690B680004CF695 /* RefinementsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D22690B680004CF695 /* RefinementsConstants.swift */; };
 		81D631D52691D86E004CF695 /* UILabelWithInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D42691D86E004CF695 /* UILabelWithInsets.swift */; };
-		81FED623268BD2C50053AD1C /* SearchRecipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FED622268BD2C50053AD1C /* SearchRecipe.swift */; };
+		81D631D72691DDA8004CF695 /* FeedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D62691DDA8004CF695 /* FeedConstants.swift */; };
 		81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */; };
 		81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */; };
 		81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */; };
@@ -91,7 +89,6 @@
 		8105634926762DB000106C65 /* FeedRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedRecipe.swift; sourceTree = "<group>"; };
 		8105635026766BAE00106C65 /* UIImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewBuilder.swift; sourceTree = "<group>"; };
 		814A8C00267D247300F46E1F /* ShimmerUIButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerUIButton.swift; sourceTree = "<group>"; };
-		814A8C03267D24B200F46E1F /* FeedCellConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedCellConstants.swift; sourceTree = "<group>"; };
 		814A8C06267D45FA00F46E1F /* CancelationProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CancelationProtocol.swift; sourceTree = "<group>"; };
 		814A8C08267DFAC900F46E1F /* ShimmerUIImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerUIImageView.swift; sourceTree = "<group>"; };
 		814A8C0A267DFAD300F46E1F /* ShimmerUILabel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShimmerUILabel.swift; sourceTree = "<group>"; };
@@ -117,16 +114,15 @@
 		81940BF626834ACB0031210C /* FeedSearchCoordinatorConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSearchCoordinatorConstants.swift; sourceTree = "<group>"; };
 		81940BF8268360250031210C /* RefinementsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsViewController.swift; sourceTree = "<group>"; };
 		81940C232684B2650031210C /* Refinements.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Refinements.swift; sourceTree = "<group>"; };
-		81940C272685249C0031210C /* RefinementInputCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementInputCell.swift; sourceTree = "<group>"; };
+		81940C272685249C0031210C /* RefinementCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementCell.swift; sourceTree = "<group>"; };
 		81940C2B268527FB0031210C /* RefinementsProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsProtocols.swift; sourceTree = "<group>"; };
-		81940C31268694290031210C /* FeedVCConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedVCConstants.swift; sourceTree = "<group>"; };
 		81A09764268E0553003E8B61 /* SearchResultCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultCell.swift; sourceTree = "<group>"; };
 		81A09766268E0586003E8B61 /* SearchResultConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchResultConstants.swift; sourceTree = "<group>"; };
 		81A09768268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RoundedCollectionCellWithShadow.swift; sourceTree = "<group>"; };
 		81A49DB9268FA7BF0024C20E /* RefinementsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsPresenter.swift; sourceTree = "<group>"; };
 		81D631D22690B680004CF695 /* RefinementsConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RefinementsConstants.swift; sourceTree = "<group>"; };
 		81D631D42691D86E004CF695 /* UILabelWithInsets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelWithInsets.swift; sourceTree = "<group>"; };
-		81FED622268BD2C50053AD1C /* SearchRecipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchRecipe.swift; sourceTree = "<group>"; };
+		81D631D62691DDA8004CF695 /* FeedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedConstants.swift; sourceTree = "<group>"; };
 		81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldBuilder.swift; sourceTree = "<group>"; };
 		81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelBuilder.swift; sourceTree = "<group>"; };
 		81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonBuilder.swift; sourceTree = "<group>"; };
@@ -176,7 +172,6 @@
 		810562F626754FC500106C65 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				814A8C03267D24B200F46E1F /* FeedCellConstants.swift */,
 				810562DE2675210300106C65 /* FeedCell.swift */,
 			);
 			path = Cells;
@@ -193,7 +188,6 @@
 		810562FA26754FDB00106C65 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				81940C31268694290031210C /* FeedVCConstants.swift */,
 				815E6E74267418DF00CE6CC1 /* FeedViewController.swift */,
 				810562F626754FC500106C65 /* Cells */,
 			);
@@ -281,6 +275,7 @@
 		815C5A582675136E004A8F09 /* Feed */ = {
 			isa = PBXGroup;
 			children = (
+				81D631D62691DDA8004CF695 /* FeedConstants.swift */,
 				81940BF0268268AB0031210C /* Protocols */,
 				8105634C26762DB500106C65 /* Model */,
 				81056303267562BA00106C65 /* NetworkService */,
@@ -332,7 +327,7 @@
 		81616AD7268B5215002DF12F /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				81940C272685249C0031210C /* RefinementInputCell.swift */,
+				81940C272685249C0031210C /* RefinementCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -345,7 +340,6 @@
 				81A0975E268D1C5C003E8B61 /* NetworkService */,
 				81A09760268D1C82003E8B61 /* Presenter */,
 				81940C26268524220031210C /* View */,
-				81A09761268D1C91003E8B61 /* Model */,
 				81940C25268524150031210C /* Refinements */,
 			);
 			path = Search;
@@ -414,14 +408,6 @@
 				81940BEC268268080031210C /* SearchPresenter.swift */,
 			);
 			path = Presenter;
-			sourceTree = "<group>";
-		};
-		81A09761268D1C91003E8B61 /* Model */ = {
-			isa = PBXGroup;
-			children = (
-				81FED622268BD2C50053AD1C /* SearchRecipe.swift */,
-			);
-			path = Model;
 			sourceTree = "<group>";
 		};
 		81A09762268E0438003E8B61 /* Helpers */ = {
@@ -541,7 +527,6 @@
 				81940BF22682735C0031210C /* SearchNetworkService.swift in Sources */,
 				81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */,
 				810562E62675304700106C65 /* AppCoordinator.swift in Sources */,
-				814A8C04267D24B200F46E1F /* FeedCellConstants.swift in Sources */,
 				814A8C09267DFAC900F46E1F /* ShimmerUIImageView.swift in Sources */,
 				81940C2C268527FB0031210C /* RefinementsProtocols.swift in Sources */,
 				81940BF9268360250031210C /* RefinementsViewController.swift in Sources */,
@@ -550,10 +535,11 @@
 				81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */,
 				814A8C19267FD91C00F46E1F /* SearchResultViewController.swift in Sources */,
 				815E6E75267418DF00CE6CC1 /* FeedViewController.swift in Sources */,
+				81D631D72691DDA8004CF695 /* FeedConstants.swift in Sources */,
 				814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */,
 				81940C242684B2650031210C /* Refinements.swift in Sources */,
 				81D631D52691D86E004CF695 /* UILabelWithInsets.swift in Sources */,
-				81940C282685249C0031210C /* RefinementInputCell.swift in Sources */,
+				81940C282685249C0031210C /* RefinementCell.swift in Sources */,
 				8105630A267564A400106C65 /* Networking.swift in Sources */,
 				815E6E71267418DF00CE6CC1 /* AppDelegate.swift in Sources */,
 				8105634A26762DB000106C65 /* FeedRecipe.swift in Sources */,
@@ -561,7 +547,6 @@
 				810562E326752F8700106C65 /* CoordinatorProtocol.swift in Sources */,
 				814A8C01267D247300F46E1F /* ShimmerUIButton.swift in Sources */,
 				810563142675659600106C65 /* HttpMethod.swift in Sources */,
-				81FED623268BD2C50053AD1C /* SearchRecipe.swift in Sources */,
 				8105633626756C7C00106C65 /* FeedNetworkService.swift in Sources */,
 				81940BED268268080031210C /* SearchPresenter.swift in Sources */,
 				815C5A3E26741ECC004A8F09 /* TabCoordinator.swift in Sources */,
@@ -583,7 +568,6 @@
 				81A09767268E0586003E8B61 /* SearchResultConstants.swift in Sources */,
 				81A49DBA268FA7BF0024C20E /* RefinementsPresenter.swift in Sources */,
 				810563462675FFFE00106C65 /* FakeReachability.swift in Sources */,
-				81940C32268694290031210C /* FeedVCConstants.swift in Sources */,
 				81616AD6268B1DAB002DF12F /* BaseInputTableViewCell.swift in Sources */,
 				81A09769268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift in Sources */,
 				814A8C0B267DFAD300F46E1F /* ShimmerUILabel.swift in Sources */,

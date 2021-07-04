@@ -20,6 +20,7 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
         UILabelBuilder()
             .backgroundColor(SearchResultConstants.Cell.Design.titleBackgroundColor)
             .textColor(SearchResultConstants.Cell.Design.titleColor)
+            .setFont(SearchResultConstants.Cell.Font.titleFont)
             .buildWithInsets()
     }()
     
@@ -34,6 +35,7 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
     }
     
     override func setupView() {
+        super.setupView()
         shadowColor = SearchResultConstants.Cell.Design.shadowColor
         cornerRadius = SearchResultConstants.Cell.Layout.cornerRadius
         shadowRadius = SearchResultConstants.Cell.Layout.shadowRadius
@@ -49,7 +51,7 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
 }
 
 extension SearchResultCell {
-    func config(with recipe: SearchRecipe) {
+    func config(with recipe: FeedRecipe) {
         self.title.text = recipe.title
         guard let imageData = recipe.imageData else {
             imageView.startShimmerAnimation()

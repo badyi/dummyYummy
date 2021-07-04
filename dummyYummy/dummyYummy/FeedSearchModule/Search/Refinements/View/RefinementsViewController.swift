@@ -14,7 +14,7 @@ final class RefinementsViewController: UIViewController {
         tv.translatesAutoresizingMaskIntoConstraints = false
         tv.delegate = self
         tv.dataSource = presenter as? UITableViewDataSource
-        tv.register(RefinementInputCell.self, forCellReuseIdentifier: RefinementInputCell.id)
+        tv.register(RefinementCell.self, forCellReuseIdentifier: RefinementCell.id)
         return tv
     }()
     
@@ -64,7 +64,7 @@ extension RefinementsViewController: RefinementsViewProtocol {
     
     func configNavigation() {
         navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.backgroundColor = FeedVCConstants.Design.navBarBackgroundColor
+        navigationController?.navigationBar.backgroundColor = FeedConstants.VC.Design.navBarBackgroundColor
     }
 }
 
@@ -79,7 +79,7 @@ extension RefinementsViewController: UITableViewDelegate {
     }
     
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if let cell = tableView.cellForRow(at: indexPath) as? RefinementInputCell, cell.canBecomeFirstResponder {
+        if let cell = tableView.cellForRow(at: indexPath) as? RefinementCell, cell.canBecomeFirstResponder {
            cell.becomeFirstResponder()
         }
         presenter.didSelectAt(indexPath)

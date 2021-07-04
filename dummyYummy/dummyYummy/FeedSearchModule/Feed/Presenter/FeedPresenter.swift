@@ -92,7 +92,7 @@ private extension FeedPresenter {
     }
     
     func loadImage(at index: IndexPath) {
-        guard let url = recipes[index.row].image else {
+        guard let url = recipes[index.row].imageURL else {
             return
         }
         
@@ -122,7 +122,7 @@ extension FeedPresenter: UICollectionViewDataSource {
         /// in case the recipes haven't loaded yet
         /// we put a few fake cells with animations
         let count = recipes.count
-        return count == 0 ? FeedVCConstants.Layout.emptyCellsCount : count
+        return count == 0 ? FeedConstants.VC.Layout.emptyCellsCount : count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

@@ -11,10 +11,10 @@ final class FeedViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionViewBuilder()
-            .backgroundColor(FeedVCConstants.Design.backgroundColor)
+            .backgroundColor(FeedConstants.VC.Design.backgroundColor)
             .delegate(self)
             .dataSource(presenter as? UICollectionViewDataSource)
-            .setInsets(FeedVCConstants.Layout.collectionInsets)
+            .setInsets(FeedConstants.VC.Layout.collectionInsets)
             .build()
         cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
         return cv
@@ -93,19 +93,19 @@ extension FeedViewController {
     }
     
     func configNavigation() {
-        let textAttributes = [NSAttributedString.Key.foregroundColor: FeedVCConstants.Design.navigationTextColor]
+        let textAttributes = [NSAttributedString.Key.foregroundColor: FeedConstants.VC.Design.navigationTextColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
-        navigationController?.navigationBar.backgroundColor = FeedVCConstants.Design.navBarBackgroundColor
+        navigationController?.navigationBar.backgroundColor = FeedConstants.VC.Design.navBarBackgroundColor
 
-        navigationController?.navigationBar.barTintColor = FeedVCConstants.Design.navBarBarTintColor
-        navigationController?.navigationBar.tintColor = FeedVCConstants.Design.navBarTintColor
+        navigationController?.navigationBar.barTintColor = FeedConstants.VC.Design.navBarBarTintColor
+        navigationController?.navigationBar.tintColor = FeedConstants.VC.Design.navBarTintColor
         navigationController?.navigationBar.prefersLargeTitles = true
 
         /// need nav bar back view image to avoid some ios bag with search result controller frame on search bar tap
-        navigationController?.navigationBar.setBackgroundImage(FeedVCConstants.Image.navBarBackground, for: .default)
-        navigationController?.navigationBar.shadowImage = FeedVCConstants.Image.navBarShadowImage
-        navigationController?.view.backgroundColor = FeedVCConstants.Design.navBarBarTintColor
+        navigationController?.navigationBar.setBackgroundImage(FeedConstants.VC.Image.navBarBackground, for: .default)
+        navigationController?.navigationBar.shadowImage = FeedConstants.VC.Image.navBarShadowImage
+        navigationController?.view.backgroundColor = FeedConstants.VC.Design.navBarBarTintColor
 
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.largeTitleDisplayMode = .always
@@ -143,6 +143,6 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return FeedVCConstants.Layout.minimumLineSpacing
+        return FeedConstants.VC.Layout.minimumLineSpacing
     }
 }

@@ -12,47 +12,47 @@ final class FeedCell: RoundedCollectionCellWithShadow {
     
     private lazy var imageView: ShimmerUIImageView = {
         return UIImageViewBuilder()
-            .backgroundColor(FeedCellConstants.Design.backgroundColor)
+            .backgroundColor(FeedConstants.Cell.Design.backgroundColor)
             .buildWithShimmer()
     }()
     
     lazy var title: ShimmerUILabel = {
         return UILabelBuilder()
-            .setFont(FeedCellConstants.Font.titleFont)
-            .backgroundColor(FeedCellConstants.Design.backgroundColor)
-            .textColor(FeedCellConstants.Design.titleColor)
+            .setFont(FeedConstants.Cell.Font.titleFont)
+            .backgroundColor(FeedConstants.Cell.Design.backgroundColor)
+            .textColor(FeedConstants.Cell.Design.titleColor)
             .buildWithShimmer()
     }()
     
     private lazy var healthScore: ShimmerUILabel = {
         return UILabelBuilder()
-            .backgroundColor(FeedCellConstants.Design.backgroundColor)
-            .textColor(FeedCellConstants.Design.additinalTextColor)
+            .backgroundColor(FeedConstants.Cell.Design.backgroundColor)
+            .textColor(FeedConstants.Cell.Design.additinalTextColor)
             .buildWithShimmer()
     }()
     
     private lazy var minutes: ShimmerUILabel = {
         return UILabelBuilder()
-            .backgroundColor(FeedCellConstants.Design.backgroundColor)
-            .textColor(FeedCellConstants.Design.additinalTextColor)
+            .backgroundColor(FeedConstants.Cell.Design.backgroundColor)
+            .textColor(FeedConstants.Cell.Design.additinalTextColor)
             .buildWithShimmer()
     }()
     
     private lazy var favorite: ShimmerUIButton = {
         return UIButtonBuilder()
-            .backgroundColor(FeedCellConstants.Design.backgroundColor)
-            .setImage(FeedCellConstants.Image.favoriteImage)
+            .backgroundColor(FeedConstants.Cell.Design.backgroundColor)
+            .setImage(FeedConstants.Cell.Image.favoriteImage)
             .largeConfig(true)
-            .tintColor(FeedCellConstants.Design.buttonTintColor)
+            .tintColor(FeedConstants.Cell.Design.buttonTintColor)
             .buildWithShimmer()
     }()
     
     private lazy var share: ShimmerUIButton = {
         return UIButtonBuilder()
-            .backgroundColor(FeedCellConstants.Design.backgroundColor)
+            .backgroundColor(FeedConstants.Cell.Design.backgroundColor)
             .largeConfig(true)
-            .tintColor(FeedCellConstants.Design.buttonTintColor)
-            .setImage(FeedCellConstants.Image.shareImage)
+            .tintColor(FeedConstants.Cell.Design.buttonTintColor)
+            .setImage(FeedConstants.Cell.Image.shareImage)
             .buildWithShimmer()
     }()
     
@@ -69,14 +69,14 @@ final class FeedCell: RoundedCollectionCellWithShadow {
     }
     
     override func setupView() {
-        shadowColor = FeedCellConstants.Design.shadowColor
-        cornerRadius = FeedCellConstants.Layout.cornerRadius
-        shadowRadius = FeedCellConstants.Layout.shadowRadius
-        shadowOpacity = FeedCellConstants.Layout.shadowOpacity
-        shadowOffsetWidth = FeedCellConstants.Layout.shadowOffsetWidth
-        shadowOffsetHeight = FeedCellConstants.Layout.shadowOffsetHeight
+        shadowColor = FeedConstants.Cell.Design.shadowColor
+        cornerRadius = FeedConstants.Cell.Layout.cornerRadius
+        shadowRadius = FeedConstants.Cell.Layout.shadowRadius
+        shadowOpacity = FeedConstants.Cell.Layout.shadowOpacity
+        shadowOffsetWidth = FeedConstants.Cell.Layout.shadowOffsetWidth
+        shadowOffsetHeight = FeedConstants.Cell.Layout.shadowOffsetHeight
         
-        contentView.backgroundColor = FeedCellConstants.Design.backgroundColor
+        contentView.backgroundColor = FeedConstants.Cell.Design.backgroundColor
 
         contentView.addSubview(imageView)
         contentView.addSubview(title)
@@ -122,8 +122,8 @@ extension FeedCell {
         minutes.text = "Cooking minutes: \(recipe.readyInMinutes)"
     
         /// set default image if recipe dont have image url and remove shimmer animation
-        if recipe.image == nil {
-            imageView.image = FeedCellConstants.Image.defaultCellImage
+        if recipe.imageURL == nil {
+            imageView.image = FeedConstants.Cell.Image.defaultCellImage
             imageView.removeShimmerAnimation()
             return
         }
@@ -137,10 +137,10 @@ extension FeedCell {
     
     static func heightForCell(with title: String, width: CGFloat) -> CGFloat {
         /// insets from left and right edges
-        let layoutConstants = FeedCellConstants.Layout.self
+        let layoutConstants = FeedConstants.Cell.Layout.self
         let horizontalInsets = layoutConstants.leadingSpace + layoutConstants.trailingSpace
         
-        let attributedString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: FeedCellConstants.Font.titleFont])
+        let attributedString = NSAttributedString(string: title, attributes: [NSAttributedString.Key.font: FeedConstants.Cell.Font.titleFont])
         let rect = attributedString.boundingRect(with:
                 CGSize(width: width - horizontalInsets, height: .greatestFiniteMagnitude),
                 options: .usesLineFragmentOrigin, context: nil)
@@ -169,45 +169,45 @@ private extension FeedCell {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: FeedCellConstants.Layout.imageHeight)
+            imageView.heightAnchor.constraint(equalToConstant: FeedConstants.Cell.Layout.imageHeight)
         ])
     }
     
     func setupLabels() {
         NSLayoutConstraint.activate([
-            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: FeedCellConstants.Layout.leadingSpace),
-            title.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: FeedCellConstants.Layout.topSpace),
-            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -FeedCellConstants.Layout.trailingSpace),
-            title.heightAnchor.constraint(greaterThanOrEqualToConstant: FeedCellConstants.Layout.minimalTitleHeight)
+            title.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: FeedConstants.Cell.Layout.leadingSpace),
+            title.topAnchor.constraint(equalTo: imageView.bottomAnchor, constant: FeedConstants.Cell.Layout.topSpace),
+            title.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -FeedConstants.Cell.Layout.trailingSpace),
+            title.heightAnchor.constraint(greaterThanOrEqualToConstant: FeedConstants.Cell.Layout.minimalTitleHeight)
         ])
         
         NSLayoutConstraint.activate([
             healthScore.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            healthScore.topAnchor.constraint(equalTo: title.bottomAnchor, constant: FeedCellConstants.Layout.verticalSpace),
-            healthScore.trailingAnchor.constraint(equalTo: share.leadingAnchor, constant: -FeedCellConstants.Layout.horizontalSpace),
-            healthScore.heightAnchor.constraint(equalToConstant: FeedCellConstants.Layout.healthScoreHeight)
+            healthScore.topAnchor.constraint(equalTo: title.bottomAnchor, constant: FeedConstants.Cell.Layout.verticalSpace),
+            healthScore.trailingAnchor.constraint(equalTo: share.leadingAnchor, constant: -FeedConstants.Cell.Layout.horizontalSpace),
+            healthScore.heightAnchor.constraint(equalToConstant: FeedConstants.Cell.Layout.healthScoreHeight)
         ])
         
         NSLayoutConstraint.activate([
             minutes.leadingAnchor.constraint(equalTo: title.leadingAnchor),
-            minutes.topAnchor.constraint(equalTo: healthScore.bottomAnchor, constant: FeedCellConstants.Layout.verticalSpace),
-            minutes.trailingAnchor.constraint(equalTo: share.leadingAnchor, constant: -FeedCellConstants.Layout.horizontalSpace),
-            minutes.heightAnchor.constraint(equalToConstant: FeedCellConstants.Layout.minutesHeight)
+            minutes.topAnchor.constraint(equalTo: healthScore.bottomAnchor, constant: FeedConstants.Cell.Layout.verticalSpace),
+            minutes.trailingAnchor.constraint(equalTo: share.leadingAnchor, constant: -FeedConstants.Cell.Layout.horizontalSpace),
+            minutes.heightAnchor.constraint(equalToConstant: FeedConstants.Cell.Layout.minutesHeight)
         ])
     }
     
     func setupButtons() {
         NSLayoutConstraint.activate([
             favorite.topAnchor.constraint(equalTo: healthScore.topAnchor),
-            favorite.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -FeedCellConstants.Layout.trailingSpace),
-            favorite.widthAnchor.constraint(equalToConstant: FeedCellConstants.Layout.buttonWidth),
+            favorite.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -FeedConstants.Cell.Layout.trailingSpace),
+            favorite.widthAnchor.constraint(equalToConstant: FeedConstants.Cell.Layout.buttonWidth),
             favorite.heightAnchor.constraint(equalTo: favorite.widthAnchor)
         ])
         
         NSLayoutConstraint.activate([
             share.topAnchor.constraint(equalTo: healthScore.topAnchor),
-            share.trailingAnchor.constraint(equalTo: favorite.leadingAnchor, constant: -FeedCellConstants.Layout.horizontalSpace),
-            share.widthAnchor.constraint(equalToConstant: FeedCellConstants.Layout.buttonWidth),
+            share.trailingAnchor.constraint(equalTo: favorite.leadingAnchor, constant: -FeedConstants.Cell.Layout.horizontalSpace),
+            share.widthAnchor.constraint(equalToConstant: FeedConstants.Cell.Layout.buttonWidth),
             share.heightAnchor.constraint(equalTo: share.widthAnchor)
         ])
     }

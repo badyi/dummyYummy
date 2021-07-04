@@ -35,7 +35,7 @@ struct RefinementsConstants {
             static let titleColor = Colors.almostPureWhite
             static let additinalTextColor = Colors.mediumPureWhite
             static let shadowColor = Colors.pureBlack
-            static let buttonTintColor = Colors.veryLightGray
+            static let buttonTintColor = Colors.wisteria
         }
         
         struct Image {

@@ -28,10 +28,10 @@ class RoundedCollectionCellWithShadow: UICollectionViewCell {
     
     override func layoutSubviews() {
         super.layoutSubviews()
-        // Improve scrolling performance with an explicit shadowPath
+        /// Improve scrolling performance with an explicit shadowPath
         layer.shadowPath = UIBezierPath(
             roundedRect: bounds,
-            cornerRadius: FeedCellConstants.Layout.cornerRadius
+            cornerRadius: cornerRadius
         ).cgPath
     }
     
@@ -56,7 +56,5 @@ class RoundedCollectionCellWithShadow: UICollectionViewCell {
         layer.shadowOffset = CGSize(width: shadowOffsetWidth, height: shadowOffsetHeight)
     }
     
-    func setupView() {
-        
-    }
+    func setupView() {}
 }

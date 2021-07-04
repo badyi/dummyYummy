@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RefinementInputCell: BaseInputTableViewCell {
+final class RefinementCell: BaseInputTableViewCell {
     static let id = "RefinementCell"
     var deleteTapped: ((IndexPath?) -> ())?
     var indexPath: IndexPath?
@@ -22,7 +22,7 @@ final class RefinementInputCell: BaseInputTableViewCell {
     private let inputLabel: UILabel = {
         return UILabelBuilder()
             .backgroundColor(RefinementsConstants.Cell.Design.backgroundColor)
-            .textColor(Colors.wisteria)//RefinementsConstants.Cell.Design.additinalTextColor)
+            .textColor(RefinementsConstants.Cell.Design.titleColor)
             .build()
     }()
     
@@ -30,7 +30,7 @@ final class RefinementInputCell: BaseInputTableViewCell {
         let button = UIButtonBuilder()
             .backgroundColor(RefinementsConstants.Cell.Design.backgroundColor)
             .setImage(RefinementsConstants.Cell.Image.deleteButtonImage)
-            .tintColor(.red)
+            .tintColor(RefinementsConstants.Cell.Design.buttonTintColor)
             .build()
         button.addTarget(self, action: #selector(deleteButtonTapped), for: .touchUpInside)
         return button
@@ -59,7 +59,7 @@ final class RefinementInputCell: BaseInputTableViewCell {
     }
 }
 
-extension RefinementInputCell {
+extension RefinementCell {
     func setIndexPath(_ indexPath: IndexPath) {
         self.indexPath = indexPath
     }
@@ -74,7 +74,7 @@ extension RefinementInputCell {
     }
 }
 
-private extension RefinementInputCell {
+private extension RefinementCell {
     @objc func deleteButtonTapped() {
         inputLabel.text = ""
         deleteButton.isHidden = true
@@ -85,7 +85,6 @@ private extension RefinementInputCell {
         contentView.backgroundColor = RefinementsConstants.Cell.Design.backgroundColor
         contentView.addSubview(label)
         contentView.addSubview(deleteButton)
-        setupTextFiled()
         contentView.addSubview(inputLabel)
         
         NSLayoutConstraint.activate([

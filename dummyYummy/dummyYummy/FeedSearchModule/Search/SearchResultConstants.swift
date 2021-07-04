@@ -37,11 +37,15 @@ struct SearchResultConstants {
         
         struct Design {
             static var backgroundColor = Colors.eclipse
-            static var titleBackgroundColor = Colors.wisteria.withAlphaComponent(0.8)
+            static var titleBackgroundColor = Colors.wisteria.withAlphaComponent(0.5)
             static var titleColor = Colors.almostPureWhite
             static var additinalTextColor = Colors.mediumPureWhite
             static var shadowColor = Colors.pureBlack
             static var buttonTintColor = Colors.veryLightGray
+        }
+        
+        struct Font {
+            static let titleFont: UIFont = UIFont(name: "Helvetica-Bold", size: 17) ?? UIFont()
         }
     }
 }

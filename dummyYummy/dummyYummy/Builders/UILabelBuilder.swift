@@ -14,9 +14,22 @@ final class UILabelBuilder {
     public private(set) var backgroundColor: UIColor = .white
     public private(set) var fontSize: Int = 17
     public private(set) var font: UIFont? = nil
+    public private(set) var numberOfLines: Int = 0
+    public private(set) var lineBreakMode: NSLineBreakMode = .byWordWrapping
 }
 
 extension UILabelBuilder {
+    @discardableResult
+    public func lineBreakMode(_ mode: NSLineBreakMode) -> UILabelBuilder {
+        self.lineBreakMode = mode
+        return self
+    }
+    
+    @discardableResult
+    public func numberOfLines(_ number: Int) -> UILabelBuilder {
+        self.numberOfLines = number
+        return self
+    }
     
     @discardableResult
     public func setFont(_ font: UIFont) -> UILabelBuilder {
@@ -70,7 +83,8 @@ extension UILabelBuilder {
 
 private extension UILabelBuilder {
     func build<T: UILabel>(label: T) -> T {
-        label.numberOfLines = 0
+        label.numberOfLines = numberOfLines
+        label.lineBreakMode = lineBreakMode
         label.translatesAutoresizingMaskIntoConstraints = false
         label.backgroundColor = backgroundColor
         label.textColor = textColor

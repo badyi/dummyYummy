@@ -11,7 +11,7 @@ final class SearchPresenter: NSObject {
     weak var view: SearchViewProtocol?
     private var service: SearchServiceProtocol
     public private(set) var refinements: SearchRefinements
-    var recipes: [SearchRecipe] {
+    var recipes: [FeedRecipe] {
         didSet {
             reloadCollection()
         }
@@ -81,7 +81,7 @@ private extension SearchPresenter {
             switch result {
             case let .success(result):
                 self?.recipes = result.results.map {
-                    SearchRecipe(with: $0)
+                    FeedRecipe(with: $0)
                 }
             case let .failure(error):
                 #warning("Fix to alert")
@@ -90,7 +90,7 @@ private extension SearchPresenter {
         }
     }
     
-    func loadImageIfNeeded(for recipe: SearchRecipe, at index: IndexPath) {
+    func loadImageIfNeeded(for recipe: FeedRecipe, at index: IndexPath) {
         guard let imageURL = recipe.imageURL, recipe.imageData == nil else {
             return
         }

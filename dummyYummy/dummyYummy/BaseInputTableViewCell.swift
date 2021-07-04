@@ -34,10 +34,7 @@ class BaseInputTableViewCell: UITableViewCell {
     var keyboardType: UIKeyboardType = .numberPad
     var isUsingKeyBoard: Bool = false
     
-    /// kinda virtual funcs
     func update(using data: Int) {}
-    func stylize() {}
-    func setupTextFiled() {}
 }
 
 extension BaseInputTableViewCell {
@@ -57,14 +54,12 @@ extension BaseInputTableViewCell: UIKeyInput {
     @discardableResult
     override func becomeFirstResponder() -> Bool {
         let becameFirstResponder = super.becomeFirstResponder()
-        stylize()
         return becameFirstResponder
     }
     
     @discardableResult
     override func resignFirstResponder() -> Bool {
         let resignedFirstResponder = super.resignFirstResponder()
-        stylize()
         return resignedFirstResponder
     }
     

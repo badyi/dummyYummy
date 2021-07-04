@@ -53,7 +53,7 @@ extension RefinementsPresenter: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RefinementInputCell.id, for: indexPath) as! RefinementInputCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: RefinementCell.id, for: indexPath) as! RefinementCell
         cell.setIndexPath(indexPath)
         cell.inputDelegate = self
         cell.deleteTapped = { [weak self] indexPath in
@@ -78,7 +78,7 @@ extension RefinementsPresenter: UITableViewDataSource {
         return cell
     }
     
-    func configCellForTime(_ cell: RefinementInputCell) {
+    func configCellForTime(_ cell: RefinementCell) {
         cell.isUsingKeyBoard = true
         var isActive = false
         if let time = refinements.maxReadyTime {
@@ -88,7 +88,7 @@ extension RefinementsPresenter: UITableViewDataSource {
         cell.configCell(with: "Max ready minutes: ", isActive)
     }
     
-    func configCellForCuisine(_ cell: RefinementInputCell) {
+    func configCellForCuisine(_ cell: RefinementCell) {
         var isActive = false
         if refinements.cuisine != nil {
             isActive = true
@@ -96,7 +96,7 @@ extension RefinementsPresenter: UITableViewDataSource {
         cell.configCell(with: "Cuisine", isActive)
     }
     
-    func configCellForExcludedCuisine(_ cell: RefinementInputCell) {
+    func configCellForExcludedCuisine(_ cell: RefinementCell) {
         var isActive = false
         if refinements.excludedCuisine != nil {
             isActive = true
@@ -104,7 +104,7 @@ extension RefinementsPresenter: UITableViewDataSource {
         cell.configCell(with: "Excluded cuisine", isActive)
     }
     
-    func configCellForDiet(_ cell: RefinementInputCell) {
+    func configCellForDiet(_ cell: RefinementCell) {
         var isActive = false
         if refinements.diet != nil {
             isActive = true
@@ -112,7 +112,7 @@ extension RefinementsPresenter: UITableViewDataSource {
         cell.configCell(with: "Diet", isActive)
     }
     
-    func configCellForIntolearns(_ cell: RefinementInputCell) {
+    func configCellForIntolearns(_ cell: RefinementCell) {
         var isActive = false
         if refinements.intolerances != nil {
             isActive = true

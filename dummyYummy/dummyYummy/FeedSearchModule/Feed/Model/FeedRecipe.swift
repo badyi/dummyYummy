@@ -11,42 +11,43 @@ struct FeedRecipe {
     let id: Int
     let title: String
     
-    let vegetarian: Bool
-    let vegan: Bool
-    let glutenFree: Bool
-    let dairyFree: Bool
-    let veryHealthy: Bool
-    let cheap: Bool
-    let veryPopular: Bool
-    let sustainable: Bool
-    let lowFodmap: Bool
-    let gaps: String
+    var imageURL: String? = nil
+    var imageData: Data? = nil
     
-    let weightWatcherSmartPoints: Int
-    let aggregateLikes: Int
-    let spoonacularScore: Int
-    let healthScore: Int
+    var vegetarian: Bool? = nil
+    var vegan: Bool? = nil
+    var glutenFree: Bool? = nil
+    var dairyFree: Bool? = nil
+    var veryHealthy: Bool? = nil
+    var cheap: Bool? = nil
+    var veryPopular: Bool? = nil
+    var sustainable: Bool? = nil
+    var lowFodmap: Bool? = nil
+    var gaps: String? = nil
     
-    let pricePerServing: Double
-    let readyInMinutes: Int
-    let servings: Int
+    var weightWatcherSmartPoints: Int? = nil
+    var aggregateLikes: Int? = nil
+    var spoonacularScore: Int? = nil
+    var healthScore: Int? = nil
     
-    let preparationMinutes: Int?
-    let cookingMinutes: Int?
+    var pricePerServing: Double? = nil
+    var readyInMinutes: Int? = nil
+    var servings: Int? = nil
     
-    let summary: String
-    let cuisines: [String]
-    let dishTypes: [String]
-    let diets: [String]
-    let occasions: [String]
-    let instructions: String
-    let analyzedInstructions: [AnalyzedInstruction]
+    var preparationMinutes: Int? = nil
+    var cookingMinutes: Int? = nil
     
-    let sourceUrl: String
-    let image: String?
-    let spoonacularSourceURL: String?
+    var summary: String? = nil
+    var cuisines: [String]? = nil
+    var dishTypes: [String]? = nil
+    var diets: [String]? = nil
+    var occasions: [String]? = nil
+    var instructions: String? = nil
+    var analyzedInstructions: [AnalyzedInstruction]? = nil
     
-    var imageData: Data?
+    var sourceUrl: String? = nil
+    
+    var spoonacularSourceURL: String? = nil
 
     init(with responseRecipe: FeedServiceRecipe) {
         id = responseRecipe.id
@@ -83,8 +84,15 @@ struct FeedRecipe {
         analyzedInstructions = responseRecipe.analyzedInstructions
         
         sourceUrl = responseRecipe.sourceUrl
-        image = responseRecipe.image
+        imageURL = responseRecipe.image
         spoonacularSourceURL = responseRecipe.spoonacularSourceURL
+        imageData = nil
+    }
+    
+    init(with searchResult: SearchResult) {
+        id = searchResult.id
+        title = searchResult.title
+        imageURL = searchResult.image
         imageData = nil
     }
 }
