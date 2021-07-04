@@ -57,10 +57,10 @@ struct Ent: Codable {
 
 struct Length: Codable {
     let number: Int
-    let unit: Unit
+    let unit: LengthUnit
 }
 
-enum Unit: String, Codable {
+enum LengthUnit: String, Codable {
     case celsius = "Celsius"
     case fahrenheit = "Fahrenheit"
     case minutes = "minutes"

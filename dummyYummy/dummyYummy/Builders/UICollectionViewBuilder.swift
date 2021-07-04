@@ -44,7 +44,7 @@ extension UICollectionViewBuilder {
     }
     
     @discardableResult
-    public func dataSource(_ dataSource: UICollectionViewDataSource) -> UICollectionViewBuilder {
+    public func dataSource(_ dataSource: UICollectionViewDataSource?) -> UICollectionViewBuilder {
         self.dataSource = dataSource
         return self
     }

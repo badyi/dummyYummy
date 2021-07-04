@@ -7,12 +7,6 @@
 
 import UIKit
 
-protocol FeedServiceProtocol {
-    func loadRandomRecipes(_ count: Int, completion: @escaping(OperationCompletion<FeedRecipeResponse>) -> ())
-    func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> ())
-    func cancelRequest(at index: IndexPath)
-}
-
 enum CancelType {
     case imageLoad
 }
@@ -21,14 +15,14 @@ final class Cancel {
     var imageLoad: Cancellation?
 }
 
-final class FeedService {
+final class FeedNetworkService {
     let networkHelper = NetworkHelper(reachability: FakeReachability())
     
     var requestContainer = [IndexPath: Cancel]()
 }
 
 // MARK: - FeedServiceProtocol
-extension FeedService: FeedServiceProtocol {
+extension FeedNetworkService: FeedServiceProtocol {
     func loadRandomRecipes(_ count: Int, completion: @escaping(OperationCompletion<FeedRecipeResponse>) -> ()) {
         guard let resource = FeedResourceFactory().createRandomRecipesResource(count) else {
             let error = NSError(domain: "Random recipe resource create error", code: 0, userInfo: nil)
@@ -57,9 +51,10 @@ extension FeedService: FeedServiceProtocol {
             requestContainer[index] = Cancel()
         }
         
-        if requestContainer[index]!.imageLoad != nil { return }
+        #warning("mb add comletion to return")
+        if requestContainer[index]?.imageLoad != nil { return }
         
-        requestContainer[index]!.imageLoad = load(at: index, type: .imageLoad, resource: resource, completion: { result in
+        requestContainer[index]?.imageLoad = load(at: index, type: .imageLoad, resource: resource, completion: { result in
             switch result {
             case .success(let result):
                 completion(.success(result))
@@ -77,15 +72,15 @@ extension FeedService: FeedServiceProtocol {
 }
 
 // MARK: - Private methods
-extension FeedService {
-    private func removeRequest(at index: IndexPath, type: CancelType) {
+private extension FeedNetworkService {
+    func removeRequest(at index: IndexPath, type: CancelType) {
         switch type {
         case .imageLoad:
             requestContainer[index]?.imageLoad = nil
         }
     }
     
-    private func load<T>(at index: IndexPath? = nil, type: CancelType? = nil, resource: Resource<T>, completion: @escaping(OperationCompletion<T>) -> ()) -> Cancellation? {
+    func load<T>(at index: IndexPath? = nil, type: CancelType? = nil, resource: Resource<T>, completion: @escaping(OperationCompletion<T>) -> ()) -> Cancellation? {
         let cancel = networkHelper.load(resource: resource, completion: { [weak self] result in
             switch result {
             case .success(let result):

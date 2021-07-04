@@ -1,43 +1,42 @@
 //
-//  FeedResourceFactory.swift
+//  SearchNetworkResourceFactory.swift
 //  dummyYummy
 //
-//  Created by badyi on 13.06.2021.
+//  Created by badyi on 29.06.2021.
 //
 
-import UIKit
+import Foundation
 
-final class FeedResourceFactory {
+final class SearchNetworkResourceFactory {
     
     // MARK: - Resource creation
-    func createRandomRecipesResource(_ count: Int) -> Resource<FeedRecipeResponse>? {
-        let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/random?number=1&tags=vegetarian%2Cdessert"
+    func createSearchRecipesResource(_ query: String) -> Resource<SearchResponse>? {
+        let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch"
         
         let headers = ["x-rapidapi-key": Constants.xRapidapiKey,
                        "x-rapidapi-host": Constants.xRapidapiHost]
-        let parameters = ["number" : "\(count)"]
+        let parameters = ["query": query]
         
         guard let url = buildURL(urlString, parameters) else {
             return nil
         }
-        return Resource<FeedRecipeResponse>(url: url, headers: headers)
+        return Resource<SearchResponse>(url: url, headers: headers)
     }
     
     func createImageResource(_ url: String) -> Resource<Data>? {
         guard let url = URL(string: url) else { return nil }
-        
+    
         let parse: (Data) throws -> Data = { data in
             return data
         }
-        
         return Resource<Data>(url: url, method: .get, parse: parse)
     }
 }
 
-extension FeedResourceFactory {
+private extension SearchNetworkResourceFactory {
     
     // MARK: - Building url
-    private func buildURL(_ baseURL: String,_ parameters: [String: Any]) -> URL? {
+    func buildURL(_ baseURL: String,_ parameters: [String: Any]) -> URL? {
         guard let url = URL(string: baseURL) else { return nil }
         
         var com = URLComponents(url: url, resolvingAgainstBaseURL: false)

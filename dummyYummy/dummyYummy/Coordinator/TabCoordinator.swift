@@ -116,9 +116,9 @@ final class TabCoordinator: NSObject, Coordinator {
 
         switch page {
         case .feed:
-            let feedCoordinator = FeedCoordinator(navController)
-            feedCoordinator.start()
-            childCoordinators.append(feedCoordinator)
+            let feedSearchCoordinator = FeedSearchCoordinator(navController)
+            feedSearchCoordinator.start()
+            childCoordinators.append(feedSearchCoordinator)
         case .fridge:
             print("fridge")
         case .favorites:

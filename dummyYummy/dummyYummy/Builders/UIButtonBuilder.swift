@@ -47,14 +47,16 @@ extension UIButtonBuilder {
     }
     
     public func build() -> UIButton {
-        return build(UIButton())
+        return build(button: UIButton())
     }
     
     public func buildWithShimmer() -> ShimmerUIButton {
-        return build(ShimmerUIButton()) as! ShimmerUIButton
+        return build(button: ShimmerUIButton())
     }
-    
-    private func build(_ button: UIButton) -> UIButton {
+}
+
+private extension UIButtonBuilder {
+    func build<T: UIButton>(button: T) -> T {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = backgroundColor
         button.tintColor = tintColor
@@ -70,4 +72,3 @@ extension UIButtonBuilder {
         return button
     }
 }
-

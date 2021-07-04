@@ -35,16 +35,16 @@ extension UIImageViewBuilder {
     }
 
     public func build() -> UIImageView {
-        let imageView = UIImageView()
-        return build(imageView)
+        return build(imageView: UIImageView())
     }
     
     public func buildWithShimmer() -> ShimmerUIImageView {
-        let imageView = ShimmerUIImageView()
-        return build(imageView) as! ShimmerUIImageView
+        return build(imageView: ShimmerUIImageView())
     }
-    
-    private func build(_ imageView: UIImageView) -> UIImageView {
+}
+
+private extension UIImageViewBuilder {
+    func build<T: UIImageView>(imageView: T) -> T {
         imageView.translatesAutoresizingMaskIntoConstraints = translatesAutoresizingMaskIntoConstraints
         imageView.backgroundColor = backgroundColor
         imageView.clipsToBounds = clipToBounds
