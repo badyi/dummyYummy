@@ -37,7 +37,11 @@ struct FeedRecipe {
     var preparationMinutes: Int? = nil
     var cookingMinutes: Int? = nil
     
-    var summary: String? = nil
+    var summary: String? = nil {
+        didSet {
+            print(summary)
+        }
+    }
     var cuisines: [String]? = nil
     var dishTypes: [String]? = nil
     var diets: [String]? = nil

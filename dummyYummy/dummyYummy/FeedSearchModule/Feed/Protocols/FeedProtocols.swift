@@ -43,5 +43,5 @@ protocol FeedServiceProtocol {
 }
 
 protocol FeedNavigationDelegate {
-    func feedDidTapCell()
+    func feedDidTapCell(with recipe: FeedRecipe)
 }

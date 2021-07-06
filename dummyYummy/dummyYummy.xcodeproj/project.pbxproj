@@ -63,6 +63,10 @@
 		81D631D72691DDA8004CF695 /* FeedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D62691DDA8004CF695 /* FeedConstants.swift */; };
 		81D631DD269211B7004CF695 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631DC269211B7004CF695 /* DetailViewController.swift */; };
 		81D631DF2692127F004CF695 /* DetailProtocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631DE2692127F004CF695 /* DetailProtocols.swift */; };
+		81D631E12693343D004CF695 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631E02693343D004CF695 /* DetailPresenter.swift */; };
+		81D6324F2694EE02004CF695 /* DetailNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6324E2694EE02004CF695 /* DetailNetworkService.swift */; };
+		81D632562694EEF1004CF695 /* DetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D632552694EEF1004CF695 /* DetailHeader.swift */; };
+		81D6325826951589004CF695 /* DetailConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6325726951589004CF695 /* DetailConstants.swift */; };
 		81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */; };
 		81FFCDD02676CBF900BD4D95 /* UILabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */; };
 		81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */; };
@@ -127,6 +131,10 @@
 		81D631D62691DDA8004CF695 /* FeedConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedConstants.swift; sourceTree = "<group>"; };
 		81D631DC269211B7004CF695 /* DetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		81D631DE2692127F004CF695 /* DetailProtocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailProtocols.swift; sourceTree = "<group>"; };
+		81D631E02693343D004CF695 /* DetailPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailPresenter.swift; sourceTree = "<group>"; };
+		81D6324E2694EE02004CF695 /* DetailNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNetworkService.swift; sourceTree = "<group>"; };
+		81D632552694EEF1004CF695 /* DetailHeader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailHeader.swift; sourceTree = "<group>"; };
+		81D6325726951589004CF695 /* DetailConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailConstants.swift; sourceTree = "<group>"; };
 		81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UITextFieldBuilder.swift; sourceTree = "<group>"; };
 		81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UILabelBuilder.swift; sourceTree = "<group>"; };
 		81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIButtonBuilder.swift; sourceTree = "<group>"; };
@@ -460,10 +468,54 @@
 		81D631DB26921163004CF695 /* Detail */ = {
 			isa = PBXGroup;
 			children = (
-				81D631DE2692127F004CF695 /* DetailProtocols.swift */,
-				81D631DC269211B7004CF695 /* DetailViewController.swift */,
+				81D6325726951589004CF695 /* DetailConstants.swift */,
+				81D632532694EE84004CF695 /* Protocols */,
+				81D632522694EE78004CF695 /* Service */,
+				81D632512694EE6E004CF695 /* View */,
+				81D632502694EE65004CF695 /* Presenter */,
 			);
 			path = Detail;
+			sourceTree = "<group>";
+		};
+		81D632502694EE65004CF695 /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				81D631E02693343D004CF695 /* DetailPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		81D632512694EE6E004CF695 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81D631DC269211B7004CF695 /* DetailViewController.swift */,
+				81D632542694EEDA004CF695 /* Cells */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		81D632522694EE78004CF695 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				81D6324E2694EE02004CF695 /* DetailNetworkService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
+		81D632532694EE84004CF695 /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				81D631DE2692127F004CF695 /* DetailProtocols.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		81D632542694EEDA004CF695 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				81D632552694EEF1004CF695 /* DetailHeader.swift */,
+			);
+			path = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -546,8 +598,10 @@
 				81940BF9268360250031210C /* RefinementsViewController.swift in Sources */,
 				810562FF2675625500106C65 /* FeedServiceModel.swift in Sources */,
 				81940BEF2682689D0031210C /* SearchProtocols.swift in Sources */,
+				81D6325826951589004CF695 /* DetailConstants.swift in Sources */,
 				81FFCDD226778C8100BD4D95 /* UIButtonBuilder.swift in Sources */,
 				814A8C19267FD91C00F46E1F /* SearchResultViewController.swift in Sources */,
+				81D632562694EEF1004CF695 /* DetailHeader.swift in Sources */,
 				815E6E75267418DF00CE6CC1 /* FeedViewController.swift in Sources */,
 				81D631D72691DDA8004CF695 /* FeedConstants.swift in Sources */,
 				814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */,
@@ -569,6 +623,7 @@
 				81056321267566F300106C65 /* NetworkHelper.swift in Sources */,
 				810563242675671B00106C65 /* NetworkHelperProtocol.swift in Sources */,
 				8105632D267567A800106C65 /* URLRequest+Resource.swift in Sources */,
+				81D6324F2694EE02004CF695 /* DetailNetworkService.swift in Sources */,
 				8105632A2675678B00106C65 /* Resource+Codable.swift in Sources */,
 				81940BF726834ACB0031210C /* FeedSearchCoordinatorConstants.swift in Sources */,
 				810562DA26751B6D00106C65 /* UICollectionViewBuilder.swift in Sources */,
@@ -582,6 +637,7 @@
 				81A09767268E0586003E8B61 /* SearchResultConstants.swift in Sources */,
 				81A49DBA268FA7BF0024C20E /* RefinementsPresenter.swift in Sources */,
 				81D631DF2692127F004CF695 /* DetailProtocols.swift in Sources */,
+				81D631E12693343D004CF695 /* DetailPresenter.swift in Sources */,
 				810563462675FFFE00106C65 /* FakeReachability.swift in Sources */,
 				81616AD6268B1DAB002DF12F /* BaseInputTableViewCell.swift in Sources */,
 				81A09769268E068E003E8B61 /* RoundedCollectionCellWithShadow.swift in Sources */,

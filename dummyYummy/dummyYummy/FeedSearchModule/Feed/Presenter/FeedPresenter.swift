@@ -70,7 +70,7 @@ extension FeedPresenter: FeedPresenterProtocol {
     }
     
     func didSelectCellAt(_ indexPath: IndexPath) {
-        navigationDelegate?.feedDidTapCell()
+        navigationDelegate?.feedDidTapCell(with: recipes[indexPath.row])
     }
 }
 
