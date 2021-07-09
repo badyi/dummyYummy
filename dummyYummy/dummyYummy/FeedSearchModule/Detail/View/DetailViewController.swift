@@ -11,12 +11,15 @@ final class DetailViewController: UIViewController {
     
     private lazy var collectionView: UICollectionView = {
         let cv = UICollectionViewBuilder()
-            .backgroundColor(.cyan)
+            .backgroundColor(DetailConstants.VC.Design.backgroundColor)
+            .setInsets(DetailConstants.VC.Layout.collectionInsets)
             .delegate(self)
-            .dataSource(self)
+            .dataSource(presenter as? UICollectionViewDataSource)
             .build()
         cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
+        cv.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CVReusableView")
         cv.register(DetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailHeader.id)
+        cv.register(CharacteristicsCell.self, forCellWithReuseIdentifier: CharacteristicsCell.id)
         return cv
     }()
     
@@ -24,6 +27,7 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        presenter.viewDidLoad()
         setupView()
     }
     
@@ -34,6 +38,12 @@ final class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: DetailViewProtocol {
+    func reloadSection(_ section: Int) {
+        collectionView.performBatchUpdates({
+            collectionView.reloadSections(IndexSet(integer: section))
+        }, completion: nil)
+    }
+    
     func setupView() {
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
@@ -47,42 +57,36 @@ extension DetailViewController: DetailViewProtocol {
 
 private extension DetailViewController {
     
-
     func configNavigation() {
         navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.backgroundColor = FeedConstants.VC.Design.navBarBackgroundColor
+        navigationController?.navigationBar.backgroundColor = DetailConstants.VC.Design.navBarBackgroundColor
     }
 }
 
-extension DetailViewController: UICollectionViewDelegate, UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailHeader.id, for: indexPath) as! DetailHeader
-        header.configView(with: presenter.recipe)
-        
-        return header
-    }
+extension DetailViewController: UICollectionViewDelegate {    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let title = presenter.headerTitle()
-        let height = DetailHeader.heightForCell(with: title, width: collectionView.bounds.width)
-        return CGSize(width: collectionView.bounds.width, height: height)
+        if section == 0 {
+            let title = presenter.headerTitle()
+            let height = DetailHeader.heightForCell(with: title, width: collectionView.bounds.width)
+            return CGSize(width: collectionView.bounds.width, height: height)
+        } else if section == 1 || section == 2 {
+            return CGSize(width:collectionView.bounds.width, height: DetailConstants.VC.Layout.headerWithTitleHeight)
+        }
+        return CGSize(width: 0, height: 0)
     }
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        10
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        DetailConstants.VC.Layout.minimumLineSpacingForSection
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
-        cell.backgroundColor = .black
-        return cell
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        return CGSize(width: collectionView.bounds.width, height: DetailConstants.VC.Layout.footerHeight)
     }
 }
 
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: 50)
+        CGSize(width: collectionView.bounds.width, height: DetailConstants.VC.Layout.characteristicsCellHeight)
     }
-    
 }

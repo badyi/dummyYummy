@@ -34,11 +34,11 @@ final class FeedPresenter: NSObject {
 extension FeedPresenter: FeedPresenterProtocol {
     func viewWillAppear() {
         view?.configNavigation()
-        view?.reloadVisibleCells()
+        //view?.reloadVisibleCells()
     }
     
     func viewWillDisappear() {
-        view?.stopVisibleCellsAnimation()
+        //view?.stopVisibleCellsAnimation()
     }
     
     func viewDidLoad() {
@@ -70,13 +70,15 @@ extension FeedPresenter: FeedPresenterProtocol {
     }
     
     func didSelectCellAt(_ indexPath: IndexPath) {
-        navigationDelegate?.feedDidTapCell(with: recipes[indexPath.row])
+        guard let recipe = recipe(at: indexPath) else {
+            return
+        }
+        navigationDelegate?.feedDidTapCell(with: recipe)
     }
 }
 
 // MARK: - Working with service layer methods
 private extension FeedPresenter {
-    
     func recipesDidSet() {
         DispatchQueue.main.async { [weak self] in
             self?.view?.reloadCollection()
@@ -122,6 +124,7 @@ private extension FeedPresenter {
     
     func setImageData(at index: IndexPath, _ data: Data) {
         recipes[index.row].imageData = data
+        recipes[index.row].image = UIImage(data: data)
     }
 }
 
@@ -135,7 +138,6 @@ extension FeedPresenter: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.id, for: indexPath) as! FeedCell
         
         cell.startAnimation()
@@ -145,4 +147,12 @@ extension FeedPresenter: UICollectionViewDataSource {
         }
         return cell
     }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchingForItemsAt indexPaths: [IndexPath]) {
+        print(indexPaths)
+    }
 }
+//
+//extension FeedPresenter: UICollectionViewDataSourcePrefetching {
+//
+//}

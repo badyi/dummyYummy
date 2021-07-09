@@ -13,9 +13,16 @@ final class UIButtonBuilder {
     public private(set) var image: UIImage?
     public private(set) var largeConfig: Bool = false
     public private(set) var tintColor: UIColor = .systemBlue
+    public private(set) var font: UIFont? = nil
 }
 
 extension UIButtonBuilder {
+    @discardableResult
+    public func setFont(_ font: UIFont) -> UIButtonBuilder {
+        self.font = font
+        return self
+    }
+    
     @discardableResult
     public func tintColor(_ color: UIColor) -> UIButtonBuilder {
         self.tintColor = color
@@ -61,6 +68,9 @@ private extension UIButtonBuilder {
         button.backgroundColor = backgroundColor
         button.tintColor = tintColor
         
+        if let font = font {
+            button.titleLabel?.font = font
+        }
         if let image = self.image {
             button.contentMode = .center
             button.setImage(image, for: .normal)

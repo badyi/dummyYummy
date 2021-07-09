@@ -17,6 +17,7 @@ final class FeedViewController: UIViewController {
             .setInsets(FeedConstants.VC.Layout.collectionInsets)
             .build()
         cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
+        //cv.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
         return cv
     }()
     
@@ -58,17 +59,32 @@ extension FeedViewController: FeedViewProtocol {
     
     func setupView() {
         title = "Browes recipes"
-        definesPresentationContext = true
         setupCollectionView()
     }
     
     func reloadCollection() {
+       // collectionView.performBatchUpdates({
         collectionView.reloadData()
+        //}, completion: nil)
     }
     
     func reloadItems(at indexPaths: [IndexPath]) {
         collectionView.reloadItems(at: indexPaths)
     }
+    
+//    func reloadItems(at indexPaths: [IndexPath]) {
+//        var reloadIndexes: [IndexPath] = []
+//        let currentVisibleItems = collectionView.indexPathsForVisibleItems
+//        indexPaths.forEach {
+//            if currentVisibleItems.contains($0) {
+//                reloadIndexes.append($0)
+//            }
+//        }
+//
+//        collectionView.performBatchUpdates({
+//            collectionView.reloadItems(at: reloadIndexes)
+//        }, completion: nil)
+//    }
 }
 
 extension FeedViewController {
@@ -116,6 +132,14 @@ extension FeedViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter.didSelectCellAt(indexPath)
+    }
+}
+
+extension FeedPresenter: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach {
+            willDisplayCell(at: $0)
+        }
     }
 }
 
