@@ -13,7 +13,6 @@ struct FeedRecipe {
     
     var imageURL: String? = nil
     var imageData: Data? = nil
-    var image: UIImage? = nil
     
     var boolCharacteristics: [String: Bool]?
 //    var intCharacteristics: [String: Int] = [:]

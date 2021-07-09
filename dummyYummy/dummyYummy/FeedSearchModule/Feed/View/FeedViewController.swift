@@ -17,7 +17,7 @@ final class FeedViewController: UIViewController {
             .setInsets(FeedConstants.VC.Layout.collectionInsets)
             .build()
         cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
-        //cv.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
+        cv.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
         return cv
     }()
     
@@ -63,28 +63,22 @@ extension FeedViewController: FeedViewProtocol {
     }
     
     func reloadCollection() {
-       // collectionView.performBatchUpdates({
         collectionView.reloadData()
-        //}, completion: nil)
     }
     
     func reloadItems(at indexPaths: [IndexPath]) {
-        collectionView.reloadItems(at: indexPaths)
+        var reloadIndexes: [IndexPath] = []
+        let currentVisibleItems = collectionView.indexPathsForVisibleItems
+        indexPaths.forEach {
+            if currentVisibleItems.contains($0) {
+                reloadIndexes.append($0)
+            }
+        }
+
+        collectionView.performBatchUpdates({
+            collectionView.reloadItems(at: reloadIndexes)
+        }, completion: nil)
     }
-    
-//    func reloadItems(at indexPaths: [IndexPath]) {
-//        var reloadIndexes: [IndexPath] = []
-//        let currentVisibleItems = collectionView.indexPathsForVisibleItems
-//        indexPaths.forEach {
-//            if currentVisibleItems.contains($0) {
-//                reloadIndexes.append($0)
-//            }
-//        }
-//
-//        collectionView.performBatchUpdates({
-//            collectionView.reloadItems(at: reloadIndexes)
-//        }, completion: nil)
-//    }
 }
 
 extension FeedViewController {

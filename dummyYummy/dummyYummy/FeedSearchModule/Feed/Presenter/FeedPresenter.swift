@@ -14,13 +14,8 @@ final class FeedPresenter: NSObject {
     
     var navigationDelegate: FeedNavigationDelegate?
     
-    var recipes: [FeedRecipe] {
-        didSet {
-            recipesDidSet()
-        }
-    }
-    
-    private let randomRecipesCount: Int = 100
+    var recipes: [FeedRecipe]
+    private let randomRecipesCount: Int = 10
     
     
     init(with view: FeedViewProtocol, _ service: FeedServiceProtocol) {
@@ -34,11 +29,11 @@ final class FeedPresenter: NSObject {
 extension FeedPresenter: FeedPresenterProtocol {
     func viewWillAppear() {
         view?.configNavigation()
-        //view?.reloadVisibleCells()
+        view?.reloadVisibleCells()
     }
     
     func viewWillDisappear() {
-        //view?.stopVisibleCellsAnimation()
+        view?.stopVisibleCellsAnimation()
     }
     
     func viewDidLoad() {
@@ -57,9 +52,7 @@ extension FeedPresenter: FeedPresenterProtocol {
         if index.row < 0 || index.row >= recipes.count {
             return 
         }
-        if recipes[index.row].imageData == nil {
-            loadImage(at: index)
-        }
+        loadImageIfNeeded(at: index)
     }
     
     func didEndDisplayingCell(at index: IndexPath) {
@@ -79,7 +72,7 @@ extension FeedPresenter: FeedPresenterProtocol {
 
 // MARK: - Working with service layer methods
 private extension FeedPresenter {
-    func recipesDidSet() {
+    func recipesDidLoad() {
         DispatchQueue.main.async { [weak self] in
             self?.view?.reloadCollection()
         }
@@ -96,17 +89,20 @@ private extension FeedPresenter {
             switch result {
             case let .success(result):
                 self?.recipes = result.recipes.map { FeedRecipe(with: $0) }
+                self?.recipesDidLoad()
             case let .failure(error):
                 print(error.localizedDescription)
             }
         })
     }
     
-    func loadImage(at index: IndexPath) {
+    func loadImageIfNeeded(at index: IndexPath) {
+        if recipes[index.row].imageData != nil {
+            return
+        }
         guard let url = recipes[index.row].imageURL else {
             return
         }
-        
         networkService.loadImage(at: index, with: url, completion: { [weak self] result in
             switch result {
             case let .success(result):
@@ -124,7 +120,6 @@ private extension FeedPresenter {
     
     func setImageData(at index: IndexPath, _ data: Data) {
         recipes[index.row].imageData = data
-        recipes[index.row].image = UIImage(data: data)
     }
 }
 
@@ -149,10 +144,8 @@ extension FeedPresenter: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, prefetchingForItemsAt indexPaths: [IndexPath]) {
-        print(indexPaths)
+        indexPaths.forEach {
+            willDisplayCell(at: $0)
+        }
     }
 }
-//
-//extension FeedPresenter: UICollectionViewDataSourcePrefetching {
-//
-//}
