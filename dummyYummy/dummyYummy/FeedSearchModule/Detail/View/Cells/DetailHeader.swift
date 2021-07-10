@@ -12,6 +12,7 @@ final class DetailHeader: UICollectionReusableView {
     static let id = "DetailHeader"
     
     var headerTapped: (() -> ())?
+    var segmentSelectedValueChanged: ((Int) -> ())?
     
     private var contentView: UIView = {
         let view = UIView()
@@ -61,19 +62,63 @@ final class DetailHeader: UICollectionReusableView {
             .buildWithShimmer()
     }()
     
-    private var segmentControll: UISegmentedControl = {
-        let segment = UISegmentedControl()
+    var segmentItems = ["Ingredients", "Instructions"]
+    var currentSelectedSegment: Int = 0
+    
+    private lazy var segmentControll: UISegmentedControl = {
+        let segment = UISegmentedControl(items: segmentItems)
         segment.translatesAutoresizingMaskIntoConstraints = false
-        segment.backgroundColor = .red
+        
+        segment.backgroundColor = Colors.nero
+        segment.selectedSegmentTintColor = DetailConstants.Header.Design.selectedSegmentColor
+        segment.setImagesToBackground()
+        segment.setTitleTextAttributes([NSAttributedString.Key.font: DetailConstants.Header.Font.titleFont ,NSAttributedString.Key.foregroundColor: DetailConstants.Header.Design.titleColor], for: .normal)
+        segment.selectedSegmentIndex = currentSelectedSegment
+        segment.addTarget(self, action: #selector(segmentChange(sender:)), for: .valueChanged)
         return segment
     }()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setupShadow()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
+    }
+    
+    let cornerRadius: CGFloat = 10
+    let shadowRadius: CGFloat = 6
+    let shadowOpacity: Float = 0.4
+    let shadowOffsetWidth: CGFloat = 0
+    let shadowOffsetHeight: CGFloat = 2
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        contentView.layer.shadowPath = UIBezierPath(
+            roundedRect: contentView.bounds,
+            cornerRadius: cornerRadius
+        ).cgPath
+    }
+    
+    override func apply(_ layoutAttributes: UICollectionViewLayoutAttributes) {
+        super.apply(layoutAttributes)
+        layoutIfNeeded()
+    }
+    
+    func setupShadow() {
+        /// Apply a shadow and round
+        contentView.layer.cornerRadius = cornerRadius
+        contentView.layer.masksToBounds = false
+        layer.cornerRadius = cornerRadius
+        layer.masksToBounds = true
+        
+        contentView.layer.shadowRadius = shadowRadius
+        contentView.layer.shadowOpacity = shadowOpacity
+        contentView.layer.shadowColor = UIColor.black.cgColor
+//
+        contentView.layer.shadowOffset = CGSize(width: shadowOffsetWidth, height: shadowOffsetHeight)
     }
     
     override func prepareForReuse() {
@@ -88,7 +133,7 @@ final class DetailHeader: UICollectionReusableView {
 }
 
 extension DetailHeader {
-    static func heightForCell(with title: String, width: CGFloat) -> CGFloat {
+    static func heightForHeaderCellWithImage(with title: String, width: CGFloat) -> CGFloat {
         let imageHeight: CGFloat = DetailConstants.Header.Layout.imageHeight
         let buttonHeight: CGFloat = DetailConstants.Header.Layout.buttonHeight
         let verticalSpaces: CGFloat = DetailConstants.Header.Layout.horizontalSpace * 2
@@ -98,12 +143,14 @@ extension DetailHeader {
         let rect = attributedString.boundingRect(with:
                 CGSize(width: width - verticalSpaces, height: .greatestFiniteMagnitude),
                 options: .usesLineFragmentOrigin, context: nil)
-        let height = rect.height + imageHeight + horizontalSpaces + buttonHeight
+        let height = rect.height + imageHeight + horizontalSpaces + buttonHeight + DetailConstants.Header.Layout.bottomGapHeight
+        
         return height
     }
     
     func configView(with recipe: FeedRecipe) {
         setupView()
+        
         titleLabel.text = recipe.title
         
         guard let imageData = recipe.imageData else {
@@ -120,12 +167,17 @@ extension DetailHeader {
         button.setTitle(title, for: .normal)
     }
     
-    func configWithSegment() {
+    func configWithSegment(_ currentSelected: Int) {
+        segmentControll.selectedSegmentIndex = currentSelected
         setupWithSegment()
     }
 }
 
 private extension DetailHeader {
+    @objc func segmentChange(sender: UISegmentedControl) {
+        segmentSelectedValueChanged?(sender.selectedSegmentIndex)
+    }
+    
     func setupView() {
         addSubview(contentView)
  
@@ -146,7 +198,6 @@ private extension DetailHeader {
         contentView.addSubview(button)
         setupContentView()
 
-        
         NSLayoutConstraint.activate([
             button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
@@ -176,7 +227,7 @@ private extension DetailHeader {
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
             contentView.trailingAnchor.constraint(equalTo: safeAreaLayoutGuide.trailingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor)
+            contentView.bottomAnchor.constraint(equalTo: safeAreaLayoutGuide.bottomAnchor, constant: -DetailConstants.Header.Layout.bottomGapHeight)
         ])
     }
     

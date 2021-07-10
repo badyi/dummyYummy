@@ -40,7 +40,8 @@ struct FeedRecipe {
     var dishTypes: [String]? = nil
     var diets: [String]? = nil
 //    var occasions: [String]? = nil
-    var instructions: String? = nil
+    var ingredients: [String]? = nil
+    var instructions: [String]? = nil
     var analyzedInstructions: [AnalyzedInstruction]? = nil
     
     var sourceUrl: String? = nil
@@ -71,7 +72,19 @@ struct FeedRecipe {
         //veryPopular = responseRecipe.veryPopular
         //sustainable = responseRecipe.sustainable
         //lowFodmap = responseRecipe.lowFodmap
-        //gaps = responseRecipe.gaps
+        //gaps = responseRecipe.gap
+        ingredients = []
+        responseRecipe.extendedIngredients.forEach {
+            ingredients?.append($0.original)
+        }
+        
+        instructions = []
+        if responseRecipe.analyzedInstructions.count > 0 {
+            responseRecipe.analyzedInstructions[0].steps.forEach {
+                instructions?.append($0.step)
+            }
+        }
+
         
         healthScore = responseRecipe.healthScore
 
@@ -81,27 +94,21 @@ struct FeedRecipe {
 
 //        preparationMinutes = responseRecipe.preparationMinutes
 //        cookingMinutes = responseRecipe.cookingMinutes
-//
         cuisines = responseRecipe.cuisines
         dishTypes = responseRecipe.dishTypes
         diets = responseRecipe.diets
         //occasions = responseRecipe.occasions
-        instructions = responseRecipe.instructions
+        
         analyzedInstructions = responseRecipe.analyzedInstructions
         
         sourceUrl = responseRecipe.sourceUrl
         imageURL = responseRecipe.image
         spoonacularSourceURL = responseRecipe.spoonacularSourceURL
-        imageData = nil
     }
     
     init(with searchResult: SearchResult) {
         id = searchResult.id
         title = searchResult.title
         imageURL = searchResult.image
-        imageData = nil
     }
-}
-
-extension FeedRecipe {
 }

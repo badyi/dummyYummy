@@ -149,7 +149,7 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
             title = recipe.title
         }
         
-        let width = collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right
+        let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
         let height = FeedCell.heightForCell(with: title, width: width)
         
         return CGSize(width: width, height: height)

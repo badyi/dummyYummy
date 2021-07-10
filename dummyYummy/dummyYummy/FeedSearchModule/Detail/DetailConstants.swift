@@ -10,17 +10,17 @@ import UIKit
 struct DetailConstants {
     struct VC {
         struct Layout {
-            static let collectionInsets: UIEdgeInsets = UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-            static let headerWithTitleHeight: CGFloat = 40
-            static let characteristicsCellHeight: CGFloat = 40
-            static let footerHeight: CGFloat = 1
-            static let minimumLineSpacingForSection: CGFloat = 1
+            static let collectionInsets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+            static let headerWithTitleHeight: CGFloat = 45
+            static let footerHeight: CGFloat = 10
+            static let minimumLineSpacingForSection: CGFloat = 10
+            static let minimumInteritemSpacingForSection: CGFloat = 0
         }
         
         struct Design {
             static let navigationTextColor: UIColor = Colors.wisteria
-            static var backgroundColor = Colors.nero
-            static var navBarBackgroundColor = Colors.black
+            static let backgroundColor = Colors.nero
+            static let navBarBackgroundColor = Colors.black
         }
     }
     
@@ -36,6 +36,7 @@ struct DetailConstants {
             static let minimalTitleHeight: CGFloat = 20
             
             static let buttonHeight: CGFloat = 45
+            static let bottomGapHeight: CGFloat = 10
         }
         
         struct Font {
@@ -49,16 +50,19 @@ struct DetailConstants {
         }
         
         struct Design {
-            static var backgroundColor = Colors.eclipse
-            static var titleColor = Colors.almostPureWhite
-            static var additinalTextColor = Colors.mediumPureWhite
-            static var shadowColor = Colors.pureBlack
-            static var buttonTintColor = Colors.veryLightGray
+            static let selectedSegmentColor = Colors.wisteria
+            static let backgroundColor = Colors.nero
+            static let titleColor = Colors.almostPureWhite
+            static let additinalTextColor = Colors.mediumPureWhite
+            static let shadowColor = Colors.pureBlack
+            static let buttonTintColor = Colors.veryLightGray
         }
     }
     
-    struct CharacteristicsCell {
+    struct DetailCell {
         struct Layout {
+            static let verticalSpace: CGFloat = 5
+            static let horizontalSpace: CGFloat = 10
         }
         
         struct Font {
@@ -66,11 +70,11 @@ struct DetailConstants {
         }
         
         struct Design {
-            static var backgroundColor = Colors.eclipse
-            static var titleColor = Colors.almostPureWhite
-            static var additinalTextColor = Colors.mediumPureWhite
-            static var shadowColor = Colors.pureBlack
-            static var buttonTintColor = Colors.veryLightGray
+            static let backgroundColor = Colors.eclipse
+            static let titleColor = Colors.almostPureWhite
+            static let additinalTextColor = Colors.mediumPureWhite
+            static let shadowColor = Colors.pureBlack
+            static let buttonTintColor = Colors.veryLightGray
         }
     }
 }

@@ -16,10 +16,9 @@ final class DetailViewController: UIViewController {
             .delegate(self)
             .dataSource(presenter as? UICollectionViewDataSource)
             .build()
-        cv.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "cell")
-        cv.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CVReusableView")
         cv.register(DetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailHeader.id)
-        cv.register(CharacteristicsCell.self, forCellWithReuseIdentifier: CharacteristicsCell.id)
+        cv.register(DetailCell.self, forCellWithReuseIdentifier: DetailCell.id)
+        cv.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CVFooterView")
         return cv
     }()
     
@@ -28,12 +27,11 @@ final class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter.viewDidLoad()
-        setupView()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        configNavigation()
+        presenter.viewWillAppear()
     }
 }
 
@@ -53,25 +51,27 @@ extension DetailViewController: DetailViewProtocol {
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-}
-
-private extension DetailViewController {
     
-    func configNavigation() {
+    func configNavigationBar() {
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.backgroundColor = DetailConstants.VC.Design.navBarBackgroundColor
     }
 }
 
+private extension DetailViewController {
+
+}
+
 extension DetailViewController: UICollectionViewDelegate {    
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
         if section == 0 {
             let title = presenter.headerTitle()
-            let height = DetailHeader.heightForCell(with: title, width: collectionView.bounds.width)
-            return CGSize(width: collectionView.bounds.width, height: height)
+            let height = DetailHeader.heightForHeaderCellWithImage(with: title, width: width)
+            return CGSize(width: width, height: height)
         } else if section == 1 || section == 2 {
-            return CGSize(width:collectionView.bounds.width, height: DetailConstants.VC.Layout.headerWithTitleHeight)
+            return CGSize(width: width, height: DetailConstants.VC.Layout.headerWithTitleHeight)
         }
         return CGSize(width: 0, height: 0)
     }
@@ -80,13 +80,34 @@ extension DetailViewController: UICollectionViewDelegate {
         DetailConstants.VC.Layout.minimumLineSpacingForSection
     }
     
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        DetailConstants.VC.Layout.minimumInteritemSpacingForSection
+    }
+    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
-        return CGSize(width: collectionView.bounds.width, height: DetailConstants.VC.Layout.footerHeight)
+        let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
+        
+        return CGSize(width: width, height: DetailConstants.VC.Layout.footerHeight)
     }
 }
 
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        CGSize(width: collectionView.bounds.width, height: DetailConstants.VC.Layout.characteristicsCellHeight)
+        
+        let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
+        
+        var height: CGFloat = 0
+        if indexPath.section == 1 {
+            let text = presenter.characteristic(at: indexPath)
+            let height = DetailCell.heightForCell(with: text, width: width)
+            return CGSize(width: width, height: height)
+        } else if indexPath.section == 2, presenter.currentSelectedSegment() == 0 {
+            let text = presenter.ingredientTitle(at: indexPath)
+            height = DetailCell.heightForCell(with: text, width: width)
+        } else if indexPath.section == 2, presenter.currentSelectedSegment() == 1 {
+            let text = presenter.instructionTitle(at: indexPath)
+            height = DetailCell.heightForCell(with: text, width: width)
+        }
+        return CGSize(width: width, height: height)
     }
 }

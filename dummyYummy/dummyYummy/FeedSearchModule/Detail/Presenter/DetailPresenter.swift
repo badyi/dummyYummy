@@ -24,6 +24,7 @@ final class DetailPresenter: NSObject {
     let sections: [DetailSections] = [.headerSection, .characteristics, .ingredientsAndInstrusctions]
     
     var characteristics: ExpandableCharacteristics
+    var currentSelected: Int = 0
     
     init(with view: DetailViewProtocol, _ networkService: DetailNetworkServiceProtocol, _ recipe: FeedRecipe) {
         self.view = view
@@ -34,12 +35,35 @@ final class DetailPresenter: NSObject {
 }
 
 extension DetailPresenter: DetailPresenterProtocol {
+    func characteristic(at indexPath: IndexPath) -> String {
+        characteristics.values[indexPath.row]
+    }
+    
+    func currentSelectedSegment() -> Int {
+        return currentSelected
+    }
+    
+    func ingredientTitle(at indexPath: IndexPath) -> String {
+        guard let ingredient = recipe.ingredients?[indexPath.row] else {
+            return ""
+        }
+        return ingredient
+    }
+    
+    func instructionTitle(at indexPath: IndexPath) -> String {
+        guard let instruction = recipe.instructions?[indexPath.row] else {
+            return ""
+        }
+        return instruction
+    }
+    
     func viewDidLoad() {
         prepareCharacteristics()
+        view?.setupView()
     }
     
     func viewWillAppear() {
-        
+        view?.configNavigationBar()
     }
     
     func headerTitle() -> String {
@@ -49,8 +73,7 @@ extension DetailPresenter: DetailPresenterProtocol {
     func headerTapped(_ section: Int) {
         if sections[section] == .characteristics {
             characteristics.isExpanded = !characteristics.isExpanded
-            view?.reloadSection(section
-            )
+            view?.reloadSection(section)
         }
     }
 }
@@ -58,39 +81,54 @@ extension DetailPresenter: DetailPresenterProtocol {
 extension DetailPresenter: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        /// use footer as small space between sections
         if kind == UICollectionView.elementKindSectionFooter {
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CVReusableView", for: indexPath)
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "CVFooterView", for: indexPath)
             return footer
         }
         
         let header = collectionView.dequeueReusableSupplementaryView(ofKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailHeader.id, for: indexPath) as! DetailHeader
-        
+        header.backgroundColor = .clear
+
+        /// header with image and title
         if sections[indexPath.section] == .headerSection {
             header.configView(with: recipe)
-            header.backgroundColor = .systemGreen
             return header
+        /// header with a button to expand
         } else if sections[indexPath.section] == .characteristics {
             header.configViewWith(title: "Characterisctics")
+            /// handle the tap  of button
+            header.headerTapped = { [weak self] in
+                self?.headerTapped(indexPath.section)
+            }
+        /// header with segment controll
         } else if sections[indexPath.section] == .ingredientsAndInstrusctions {
-            header.configWithSegment()
-        }
-        
-        header.headerTapped = { [weak self] in
-            self?.headerTapped(indexPath.section)
+            
+            header.configWithSegment(currentSelected)
+            header.segmentSelectedValueChanged = { [weak self] value in
+                self?.currentSelected = value
+                self?.view?.reloadSection(indexPath.section)
+            }
         }
         return header
     }
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
         if sections[section] == .headerSection {
             return 0
         } else if sections[section] == .characteristics {
             if characteristics.isExpanded {
                 return characteristics.values.count
             }
+            /// if the section should not be expanded, return 0
             return 0
         } else if sections[section] == .ingredientsAndInstrusctions {
-            
+            if currentSelected == 0 {
+                return recipe.ingredients?.count ?? 0
+            } else if currentSelected == 1 {
+                return recipe.instructions?.count ?? 0
+            }
         }
         return 0
     }
@@ -101,12 +139,21 @@ extension DetailPresenter: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath)
+        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCell.id, for: indexPath) as! DetailCell
         
+        /// configuring cells for characteristics section
         if sections[indexPath.section] == .characteristics {
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CharacteristicsCell.id, for: indexPath) as! CharacteristicsCell
             cell.config(with: characteristics.values[indexPath.row])
             return cell
+        /// configuring cells for ingredients and instructions section
+        } else if sections[indexPath.section] == .ingredientsAndInstrusctions {
+            /// configuring for ingredients
+            if currentSelected == 0 {
+                cell.config(with: recipe.ingredients?[indexPath.row] ?? "")
+            /// configuring for instructions
+            } else if currentSelected == 1 {
+                cell.config("Step \(indexPath.row + 1). ",with: recipe.instructions?[indexPath.row] ?? "")
+            }
         }
         return cell
     }
@@ -130,5 +177,12 @@ private extension DetailPresenter {
                 characteristics.values.append(i.key)
             }
         }
+    }
+    
+    func prepareIngredients() {
+//        guard let ingredients = recipe.ingredients else {
+//            #warning("load")
+//            return
+//        }
     }
 }

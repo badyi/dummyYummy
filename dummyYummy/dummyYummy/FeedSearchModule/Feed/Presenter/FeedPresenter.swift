@@ -15,7 +15,7 @@ final class FeedPresenter: NSObject {
     var navigationDelegate: FeedNavigationDelegate?
     
     var recipes: [FeedRecipe]
-    private let randomRecipesCount: Int = 10
+    private let randomRecipesCount: Int = 100
     
     
     init(with view: FeedViewProtocol, _ service: FeedServiceProtocol) {
