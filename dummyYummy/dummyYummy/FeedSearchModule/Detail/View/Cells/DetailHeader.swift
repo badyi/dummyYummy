@@ -13,6 +13,15 @@ final class DetailHeader: UICollectionReusableView {
     
     var headerTapped: (() -> ())?
     var segmentSelectedValueChanged: ((Int) -> ())?
+    var isExpanded: Bool? = nil {
+        willSet {
+            if newValue == true {
+                button.rightIcon(image: DetailConstants.Header.Image.chevronDown)
+            } else if newValue == false {
+                button.rightIcon(image: DetailConstants.Header.Image.chevronRight)
+            }
+        }
+    }
     
     private var contentView: UIView = {
         let view = UIView()
@@ -33,6 +42,7 @@ final class DetailHeader: UICollectionReusableView {
                         .setFont(DetailConstants.Header.Font.titleFont)
                         .build()
         button.addTarget(self, action: #selector(tap), for: .touchUpInside)
+        button.tintColor = Colors.wisteria
         return button
     }()
     
@@ -171,6 +181,10 @@ extension DetailHeader {
         segmentControll.selectedSegmentIndex = currentSelected
         setupWithSegment()
     }
+    
+    func changeButtonState(_ flag: Bool) {
+        
+    }
 }
 
 private extension DetailHeader {
@@ -264,5 +278,13 @@ private extension DetailHeader {
             share.trailingAnchor.constraint(equalTo: favorite.leadingAnchor, constant: -DetailConstants.Header.Layout.spaceBetweenButtons)
         ])
     }
-    
+    func addArrowImageToButton(button: UIButton, arrowImage: UIImage) {
+        let btnSize:CGFloat = 32
+        let imageView = UIImageView(image: arrowImage)
+        let btnFrame = button.frame
+        imageView.frame = CGRect(x: btnFrame.width-btnSize-8, y: btnFrame.height/2 - btnSize/2, width: btnSize, height: btnSize)
+        button.addSubview(imageView)
+        //Imageview on Top of View
+        button.bringSubviewToFront(imageView)
+    }
 }

@@ -2,7 +2,7 @@
 //  UILabelWithInsets.swift
 //  dummyYummy
 //
-//  Created by badyi on 04.07.2021.
+//  Created by badyi on 11.07.2021.
 //
 
 import UIKit

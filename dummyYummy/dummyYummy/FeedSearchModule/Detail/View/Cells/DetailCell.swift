@@ -63,7 +63,7 @@ extension DetailCell {
 }
 
 private extension DetailCell {
-  
+    
 }
 
 #warning("remove from here")

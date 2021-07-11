@@ -42,7 +42,6 @@ struct FeedRecipe {
 //    var occasions: [String]? = nil
     var ingredients: [String]? = nil
     var instructions: [String]? = nil
-    var analyzedInstructions: [AnalyzedInstruction]? = nil
     
     var sourceUrl: String? = nil
     
@@ -84,7 +83,6 @@ struct FeedRecipe {
                 instructions?.append($0.step)
             }
         }
-
         
         healthScore = responseRecipe.healthScore
 
@@ -98,8 +96,6 @@ struct FeedRecipe {
         dishTypes = responseRecipe.dishTypes
         diets = responseRecipe.diets
         //occasions = responseRecipe.occasions
-        
-        analyzedInstructions = responseRecipe.analyzedInstructions
         
         sourceUrl = responseRecipe.sourceUrl
         imageURL = responseRecipe.image

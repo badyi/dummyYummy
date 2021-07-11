@@ -37,5 +37,5 @@ protocol SearchNetworkServiceProtocol {
 
 protocol SearchNavigationDelegate {
     func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements)
-    func searchDidTapCell()
+    func searchDidTapCell(with recipe: FeedRecipe)
 }

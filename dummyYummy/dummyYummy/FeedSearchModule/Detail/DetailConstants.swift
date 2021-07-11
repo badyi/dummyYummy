@@ -11,7 +11,7 @@ struct DetailConstants {
     struct VC {
         struct Layout {
             static let collectionInsets: UIEdgeInsets = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
-            static let headerWithTitleHeight: CGFloat = 45
+            static let headerWithTitleHeight: CGFloat = 50
             static let footerHeight: CGFloat = 10
             static let minimumLineSpacingForSection: CGFloat = 10
             static let minimumInteritemSpacingForSection: CGFloat = 0
@@ -44,9 +44,10 @@ struct DetailConstants {
         }
 
         struct Image {
-            static let defaultCellImage = UIImage(named: "defaultFoodImage") ?? UIImage()
             static let shareImage = UIImage(systemName: "square.and.arrow.up") ?? UIImage()
             static let favoriteImage = UIImage(systemName: "suit.heart") ?? UIImage()
+            static let chevronRight = UIImage(systemName: "chevron.right.circle")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
+            static let chevronDown = UIImage(systemName: "chevron.down.circle")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
         }
         
         struct Design {

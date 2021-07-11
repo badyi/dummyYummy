@@ -88,8 +88,8 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
 
 extension FeedSearchCoordinator: SearchNavigationDelegate {
     
-    func searchDidTapCell() {
-        #warning("didtap")
+    func searchDidTapCell(with recipe: FeedRecipe) {
+        showDetail(with: recipe)
     }
     
     func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements) {

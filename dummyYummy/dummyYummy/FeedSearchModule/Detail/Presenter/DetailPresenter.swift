@@ -98,6 +98,7 @@ extension DetailPresenter: UICollectionViewDataSource {
         } else if sections[indexPath.section] == .characteristics {
             header.configViewWith(title: "Characterisctics")
             /// handle the tap  of button
+            header.isExpanded = characteristics.isExpanded
             header.headerTapped = { [weak self] in
                 self?.headerTapped(indexPath.section)
             }
