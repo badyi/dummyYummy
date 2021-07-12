@@ -51,7 +51,7 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
 }
 
 extension SearchResultCell {
-    func config(with recipe: FeedRecipe) {
+    func config(with recipe: Recipe) {
         self.title.text = recipe.title
         guard let imageData = recipe.imageData else {
             imageView.startShimmerAnimation()

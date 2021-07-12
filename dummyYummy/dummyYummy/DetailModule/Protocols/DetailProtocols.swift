@@ -15,9 +15,9 @@ protocol DetailViewProtocol: AnyObject {
 }
 
 protocol DetailPresenterProtocol {
-    var recipe: FeedRecipe { get }
+    var recipe: Recipe { get }
     
-    init(with view: DetailViewProtocol, _ networkService: DetailNetworkServiceProtocol, _ recipe: FeedRecipe)
+    init(with view: DetailViewProtocol, _ networkService: DetailNetworkServiceProtocol, _ recipe: Recipe)
     func viewDidLoad()
     func viewWillAppear()
     func headerTitle() -> String

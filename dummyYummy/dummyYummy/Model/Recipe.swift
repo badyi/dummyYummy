@@ -1,5 +1,5 @@
 //
-//  FeedRecipeModel.swift
+//  Recipe.swift
 //  dummyYummy
 //
 //  Created by badyi on 13.06.2021.
@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class FeedRecipe {
+final class Recipe {
     let id: Int
     let title: String
     
@@ -109,7 +109,7 @@ final class FeedRecipe {
     }
 }
 
-extension FeedRecipe {
+extension Recipe {
     func configInfo(with responseRecipe: FeedRecipeInfoResponse) {
         sourceURL = responseRecipe.sourceUrl
         spoonacularSourceURL = responseRecipe.spoonacularSourceURL

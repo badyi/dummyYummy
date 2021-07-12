@@ -158,7 +158,7 @@ extension DetailHeader {
         return height
     }
     
-    func configView(with recipe: FeedRecipe) {
+    func configView(with recipe: Recipe) {
         setupView()
         
         titleLabel.text = recipe.title

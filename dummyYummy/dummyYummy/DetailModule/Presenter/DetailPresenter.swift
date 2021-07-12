@@ -20,13 +20,13 @@ final class DetailPresenter: NSObject {
 
     weak var view: DetailViewProtocol?
     var networkService: DetailNetworkServiceProtocol
-    var recipe: FeedRecipe
+    var recipe: Recipe
     let sections: [DetailSections] = [.headerSection, .characteristics, .ingredientsAndInstrusctions]
     
     var characteristics: ExpandableCharacteristics
     var currentSelected: Int = 0
     
-    init(with view: DetailViewProtocol, _ networkService: DetailNetworkServiceProtocol, _ recipe: FeedRecipe) {
+    init(with view: DetailViewProtocol, _ networkService: DetailNetworkServiceProtocol, _ recipe: Recipe) {
         self.view = view
         self.recipe = recipe
         self.networkService = networkService
@@ -220,7 +220,7 @@ private extension DetailPresenter {
         networkService.loadRecipeInfo(recipe.id, completion: { [weak self] result in
             switch result {
             case .success(let result):
-                self?.recipe = FeedRecipe(with: result)
+                self?.recipe = Recipe(with: result)
                 self?.recipeInfoDidLoad()
             case .failure(let error):
                 #warning("alert")

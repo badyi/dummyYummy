@@ -32,7 +32,7 @@ protocol FeedPresenterProtocol: AnyObject {
     func viewWillDisappear()
     func willDisplayCell(at index: IndexPath)
     func didEndDisplayingCell(at index: IndexPath)
-    func recipe(at index: IndexPath) -> FeedRecipe?
+    func recipe(at index: IndexPath) -> Recipe?
     func didSelectCellAt(_ indexPath: IndexPath)
 }
 
@@ -43,5 +43,5 @@ protocol FeedServiceProtocol {
 }
 
 protocol FeedNavigationDelegate {
-    func feedDidTapCell(with recipe: FeedRecipe)
+    func feedDidTapCell(with recipe: Recipe)
 }

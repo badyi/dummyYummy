@@ -14,7 +14,7 @@ final class FeedPresenter: NSObject {
     
     var navigationDelegate: FeedNavigationDelegate?
     
-    var recipes: [FeedRecipe]
+    var recipes: [Recipe]
     private let randomRecipesCount: Int = 100
     
     
@@ -41,7 +41,7 @@ extension FeedPresenter: FeedPresenterProtocol {
         loadRandomRecipes()
     }
     
-    func recipe(at index: IndexPath) -> FeedRecipe? {
+    func recipe(at index: IndexPath) -> Recipe? {
         if index.row < 0 || index.row >= recipes.count {
             return nil
         }
@@ -88,7 +88,7 @@ private extension FeedPresenter {
         networkService.loadRandomRecipes(randomRecipesCount, completion: { [weak self] result in
             switch result {
             case let .success(result):
-                self?.recipes = result.recipes.map { FeedRecipe(with: $0) }
+                self?.recipes = result.recipes.map { Recipe(with: $0) }
                 self?.recipesDidLoad()
             case let .failure(error):
                 print(error.localizedDescription)

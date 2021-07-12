@@ -9,7 +9,7 @@ import UIKit
 
 final class FeedViewController: UIViewController {
     
-    private lazy var collectionView: UICollectionView = {
+    lazy var collectionView: UICollectionView = {
         let cv = UICollectionViewBuilder()
             .backgroundColor(FeedConstants.VC.Design.backgroundColor)
             .delegate(self)

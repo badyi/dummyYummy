@@ -9,6 +9,8 @@ import UIKit
 
 protocol FeedSearchCoordinatorProtocol: Coordinator {
     func showFeedSearch()
+    func showRefinements(with refinements: SearchRefinements)
+    func showDetail(with recipe: Recipe)
 }
 
 final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
@@ -74,7 +76,7 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
         navigationController.pushViewController(refinementsViewController, animated: true)
     }
     
-    func showDetail(with recipe: FeedRecipe) {
+    func showDetail(with recipe: Recipe) {
         let detailViewController = DetailViewController()
         let networkService = DetailNetworkService()
         let presenter = DetailPresenter(with: detailViewController, networkService, recipe)
@@ -88,7 +90,7 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
 
 extension FeedSearchCoordinator: SearchNavigationDelegate {
     
-    func searchDidTapCell(with recipe: FeedRecipe) {
+    func searchDidTapCell(with recipe: Recipe) {
         showDetail(with: recipe)
     }
     
@@ -98,7 +100,7 @@ extension FeedSearchCoordinator: SearchNavigationDelegate {
 }
 
 extension FeedSearchCoordinator: FeedNavigationDelegate {
-    func feedDidTapCell(with recipe: FeedRecipe) {
+    func feedDidTapCell(with recipe: Recipe) {
         showDetail(with: recipe)
     }
 }

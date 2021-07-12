@@ -14,7 +14,7 @@ final class SearchPresenter: NSObject {
     
     var navigationDelegate: SearchNavigationDelegate?
     
-    var recipes: [FeedRecipe] {
+    var recipes: [Recipe] {
         didSet {
             reloadCollection()
         }
@@ -94,7 +94,7 @@ private extension SearchPresenter {
             switch result {
             case let .success(result):
                 self?.recipes = result.results.map {
-                    FeedRecipe(with: $0)
+                    Recipe(with: $0)
                 }
             case let .failure(error):
                 #warning("Fix to alert")
@@ -103,7 +103,7 @@ private extension SearchPresenter {
         }
     }
     
-    func loadImageIfNeeded(for recipe: FeedRecipe, at index: IndexPath) {
+    func loadImageIfNeeded(for recipe: Recipe, at index: IndexPath) {
         guard let imageURL = recipe.imageURL, recipe.imageData == nil else {
             return
         }

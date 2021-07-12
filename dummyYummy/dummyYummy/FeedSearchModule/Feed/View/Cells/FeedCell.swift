@@ -116,7 +116,7 @@ extension FeedCell {
         share.startShimmerAnimation()
     }
     
-    func configView(with recipe: FeedRecipe) {
+    func configView(with recipe: Recipe) {
         title.text = recipe.title
         
         if let score = recipe.healthScore, let time = recipe.readyInMinutes {
@@ -166,7 +166,6 @@ extension FeedCell {
 
 private extension FeedCell {
 
-    
     func setupImageViews() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),

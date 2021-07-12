@@ -122,7 +122,9 @@ final class TabCoordinator: NSObject, Coordinator {
         case .fridge:
             print("fridge")
         case .favorites:
-            print("fav")
+            let favoritesCoodrinator = FavoritesCoordinator(navController)
+            favoritesCoodrinator.start()
+            childCoordinators.append(favoritesCoodrinator)
         }
         
         return navController
@@ -145,6 +147,5 @@ final class TabCoordinator: NSObject, Coordinator {
 extension TabCoordinator: UITabBarControllerDelegate {
     func tabBarController(_ tabBarController: UITabBarController,
                           didSelect viewController: UIViewController) {
-        // Some implementation
     }
 }
