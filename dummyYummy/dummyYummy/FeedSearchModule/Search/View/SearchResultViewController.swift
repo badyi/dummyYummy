@@ -76,6 +76,10 @@ extension SearchResultViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         presenter.didEndDisplayCell(at: indexPath)
     }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        presenter.didSelectCell(at: indexPath)
+    }
 }
 
 extension SearchResultViewController: UICollectionViewDelegateFlowLayout {

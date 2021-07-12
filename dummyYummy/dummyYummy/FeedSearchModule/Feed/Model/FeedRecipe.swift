@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct FeedRecipe {
+final class FeedRecipe {
     let id: Int
     let title: String
     
@@ -43,11 +43,11 @@ struct FeedRecipe {
     var ingredients: [String]? = nil
     var instructions: [String]? = nil
     
-    var sourceUrl: String? = nil
+    var sourceURL: String? = nil
     
     var spoonacularSourceURL: String? = nil
 
-    init(with responseRecipe: FeedServiceRecipe) {
+    init(with responseRecipe: FeedRecipeInfoResponse) {
         id = responseRecipe.id
         title = responseRecipe.title
         
@@ -97,7 +97,7 @@ struct FeedRecipe {
         diets = responseRecipe.diets
         //occasions = responseRecipe.occasions
         
-        sourceUrl = responseRecipe.sourceUrl
+        sourceURL = responseRecipe.sourceUrl
         imageURL = responseRecipe.image
         spoonacularSourceURL = responseRecipe.spoonacularSourceURL
     }
@@ -106,5 +106,35 @@ struct FeedRecipe {
         id = searchResult.id
         title = searchResult.title
         imageURL = searchResult.image
+    }
+}
+
+extension FeedRecipe {
+    func configInfo(with responseRecipe: FeedRecipeInfoResponse) {
+        sourceURL = responseRecipe.sourceUrl
+        spoonacularSourceURL = responseRecipe.spoonacularSourceURL
+        
+        boolCharacteristics = [:]
+        boolCharacteristics?["Vegeterian"] = responseRecipe.vegetarian
+        boolCharacteristics?["Gluten free"] = responseRecipe.glutenFree
+        boolCharacteristics?["Vegan"] = responseRecipe.vegan
+        boolCharacteristics?["Dairy free"] = responseRecipe.dairyFree
+        boolCharacteristics?["Very healthy"] = responseRecipe.veryHealthy
+        boolCharacteristics?["Cheap"] = responseRecipe.cheap
+        boolCharacteristics?["Very popular"] = responseRecipe.veryPopular
+        boolCharacteristics?["Sustainable"] = responseRecipe.sustainable
+        boolCharacteristics?["Low fodmap"] = responseRecipe.lowFodmap
+        
+        ingredients = []
+        responseRecipe.extendedIngredients.forEach {
+            ingredients?.append($0.original)
+        }
+        
+        instructions = []
+        if responseRecipe.analyzedInstructions.count > 0 {
+            responseRecipe.analyzedInstructions[0].steps.forEach {
+                instructions?.append($0.step)
+            }
+        }
     }
 }

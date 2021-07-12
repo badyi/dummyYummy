@@ -11,6 +11,7 @@ protocol DetailViewProtocol: AnyObject {
     func setupView()
     func configNavigationBar()
     func reloadSection(_ section: Int)
+    func reloadCollection()
 }
 
 protocol DetailPresenterProtocol {
@@ -28,5 +29,7 @@ protocol DetailPresenterProtocol {
 }
 
 protocol DetailNetworkServiceProtocol {
-    func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> ())
+    func loadRecipeInfo(_ id: Int, completion: @escaping(OperationCompletion<FeedRecipeInfoResponse>) -> ())
+    func loadImage(_ url: String, completion: @escaping(OperationCompletion<Data>) -> ())
 }
+

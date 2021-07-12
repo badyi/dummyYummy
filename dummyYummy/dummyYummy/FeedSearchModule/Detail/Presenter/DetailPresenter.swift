@@ -58,7 +58,9 @@ extension DetailPresenter: DetailPresenterProtocol {
     }
     
     func viewDidLoad() {
+        loadImageIfNeeded()
         prepareCharacteristics()
+        prepareIngredientsAndInstructions()
         view?.setupView()
     }
     
@@ -161,9 +163,37 @@ extension DetailPresenter: UICollectionViewDataSource {
 }
 
 private extension DetailPresenter {
+    func loadImageIfNeeded() {
+        if recipe.imageData != nil {
+            return
+        }
+        guard let url = recipe.imageURL else {
+            return
+        }
+        networkService.loadImage(url, completion: { [weak self] result in
+            switch result {
+            case let .success(result):
+                self?.recipe.imageData = result
+                self?.imageDidLoad()
+            case let .failure(error):
+                print(error.localizedDescription)
+            }
+            
+        })
+//        networkService.loadImage(id, with: url, completion: { [weak self] result in
+//            switch result {
+//            case let .success(result):
+//                self?.setImageData(at: index, result)
+//                self?.imageDidLoad(at: index)
+//            case let .failure(error):
+//                print(error.localizedDescription)
+//            }
+//        })
+    }
+    
     func prepareCharacteristics() {
         guard let boolCharacteristics = recipe.boolCharacteristics else {
-            #warning("load")
+            loadRecipeInfo()
             return
         }
         
@@ -180,10 +210,36 @@ private extension DetailPresenter {
         }
     }
     
-    func prepareIngredients() {
-//        guard let ingredients = recipe.ingredients else {
-//            #warning("load")
-//            return
-//        }
+    func prepareIngredientsAndInstructions() {
+        if recipe.ingredients == nil || recipe.instructions == nil {
+            loadRecipeInfo()
+        }
+    }
+    
+    func loadRecipeInfo() {
+        networkService.loadRecipeInfo(recipe.id, completion: { [weak self] result in
+            switch result {
+            case .success(let result):
+                self?.recipe = FeedRecipe(with: result)
+                self?.recipeInfoDidLoad()
+            case .failure(let error):
+                #warning("alert")
+                print(error)
+            }
+        })
+    }
+    
+    func recipeInfoDidLoad() {
+        DispatchQueue.main.async { [weak self] in
+            self?.prepareCharacteristics()
+            self?.prepareIngredientsAndInstructions()
+            self?.view?.reloadCollection()
+        }
+    }
+    
+    func imageDidLoad() {
+        DispatchQueue.main.async { [weak self] in
+            self?.view?.reloadCollection()
+        }
     }
 }

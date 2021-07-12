@@ -36,6 +36,10 @@ final class DetailViewController: UIViewController {
 }
 
 extension DetailViewController: DetailViewProtocol {
+    func reloadCollection() {
+        collectionView.reloadData()
+    }
+    
     func reloadSection(_ section: Int) {
         collectionView.performBatchUpdates({
             collectionView.reloadSections(IndexSet(integer: section))

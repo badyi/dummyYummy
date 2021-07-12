@@ -6,10 +6,10 @@
 import Foundation
 
 struct FeedRecipeResponse: Codable {
-    let recipes: [FeedServiceRecipe]
+    let recipes: [FeedRecipeInfoResponse]
 }
 
-struct FeedServiceRecipe: Codable {
+struct FeedRecipeInfoResponse: Codable {
     let vegetarian, vegan, glutenFree, dairyFree: Bool
     let veryHealthy, cheap, veryPopular, sustainable: Bool
     let weightWatcherSmartPoints: Int
@@ -29,7 +29,7 @@ struct FeedServiceRecipe: Codable {
     let dishTypes: [String]
     let diets: [String]
     let occasions: [String]
-    let instructions: String
+    let instructions: String?
     let analyzedInstructions: [AnalyzedInstruction]
     let spoonacularSourceURL: String?
     let preparationMinutes: Int?
