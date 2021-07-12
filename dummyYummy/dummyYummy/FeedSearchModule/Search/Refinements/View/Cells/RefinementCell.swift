@@ -7,7 +7,7 @@
 
 import UIKit
 
-final class RefinementCell: BaseInputTableViewCell {
+final class RefinementCell: InputTableViewCell {
     static let id = "RefinementCell"
     var deleteTapped: ((IndexPath?) -> ())?
     var indexPath: IndexPath?

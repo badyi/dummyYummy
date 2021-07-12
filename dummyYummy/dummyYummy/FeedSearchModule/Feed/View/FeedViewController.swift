@@ -17,6 +17,7 @@ final class FeedViewController: UIViewController {
             .setInsets(FeedConstants.VC.Layout.collectionInsets)
             .build()
         cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
+        cv.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
         return cv
     }()
     
@@ -58,7 +59,6 @@ extension FeedViewController: FeedViewProtocol {
     
     func setupView() {
         title = "Browes recipes"
-        definesPresentationContext = true
         setupCollectionView()
     }
     
@@ -67,7 +67,17 @@ extension FeedViewController: FeedViewProtocol {
     }
     
     func reloadItems(at indexPaths: [IndexPath]) {
-        collectionView.reloadItems(at: indexPaths)
+        var reloadIndexes: [IndexPath] = []
+        let currentVisibleItems = collectionView.indexPathsForVisibleItems
+        indexPaths.forEach {
+            if currentVisibleItems.contains($0) {
+                reloadIndexes.append($0)
+            }
+        }
+
+        collectionView.performBatchUpdates({
+            collectionView.reloadItems(at: reloadIndexes)
+        }, completion: nil)
     }
 }
 
@@ -119,6 +129,14 @@ extension FeedViewController: UICollectionViewDelegate {
     }
 }
 
+extension FeedPresenter: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach {
+            willDisplayCell(at: $0)
+        }
+    }
+}
+
 // MARK: - UICollectionViewDelegateFlowLayout
 extension FeedViewController: UICollectionViewDelegateFlowLayout {
     
@@ -131,7 +149,7 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
             title = recipe.title
         }
         
-        let width = collectionView.frame.width - collectionView.contentInset.left - collectionView.contentInset.right
+        let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
         let height = FeedCell.heightForCell(with: title, width: width)
         
         return CGSize(width: width, height: height)

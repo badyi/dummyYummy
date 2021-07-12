@@ -14,12 +14,7 @@ final class FeedPresenter: NSObject {
     
     var navigationDelegate: FeedNavigationDelegate?
     
-    var recipes: [FeedRecipe] {
-        didSet {
-            recipesDidSet()
-        }
-    }
-    
+    var recipes: [FeedRecipe]
     private let randomRecipesCount: Int = 100
     
     
@@ -57,9 +52,7 @@ extension FeedPresenter: FeedPresenterProtocol {
         if index.row < 0 || index.row >= recipes.count {
             return 
         }
-        if recipes[index.row].imageData == nil {
-            loadImage(at: index)
-        }
+        loadImageIfNeeded(at: index)
     }
     
     func didEndDisplayingCell(at index: IndexPath) {
@@ -70,14 +63,16 @@ extension FeedPresenter: FeedPresenterProtocol {
     }
     
     func didSelectCellAt(_ indexPath: IndexPath) {
-        navigationDelegate?.feedDidTapCell()
+        guard let recipe = recipe(at: indexPath) else {
+            return
+        }
+        navigationDelegate?.feedDidTapCell(with: recipe)
     }
 }
 
 // MARK: - Working with service layer methods
 private extension FeedPresenter {
-    
-    func recipesDidSet() {
+    func recipesDidLoad() {
         DispatchQueue.main.async { [weak self] in
             self?.view?.reloadCollection()
         }
@@ -94,17 +89,20 @@ private extension FeedPresenter {
             switch result {
             case let .success(result):
                 self?.recipes = result.recipes.map { FeedRecipe(with: $0) }
+                self?.recipesDidLoad()
             case let .failure(error):
                 print(error.localizedDescription)
             }
         })
     }
     
-    func loadImage(at index: IndexPath) {
+    func loadImageIfNeeded(at index: IndexPath) {
+        if recipes[index.row].imageData != nil {
+            return
+        }
         guard let url = recipes[index.row].imageURL else {
             return
         }
-        
         networkService.loadImage(at: index, with: url, completion: { [weak self] result in
             switch result {
             case let .success(result):
@@ -135,7 +133,6 @@ extension FeedPresenter: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.id, for: indexPath) as! FeedCell
         
         cell.startAnimation()
@@ -144,5 +141,11 @@ extension FeedPresenter: UICollectionViewDataSource {
             cell.stopAnimation()
         }
         return cell
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, prefetchingForItemsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach {
+            willDisplayCell(at: $0)
+        }
     }
 }

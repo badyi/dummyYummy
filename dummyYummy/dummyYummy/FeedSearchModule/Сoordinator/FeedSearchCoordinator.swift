@@ -74,15 +74,22 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
         navigationController.pushViewController(refinementsViewController, animated: true)
     }
     
-    func showDetail() {
+    func showDetail(with recipe: FeedRecipe) {
+        let detailViewController = DetailViewController()
+        let networkService = DetailNetworkService()
+        let presenter = DetailPresenter(with: detailViewController, networkService, recipe)
         
+        detailViewController.presenter = presenter
+        
+        detailViewController.definesPresentationContext = true
+        navigationController.pushViewController(detailViewController, animated: true)
     }
 }
 
 extension FeedSearchCoordinator: SearchNavigationDelegate {
-
-    func searchDidTapCell() {
-        #warning("didtap")
+    
+    func searchDidTapCell(with recipe: FeedRecipe) {
+        showDetail(with: recipe)
     }
     
     func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements) {
@@ -91,8 +98,7 @@ extension FeedSearchCoordinator: SearchNavigationDelegate {
 }
 
 extension FeedSearchCoordinator: FeedNavigationDelegate {
-    
-    func feedDidTapCell() {
-        showDetail()
+    func feedDidTapCell(with recipe: FeedRecipe) {
+        showDetail(with: recipe)
     }
 }

@@ -51,7 +51,11 @@ extension SearchPresenter: SearchPresenterProtocol {
     }
     
     func didEndDisplayCell(at index: IndexPath) {
-        
+        #warning("code here")
+    }
+    
+    func didSelectCell(at index: IndexPath) {
+        navigationDelegate?.searchDidTapCell(with: recipes[index.row])
     }
     
     func updateRefinements(_ refinements: SearchRefinements) {

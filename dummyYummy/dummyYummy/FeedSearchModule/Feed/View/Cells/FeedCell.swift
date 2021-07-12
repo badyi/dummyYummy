@@ -111,7 +111,7 @@ extension FeedCell {
         title.startShimmerAnimation()
         healthScore.startShimmerAnimation()
         minutes.startShimmerAnimation()
-        
+
         favorite.startShimmerAnimation()
         share.startShimmerAnimation()
     }
@@ -131,9 +131,9 @@ extension FeedCell {
             return
         }
         
+        
         guard let imageData = recipe.imageData else { return }
         guard let image = UIImage(data: imageData) else { return }
-        
         imageView.image = image
         imageView.removeShimmerAnimation()
     }

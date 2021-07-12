@@ -24,6 +24,7 @@ protocol SearchPresenterProtocol: AnyObject {
     func viewWillAppear()
     func willDisplayCell(at index: IndexPath)
     func didEndDisplayCell(at index: IndexPath)
+    func didSelectCell(at index: IndexPath)
     func updateRefinements(_ refinements: SearchRefinements)
     func resultCount() -> Int
     func updateSearchResult(_ query: String)
@@ -37,5 +38,5 @@ protocol SearchNetworkServiceProtocol {
 
 protocol SearchNavigationDelegate {
     func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements)
-    func searchDidTapCell()
+    func searchDidTapCell(with recipe: FeedRecipe)
 }
