@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="18154" systemVersion="20F71" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="MORecipe" representedClassName="MORecipe" syncable="YES">
+        <attribute name="boolCharacteristics" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Dictionary&lt;String, Bool&gt;"/>
+        <attribute name="cuisines" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;String&gt;"/>
+        <attribute name="diets" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;String&gt;"/>
+        <attribute name="dishTypes" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;String&gt;"/>
+        <attribute name="healthScore" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="id" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="imagePath" optional="YES" attributeType="URI"/>
+        <attribute name="imageURL" optional="YES" attributeType="String"/>
+        <attribute name="ingredients" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;Srtring&gt;"/>
+        <attribute name="instructions" optional="YES" attributeType="Transformable" valueTransformerName="NSSecureUnarchiveFromData" customClassName="Array&lt;String&gt;"/>
+        <attribute name="pricePerServing" optional="YES" attributeType="Double" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="readyInMinutes" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="servings" optional="YES" attributeType="Integer 64" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="sourceURL" optional="YES" attributeType="String"/>
+        <attribute name="spoonacularSourceURL" optional="YES" attributeType="String"/>
+        <attribute name="title" attributeType="String"/>
+    </entity>
+    <elements>
+        <element name="MORecipe" positionX="-63" positionY="-9" width="128" height="269"/>
+    </elements>
+</model>

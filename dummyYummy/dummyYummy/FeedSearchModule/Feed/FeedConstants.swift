@@ -61,6 +61,7 @@ struct FeedConstants {
             static let defaultCellImage = UIImage(named: "defaultFoodImage") ?? UIImage()
             static let shareImage = UIImage(systemName: "square.and.arrow.up") ?? UIImage()
             static let favoriteImage = UIImage(systemName: "suit.heart") ?? UIImage()
+            static let favoriteImageFill = UIImage(systemName: "suit.heart.fill") ?? UIImage()
         }
         
         struct Design {

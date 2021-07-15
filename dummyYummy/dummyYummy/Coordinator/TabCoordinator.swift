@@ -66,7 +66,7 @@ protocol TabCoordinatorProtocol: Coordinator {
 }
 
 final class TabCoordinator: NSObject, Coordinator {
-    weak var finishDelegate: CoordinatorFinishDelegate?
+   // weak var finishDelegate: CoordinatorFinishDelegate?
         
     var childCoordinators: [Coordinator] = []
 

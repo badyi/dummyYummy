@@ -20,12 +20,12 @@ final class SearchResultViewController: UIViewController {
         return cv
     }()
     
-    var presenter: SearchPresenterProtocol!
+    var presenter: SearchPresenterProtocol?
     
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewDidLoad()
+        presenter?.viewDidLoad()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -70,15 +70,15 @@ extension SearchResultViewController {
 
 extension SearchResultViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        presenter.willDisplayCell(at: indexPath)
+        presenter?.willDisplayCell(at: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        presenter.didEndDisplayCell(at: indexPath)
+        presenter?.didEndDisplayCell(at: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter.didSelectCell(at: indexPath)
+        presenter?.didSelectCell(at: indexPath)
     }
 }
 
@@ -111,12 +111,12 @@ extension SearchResultViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else {
             return
         }
-        presenter.updateSearchResult(text)
+        presenter?.updateSearchResult(text)
     }
 }
 
 extension SearchResultViewController: UISearchBarDelegate {
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        presenter.searchRefinementsTapped()
+        presenter?.searchRefinementsTapped()
     }
 }

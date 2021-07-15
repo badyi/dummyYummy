@@ -1,14 +1,14 @@
 //
-//  FeedCell.swift
+//  FavoriteCell.swift
 //  dummyYummy
 //
-//  Created by badyi on 12.06.2021.
+//  Created by badyi on 15.07.2021.
 //
 
 import UIKit
 
-final class FeedCell: RecipeBigCell {
-    static let id = "FeedCell"
+final class FavoriteCell: RecipeBigCell {
+    static let id = "FavoriteCell"
 
     // MARK: - View lifecycle methods
     override func prepareForReuse() {
@@ -17,16 +17,11 @@ final class FeedCell: RecipeBigCell {
         titleLabel.text = ""
         minutesLabel.text = ""
         healthScoreLabel.text = ""
-        favoriteButton.tintColor = FeedConstants.Cell.Design.buttonTintColor
     }
     
     override func setupView() {
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
-        
-        /// need to be user not interactive to avoid saving to core data without image
-        /// it will be not interactive until cell is fully configured
-        favoriteButton.isUserInteractionEnabled = false
-        
+            
         imageView.backgroundColor = FeedConstants.Cell.Design.backgroundColor
 
         titleLabel.font = FeedConstants.Cell.Font.titleFont
@@ -45,9 +40,9 @@ final class FeedCell: RecipeBigCell {
         shareButton.setImage(FeedConstants.Cell.Image.shareImage, for: .normal)
         
         favoriteButton.backgroundColor = FeedConstants.Cell.Design.backgroundColor
-        favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImage, for: .normal)
-        favoriteButton.tintColor = FeedConstants.Cell.Design.buttonTintColor
-  
+        favoriteButton.tintColor = .red
+        favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImageFill, for: .normal)
+        
         shadowColor = FeedConstants.Cell.Design.shadowColor
         cornerRadius = FeedConstants.Cell.Layout.cornerRadius
         shadowRadius = FeedConstants.Cell.Layout.shadowRadius
@@ -63,7 +58,6 @@ final class FeedCell: RecipeBigCell {
         contentView.addSubview(minutesLabel)
         contentView.addSubview(favoriteButton)
         contentView.addSubview(shareButton)
-        
         setConstraints()
         setupImageViews()
         setupLabels()
@@ -97,8 +91,7 @@ final class FeedCell: RecipeBigCell {
     }
 }
 
-// MARK: - View setup methods
-extension FeedCell {
+extension FavoriteCell {
     func configView(with recipe: Recipe) {
         titleLabel.text = recipe.title
         
@@ -106,18 +99,11 @@ extension FeedCell {
             healthScoreLabel.text = "Health score: \(score)"
             minutesLabel.text = "Cooking minutes: \(time)"
         }
-    
-        if recipe.isFavorite {
-            favoriteButton.tintColor = .red
-            favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImageFill, for: .normal)
-        } else {
-            favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImage, for: .normal)
-        }
+        
         
         /// set default image if recipe dont have image url and remove shimmer animation
         if recipe.imageURL == nil {
             imageView.image = FeedConstants.Cell.Image.defaultCellImage
-            favoriteButton.isUserInteractionEnabled = true
             imageView.removeShimmerAnimation()
             return
         }
@@ -125,13 +111,12 @@ extension FeedCell {
         guard let imageData = recipe.imageData else { return }
         guard let image = UIImage(data: imageData) else { return }
         imageView.image = image
-        favoriteButton.isUserInteractionEnabled = true
         imageView.removeShimmerAnimation()
     }
 }
 
 // MARK: - Setup UI elements
-private extension FeedCell {
+private extension FavoriteCell {
     func setConstraints() {
         imageViewConstraints = [
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
@@ -177,7 +162,7 @@ private extension FeedCell {
     }
 }
 
-private extension FeedCell {
+private extension FavoriteCell {
     @objc func favoriteButtonTapped() {
         favoriteButtonTapHandle?()
     }

@@ -21,22 +21,22 @@ final class FeedViewController: UIViewController {
         return cv
     }()
     
-    var presenter: FeedPresenterProtocol!
+    var presenter: FeedPresenterProtocol?
     
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewDidLoad()
+        presenter?.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.viewWillAppear()
+        presenter?.viewWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        presenter.viewWillDisappear()
+        presenter?.viewWillDisappear()
     }
 }
 
@@ -117,15 +117,15 @@ extension FeedViewController {
 extension FeedViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        presenter.willDisplayCell(at: indexPath)
+        presenter?.willDisplayCell(at: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
-        presenter.didEndDisplayingCell(at: indexPath)
+        presenter?.didEndDisplayingCell(at: indexPath)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter.didSelectCellAt(indexPath)
+        presenter?.didSelectCell(at: indexPath)
     }
 }
 
@@ -145,8 +145,8 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
         /// The calculation is mainly aimed at calculating the size of the title in the cell
         /// based on this, we calculate the entire size of cell
         var title = ""
-        if let recipe = presenter.recipe(at: indexPath) {
-            title = recipe.title
+        if let recipeTitle = presenter?.recipeTitle(at: indexPath) {
+            title = recipeTitle
         }
         
         let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right

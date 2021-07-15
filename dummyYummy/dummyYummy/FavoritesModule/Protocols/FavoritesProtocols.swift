@@ -8,14 +8,19 @@
 import Foundation
 
 protocol FavoritesViewProtocol: AnyObject {
+    func setupView()
+    func reloadCollection()
 }
 
 protocol FavoritesPresenterProtocol {
+    init(with view: FavoritesViewProtocol, _ dataBaseService: DataBaseServiceProtocol, _ fileSystemService: FileSystemServiceProtocol)
+    
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
-    func willDisplayCell(at index: IndexPath)
-    func didEndDisplayingCell(at index: IndexPath)
-    func recipe(at index: IndexPath) -> Recipe?
-    func didSelectCellAt(_ indexPath: IndexPath)
+    func recipeTitle(at index: IndexPath) -> String?
+    func willDisplayCell(at indexPath: IndexPath)
+    func didEndDisplayingCell(at indexPath: IndexPath)
+    func didSelectCell(at indexPath: IndexPath)
 }
+

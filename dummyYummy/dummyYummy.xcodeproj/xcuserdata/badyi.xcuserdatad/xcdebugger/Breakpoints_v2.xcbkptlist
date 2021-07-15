@@ -1716,8 +1716,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/View/Cells/FeedCell.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "72"
-            endingLineNumber = "72"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
             landmarkName = "setupView()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1860,9 +1860,9 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "66"
-            endingLineNumber = "66"
-            landmarkName = "didSelectCellAt(_:)"
+            startingLineNumber = "69"
+            endingLineNumber = "69"
+            landmarkName = "didSelectCell(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>
@@ -1940,8 +1940,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "140"
-            endingLineNumber = "140"
+            startingLineNumber = "152"
+            endingLineNumber = "152"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1956,8 +1956,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "137"
-            endingLineNumber = "137"
+            startingLineNumber = "147"
+            endingLineNumber = "147"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1972,8 +1972,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "32"
-            endingLineNumber = "32"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
             landmarkName = "viewWillAppear()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1988,8 +1988,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "36"
-            endingLineNumber = "36"
+            startingLineNumber = "39"
+            endingLineNumber = "39"
             landmarkName = "viewWillDisappear()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2020,8 +2020,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "104"
-            endingLineNumber = "104"
+            startingLineNumber = "107"
+            endingLineNumber = "107"
             landmarkName = "loadImageIfNeeded(at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2036,8 +2036,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "92"
-            endingLineNumber = "92"
+            startingLineNumber = "95"
+            endingLineNumber = "95"
             landmarkName = "loadRandomRecipes()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2052,8 +2052,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "77"
-            endingLineNumber = "77"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "recipesDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -2068,8 +2068,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "139"
-            endingLineNumber = "139"
+            startingLineNumber = "149"
+            endingLineNumber = "149"
             landmarkName = "collectionView(_:cellForItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -2183,6 +2183,278 @@
             startingLineNumber = "127"
             endingLineNumber = "127"
             landmarkName = "getTabController(_:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "C8E1D9A5-B97C-4C35-A35C-9317ECC3016B"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FavoritesModule/Coordinator/FavoritesCoordinator.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "38"
+            endingLineNumber = "38"
+            landmarkName = "showFavorite()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "513EF662-C6F6-4120-85B1-A3538A645FD7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/CoreData/DataBaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "update(recipes:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B9E0B1EA-8B74-4339-96DB-89BF46111C00"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/CoreData/CoreDataStack.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "34"
+            endingLineNumber = "34"
+            landmarkName = "init()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "B0004AB8-A249-4306-A6DB-22EF74BCD2F7"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/CoreData/DataBaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "update(recipes:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "213ACEB2-0E08-45B6-8875-DA6C11891ED3"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/CoreData/DataBaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "allRecipes()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "213ACEB2-0E08-45B6-8875-DA6C11891ED3 - 5cc24065f357a783"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 () -&gt; () in dummyYummy.DataBaseService.allRecipes() -&gt; Swift.Array&lt;dummyYummy.RecipeDTO&gt;"
+                  moduleName = "dummyYummy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/badyi/dummyYummy/dummyYummy/dummyYummy/CoreData/DataBaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "284">
+               </Location>
+               <Location
+                  uuid = "213ACEB2-0E08-45B6-8875-DA6C11891ED3 - 477ac85d6440d393"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (dummyYummy.MORecipe) -&gt; dummyYummy.RecipeDTO in closure #1 () -&gt; () in dummyYummy.DataBaseService.allRecipes() -&gt; Swift.Array&lt;dummyYummy.RecipeDTO&gt;"
+                  moduleName = "dummyYummy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/badyi/dummyYummy/dummyYummy/dummyYummy/CoreData/DataBaseService.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "107"
+                  endingLineNumber = "107"
+                  offsetFromSymbolStart = "28">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "F6645B52-CAD1-48DF-AE5C-8930987D8535"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/CoreData/DataBaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "82"
+            endingLineNumber = "82"
+            landmarkName = "allRecipes()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BFDD7D39-4A9A-4C86-A372-5B4315D2945D"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FavoritesModule/Presenter/FavoritesPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "36"
+            endingLineNumber = "36"
+            landmarkName = "viewWillAppear()"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "BBB194E7-EC07-4DDE-949A-D4A0F87F4592"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FavoritesModule/Presenter/FavoritesPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "35"
+            endingLineNumber = "35"
+            landmarkName = "viewWillAppear()"
+            landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "BBB194E7-EC07-4DDE-949A-D4A0F87F4592 - 3ccfd8d85bcc997d"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "dummyYummy.FavoritesPresenter.viewWillAppear() -&gt; ()"
+                  moduleName = "dummyYummy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/badyi/dummyYummy/dummyYummy/dummyYummy/FavoritesModule/Presenter/FavoritesPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "40">
+               </Location>
+               <Location
+                  uuid = "BBB194E7-EC07-4DDE-949A-D4A0F87F4592 - aa7cd035f05451cf"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (dummyYummy.RecipeDTO) -&gt; dummyYummy.Recipe in dummyYummy.FavoritesPresenter.viewWillAppear() -&gt; ()"
+                  moduleName = "dummyYummy"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/badyi/dummyYummy/dummyYummy/dummyYummy/FavoritesModule/Presenter/FavoritesPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "32"
+                  endingLineNumber = "32"
+                  offsetFromSymbolStart = "32">
+               </Location>
+            </Locations>
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "EA2DE90F-E205-427C-BAC2-7B396AC6A42E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/CoreData/DataBaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "51"
+            endingLineNumber = "51"
+            landmarkName = "delete(recipes:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "2538E001-257C-4AE7-A14C-629883718832"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/CoreData/DataBaseService.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "90"
+            endingLineNumber = "90"
+            landmarkName = "fetchRequest(for:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "6E2C610D-576C-4C60-939E-AD3BB7BBB99E"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FavoritesModule/Presenter/FavoritesPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
+            landmarkName = "collectionView(_:cellForItemAt:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "D4E5E589-E60F-43C5-AF2A-D1C0AE4D1659"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FavoritesModule/Presenter/FavoritesPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
+            landmarkName = "handleFavoriteTap(at:)"
+            landmarkType = "7">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            uuid = "09105047-5878-42B5-9AFE-1DF6A7DA5730"
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "dummyYummy/FavoritesModule/Presenter/FavoritesPresenter.swift"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "79"
+            endingLineNumber = "79"
+            landmarkName = "handleFavoriteTap(at:)"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

@@ -11,16 +11,19 @@ final class FeedPresenter: NSObject {
     
     weak var view: FeedViewProtocol?
     private var networkService: FeedServiceProtocol
+    private var dataBaseService: DataBaseServiceProtocol
+    private var fileSystemService: FileSystemServiceProtocol
     
     var navigationDelegate: FeedNavigationDelegate?
     
     var recipes: [Recipe]
     private let randomRecipesCount: Int = 100
     
-    
-    init(with view: FeedViewProtocol, _ service: FeedServiceProtocol) {
+    init(with view: FeedViewProtocol, _ networkService: FeedServiceProtocol, _ dataBaseService: DataBaseServiceProtocol, _ fileSystemService: FileSystemServiceProtocol) {
         self.view = view
-        self.networkService = service
+        self.networkService = networkService
+        self.dataBaseService = dataBaseService
+        self.fileSystemService = fileSystemService
         recipes = []
     }
 }
@@ -41,11 +44,11 @@ extension FeedPresenter: FeedPresenterProtocol {
         loadRandomRecipes()
     }
     
-    func recipe(at index: IndexPath) -> Recipe? {
+    func recipeTitle(at index: IndexPath) -> String? {
         if index.row < 0 || index.row >= recipes.count {
             return nil
         }
-        return recipes[index.row]
+        return recipes[index.row].title
     }
     
     func willDisplayCell(at index: IndexPath) {
@@ -62,7 +65,7 @@ extension FeedPresenter: FeedPresenterProtocol {
         self.cancelLoad(at: index)
     }
     
-    func didSelectCellAt(_ indexPath: IndexPath) {
+    func didSelectCell(at indexPath: IndexPath) {
         guard let recipe = recipe(at: indexPath) else {
             return
         }
@@ -121,6 +124,13 @@ private extension FeedPresenter {
     func setImageData(at index: IndexPath, _ data: Data) {
         recipes[index.row].imageData = data
     }
+    
+    func recipe(at index: IndexPath) -> Recipe? {
+        if index.row < 0 || index.row >= recipes.count {
+            return nil
+        }
+        return recipes[index.row]
+    }
 }
 
 // MARK: - UICollectionViewDataSource
@@ -137,8 +147,14 @@ extension FeedPresenter: UICollectionViewDataSource {
         
         cell.startAnimation()
         if let recipe = recipe(at: indexPath) {
+            recipe.isFavorite = checkFavoriteStatus(at: indexPath)
+            
             cell.configView(with: recipe)
             cell.stopAnimation()
+            cell.favoriteButtonTapHandle = { [weak self] in
+                self?.handleFavoriteTap(at: indexPath)
+                self?.view?.reloadItems(at: [indexPath])
+            }
         }
         return cell
     }
@@ -147,5 +163,38 @@ extension FeedPresenter: UICollectionViewDataSource {
         indexPaths.forEach {
             willDisplayCell(at: $0)
         }
+    }
+}
+
+private extension FeedPresenter {
+    func handleFavoriteTap(at indexPath: IndexPath) {
+        guard let recipe = recipe(at: indexPath) else {
+            return
+        }
+        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
+        
+        if dataBaseService.recipes(with: predicate).count > 0 {
+            dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
+            if recipe.imageData != nil {
+                fileSystemService.delete(forKey: "\(recipe.id)")
+            }
+            return
+        }
+        
+        if let data = recipe.imageData {
+            fileSystemService.store(imageData: data, forKey: "\(recipe.id)")
+        }
+        dataBaseService.update(recipes: [RecipeDTO(with: recipe)])
+    }
+    
+    func checkFavoriteStatus(at indexPath: IndexPath) -> Bool {
+        guard let recipe = recipe(at: indexPath) else {
+            return false
+        }
+        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
+        if dataBaseService.recipes(with: predicate).count > 0 {
+            return true
+        }
+        return false
     }
 }

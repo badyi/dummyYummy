@@ -14,7 +14,7 @@ protocol FeedSearchCoordinatorProtocol: Coordinator {
 }
 
 final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
-    var finishDelegate: CoordinatorFinishDelegate?
+    //var finishDelegate: CoordinatorFinishDelegate?
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .feedSearch }
@@ -29,8 +29,11 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
     
     func showFeedSearch() {
         let feedNetworkService = FeedNetworkService()
+        let dataBaseService = DataBaseService(coreDataStack: CoreDataStack.shared)
+        let fileSystemService = FileSystemService()
+        
         let feedViewController = FeedViewController()
-        let feedPresenter = FeedPresenter(with: feedViewController, feedNetworkService)
+        let feedPresenter = FeedPresenter(with: feedViewController, feedNetworkService, dataBaseService, fileSystemService)
         
         feedViewController.presenter = feedPresenter
         feedPresenter.view = feedViewController
@@ -71,7 +74,7 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
             guard let searchReslutVC = (self?.navigationController.visibleViewController as? FeedViewController)?.navigationItem.searchController?.searchResultsController as? SearchResultViewController else {
                 return
             }
-            searchReslutVC.presenter.updateRefinements(refinements)
+            searchReslutVC.presenter?.updateRefinements(refinements)
         }
         navigationController.pushViewController(refinementsViewController, animated: true)
     }
