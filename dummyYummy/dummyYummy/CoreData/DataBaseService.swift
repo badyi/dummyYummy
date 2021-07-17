@@ -9,19 +9,25 @@ import Foundation
 import CoreData
 
 protocol DataBaseServiceProtocol {
+    init(coreDataStack: CoreDataStackProtocol)
+    
+    /// Update recipe in store, if it doesn't exist it will be stored
+    /// - Parameter recipes: recipeDTOs
     func update(recipes: [RecipeDTO])
     
+    /// Delete from store
+    /// - Parameter recipes: recipeDTOs
     func delete(recipes: [RecipeDTO]?)
-    
+    func deleteAll()
     func recipes(with predicate: NSPredicate) -> [RecipeDTO]
     func allRecipes() -> [RecipeDTO]
 }
 
 final class DataBaseService {
     
-    private let stack: CoreDataStack
+    private let stack: CoreDataStackProtocol
     
-    init(coreDataStack: CoreDataStack) {
+    init(coreDataStack: CoreDataStackProtocol) {
         stack = coreDataStack
     }
 }
@@ -50,6 +56,18 @@ extension DataBaseService: DataBaseServiceProtocol {
                 if let recipe = try? self.fetchRequest(for: $0).execute().first {
                     context.delete(recipe)
                 }
+            }
+            stack.saveContext()
+        }
+    }
+    
+    func deleteAll() {
+        let context = stack.backgroundContext
+        let fetchRequest = NSFetchRequest<MORecipe>(entityName: stack.entityName)
+        context.performAndWait {
+            let recipes = try? fetchRequest.execute()
+            recipes?.forEach {
+                context.delete($0)
             }
             stack.saveContext()
         }
@@ -92,7 +110,6 @@ private extension DataBaseService {
 }
 
 fileprivate extension RecipeDTO {
-
     init(with MORecipe: MORecipe) {
         id = Int(MORecipe.id)
         boolCharacteristics = MORecipe.boolCharacteristics
@@ -132,19 +149,6 @@ fileprivate extension MORecipe {
     
     func configNew(with recipeDTO: RecipeDTO) {
         id = Int64(recipeDTO.id)
-        boolCharacteristics = recipeDTO.boolCharacteristics
-        cuisines = recipeDTO.cuisines
-        diets = recipeDTO.diets
-        dishTypes = recipeDTO.dishTypes
-        healthScore = Int64(recipeDTO.healthScore ?? -1)
-        title = recipeDTO.title
-        imageURL = recipeDTO.imageURL
-        pricePerServing = recipeDTO.pricePerServing ?? -1
-        readyInMinutes = Int64(recipeDTO.readyInMinutes ?? -1)
-        servings = Int64(recipeDTO.servings ?? -1)
-        ingredients = recipeDTO.ingredients
-        instructions = recipeDTO.instructions
-        sourceURL = recipeDTO.sourceURL
-        spoonacularSourceURL = recipeDTO.spoonacularSourceURL
+        update(with: recipeDTO)
     }
 }

@@ -273,8 +273,8 @@ private extension DetailHeader {
         
         NSLayoutConstraint.activate([
             share.topAnchor.constraint(equalTo: favorite.topAnchor),
-            share.widthAnchor.constraint(equalToConstant: FeedConstants.Cell.Layout.buttonWidth),
-            share.heightAnchor.constraint(equalTo: share.widthAnchor),
+            share.widthAnchor.constraint(equalTo: share.widthAnchor),
+            share.heightAnchor.constraint(equalToConstant: DetailConstants.Header.Layout.buttonHeight),
             share.trailingAnchor.constraint(equalTo: favorite.leadingAnchor, constant: -DetailConstants.Header.Layout.spaceBetweenButtons)
         ])
     }

@@ -7,19 +7,7 @@
 
 import UIKit
 
-final class FavoritesViewController: UIViewController {
-    
-    lazy var collectionView: UICollectionView = {
-        let cv = UICollectionViewBuilder()
-            .backgroundColor(FeedConstants.VC.Design.backgroundColor)
-            .delegate(self)
-            .dataSource(presenter as? UICollectionViewDataSource)
-            .setInsets(FeedConstants.VC.Layout.collectionInsets)
-            .build()
-        cv.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.id)
-        //cv.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
-        return cv
-    }()
+final class FavoritesViewController: RecipesViewController {
     
     var presenter: FavoritesPresenterProtocol?
     
@@ -41,26 +29,17 @@ final class FavoritesViewController: UIViewController {
 }
 
 extension FavoritesViewController: FavoritesViewProtocol {
-    func reloadCollection() {
-        collectionView.reloadData()
-    }
-    
     func setupView() {
+        title = "Favorite recipes"
+        collectionView.delegate = self
+        collectionView.dataSource = presenter as? UICollectionViewDataSource
+        collectionView.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
+        collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.id)
+        
         setupCollectionView()
     }
 }
 
-private extension FavoritesViewController {
-    func setupCollectionView() {
-        view.addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-    }
-}
 
 extension FavoritesViewController: UICollectionViewDelegate {
     
@@ -79,7 +58,6 @@ extension FavoritesViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDelegateFlowLayout
 extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         /// Calculating cell size
         /// The calculation is mainly aimed at calculating the size of the title in the cell

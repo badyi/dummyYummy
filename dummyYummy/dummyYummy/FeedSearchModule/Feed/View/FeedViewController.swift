@@ -7,20 +7,20 @@
 
 import UIKit
 
-final class FeedViewController: UIViewController {
+final class FeedViewController: RecipesViewController {
     
-    lazy var collectionView: UICollectionView = {
-        let cv = UICollectionViewBuilder()
-            .backgroundColor(FeedConstants.VC.Design.backgroundColor)
-            .delegate(self)
-            .dataSource(presenter as? UICollectionViewDataSource)
-            .setInsets(FeedConstants.VC.Layout.collectionInsets)
-            .build()
-        cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
-        cv.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
-        return cv
-    }()
-    
+//    lazy var collectionView: UICollectionView = {
+//        let cv = UICollectionViewBuilder()
+//            .backgroundColor(FeedConstants.VC.Design.backgroundColor)
+//            .delegate(self)
+//            .dataSource(presenter as? UICollectionViewDataSource)
+//            .setInsets(FeedConstants.VC.Layout.collectionInsets)
+//            .build()
+//        cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
+//        cv.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
+//        return cv
+//    }()
+//    
     var presenter: FeedPresenterProtocol?
     
     // MARK: - View lifecycle methods
@@ -42,75 +42,22 @@ final class FeedViewController: UIViewController {
 
 // MARK: - FeedViewProtocol
 extension FeedViewController: FeedViewProtocol {
-    
-    func reloadVisibleCells() {
-        /// if we don't use perform batch, large title is hidden after reloading visible items
-        collectionView.performBatchUpdates({
-            collectionView.reloadItems(at: collectionView.indexPathsForVisibleItems)
-        }, completion: nil)
-    }
-    
-    func stopVisibleCellsAnimation() {
-        collectionView.visibleCells.forEach {
-            ($0 as? FeedCell)?.stopAnimation()
-            ($0 as? FeedCell)?.stopImageViewAnimation()
-        }
-    }
-    
+
     func setupView() {
         title = "Browes recipes"
+        collectionView.delegate = self
+        collectionView.dataSource = presenter as? UICollectionViewDataSource
+        collectionView.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
+        collectionView.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
+        
         setupCollectionView()
-    }
-    
-    func reloadCollection() {
-        collectionView.reloadData()
-    }
-    
-    func reloadItems(at indexPaths: [IndexPath]) {
-        var reloadIndexes: [IndexPath] = []
-        let currentVisibleItems = collectionView.indexPathsForVisibleItems
-        indexPaths.forEach {
-            if currentVisibleItems.contains($0) {
-                reloadIndexes.append($0)
-            }
-        }
-
-        collectionView.performBatchUpdates({
-            collectionView.reloadItems(at: reloadIndexes)
-        }, completion: nil)
     }
 }
 
 extension FeedViewController {
     // MARK: - View setup methods
-    private func setupCollectionView() {
-        view.addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
-    }
-    
-    func configNavigation() {
-        let textAttributes = [NSAttributedString.Key.foregroundColor: FeedConstants.VC.Design.navigationTextColor]
-        navigationController?.navigationBar.titleTextAttributes = textAttributes
-        navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
-        navigationController?.navigationBar.backgroundColor = FeedConstants.VC.Design.navBarBackgroundColor
 
-        navigationController?.navigationBar.barTintColor = FeedConstants.VC.Design.navBarBarTintColor
-        navigationController?.navigationBar.tintColor = FeedConstants.VC.Design.navBarTintColor
-        navigationController?.navigationBar.prefersLargeTitles = true
 
-        /// need nav bar back view image to avoid some ios bag with search result controller frame on search bar tap
-        navigationController?.navigationBar.setBackgroundImage(FeedConstants.VC.Image.navBarBackground, for: .default)
-        navigationController?.navigationBar.shadowImage = FeedConstants.VC.Image.navBarShadowImage
-        navigationController?.view.backgroundColor = FeedConstants.VC.Design.navBarBarTintColor
-
-        navigationItem.hidesSearchBarWhenScrolling = false
-        navigationItem.largeTitleDisplayMode = .always
-    }
 }
 
 // MARK: - UICollectionViewDelegate

@@ -7,13 +7,13 @@
 
 import Foundation
 
-protocol FeedViewProtocol: AnyObject {
+protocol FeedViewProtocol: RecipesViewProtocol {
     
     /// Setup and config all subviews on view controleller
     func setupView()
     
     /// Config view of navigation bar
-    func configNavigation()
+    //func configNavigation()
     
     /// Reload collection view
     func reloadCollection()

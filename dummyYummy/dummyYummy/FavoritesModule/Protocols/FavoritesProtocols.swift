@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FavoritesViewProtocol: AnyObject {
+protocol FavoritesViewProtocol: AnyObject, RecipesViewProtocol {
     func setupView()
     func reloadCollection()
 }
@@ -24,3 +24,6 @@ protocol FavoritesPresenterProtocol {
     func didSelectCell(at indexPath: IndexPath)
 }
 
+//protocol FavoritesNavigationDelegate {
+//    
+//}

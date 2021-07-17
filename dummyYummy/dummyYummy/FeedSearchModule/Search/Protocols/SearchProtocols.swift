@@ -36,7 +36,7 @@ protocol SearchNetworkServiceProtocol {
     func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> ())
 }
 
-protocol SearchNavigationDelegate {
+protocol SearchNavigationDelegate: RecipesNavigationDelegate {
     func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements)
-    func searchDidTapCell(with recipe: Recipe)
+    //func searchDidTapCell(with recipe: Recipe)
 }

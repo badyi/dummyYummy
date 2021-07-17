@@ -102,8 +102,8 @@ extension FeedSearchCoordinator: SearchNavigationDelegate {
     }
 }
 
-extension FeedSearchCoordinator: FeedNavigationDelegate {
-    func feedDidTapCell(with recipe: Recipe) {
+extension FeedSearchCoordinator: RecipesNavigationDelegate {
+    func didTapCell(with recipe: Recipe) {
         showDetail(with: recipe)
     }
 }

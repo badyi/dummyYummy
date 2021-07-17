@@ -14,7 +14,7 @@ final class FeedPresenter: NSObject {
     private var dataBaseService: DataBaseServiceProtocol
     private var fileSystemService: FileSystemServiceProtocol
     
-    var navigationDelegate: FeedNavigationDelegate?
+    var navigationDelegate: RecipesNavigationDelegate?//FeedNavigationDelegate?
     
     var recipes: [Recipe]
     private let randomRecipesCount: Int = 100
@@ -69,7 +69,7 @@ extension FeedPresenter: FeedPresenterProtocol {
         guard let recipe = recipe(at: indexPath) else {
             return
         }
-        navigationDelegate?.feedDidTapCell(with: recipe)
+        navigationDelegate?.didTapCell(with: recipe)
     }
 }
 

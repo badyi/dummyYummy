@@ -34,7 +34,25 @@ final class FavoritesCoordinator: FavoritesCoordinatorProtocol {
         let fileSystemService = FileSystemService()
         
         let presenter = FavoritesPresenter(with: favoriteViewController, dataBaseService, fileSystemService)
+        presenter.navigationDelegate = self
         favoriteViewController.presenter = presenter
         navigationController.pushViewController(favoriteViewController, animated: true)
+    }
+    
+    func showDetail(with recipe: Recipe) {
+        let detailViewController = DetailViewController()
+        let networkService = DetailNetworkService()
+        let presenter = DetailPresenter(with: detailViewController, networkService, recipe)
+        
+        detailViewController.presenter = presenter
+        
+        detailViewController.definesPresentationContext = true
+        navigationController.pushViewController(detailViewController, animated: true)
+    }
+}
+
+extension FavoritesCoordinator: RecipesNavigationDelegate {
+    func didTapCell(with recipe: Recipe) {
+        showDetail(with: recipe)
     }
 }

@@ -11,6 +11,9 @@ final class FavoritesPresenter: NSObject {
     weak var view: FavoritesViewProtocol?
     private var dataBaseService: DataBaseServiceProtocol
     private var fileSystemService: FileSystemServiceProtocol
+    
+    var navigationDelegate: RecipesNavigationDelegate?
+    
     private var recipes: [Recipe]
   
     init(with view: FavoritesViewProtocol, _ dataBaseService: DataBaseServiceProtocol, _ fileSystemService: FileSystemServiceProtocol) {
@@ -27,11 +30,11 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func viewDidLoad() {
-        recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }
         view?.setupView()
     }
     
     func viewWillAppear() {
+        view?.configNavigation()
         recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }
         view?.reloadCollection()
     }
@@ -49,7 +52,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
     }
     
     func didSelectCell(at indexPath: IndexPath) {
-        
+        navigationDelegate?.didTapCell(with: recipes[indexPath.row])
     }
 }
 

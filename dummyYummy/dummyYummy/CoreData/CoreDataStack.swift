@@ -8,7 +8,36 @@
 import Foundation
 import CoreData
 
-final class CoreDataStack {
+protocol CoreDataStackProtocol {
+    var moduleName: String { get }
+    var entityName: String { get }
+    
+    var mainContext: NSManagedObjectContext { get }
+    var backgroundContext: NSManagedObjectContext { get }
+    
+    func saveContext()
+}
+
+extension CoreDataStackProtocol {
+    func saveContext() {
+        if backgroundContext.hasChanges {
+            do {
+                try backgroundContext.save()
+            } catch {
+                print(error)
+            }
+        }
+        if mainContext.hasChanges {
+            do {
+                try mainContext.save()
+            } catch {
+                print(error)
+            }
+        }
+    }
+}
+
+class CoreDataStack: CoreDataStackProtocol {
     static let shared = CoreDataStack()
     
     let moduleName = "dummyYummy"
@@ -30,7 +59,7 @@ final class CoreDataStack {
     
     private var persistantStoreCoodrinator: NSPersistentStoreCoordinator
     
-    init() {
+    private init() {
         let documentsPath = NSSearchPathForDirectoriesInDomains(.documentDirectory, .userDomainMask, true).first ?? ""
         let url = URL(fileURLWithPath: documentsPath).appendingPathComponent("\(moduleName).sqlite")
         let coordinator = NSPersistentStoreCoordinator(managedObjectModel: managedObjectModel)
@@ -47,22 +76,5 @@ final class CoreDataStack {
         
         backgroundContext = NSManagedObjectContext(concurrencyType: .privateQueueConcurrencyType)
         backgroundContext.parent = mainContext
-    }
-    
-    func saveContext() {
-        if backgroundContext.hasChanges {
-            do {
-                try backgroundContext.save()
-            } catch {
-                print(error)
-            }
-        }
-        if mainContext.hasChanges {
-            do {
-                try mainContext.save()
-            } catch {
-                print(error)
-            }
-        }
     }
 }
