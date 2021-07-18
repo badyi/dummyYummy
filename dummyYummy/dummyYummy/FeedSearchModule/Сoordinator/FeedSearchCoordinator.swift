@@ -64,10 +64,9 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
     
     func showRefinements(with refinements: SearchRefinements) {
         let refinementsViewController = RefinementsViewController()
-        let presenter = RefinementsPresenter(with: refinements)
+        let presenter = RefinementsPresenter(with: refinementsViewController, refinements)
         
         refinementsViewController.presenter = presenter
-        presenter.view = refinementsViewController
         
         refinementsViewController.hidesBottomBarWhenPushed = true
         refinementsViewController.willFinish = { [weak self] refinements in

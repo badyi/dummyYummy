@@ -20,21 +20,21 @@ final class RefinementsViewController: UIViewController {
     
     var willFinish: ((SearchRefinements) -> ())?
     
-    var presenter: RefinementsPresenterProtocol!
+    var presenter: RefinementsPresenterProtocol?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewDidLoad()
+        presenter?.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.viewWillAppear()
+        presenter?.viewWillAppear()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        presenter.viewWillDisappear()
+        presenter?.viewWillDisappear()
     }
 }
 
@@ -73,7 +73,7 @@ extension RefinementsViewController: UITableViewDelegate {
         if let cell = tableView.cellForRow(at: indexPath) as? RefinementCell, cell.canBecomeFirstResponder {
            cell.becomeFirstResponder()
         }
-        presenter.didSelectAt(indexPath)
+        presenter?.didSelectAt(indexPath)
     }
     
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {

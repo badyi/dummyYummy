@@ -26,7 +26,6 @@ final public class NetworkHelper {
     /// - Parameters:
     ///   - reachability: объект для проверки наличие возможности отправки запроса
     ///   - networking: объект отсылающий запросы в сеть
-    /// - note: Необходим для тестов, недоступен снаружи
     init(reachability: ReachabilityProtocol, networking: Networking) {
         self.reachability = reachability
         self.networking = networking

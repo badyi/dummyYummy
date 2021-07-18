@@ -11,7 +11,7 @@ import CoreData
 
 class TestDataBaseService: XCTestCase {
     var sut: DataBaseServiceProtocol!
-    var stack = MockCoreDataStack.shared
+    var stack: CoreDataStackProtocol!
     
     override func setUp() {
         super.setUp()
@@ -38,8 +38,8 @@ class TestDataBaseService: XCTestCase {
     }
     
     func testUpdateExistingRecipes() {
-        var recipe = RecipeDTO(id: 1, title: "hello school")
-        var updRecipe = RecipeDTO(id: 1, title: "hello sber")
+        let recipe = RecipeDTO(id: 1, title: "hello school")
+        let updRecipe = RecipeDTO(id: 1, title: "hello sber")
         sut.update(recipes: [recipe])
         
         sut.update(recipes: [updRecipe])

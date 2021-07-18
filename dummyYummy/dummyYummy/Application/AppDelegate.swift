@@ -22,10 +22,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.rootViewController = navigationController
         
         let window = UIApplication.shared.windows.filter {$0.isKeyWindow}.first
-        let statusBarFrame = window?.windowScene?.statusBarManager?.statusBarFrame
-        let statusBarView = UIView(frame: statusBarFrame!)
-        self.window?.addSubview(statusBarView)
-        statusBarView.backgroundColor = UIColor(hexString: "#121212")
+    
+        if let statusBarFrame = window?.windowScene?.statusBarManager?.statusBarFrame {
+            let statusBarView = UIView(frame: statusBarFrame)
+            statusBarView.backgroundColor = UIColor(hexString: "#121212")
+            self.window?.addSubview(statusBarView)
+        }
+        
         
         appCoordinator = AppCoordinator(navigationController)
         appCoordinator?.start()

@@ -82,7 +82,15 @@ private extension FavoritesPresenter {
         let recipe = recipes[indexPath.row]
         dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
         if recipe.imageData != nil {
-            fileSystemService.delete(forKey: "\(recipe.id)")
+            fileSystemService.delete(forKey: "\(recipe.id)") { status in
+                switch status {
+                case let .success(status):
+                    print(status)
+                case let .failure(error):
+                    #warning("hadnle error")
+                    print(error.localizedDescription)
+                }
+            }
         }
         recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }
     }

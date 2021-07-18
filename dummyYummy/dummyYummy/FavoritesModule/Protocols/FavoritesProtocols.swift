@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FavoritesViewProtocol: AnyObject, RecipesViewProtocol {
+protocol FavoritesViewProtocol: RecipesViewProtocol {
     func setupView()
     func reloadCollection()
 }

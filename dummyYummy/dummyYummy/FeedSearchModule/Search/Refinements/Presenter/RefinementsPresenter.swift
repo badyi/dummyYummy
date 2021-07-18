@@ -15,12 +15,14 @@ final class RefinementsPresenter: NSObject {
     var refinements: SearchRefinements
     weak var view: RefinementsViewProtocol?
     
-    init(with refinements: SearchRefinements) {
+    init(with view: RefinementsViewProtocol, _ refinements: SearchRefinements) {
+        self.view = view
         self.refinements = refinements
     }
 }
 
 extension RefinementsPresenter: RefinementsPresenterProtocol {
+    
     func viewDidLoad() {
         view?.setupView()
     }

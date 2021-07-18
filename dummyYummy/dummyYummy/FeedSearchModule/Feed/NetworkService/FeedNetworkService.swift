@@ -17,7 +17,6 @@ final class Cancel {
 
 final class FeedNetworkService {
     let networkHelper = NetworkHelper(reachability: FakeReachability())
-    
     var requestContainer = [IndexPath: Cancel]()
 }
 

@@ -17,6 +17,7 @@ protocol RefinementsViewProtocol: AnyObject {
 }
 
 protocol RefinementsPresenterProtocol {
+    init(with view: RefinementsViewProtocol, _ refinements: SearchRefinements)
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()

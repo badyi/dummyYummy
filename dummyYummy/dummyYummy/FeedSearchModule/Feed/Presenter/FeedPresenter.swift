@@ -176,13 +176,29 @@ private extension FeedPresenter {
         if dataBaseService.recipes(with: predicate).count > 0 {
             dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
             if recipe.imageData != nil {
-                fileSystemService.delete(forKey: "\(recipe.id)")
+                fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: { status in
+                    switch status {
+                    case let .success(status):
+                        print(status)
+                    case let .failure(error):
+                        #warning("hadnle error")
+                        print(error)
+                    }
+                })
             }
             return
         }
         
         if let data = recipe.imageData {
-            fileSystemService.store(imageData: data, forKey: "\(recipe.id)")
+            fileSystemService.store(imageData: data, forKey: "\(recipe.id)", completionStatus: { status in
+                switch status {
+                case let .success(status):
+                    print(status)
+                case let .failure(error):
+                    #warning("hadnle error")
+                    print(error.localizedDescription)
+                }
+            })
         }
         dataBaseService.update(recipes: [RecipeDTO(with: recipe)])
     }

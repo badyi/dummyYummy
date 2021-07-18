@@ -5,23 +5,12 @@
 //  Created by badyi on 14.07.2021.
 //
 
-import UIKit
+import Foundation
 
-protocol FileSystemServiceProtocol {
-    
-    /// Store image data by key
-    /// - Parameters:
-    ///   - imageData: image in data representation
-    ///   - key: the unique key to create a unique path
-    func store(imageData: Data, forKey key: String)
-    
-    /// Retrive image from file system
-    /// - Parameter key: the unique key that was used to store the image data
-    func retrieveImageData(forKey key: String) -> Data?
-    
-    /// Delete image data from file system
-    /// - Parameter key: the unique key that was used to store the image data
-    func delete(forKey key: String)
+public enum FileOperationCompletion {
+    /// in success case return string  operation successful
+    case success(String)
+    case failure(Error)
 }
 
 final class FileSystemService {
@@ -29,27 +18,28 @@ final class FileSystemService {
 }
 
 extension FileSystemService: FileSystemServiceProtocol {
-    func store(imageData: Data, forKey key: String) {
+    func store(imageData: Data, forKey key: String, completionStatus: @escaping (FileOperationCompletion) -> ()) {
         writeQueue.async { [weak self] in
             if let filePath = self?.filePath(forKey: key) {
                 do  {
                     try imageData.write(to: filePath,
                                                 options: .atomic)
+                    completionStatus(.success("operation successful"))
                 } catch {
-                    #warning("handle error")
-                    fatalError("cant write image")
+                    completionStatus(.failure(error))
                 }
             }
         }
     }
     
-    func delete(forKey key: String) {
+    func delete(forKey key: String, completionStatus: @escaping (FileOperationCompletion) -> ()) {
         writeQueue.async { [weak self] in
             if let filePath = self?.filePath(forKey: key) {
                 do {
                     try FileManager.default.removeItem(atPath: filePath.path)
+                    completionStatus(.success("operation successful"))
                 } catch {
-                    print(error)
+                    completionStatus(.failure(error))
                 }
             }
         }

@@ -19,19 +19,20 @@ final class DetailViewController: UIViewController {
         cv.register(DetailHeader.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: DetailHeader.id)
         cv.register(DetailCell.self, forCellWithReuseIdentifier: DetailCell.id)
         cv.register(UICollectionReusableView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "CVFooterView")
+        cv.accessibilityIdentifier = AccessibilityIdentifiers.DetailViewController.collectionView
         return cv
     }()
     
-    var presenter: DetailPresenterProtocol!
+    var presenter: DetailPresenterProtocol?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter.viewDidLoad()
+        presenter?.viewDidLoad()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter.viewWillAppear()
+        presenter?.viewWillAppear()
     }
 }
 
@@ -71,7 +72,7 @@ extension DetailViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
         if section == 0 {
-            let title = presenter.headerTitle()
+            let title = presenter?.headerTitle() ?? ""
             let height = DetailHeader.heightForHeaderCellWithImage(with: title, width: width)
             return CGSize(width: width, height: height)
         } else if section == 1 || section == 2 {
@@ -102,14 +103,14 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         
         var height: CGFloat = 0
         if indexPath.section == 1 {
-            let text = presenter.characteristic(at: indexPath)
+            let text = presenter?.characteristic(at: indexPath) ?? ""
             let height = DetailCell.heightForCell(with: text, width: width)
             return CGSize(width: width, height: height)
-        } else if indexPath.section == 2, presenter.currentSelectedSegment() == 0 {
-            let text = presenter.ingredientTitle(at: indexPath)
+        } else if indexPath.section == 2, presenter?.currentSelectedSegment() == 0 {
+            let text = presenter?.ingredientTitle(at: indexPath) ?? ""
             height = DetailCell.heightForCell(with: text, width: width)
-        } else if indexPath.section == 2, presenter.currentSelectedSegment() == 1 {
-            let text = presenter.instructionTitle(at: indexPath)
+        } else if indexPath.section == 2, presenter?.currentSelectedSegment() == 1 {
+            let text = presenter?.instructionTitle(at: indexPath) ?? ""
             height = DetailCell.heightForCell(with: text, width: width)
         }
         return CGSize(width: width, height: height)

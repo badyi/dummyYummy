@@ -9,18 +9,6 @@ import UIKit
 
 final class FeedViewController: RecipesViewController {
     
-//    lazy var collectionView: UICollectionView = {
-//        let cv = UICollectionViewBuilder()
-//            .backgroundColor(FeedConstants.VC.Design.backgroundColor)
-//            .delegate(self)
-//            .dataSource(presenter as? UICollectionViewDataSource)
-//            .setInsets(FeedConstants.VC.Layout.collectionInsets)
-//            .build()
-//        cv.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
-//        cv.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
-//        return cv
-//    }()
-//    
     var presenter: FeedPresenterProtocol?
     
     // MARK: - View lifecycle methods
@@ -45,6 +33,7 @@ extension FeedViewController: FeedViewProtocol {
 
     func setupView() {
         title = "Browes recipes"
+        collectionView.accessibilityIdentifier = AccessibilityIdentifiers.FeedViewControlller.collectionView
         collectionView.delegate = self
         collectionView.dataSource = presenter as? UICollectionViewDataSource
         collectionView.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
@@ -65,6 +54,7 @@ extension FeedViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
         presenter?.willDisplayCell(at: indexPath)
+        cell.accessibilityIdentifier = AccessibilityIdentifiers.FeedViewControlller.cell + "-\(indexPath.section)-\(indexPath.row)"
     }
     
     func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
