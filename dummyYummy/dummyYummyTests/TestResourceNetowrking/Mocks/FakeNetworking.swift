@@ -5,14 +5,15 @@
 //  Created by badyi on 17.07.2021.
 //
 
-import Foundation
-@testable import dummyYummy
+ import Foundation
+ @testable import dummyYummy
 
-class FakeNetworking: Networking {
-    func execute<A>(_ resource: Resource<A>, completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> Cancellation? {
+ class FakeNetworking: Networking {
+    func execute<A>(_ resource: Resource<A>,
+                    completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> Cancellation? {
         if A.self == SuccessResponse.self {
             let jsonDict = ["id": "one"]
-            let json = try! JSONEncoder().encode(jsonDict)
+            let json = try? JSONEncoder().encode(jsonDict)
             completionHandler(json, nil, nil)
         } else if A.self == Data.self {
             completionHandler(Data(), nil, NSError(domain: "Fake", code: 1, userInfo: nil))
@@ -23,15 +24,17 @@ class FakeNetworking: Networking {
         }
         return nil
     }
-}
+ }
 
-struct SuccessResponse: Codable {
+ struct SuccessResponse: Codable {
     let id: String
-}
+ }
 
-class ResourceFactory {
+ class ResourceFactory {
     static let successEncoded = Resource<SuccessResponse>(url: URL(fileURLWithPath: "success"), headers: nil)
     static let failure = Resource<String>(url: URL(fileURLWithPath: "failure"), headers: nil)
     static let failureWithData = Resource<Data>(url: URL(fileURLWithPath: "failureWithData"), headers: nil)
-    static let parseFailure = Resource<Int>(url: URL(fileURLWithPath: "parseFailure"), method: .get, parse: { _ in throw NSError(domain: "Fake parse", code: 0, userInfo: nil) })
-}
+    static let parseFailure = Resource<Int>(url: URL(fileURLWithPath: "parseFailure"),
+                                            method: .get, parse: { _ in throw NSError(domain: "Fake parse",
+                                                                                      code: 0, userInfo: nil) })
+ }

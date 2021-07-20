@@ -8,26 +8,26 @@
 import UIKit
 
 final class SearchResultViewController: UIViewController {
-    
+
     private lazy var collectionView: UICollectionView = {
-        let cv = UICollectionViewBuilder()
-            .backgroundColor(SearchResultConstants.VC.Design.backgroundColor)
+        let collectionView = UICollectionViewBuilder()
+            .backgroundColor(SearchResultConstants.ViewController.Design.backgroundColor)
             .delegate(self)
             .dataSource(presenter as? UICollectionViewDataSource)
-            .setInsets(SearchResultConstants.VC.Layout.collectionViewInsets)
+            .setInsets(SearchResultConstants.ViewController.Layout.collectionViewInsets)
             .build()
-        cv.register(SearchResultCell.self, forCellWithReuseIdentifier: SearchResultCell.id)
-        return cv
+        collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: SearchResultCell.id)
+        return collectionView
     }()
-    
+
     var presenter: SearchPresenterProtocol?
-    
+
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
     }
-    
+
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
     }
@@ -39,20 +39,20 @@ final class SearchResultViewController: UIViewController {
 
 extension SearchResultViewController: SearchViewProtocol {
     func setupView() {
-        view.backgroundColor = SearchResultConstants.VC.Design.backgroundColor
+        view.backgroundColor = SearchResultConstants.ViewController.Design.backgroundColor
         setupCollectionView()
     }
-    
+
     func reloadCollection() {
         collectionView.reloadData()
     }
-    
+
     func reloadItems(at indexPaths: [IndexPath]) {
         collectionView.reloadItems(at: indexPaths)
     }
-    
+
     func configNavigation() {
-        
+
     }
 }
 
@@ -69,40 +69,51 @@ extension SearchResultViewController {
 }
 
 extension SearchResultViewController: UICollectionViewDelegate {
-    func collectionView(_ collectionView: UICollectionView, willDisplay cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+    func collectionView(_ collectionView: UICollectionView,
+                        willDisplay cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
         presenter?.willDisplayCell(at: indexPath)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didEndDisplaying cell: UICollectionViewCell, forItemAt indexPath: IndexPath) {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        didEndDisplaying cell: UICollectionViewCell,
+                        forItemAt indexPath: IndexPath) {
         presenter?.didEndDisplayCell(at: indexPath)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        didSelectItemAt indexPath: IndexPath) {
         presenter?.didSelectCell(at: indexPath)
     }
 }
 
 extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        sizeForItemAt indexPath: IndexPath) -> CGSize {
+
         let horizontalInsets = collectionView.contentInset.left + collectionView.contentInset.right
-        let lineSpace = SearchResultConstants.VC.Layout.minimumLineSpacingForSection
-        let interSpace = SearchResultConstants.VC.Layout.minimumInteritemSpacingForSection
-        let cellsPerLine = SearchResultConstants.VC.Layout.cellsPerLine
-        
+        let lineSpace = SearchResultConstants.ViewController.Layout.minimumLineSpacingForSection
+        let interSpace = SearchResultConstants.ViewController.Layout.minimumInteritemSpacingForSection
+        let cellsPerLine = SearchResultConstants.ViewController.Layout.cellsPerLine
+
         let width = (collectionView.bounds.width - (horizontalInsets + interSpace)) / cellsPerLine
-        let height =  (collectionView.bounds.width - (horizontalInsets + lineSpace)) / cellsPerLine
+        let height = (collectionView.bounds.width - (horizontalInsets + lineSpace)) / cellsPerLine
         return CGSize(width: width, height: height)
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        
-        SearchResultConstants.VC.Layout.minimumInteritemSpacingForSection
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+
+        SearchResultConstants.ViewController.Layout.minimumInteritemSpacingForSection
     }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        
-        SearchResultConstants.VC.Layout.minimumInteritemSpacingForSection
+
+    func collectionView(_ collectionView: UICollectionView,
+                        layout collectionViewLayout: UICollectionViewLayout,
+                        minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+
+        SearchResultConstants.ViewController.Layout.minimumInteritemSpacingForSection
     }
 }
 

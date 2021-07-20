@@ -8,30 +8,30 @@
 import UIKit
 
 final class RefinementsViewController: UIViewController {
-    
+
     private lazy var tableView: UITableView = {
-        let tv = UITableView()
-        tv.translatesAutoresizingMaskIntoConstraints = false
-        tv.delegate = self
-        tv.dataSource = presenter as? UITableViewDataSource
-        tv.register(RefinementCell.self, forCellReuseIdentifier: RefinementCell.id)
-        return tv
+        let tableView = UITableView()
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.delegate = self
+        tableView.dataSource = presenter as? UITableViewDataSource
+        tableView.register(RefinementCell.self, forCellReuseIdentifier: RefinementCell.id)
+        return tableView
     }()
-    
-    var willFinish: ((SearchRefinements) -> ())?
-    
+
+    var willFinish: ((SearchRefinements) -> Void)?
+
     var presenter: RefinementsPresenterProtocol?
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
         presenter?.viewDidLoad()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
     }
-    
+
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         presenter?.viewWillDisappear()
@@ -40,7 +40,7 @@ final class RefinementsViewController: UIViewController {
 
 extension RefinementsViewController: RefinementsViewProtocol {
     func setupView() {
-        view.backgroundColor = RefinementsConstants.VC.Design.backgroundColor
+        view.backgroundColor = RefinementsConstants.ViewController.Design.backgroundColor
 
         let gesture = UITapGestureRecognizer(target: self, action: #selector(backgroundTapped(_:)))
         gesture.cancelsTouchesInView = false
@@ -48,55 +48,55 @@ extension RefinementsViewController: RefinementsViewProtocol {
         view.addSubview(tableView)
         setupTableView()
     }
-    
+
     func endEditing(_ flag: Bool) {
         view.endEditing(flag)
     }
-    
+
     func configNavigation() {
         navigationItem.largeTitleDisplayMode = .never
-        navigationController?.navigationBar.backgroundColor = FeedConstants.VC.Design.navBarBackgroundColor
+        navigationController?.navigationBar.backgroundColor = FeedConstants.ViewController.Design.navBarBackgroundColor
     }
 }
 
 extension RefinementsViewController: UITableViewDelegate {
-    
+
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        return RefinementsConstants.VC.Layout.sectionFooterHeight
+        return RefinementsConstants.ViewController.Layout.sectionFooterHeight
     }
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return RefinementsConstants.VC.Layout.heightForRow
+        return RefinementsConstants.ViewController.Layout.heightForRow
     }
-    
+
    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         if let cell = tableView.cellForRow(at: indexPath) as? RefinementCell, cell.canBecomeFirstResponder {
            cell.becomeFirstResponder()
         }
         presenter?.didSelectAt(indexPath)
     }
-    
+
     func tableView(_ tableView: UITableView, willDisplayFooterView view: UIView, forSection section: Int) {
         guard let footer = view as? UITableViewHeaderFooterView else {
             return
         }
-        footer.contentView.backgroundColor = RefinementsConstants.VC.Design.backgroundColor
+        footer.contentView.backgroundColor = RefinementsConstants.ViewController.Design.backgroundColor
     }
 }
 
 private extension RefinementsViewController {
-    
+
     @objc func backgroundTapped(_ sender: UIGestureRecognizer) {
         self.view.endEditing(true)
     }
-    
+
     func setupTableView() {
-        /// put zero here so that the footer height method is called later
+        // put zero here so that the footer height method is called later
         tableView.sectionFooterHeight = 0
-        
-        tableView.contentInset = RefinementsConstants.VC.Layout.collectionInsets
-        tableView.backgroundColor = RefinementsConstants.VC.Design.backgroundColor
-        
+
+        tableView.contentInset = RefinementsConstants.ViewController.Layout.collectionInsets
+        tableView.backgroundColor = RefinementsConstants.ViewController.Design.backgroundColor
+
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -105,4 +105,3 @@ private extension RefinementsViewController {
         ])
     }
 }
-

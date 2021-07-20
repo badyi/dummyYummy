@@ -7,8 +7,8 @@
 
 import Foundation
 
-//// MARK: - DetailRecipeResponse
-//struct DetailRecipeResponse: Codable {
+// MARK: - DetailRecipeResponse
+// struct DetailRecipeResponse: Codable {
 //    let vegetarian, vegan, glutenFree, dairyFree: Bool
 //    let veryHealthy, cheap, veryPopular, sustainable: Bool
 //    let weightWatcherSmartPoints: Int
@@ -32,4 +32,4 @@ import Foundation
 //    let instructions: String
 //    let analyzedInstructions: [AnalyzedInstruction]
 //    let originalID: JSONNull?
-//}
+// }

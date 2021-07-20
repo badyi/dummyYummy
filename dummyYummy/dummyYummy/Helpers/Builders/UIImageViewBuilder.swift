@@ -8,7 +8,7 @@
 import UIKit
 
 final class UIImageViewBuilder {
-    public private(set) var translatesAutoresizingMaskIntoConstraints: Bool = false
+    public private(set) var translatesAutoresizing: Bool = false
     public private(set) var backgroundColor: UIColor = .black
     public private(set) var clipToBounds: Bool = true
     public private(set) var contentMode: UIView.ContentMode = .scaleAspectFill
@@ -21,10 +21,10 @@ extension UIImageViewBuilder {
         cornerRadius = radius
         return self
     }
-    
+
     @discardableResult
     public func translatesAutoresizingMaskIntoConstraints(_ flag: Bool) -> UIImageViewBuilder {
-        translatesAutoresizingMaskIntoConstraints = flag
+        translatesAutoresizing = flag
         return self
     }
 
@@ -37,7 +37,7 @@ extension UIImageViewBuilder {
     public func build() -> UIImageView {
         return build(imageView: UIImageView())
     }
-    
+
     public func buildWithShimmer() -> ShimmerUIImageView {
         return build(imageView: ShimmerUIImageView())
     }
@@ -45,7 +45,7 @@ extension UIImageViewBuilder {
 
 private extension UIImageViewBuilder {
     func build<T: UIImageView>(imageView: T) -> T {
-        imageView.translatesAutoresizingMaskIntoConstraints = translatesAutoresizingMaskIntoConstraints
+        imageView.translatesAutoresizingMaskIntoConstraints = translatesAutoresizing
         imageView.backgroundColor = backgroundColor
         imageView.clipsToBounds = clipToBounds
         imageView.contentMode = contentMode

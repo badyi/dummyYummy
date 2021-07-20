@@ -10,35 +10,35 @@ import UIKit
 final class Recipe {
     let id: Int
     let title: String
-    
-    var imageURL: String? = nil
-    var imageData: Data? = nil
-    
+
+    var imageURL: String?
+    var imageData: Data?
+
     var boolCharacteristics: [String: Bool]?
-    
-    var healthScore: Int? = nil
-    
-    var pricePerServing: Double? = nil
-    var readyInMinutes: Int? = nil
-    var servings: Int? = nil
-    
-    var cuisines: [String]? = nil
-    var dishTypes: [String]? = nil
-    var diets: [String]? = nil
-    
-    var ingredients: [String]? = nil
-    var instructions: [String]? = nil
-    
-    var sourceURL: String? = nil
-    
-    var spoonacularSourceURL: String? = nil
-    
+
+    var healthScore: Int?
+
+    var pricePerServing: Double?
+    var readyInMinutes: Int?
+    var servings: Int?
+
+    var cuisines: [String]?
+    var dishTypes: [String]?
+    var diets: [String]?
+
+    var ingredients: [String]?
+    var instructions: [String]?
+
+    var sourceURL: String?
+
+    var spoonacularSourceURL: String?
+
     var isFavorite: Bool = false
 
     init(with responseRecipe: FeedRecipeInfoResponse) {
         id = responseRecipe.id
         title = responseRecipe.title
-        
+
         boolCharacteristics = [:]
         boolCharacteristics?["Vegeterian"] = responseRecipe.vegetarian
         boolCharacteristics?["Gluten free"] = responseRecipe.glutenFree
@@ -49,19 +49,19 @@ final class Recipe {
         boolCharacteristics?["Very popular"] = responseRecipe.veryPopular
         boolCharacteristics?["Sustainable"] = responseRecipe.sustainable
         boolCharacteristics?["Low fodmap"] = responseRecipe.lowFodmap
-        
+
         ingredients = []
         responseRecipe.extendedIngredients.forEach {
             ingredients?.append($0.original)
         }
-        
+
         instructions = []
-        if responseRecipe.analyzedInstructions.count > 0 {
+        if !responseRecipe.analyzedInstructions.isEmpty {
             responseRecipe.analyzedInstructions[0].steps.forEach {
                 instructions?.append($0.step)
             }
         }
-        
+
         healthScore = responseRecipe.healthScore
 
         pricePerServing = responseRecipe.pricePerServing
@@ -71,18 +71,18 @@ final class Recipe {
         cuisines = responseRecipe.cuisines
         dishTypes = responseRecipe.dishTypes
         diets = responseRecipe.diets
-        
+
         sourceURL = responseRecipe.sourceUrl
         imageURL = responseRecipe.image
         spoonacularSourceURL = responseRecipe.spoonacularSourceURL
     }
-    
+
     init(with searchResult: SearchResult) {
         id = searchResult.id
         title = searchResult.title
         imageURL = searchResult.image
     }
-    
+
     init(with recipeDTO: RecipeDTO) {
         id = recipeDTO.id
         boolCharacteristics = recipeDTO.boolCharacteristics
@@ -106,7 +106,7 @@ extension Recipe {
     func configInfo(with responseRecipe: FeedRecipeInfoResponse) {
         sourceURL = responseRecipe.sourceUrl
         spoonacularSourceURL = responseRecipe.spoonacularSourceURL
-        
+
         boolCharacteristics = [:]
         boolCharacteristics?["Vegeterian"] = responseRecipe.vegetarian
         boolCharacteristics?["Gluten free"] = responseRecipe.glutenFree
@@ -117,14 +117,14 @@ extension Recipe {
         boolCharacteristics?["Very popular"] = responseRecipe.veryPopular
         boolCharacteristics?["Sustainable"] = responseRecipe.sustainable
         boolCharacteristics?["Low fodmap"] = responseRecipe.lowFodmap
-        
+
         ingredients = []
         responseRecipe.extendedIngredients.forEach {
             ingredients?.append($0.original)
         }
-        
+
         instructions = []
-        if responseRecipe.analyzedInstructions.count > 0 {
+        if !responseRecipe.analyzedInstructions.isEmpty {
             responseRecipe.analyzedInstructions[0].steps.forEach {
                 instructions?.append($0.step)
             }

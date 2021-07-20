@@ -24,7 +24,7 @@ enum TabBarPage {
             return nil
         }
     }
-    
+
     func pageTitleValue() -> String {
         switch self {
         case .feed:
@@ -48,34 +48,33 @@ enum TabBarPage {
     }
 
     // Add tab icon value
-    
+
     // Add tab icon selected / deselected color
-    
+
     // etc
 }
 
-
 protocol TabCoordinatorProtocol: Coordinator {
     var tabBarController: UITabBarController { get set }
-    
+
     func selectPage(_ page: TabBarPage)
-    
+
     func setSelectedIndex(_ index: Int)
-    
+
     func currentPage() -> TabBarPage?
 }
 
 final class TabCoordinator: NSObject, Coordinator {
    // weak var finishDelegate: CoordinatorFinishDelegate?
-        
+
     var childCoordinators: [Coordinator] = []
 
     var navigationController: UINavigationController
-    
+
     var tabBarController: UITabBarController
 
     var type: CoordinatorType { .tab }
-    
+
     required init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.tabBarController = .init()
@@ -85,32 +84,32 @@ final class TabCoordinator: NSObject, Coordinator {
         // Define which pages do we want to add into tab bar
         let pages: [TabBarPage] = [.feed, .fridge, .favorites]
             .sorted(by: { $0.pageOrderNumber() < $1.pageOrderNumber() })
-        
+
         // Initialization of ViewControllers or these pages
         let controllers: [UINavigationController] = pages.map({ getTabController($0) })
-        
+
         prepareTabBarController(withTabControllers: controllers)
     }
-    
+
     private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
-        /// Set delegate for UITabBarController
+        // Set delegate for UITabBarController
         tabBarController.delegate = self
-        /// Assign page's controllers
+        // Assign page's controllers
         tabBarController.setViewControllers(tabControllers, animated: true)
-        /// Set index
+        // Set index
         tabBarController.selectedIndex = TabBarPage.feed.pageOrderNumber()
-        /// Styling
+        // Styling
         tabBarController.tabBar.isTranslucent = false
-        
-        /// In this step, we attach tabBarController to navigation controller associated with this coordanator
+
+        // In this step, we attach tabBarController to navigation controller associated with this coordanator
         navigationController.viewControllers = [tabBarController]
     }
-      
+
     private func getTabController(_ page: TabBarPage) -> UINavigationController {
         let navController = UINavigationController()
         navController.setNavigationBarHidden(false, animated: false)
 
-        navController.tabBarItem = UITabBarItem.init(title: page.pageTitleValue(),
+        navController.tabBarItem = UITabBarItem(title: page.pageTitleValue(),
                                                      image: nil,
                                                      tag: page.pageOrderNumber())
 
@@ -126,19 +125,19 @@ final class TabCoordinator: NSObject, Coordinator {
             favoritesCoodrinator.start()
             childCoordinators.append(favoritesCoodrinator)
         }
-        
+
         return navController
     }
-    
-    func currentPage() -> TabBarPage? { TabBarPage.init(index: tabBarController.selectedIndex) }
+
+    func currentPage() -> TabBarPage? { TabBarPage(index: tabBarController.selectedIndex) }
 
     func selectPage(_ page: TabBarPage) {
         tabBarController.selectedIndex = page.pageOrderNumber()
     }
-    
+
     func setSelectedIndex(_ index: Int) {
-        guard let page = TabBarPage.init(index: index) else { return }
-        
+        guard let page = TabBarPage(index: index) else { return }
+
         tabBarController.selectedIndex = page.pageOrderNumber()
     }
 }

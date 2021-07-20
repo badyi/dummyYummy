@@ -15,9 +15,12 @@ protocol DetailViewProtocol: AnyObject {
 }
 
 protocol DetailPresenterProtocol {
-    var recipe: Recipe { get }
-    
-    init(with view: DetailViewProtocol, _ networkService: DetailNetworkServiceProtocol, _ recipe: Recipe)
+    init(with view: DetailViewProtocol,
+         _ dataBaseService: DataBaseServiceProtocol,
+         _ fileSystemService: FileSystemServiceProtocol,
+         _ networkService: DetailNetworkServiceProtocol,
+         _ recipe: Recipe)
+
     func viewDidLoad()
     func viewWillAppear()
     func headerTitle() -> String
@@ -29,7 +32,6 @@ protocol DetailPresenterProtocol {
 }
 
 protocol DetailNetworkServiceProtocol {
-    func loadRecipeInfo(_ id: Int, completion: @escaping(OperationCompletion<FeedRecipeInfoResponse>) -> ())
-    func loadImage(_ url: String, completion: @escaping(OperationCompletion<Data>) -> ())
+    func loadRecipeInfo(_ id: Int, completion: @escaping(OperationCompletion<FeedRecipeInfoResponse>) -> Void)
+    func loadImage(_ url: String, completion: @escaping(OperationCompletion<Data>) -> Void)
 }
-

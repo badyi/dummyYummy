@@ -9,7 +9,7 @@
 
 class SimpleCancellation: Cancellation {
     var isCanceled = false
-    
+
     func cancel() {
         isCanceled = true
     }

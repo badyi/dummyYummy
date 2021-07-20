@@ -13,8 +13,10 @@ protocol FavoritesViewProtocol: RecipesViewProtocol {
 }
 
 protocol FavoritesPresenterProtocol {
-    init(with view: FavoritesViewProtocol, _ dataBaseService: DataBaseServiceProtocol, _ fileSystemService: FileSystemServiceProtocol)
-    
+    init(with view: FavoritesViewProtocol,
+         _ dataBaseService: DataBaseServiceProtocol,
+         _ fileSystemService: FileSystemServiceProtocol)
+
     func viewDidLoad()
     func viewWillAppear()
     func viewWillDisappear()
@@ -24,6 +26,6 @@ protocol FavoritesPresenterProtocol {
     func didSelectCell(at indexPath: IndexPath)
 }
 
-//protocol FavoritesNavigationDelegate {
+// protocol FavoritesNavigationDelegate {
 //    
-//}
+// }

@@ -8,12 +8,12 @@
 import UIKit
 
 final class UIButtonBuilder {
-    public private(set) var translatesAutoresizingMaskIntoConstraints: Bool = false
+    public private(set) var translatesAutoresizing: Bool = false
     public private(set) var backgroundColor: UIColor = .white
     public private(set) var image: UIImage?
     public private(set) var largeConfig: Bool = false
     public private(set) var tintColor: UIColor = .systemBlue
-    public private(set) var font: UIFont? = nil
+    public private(set) var font: UIFont?
 }
 
 extension UIButtonBuilder {
@@ -22,41 +22,41 @@ extension UIButtonBuilder {
         self.font = font
         return self
     }
-    
+
     @discardableResult
     public func tintColor(_ color: UIColor) -> UIButtonBuilder {
         self.tintColor = color
         return self
     }
-    
+
     @discardableResult
     public func setImage(_ image: UIImage) -> UIButtonBuilder {
         self.image = image
         return self
     }
-    
+
     @discardableResult
     public func translatesAutoresizingMaskIntoConstraints(_ flag: Bool) -> UIButtonBuilder {
-        translatesAutoresizingMaskIntoConstraints = flag
+        translatesAutoresizing = flag
         return self
     }
-    
+
     @discardableResult
     public func backgroundColor(_ color: UIColor) -> UIButtonBuilder {
         self.backgroundColor = color
         return self
     }
-    
+
     @discardableResult
     public func largeConfig(_ flag: Bool) -> UIButtonBuilder {
         largeConfig = flag
         return self
     }
-    
+
     public func build() -> UIButton {
         return build(button: UIButton())
     }
-    
+
     public func buildWithShimmer() -> ShimmerUIButton {
         return build(button: ShimmerUIButton())
     }
@@ -67,7 +67,7 @@ private extension UIButtonBuilder {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = backgroundColor
         button.tintColor = tintColor
-        
+
         if let font = font {
             button.titleLabel?.font = font
         }

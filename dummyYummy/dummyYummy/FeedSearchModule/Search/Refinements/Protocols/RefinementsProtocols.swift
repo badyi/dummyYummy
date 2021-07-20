@@ -8,12 +8,12 @@
 import UIKit
 
 protocol RefinementsViewProtocol: AnyObject {
-    var willFinish: ((SearchRefinements) -> ())? { get set }
+    var willFinish: ((SearchRefinements) -> Void)? { get set }
 
     func setupView()
     func endEditing(_ flag: Bool)
     func configNavigation()
-    
+
 }
 
 protocol RefinementsPresenterProtocol {

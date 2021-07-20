@@ -10,7 +10,7 @@ import Foundation
 
 class FakeReachability: ReachabilityProtocol {
     var isReachable: Bool
-    
+
     init(isReachable: Bool) {
         self.isReachable = isReachable
     }

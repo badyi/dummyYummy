@@ -22,50 +22,53 @@ final class FeedNetworkService {
 
 // MARK: - FeedServiceProtocol
 extension FeedNetworkService: FeedServiceProtocol {
-    func loadRandomRecipes(_ count: Int, completion: @escaping(OperationCompletion<FeedRecipeResponse>) -> ()) {
+    func loadRandomRecipes(_ count: Int, completion: ((OperationCompletion<FeedRecipeResponse>) -> Void)?) {
         guard let resource = FeedResourceFactory().createRandomRecipesResource(count) else {
             let error = NSError(domain: "Random recipe resource create error", code: 0, userInfo: nil)
-            completion(.failure(error))
+            completion?(.failure(error))
             return
         }
-        
+
         _ = load(resource: resource, completion: { result in
             switch result {
             case .success(let result):
-                completion(.success(result))
+                completion?(.success(result))
             case .failure(let error):
-                completion(.failure(error))
+                completion?(.failure(error))
             }
         })
     }
-    
-    func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> ()) {
+
+    func loadImage(at index: IndexPath, with url: String, completion: ((OperationCompletion<Data>) -> Void)?) {
         guard let resource = FeedResourceFactory().createImageResource(url) else {
             let error = NSError(domain: "Image resource create error", code: 0, userInfo: nil)
-            completion(.failure(error))
+            completion?(.failure(error))
             return
         }
-        
+
         if requestContainer[index] == nil {
             requestContainer[index] = Cancel()
         }
-        
+
         #warning("mb add comletion to return")
         if requestContainer[index]?.imageLoad != nil { return }
-        
-        requestContainer[index]?.imageLoad = load(at: index, type: .imageLoad, resource: resource, completion: { result in
+
+        requestContainer[index]?.imageLoad = load(at: index,
+                                                  type: .imageLoad,
+                                                  resource: resource,
+                                                  completion: { result in
             switch result {
             case .success(let result):
-                completion(.success(result))
+                completion?(.success(result))
             case .failure(let error):
-                completion(.failure(error))
+                completion?(.failure(error))
             }
         })
     }
-    
+
     func cancelRequest(at index: IndexPath) {
         requestContainer[index]?.imageLoad?.cancel()
-        
+
         requestContainer[index]?.imageLoad = nil
     }
 }
@@ -78,8 +81,12 @@ private extension FeedNetworkService {
             requestContainer[index]?.imageLoad = nil
         }
     }
-    
-    func load<T>(at index: IndexPath? = nil, type: CancelType? = nil, resource: Resource<T>, completion: @escaping(OperationCompletion<T>) -> ()) -> Cancellation? {
+
+    func load<T>(at index: IndexPath? = nil,
+                 type: CancelType? = nil,
+                 resource: Resource<T>,
+                 completion: @escaping(OperationCompletion<T>) -> Void) -> Cancellation? {
+
         let cancel = networkHelper.load(resource: resource, completion: { [weak self] result in
             switch result {
             case .success(let result):

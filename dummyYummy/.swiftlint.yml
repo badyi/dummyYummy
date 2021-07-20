@@ -1,0 +1,107 @@
+disabled_rules:
+  - vertical_parameter_alignment_on_call
+  - weak_delegate
+  - vertical_parameter_alignment
+  - closure_parameter_position
+  - todo
+  - superfluous_disable_command
+
+opt_in_rules:
+  - static_operator
+  - empty_count
+  - explicit_init
+  - closure_spacing
+  - overridden_super_call
+  - redundant_nil_coalescing
+  - private_outlet
+  - nimble_operator
+  - operator_usage_whitespace
+  - closure_end_indentation
+  - first_where
+  # - number_separator (100000  =>  100_000)
+  - prohibited_super_call
+  - fatal_error_message
+  - unneeded_parentheses_in_closure_argument
+  - pattern_matching_keywords
+  - array_init
+  - literal_expression_end_indentation
+  - joined_default_parameter
+  - contains_over_first_not_nil
+  - override_in_extension
+  - private_action
+  - quick_discouraged_call
+  - quick_discouraged_focused_test
+  - quick_discouraged_pending_test
+  - single_test_class
+  - sorted_first_last
+
+line_length: 120
+
+type_body_length:
+  - 300 # warning
+  - 300 # error (должно быть 300)
+
+file_length:
+  warning: 400 # warning
+  error: 400 # error (должно быть 400)
+  ignore_comment_only_lines: true
+
+identifier_name:
+  min_length:
+    error: 2
+  max_length:
+    error: 50
+  excluded:
+    - id
+
+nesting:
+  type_level: 3
+
+cyclomatic_complexity:
+  ignores_case_statements: true
+
+excluded:
+  - Carthage
+  - Pods
+  - Tests
+  - Sberbank/Notification Content Extension
+  - Documents
+  - build-scripts
+  - DerivedData
+  - .*Tests\\.swift
+
+  - Dangerfile.swift
+  - Sberbank/Sberthage/Checkouts/CreditRating
+  - Sberbank/Sberthage/Checkouts/MessengerKit
+
+  # Build Artifacts on Jenkins
+  - buildUniversalDerivedData
+  - buildSim
+  - buildDir
+  - buildDevice
+  - tempFatBinaries
+  - buildLogs
+
+
+custom_rules:
+  operator_overload:
+    included: ".*\\.swift"
+    excluded: ".*Tests\\.swift"
+    name: "Operator Overload"
+    regex: "\\s*func\\s+(\\/|-|\\+|!|\\*|%|&|\\||\\^|~|\\?)"
+    message: "Перегрузка операторов запрещена"
+    severity: error
+  operator_declaration:
+    included: ".*\\.swift"
+    name: "Operator Declaration"
+    regex: "(infix|postfix|prefix)\\s+operator"
+    message: "Объявление оператора запрещено вне MPFoundation.framework"
+    severity: error
+  disable_print:
+    included: ".*\\.swift"
+    excluded: ".*Tests\\.swift"
+    name: "print usage"
+    regex: "(^| |Swift.)(?<!func )(print|debugPrint)\\("
+    message: "Необходимо использовать log() из DebugHelper.framework"
+    severity: warning
+

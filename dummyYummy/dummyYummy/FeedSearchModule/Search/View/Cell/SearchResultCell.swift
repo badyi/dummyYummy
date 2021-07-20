@@ -9,13 +9,13 @@ import UIKit
 
 final class SearchResultCell: RoundedCollectionCellWithShadow {
     static let id = "SearchResultCell"
-    
+
     private var imageView: ShimmerUIImageView = {
         UIImageViewBuilder()
             .backgroundColor(SearchResultConstants.Cell.Design.backgroundColor)
             .buildWithShimmer()
     }()
-    
+
     private var title: UILabelWithInsets = {
         UILabelBuilder()
             .backgroundColor(SearchResultConstants.Cell.Design.titleBackgroundColor)
@@ -23,9 +23,9 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
             .setFont(SearchResultConstants.Cell.Font.titleFont)
             .buildWithInsets()
     }()
-    
+
     var isShimmerAnimatin: Bool = false
-    
+
     // MARK: - View lifecycle methods
 
     override func prepareForReuse() {
@@ -33,7 +33,7 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
         imageView.image = nil
         title.text = ""
     }
-    
+
     override func setupView() {
         super.setupView()
         shadowColor = SearchResultConstants.Cell.Design.shadowColor
@@ -42,7 +42,7 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
         shadowOpacity = SearchResultConstants.Cell.Layout.shadowOpacity
         shadowOffsetWidth = SearchResultConstants.Cell.Layout.shadowOffsetWidth
         shadowOffsetHeight = SearchResultConstants.Cell.Layout.shadowOffsetHeight
-       
+
         contentView.addSubview(imageView)
         contentView.addSubview(title)
         setupImageView()
@@ -66,7 +66,7 @@ extension SearchResultCell {
 }
 
 private extension SearchResultCell {
-    
+
     func setupImageView() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
@@ -75,7 +75,7 @@ private extension SearchResultCell {
             imageView.bottomAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
-    
+
     func setupTitle() {
         NSLayoutConstraint.activate([
             title.leadingAnchor.constraint(equalTo: imageView.leadingAnchor),

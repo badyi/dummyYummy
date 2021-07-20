@@ -8,39 +8,43 @@
 import UIKit
 
 final class RefinementsPresenter: NSObject {
-    
-    let refinementsSections: [RefinementsSection : [RefinementsRows]] = [.time : [.time], .cuisine : [.cuisine, .excludesCuisine], .diet : [.diet], .intolearns : [.intolearns]]
-    
+
+    let refinementsSections: [RefinementsSection: [RefinementsRows]]
+
     let refinementsOrder: [RefinementsSection] = [.time, .cuisine, .diet, .intolearns]
     var refinements: SearchRefinements
     weak var view: RefinementsViewProtocol?
-    
+
     init(with view: RefinementsViewProtocol, _ refinements: SearchRefinements) {
         self.view = view
         self.refinements = refinements
+        refinementsSections = [.time: [.time],
+                               .cuisine: [.cuisine, .excludesCuisine],
+                               .diet: [.diet],
+                               .intolearns: [.intolearns]]
     }
 }
 
 extension RefinementsPresenter: RefinementsPresenterProtocol {
-    
+
     func viewDidLoad() {
         view?.setupView()
     }
-    
+
     func viewWillAppear() {
         view?.configNavigation()
     }
-    
+
     func viewWillDisappear() {
         view?.willFinish?(refinements)
     }
-    
+
     func willDisplayCell(at index: IndexPath) {
-        
+
     }
-    
+
     func didEndDisplayCell(at index: IndexPath) {
-        
+
     }
 }
 
@@ -49,19 +53,22 @@ extension RefinementsPresenter: UITableViewDataSource {
     func numberOfSections(in tableView: UITableView) -> Int {
         return refinementsSections.count
     }
-    
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         refinementsSections[refinementsOrder[section]]?.count ?? 0
     }
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: RefinementCell.id, for: indexPath) as! RefinementCell
+        guard let cell = tableView.dequeueReusableCell(withIdentifier:
+                                                        RefinementCell.id, for: indexPath) as? RefinementCell else {
+            return tableView.dequeueReusableCell(withIdentifier: "defaultCell", for: indexPath)
+        }
         cell.setIndexPath(indexPath)
         cell.inputDelegate = self
         cell.deleteTapped = { [weak self] indexPath in
             self?.deleteAt(indexPath)
         }
-        
+
         switch refinementsOrder[indexPath.section] {
         case .time:
             configCellForTime(cell)
@@ -76,10 +83,10 @@ extension RefinementsPresenter: UITableViewDataSource {
         default:
             return cell
         }
-        
+
         return cell
     }
-    
+
     func configCellForTime(_ cell: RefinementCell) {
         cell.isUsingKeyBoard = true
         var isActive = false
@@ -89,7 +96,7 @@ extension RefinementsPresenter: UITableViewDataSource {
         }
         cell.configCell(with: "Max ready minutes: ", isActive)
     }
-    
+
     func configCellForCuisine(_ cell: RefinementCell) {
         var isActive = false
         if refinements.cuisine != nil {
@@ -97,7 +104,7 @@ extension RefinementsPresenter: UITableViewDataSource {
         }
         cell.configCell(with: "Cuisine", isActive)
     }
-    
+
     func configCellForExcludedCuisine(_ cell: RefinementCell) {
         var isActive = false
         if refinements.excludedCuisine != nil {
@@ -105,7 +112,7 @@ extension RefinementsPresenter: UITableViewDataSource {
         }
         cell.configCell(with: "Excluded cuisine", isActive)
     }
-    
+
     func configCellForDiet(_ cell: RefinementCell) {
         var isActive = false
         if refinements.diet != nil {
@@ -113,7 +120,7 @@ extension RefinementsPresenter: UITableViewDataSource {
         }
         cell.configCell(with: "Diet", isActive)
     }
-    
+
     func configCellForIntolearns(_ cell: RefinementCell) {
         var isActive = false
         if refinements.intolerances != nil {
@@ -121,10 +128,10 @@ extension RefinementsPresenter: UITableViewDataSource {
         }
         cell.configCell(with: "intolearns", isActive)
     }
-    
+
     func deleteAt(_ indexPath: IndexPath?) {
         guard let indexPath = indexPath else { return }
-        
+
         switch refinementsOrder[indexPath.section] {
         case .time:
             refinements.maxReadyTime = nil
@@ -140,7 +147,7 @@ extension RefinementsPresenter: UITableViewDataSource {
             print("deafult")
         }
     }
-    
+
     func didSelectAt(_ indexPath: IndexPath) {
         switch refinementsOrder[indexPath.section] {
         case .time:
@@ -163,8 +170,8 @@ extension RefinementsPresenter: InputCellDelegate {
     func doneButtonTapped() {
         view?.endEditing(true)
     }
-    
-    func insertText(_ text: String, didFinishUpdate: ((Int) -> ())?) {
+
+    func insertText(_ text: String, didFinishUpdate: ((Int) -> Void)?) {
         var entry: Int = 0
         if let time = refinements.maxReadyTime {
             entry = time
@@ -179,8 +186,8 @@ extension RefinementsPresenter: InputCellDelegate {
             didFinishUpdate?(entry)
         }
     }
-    
-    func deleteBackwards(didFinishUpdate: ((Int) -> ())?) {
+
+    func deleteBackwards(didFinishUpdate: ((Int) -> Void)?) {
         var entry: Int = 0
         if let time = refinements.maxReadyTime {
             entry = time

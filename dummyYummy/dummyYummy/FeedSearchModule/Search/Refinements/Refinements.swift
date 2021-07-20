@@ -69,7 +69,7 @@ enum RefinementsSection {
     case cuisine
     case diet
     case intolearns
-    //case ingredients
+    // case ingredients
 }
 
 enum RefinementsRows {
@@ -78,7 +78,7 @@ enum RefinementsRows {
 
 final class SearchRefinements {
     private var _maxReadyTime: Int?
-    
+
     var maxReadyTime: Int? {
         get {
             _maxReadyTime
@@ -91,10 +91,10 @@ final class SearchRefinements {
             _maxReadyTime = newValue
         }
     }
-    
+
     var cuisine: [Cuisine]?
     var excludedCuisine: [Cuisine]?
-    
+
     var diet: Diet?
     var intolerances: [Intolerances]?
 }

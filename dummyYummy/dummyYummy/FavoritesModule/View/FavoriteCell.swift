@@ -18,7 +18,7 @@ final class FavoriteCell: RecipeBigCell {
         minutesLabel.text = ""
         healthScoreLabel.text = ""
     }
-    
+
     override func setupView() {
         super.setupView()
         favoriteButton.setImage(BaseRecipeConstants.Cell.Image.favoriteImageFill, for: .normal)
@@ -33,18 +33,17 @@ extension FavoriteCell {
             healthScoreLabel.text = "Health score: \(score)"
             minutesLabel.text = "Cooking minutes: \(time)"
         }
-        
-        /// set default image if recipe dont have image url and remove shimmer animation
+
+        // set default image if recipe dont have image url and remove shimmer animation
         if recipe.imageURL == nil {
             imageView.image = FeedConstants.Cell.Image.defaultCellImage
             imageView.removeShimmerAnimation()
             return
         }
-        
+
         guard let imageData = recipe.imageData else { return }
         guard let image = UIImage(data: imageData) else { return }
         imageView.image = image
         imageView.removeShimmerAnimation()
     }
 }
-
