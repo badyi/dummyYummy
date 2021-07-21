@@ -117,14 +117,14 @@ extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-extension SearchResultViewController: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else {
-            return
-        }
-        presenter?.updateSearchResult(text)
-    }
-}
+// extension SearchResultViewController: UISearchResultsUpdating {
+//    func updateSearchResults(for searchController: UISearchController) {
+//        guard let text = searchController.searchBar.text else {
+//            return
+//        }
+//        presenter?.updateSearchResult(text)
+//    }
+// }
 
 extension SearchResultViewController: UISearchBarDelegate {
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {

@@ -7,7 +7,11 @@
 
 import UIKit
 
-protocol SearchNetworkServiceProtocol {
+protocol SearchNetworkServiceProtocol: NetworkServiceProtocol {
     func loadSearch(_ query: String, completion: @escaping(OperationCompletion<SearchResponse>) -> Void)
     func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> Void)
+}
+
+protocol SearchResourceFactoryProtocol: ResourceFactoryProtocol {
+    func createSearchRecipesResource(_ query: String) -> Resource<SearchResponse>?
 }

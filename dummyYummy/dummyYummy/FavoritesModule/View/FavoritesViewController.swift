@@ -33,8 +33,8 @@ extension FavoritesViewController: FavoritesViewProtocol {
         title = "Favorite recipes"
         collectionView.delegate = self
         collectionView.dataSource = presenter as? UICollectionViewDataSource
-        collectionView.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
         collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.id)
+        view.addSubview(collectionView)
         setupSearchBar()
         setupCollectionView()
     }

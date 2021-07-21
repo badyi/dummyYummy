@@ -20,10 +20,11 @@ final class FridgePresenter {
 extension FridgePresenter: FridgePresenterProtocol {
     func viewDidLoad() {
         view?.setupView()
+        view?.configNavigationBar()
     }
 
     func viewWillAppear() {
-
+        view?.configNavigationBar()
     }
 }
 

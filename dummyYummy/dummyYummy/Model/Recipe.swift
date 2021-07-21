@@ -35,7 +35,7 @@ final class Recipe {
 
     var isFavorite: Bool = false
 
-    init(with responseRecipe: FeedRecipeInfoResponse) {
+    init(with responseRecipe: RecipeInfoResponse) {
         id = responseRecipe.id
         title = responseRecipe.title
 
@@ -103,7 +103,7 @@ final class Recipe {
 }
 
 extension Recipe {
-    func configInfo(with responseRecipe: FeedRecipeInfoResponse) {
+    func configInfo(with responseRecipe: RecipeInfoResponse) {
         sourceURL = responseRecipe.sourceUrl
         spoonacularSourceURL = responseRecipe.spoonacularSourceURL
 

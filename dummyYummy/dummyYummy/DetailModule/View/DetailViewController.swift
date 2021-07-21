@@ -54,12 +54,7 @@ extension DetailViewController: DetailViewProtocol {
 
     func setupView() {
         view.addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        setupCollectionView()
     }
 
     func configNavigationBar() {
@@ -126,5 +121,16 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
             height = DetailCell.heightForCell(with: text, width: width)
         }
         return CGSize(width: width, height: height)
+    }
+}
+
+private extension DetailViewController {
+    func setupCollectionView() {
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
     }
 }

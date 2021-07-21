@@ -57,6 +57,5 @@ class RoundedCollectionCellWithShadow: UICollectionViewCell {
     }
 
     func setupView() {
-
     }
 }

@@ -39,7 +39,15 @@ extension FeedViewController: FeedViewProtocol {
         collectionView.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
 
+        view.addSubview(collectionView)
         setupCollectionView()
+    }
+
+    func setSearchController(_ searchController: UISearchController) {
+        searchController.hidesNavigationBarDuringPresentation = true
+        searchController.searchBar.searchBarStyle = .minimal
+        searchController.definesPresentationContext = true
+        navigationItem.searchController = searchController
     }
 }
 

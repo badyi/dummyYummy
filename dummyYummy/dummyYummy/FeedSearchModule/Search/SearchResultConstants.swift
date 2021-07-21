@@ -17,11 +17,7 @@ struct SearchResultConstants {
         }
 
         struct Design {
-            // static let navigationTextColor: UIColor = Colors.wisteria
             static var backgroundColor = Colors.nero
-            // static var navBarBackgroundColor = Colors.black
-            // static var navBarBarTintColor = Colors.black
-            // static var navBarTintColor = Colors.wisteria
         }
     }
 
@@ -41,8 +37,7 @@ struct SearchResultConstants {
             static var titleColor = Colors.almostPureWhite
             static var additinalTextColor = Colors.mediumPureWhite
             static var shadowColor = Colors.pureBlack
-            static var buttonTintColor = Colors.veryLightGray
-        }
+            static var buttonTintColor = Colors.veryLightGray        }
 
         struct Font {
             static let titleFont: UIFont = UIFont(name: "Helvetica-Bold", size: 17) ?? UIFont()

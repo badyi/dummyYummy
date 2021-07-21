@@ -18,13 +18,9 @@ class FeedTests: XCTestCase {
         feedPage = FeedSearchPage(app: app)
     }
 
-    func testCells() {
-        // feedPage.scrollDownAndCollectAllCells()
-    }
-
     func testScroll() {
         let cellID = AccessibilityIdentifiers.FeedViewControlller.cell + "-0-10"
-        let findCell = feedPage.scrollDown(at: cellID, maxScrolls: 100)
+        let findCell = feedPage.scrollDown(to: cellID, maxScrolls: 100)
         feedPage.tapCellTarget()
 
         XCTAssertNotNil(findCell)

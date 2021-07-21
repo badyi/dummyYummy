@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SearchNetworkResourceFactory {
+final class SearchNetworkResourceFactory: ResourceFactoryProtocol {
 
     // MARK: - Resource creation
     func createSearchRecipesResource(_ query: String) -> Resource<SearchResponse>? {
@@ -21,32 +21,5 @@ final class SearchNetworkResourceFactory {
             return nil
         }
         return Resource<SearchResponse>(url: url, headers: headers)
-    }
-
-    func createImageResource(_ url: String) -> Resource<Data>? {
-        guard let url = URL(string: url) else { return nil }
-
-        let parse: (Data) throws -> Data = { data in
-            return data
-        }
-        return Resource<Data>(url: url, method: .get, parse: parse)
-    }
-}
-
-private extension SearchNetworkResourceFactory {
-
-    // MARK: - Building url
-    func buildURL(_ baseURL: String, _ parameters: [String: Any]) -> URL? {
-        guard let url = URL(string: baseURL) else { return nil }
-
-        var com = URLComponents(url: url, resolvingAgainstBaseURL: false)
-        com?.queryItems = [URLQueryItem]()
-
-        for (key, value) in parameters {
-            let item = URLQueryItem(name: key, value: "\(value)")
-            com?.queryItems?.append(item)
-        }
-
-        return com?.url
     }
 }

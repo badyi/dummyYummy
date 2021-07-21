@@ -14,7 +14,7 @@ final class FeedPresenter: NSObject {
     private var dataBaseService: DataBaseServiceProtocol
     private var fileSystemService: FileSystemServiceProtocol
 
-    weak var navigationDelegate: RecipesNavigationDelegate?// FeedNavigationDelegate?
+    weak var navigationDelegate: RecipesNavigationDelegate?
 
     var recipes: [Recipe]
     private let randomRecipesCount: Int = 100

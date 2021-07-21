@@ -1,16 +1,11 @@
 //
-//  FavoritesProtocols.swift
+//  FavoritesPresenterProtocol.swift
 //  dummyYummy
 //
 //  Created by badyi on 12.07.2021.
 //
 
 import Foundation
-
-protocol FavoritesViewProtocol: RecipesViewProtocol {
-    func setupView()
-    func reloadCollection()
-}
 
 protocol FavoritesPresenterProtocol {
     init(with view: FavoritesViewProtocol,
@@ -25,7 +20,3 @@ protocol FavoritesPresenterProtocol {
     func didEndDisplayingCell(at indexPath: IndexPath)
     func didSelectCell(at indexPath: IndexPath)
 }
-
-// protocol FavoritesNavigationDelegate {
-//    
-// }

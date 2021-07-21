@@ -49,19 +49,14 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
         searchPresenter.navigationDelegate = self
         searchResultViewController.presenter = searchPresenter
 
-        searchPresenter.view = searchResultViewController
-
         let searchController = UISearchController(searchResultsController: searchResultViewController)
-        searchController.hidesNavigationBarDuringPresentation = true
-        searchController.searchBar.searchBarStyle = .minimal
-        searchController.definesPresentationContext = true
-        searchController.searchResultsUpdater = searchResultViewController
+
+        searchController.searchResultsUpdater = searchPresenter
         searchController.searchBar.delegate = searchResultViewController
         searchController.searchBar.showsBookmarkButton = true
         searchController.searchBar.setImage(FeedSearchConstants.Image.searchSettingsButtonImage,
                                             for: .bookmark, state: .normal)
-
-        feedViewController.navigationItem.searchController = searchController
+        feedViewController.setSearchController(searchController)
 
         navigationController.pushViewController(feedViewController, animated: true)
     }

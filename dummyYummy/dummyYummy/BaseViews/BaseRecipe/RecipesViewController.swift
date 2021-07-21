@@ -20,7 +20,6 @@ class RecipesViewController: UIViewController {
 extension RecipesViewController: RecipesViewProtocol {
 
     func setupCollectionView() {
-        view.addSubview(collectionView)
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),

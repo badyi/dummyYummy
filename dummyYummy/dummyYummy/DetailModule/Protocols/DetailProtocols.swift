@@ -31,7 +31,11 @@ protocol DetailPresenterProtocol {
     func headerTapped(_ section: Int)
 }
 
-protocol DetailNetworkServiceProtocol {
-    func loadRecipeInfo(_ id: Int, completion: @escaping(OperationCompletion<FeedRecipeInfoResponse>) -> Void)
+protocol DetailNetworkServiceProtocol: NetworkServiceProtocol {
+    func loadRecipeInfo(_ id: Int, completion: @escaping(OperationCompletion<RecipeInfoResponse>) -> Void)
     func loadImage(_ url: String, completion: @escaping(OperationCompletion<Data>) -> Void)
+}
+
+protocol DetailResourceFactoryProtocol: ResourceFactoryProtocol {
+    func createRecipesInfoResource(_ id: Int) -> Resource<RecipeInfoResponse>?
 }

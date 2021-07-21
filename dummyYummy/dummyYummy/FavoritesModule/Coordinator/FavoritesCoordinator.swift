@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol FavoritesCoordinatorProtocol: Coordinator {
-    func showFavorite()
-}
-
 final class FavoritesCoordinator: FavoritesCoordinatorProtocol {
    // var finishDelegate: CoordinatorFinishDelegate?
 

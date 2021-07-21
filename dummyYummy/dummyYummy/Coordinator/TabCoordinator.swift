@@ -119,7 +119,9 @@ final class TabCoordinator: NSObject, Coordinator {
             feedSearchCoordinator.start()
             childCoordinators.append(feedSearchCoordinator)
         case .fridge:
-            print("fridge")
+            let fridgeCoordinator = FridgeCoordinator(navController)
+            fridgeCoordinator.start()
+            childCoordinators.append(fridgeCoordinator)
         case .favorites:
             let favoritesCoodrinator = FavoritesCoordinator(navController)
             favoritesCoodrinator.start()
