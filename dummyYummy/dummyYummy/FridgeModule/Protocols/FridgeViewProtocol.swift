@@ -8,6 +8,4 @@
 import UIKit
 
 protocol FridgeViewProtocol: AnyObject {
-    func setupView()
-    func configNavigationBar()
 }

@@ -68,15 +68,6 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
 
     var isShimmerAnimatin: Bool = false
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = nil
-        titleLabel.text = ""
-        minutesLabel.text = ""
-        healthScoreLabel.text = ""
-        favoriteButton.tintColor = BaseRecipeConstants.Cell.Design.buttonTintColor
-    }
-
     /// stop shimmer animation in all subviews except image view
     func stopAnimation() {
         titleLabel.removeShimmerAnimation()

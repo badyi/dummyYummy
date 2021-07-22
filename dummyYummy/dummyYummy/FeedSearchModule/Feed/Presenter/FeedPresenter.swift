@@ -5,9 +5,9 @@
 //  Created by badyi on 12.06.2021.
 //
 
-import UIKit
+import Foundation
 
-final class FeedPresenter: NSObject {
+final class FeedPresenter {
 
     weak var view: FeedViewProtocol?
     private var networkService: FeedServiceProtocol
@@ -34,186 +34,61 @@ final class FeedPresenter: NSObject {
 
 // MARK: - FeedPresenterProtocol
 extension FeedPresenter: FeedPresenterProtocol {
-    func viewWillAppear() {
-        view?.configNavigation()
-        view?.reloadVisibleCells()
+
+    func recipesCount() -> Int {
+        recipes.count
     }
 
-    func viewWillDisappear() {
-        view?.stopVisibleCellsAnimation()
-    }
-
-    func viewDidLoad() {
-        view?.setupView()
-        loadRandomRecipes()
-    }
-
-    func recipeTitle(at index: IndexPath) -> String? {
-        if index.row < 0 || index.row >= recipes.count {
+    func recipeTitle(at index: Int) -> String? {
+        if index < 0 || index >= recipes.count {
             return nil
         }
-        return recipes[index.row].title
+        return recipes[index].title
     }
 
-    func willDisplayCell(at index: IndexPath) {
-        if index.row < 0 || index.row >= recipes.count {
+    func willDisplayRecipe(at index: Int) {
+        if index < 0 || index >= recipes.count {
             return
         }
         loadImageIfNeeded(at: index)
     }
 
-    func didEndDisplayingCell(at index: IndexPath) {
-        if index.row < 0 || index.row >= recipes.count {
+    func didEndDisplayingRecipe(at index: Int) {
+        guard let imageURL = recipe(at: index)?.imageURL else { return }
+        self.cancelLoad(with: imageURL)
+    }
+
+    func didSelectRecipe(at index: Int) {
+        guard let recipe = recipe(at: index) else {
             return
         }
-        self.cancelLoad(at: index)
+        navigationDelegate?.didTapRecipe(recipe)
     }
 
-    func didSelectCell(at indexPath: IndexPath) {
-        guard let recipe = recipe(at: indexPath) else {
-            return
-        }
-        navigationDelegate?.didTapCell(with: recipe)
-    }
-}
-
-// MARK: - Working with service layer methods
-private extension FeedPresenter {
-    func recipesDidLoad() {
-        DispatchQueue.main.async { [weak self] in
-            self?.view?.reloadCollection()
-        }
-    }
-
-    func imageDidLoad(at index: IndexPath) {
-        DispatchQueue.main.async { [weak self] in
-            self?.view?.reloadItems(at: [index])
-        }
-    }
-
-    func loadRandomRecipes() {
-        networkService.loadRandomRecipes(randomRecipesCount, completion: { [weak self] result in
-            switch result {
-            case let .success(result):
-                self?.recipes = result.recipes.map { Recipe(with: $0) }
-                self?.recipesDidLoad()
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        })
-    }
-
-    func loadImageIfNeeded(at index: IndexPath) {
-        if recipes[index.row].imageData != nil {
-            return
-        }
-        guard let url = recipes[index.row].imageURL else {
-            return
-        }
-        networkService.loadImage(at: index, with: url, completion: { [weak self] result in
-            switch result {
-            case let .success(result):
-                self?.setImageData(at: index, result)
-                self?.imageDidLoad(at: index)
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        })
-    }
-
-    func cancelLoad(at index: IndexPath) {
-        networkService.cancelRequest(at: index)
-    }
-
-    func setImageData(at index: IndexPath, _ data: Data) {
-        recipes[index.row].imageData = data
-    }
-
-    func recipe(at index: IndexPath) -> Recipe? {
-        if index.row < 0 || index.row >= recipes.count {
+    func recipe(at index: Int) -> Recipe? {
+        if index < 0 || index >= recipes.count {
             return nil
         }
-        return recipes[index.row]
-    }
-}
 
-// MARK: - UICollectionViewDataSource
-extension FeedPresenter: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        // in case the recipes haven't loaded yet
-        // we put a few fake cells with animations
-        let count = recipes.count
-        return recipes.isEmpty ? FeedConstants.ViewController.Layout.emptyCellsCount : count
+        return recipes[index]
     }
 
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.id,
-                                                            for: indexPath) as? FeedCell else {
-
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "defaultCell", for: indexPath)
-        }
-
-        cell.startAnimation()
-        if let recipe = recipe(at: indexPath) {
-            recipe.isFavorite = checkFavoriteStatus(at: indexPath)
-
-            cell.configView(with: recipe)
-            cell.stopAnimation()
-            cell.favoriteButtonTapHandle = { [weak self] in
-                self?.handleFavoriteTap(at: indexPath)
-                self?.view?.reloadItems(at: [indexPath])
-            }
-        }
-        return cell
-    }
-
-    func collectionView(_ collectionView: UICollectionView, prefetchingForItemsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach {
-            willDisplayCell(at: $0)
-        }
-    }
-}
-
-private extension FeedPresenter {
-    func handleFavoriteTap(at indexPath: IndexPath) {
-        guard let recipe = recipe(at: indexPath) else {
+    func handleFavoriteTap(at index: Int) {
+        guard let recipe = recipe(at: index) else {
             return
         }
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
 
         if !dataBaseService.recipes(with: predicate).isEmpty {
-            dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
-            if recipe.imageData != nil {
-                fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: { status in
-                    switch status {
-                    case let .success(status):
-                        print(status)
-                    case let .failure(error):
-                        #warning("hadnle error")
-                        print(error)
-                    }
-                })
-            }
-            return
+            deleteFromDB(at: index)
+        } else {
+            saveToDB(at: index)
         }
-
-        if let data = recipe.imageData {
-            fileSystemService.store(imageData: data, forKey: "\(recipe.id)", completionStatus: { status in
-                switch status {
-                case let .success(status):
-                    print(status)
-                case let .failure(error):
-                    #warning("hadnle error")
-                    print(error.localizedDescription)
-                }
-            })
-        }
-        dataBaseService.update(recipes: [RecipeDTO(with: recipe)])
+        view?.reloadItems(at: [IndexPath(row: index, section: 0)])
     }
 
-    func checkFavoriteStatus(at indexPath: IndexPath) -> Bool {
-        guard let recipe = recipe(at: indexPath) else {
+    func checkFavoriteStatus(at index: Int) -> Bool {
+        guard let recipe = recipe(at: index) else {
             return false
         }
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
@@ -222,4 +97,113 @@ private extension FeedPresenter {
         }
         return false
     }
+
+    func loadRandomRecipes() {
+        networkService.clearAndCancelAll()
+        networkService.loadRandomRecipes(randomRecipesCount, completion: { [weak self] result in
+            switch result {
+            case let .success(result):
+                self?.recipes = result.recipes.map { Recipe(with: $0) }
+                self?.recipesDidLoad()
+            case let .failure(error):
+                self?.handleError(error)
+            }
+        })
+    }
+
+    func loadRandomRecipesIfNeeded() {
+        if recipes.isEmpty {
+            loadRandomRecipes()
+        }
+    }
+}
+
+extension FeedPresenter {
+    private func saveToDB(at index: Int) {
+        let recipe = recipes[index]
+        recipe.isFavorite = true
+
+        if let data = recipe.imageData {
+            fileSystemService.store(imageData: data, forKey: "\(recipe.id)", completionStatus: { [weak self] status in
+                switch status {
+                case let .failure(error):
+                    self?.handleError(error)
+                default: break
+                }
+            })
+        }
+        dataBaseService.update(recipes: [RecipeDTO(with: recipe)])
+    }
+
+    private func deleteFromDB(at index: Int) {
+        let recipe = recipes[index]
+        recipe.isFavorite = false
+
+        dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
+
+        if recipe.imageData != nil {
+            fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: { status in
+                switch status {
+                case let .failure(error):
+                    NSLog("\(error.localizedDescription)")
+                default: break
+                }
+            })
+        }
+        return
+    }
+
+    private func recipesDidLoad() {
+        DispatchQueue.main.async { [weak self] in
+            self?.view?.reloadCollectionView()
+        }
+    }
+
+    private func imageDidLoad(at index: Int) {
+        DispatchQueue.main.async { [weak self] in
+            self?.view?.reloadItems(at: [IndexPath(row: index, section: 0)])
+        }
+    }
+
+    private func loadImageIfNeeded(at index: Int) {
+        if recipes[index].imageData != nil {
+            return
+        }
+        guard let url = recipes[index].imageURL else {
+            return
+        }
+        networkService.loadImage(with: url, completion: { [weak self] result in
+            switch result {
+            case let .success(result):
+                self?.setImageData(at: index, result)
+                self?.imageDidLoad(at: index)
+            case let .failure(error):
+                self?.handleError(error)
+            }
+        })
+    }
+
+    private func cancelLoad(with url: String) {
+        networkService.cancelImageLoad(with: url)
+    }
+
+    private func setImageData(at index: Int, _ data: Data) {
+        recipes[index].imageData = data
+    }
+
+    private func handleError(_ error: Error) {
+        if let error = error as? ServiceError {
+            switch error {
+            case .alreadyLoading:
+                break
+            case .resourceCreatingError:
+                NSLog("resource createtion error")
+            }
+        } else if error.localizedDescription == "cancelled" {
+            // ok scenario. do nothing
+        } else {
+            navigationDelegate?.showErrorAlert(with: error.localizedDescription)
+        }
+    }
+
 }

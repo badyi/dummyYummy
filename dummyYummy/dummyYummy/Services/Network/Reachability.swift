@@ -9,11 +9,13 @@ import Foundation
 import Network
 
 final class Reachability: ReachabilityProtocol {
-    var isReachable: Bool = false
-    let monitor: NWPathMonitor
-    let queue = DispatchQueue(label: "Monitor")
+    private(set) var isReachable: Bool
+    private let monitor: NWPathMonitor
+    private let queue: DispatchQueue
 
     init() {
+        isReachable = false
+        queue = DispatchQueue(label: "Monitor")
         monitor = NWPathMonitor()
         monitor.pathUpdateHandler = { [weak self] path in
             if path.status == .satisfied {

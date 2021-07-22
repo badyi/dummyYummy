@@ -42,7 +42,7 @@ extension RecipesViewController: RecipesViewProtocol {
         }
     }
 
-    func reloadCollection() {
+    func reloadCollectionView() {
         collectionView.reloadData()
     }
 

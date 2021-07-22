@@ -11,7 +11,7 @@ final class IngredinentsCell: UITableViewCell {
 
     static let id = "IngredientsCell"
 
-    var handleChoseButtonTap: (() -> Void)?
+    var choseButtonTapDelegate: (() -> Void)?
 
     private let label: UILabel = {
         UILabelBuilder()
@@ -84,7 +84,7 @@ extension IngredinentsCell {
 private extension IngredinentsCell {
     @objc
     func choseButtonTap() {
-        handleChoseButtonTap?()
+        choseButtonTapDelegate?()
     }
 
     func setupView() {

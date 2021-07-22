@@ -8,7 +8,5 @@
 import Foundation
 
 protocol SearchIngredientsViewProtocol: AnyObject {
-    func setupView()
     func reloadTable()
-    func configNavigation()
 }

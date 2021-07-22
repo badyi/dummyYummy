@@ -8,9 +8,9 @@
 import Foundation
 
 /// Менеджер отправки сетевых запросов, реализует NetworkHelperProtocol
-final public class NetworkHelper {
+final class NetworkHelper {
     /// - noConnection: Ошибка отсутствия сети
-    public enum Errors: Error {
+    enum NetworkErrors: Error {
         case noConnection
     }
 
@@ -19,7 +19,7 @@ final public class NetworkHelper {
     private let networking: Networking
 
     /// - Parameter reachability: объект для проверки наличие возможности отправки запроса
-    public convenience init(reachability: ReachabilityProtocol) {
+    convenience init(reachability: ReachabilityProtocol) {
         self.init(reachability: reachability, networking: URLSession.shared)
     }
 
@@ -34,11 +34,11 @@ final public class NetworkHelper {
 
 // MARK: - NetworkHelperProtocol
 extension NetworkHelper: NetworkHelperProtocol {
-    public func load<A>(resource: Resource<A>,
+    func load<A>(resource: Resource<A>,
                         completion: @escaping (OperationCompletion<A>) -> Void) -> Cancellation? {
 
         if !reachability.isReachable {
-            completion(.failure(Errors.noConnection))
+            completion(.failure(NetworkErrors.noConnection))
             return nil
         }
 

@@ -10,6 +10,5 @@ import Foundation
 protocol FridgePresenterProtocol {
     init (with view: FridgeViewProtocol, _ networkService: FridgeNetworkServiceProtocol)
 
-    func viewDidLoad()
-    func viewWillAppear()
+    func setChosenIngredients(_ ingredients: [String])
 }

@@ -9,6 +9,8 @@ import Foundation
 
 protocol FeedServiceProtocol: NetworkServiceProtocol {
 
+    func clearAndCancelAll()
+
     /// Load random recipes from api
     /// - Parameters:
     ///   - count: count of recipes
@@ -20,11 +22,11 @@ protocol FeedServiceProtocol: NetworkServiceProtocol {
     ///   - indexPath: the index of the cell that asks to download the image
     ///   - url: url of image
     ///   - completion: result of downloading
-    func loadImage(at indexPath: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> Void)
+    func loadImage(with url: String, completion: @escaping(OperationCompletion<Data>) -> Void)
 
     /// Cancel request at index
     /// - Parameter index: the index of the cell that asked to download the image
-    func cancelRequest(at indexPath: IndexPath)
+    func cancelImageLoad(with url: String)
 }
 
 protocol FeedResourceFactoryProtocol: ResourceFactoryProtocol {

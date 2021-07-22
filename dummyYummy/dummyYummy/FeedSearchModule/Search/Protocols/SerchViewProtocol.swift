@@ -8,8 +8,6 @@
 import Foundation
 
 protocol SearchViewProtocol: AnyObject {
-    func setupView()
-    func reloadCollection()
+    func reloadCollectionView()
     func reloadItems(at indexPaths: [IndexPath])
-    func configNavigation()
 }

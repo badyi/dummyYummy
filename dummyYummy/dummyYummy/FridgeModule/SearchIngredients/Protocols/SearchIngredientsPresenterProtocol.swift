@@ -8,15 +8,17 @@
 import Foundation
 
 protocol SearchIngredientsPresenterProtocol {
+    var chosenIngredinets: [String] { get }
+
     init(with view: SearchIngredientsViewProtocol,
          _ networkService: SearchIngredientsNetworkProtocol)
 
-    func viewDidLoad()
-    func viewWillAppear()
-    func viewWillDisappear()
     func reloadTable()
-    func willDisplayCell(at indexPath: IndexPath)
-    func didEndDisplayingCell(at indexPath: IndexPath)
-    func didSelectCell(at indexPath: IndexPath)
-    func title(at indexPath: IndexPath) -> String
+    func didSelectRecipe(at index: Int)
+    func title(at index: Int) -> String
+    func ingredientsCount() -> Int
+    func isChosen(_ ingredient: String) -> Bool
+    func handleChooseTap(at ingredient: String)
+    func loadSearch(_ query: String)
+    func setChosenIngredients(_ ingredients: [String])
 }

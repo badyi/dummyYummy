@@ -7,7 +7,7 @@
 
 import Foundation
 
-public enum OperationCompletion<ResponseType> {
+enum OperationCompletion<ResponseType> {
     case success(ResponseType)
     case failure(Error)
 }

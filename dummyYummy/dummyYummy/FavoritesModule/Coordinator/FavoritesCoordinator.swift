@@ -54,7 +54,11 @@ final class FavoritesCoordinator: FavoritesCoordinatorProtocol {
 }
 
 extension FavoritesCoordinator: RecipesNavigationDelegate {
-    func didTapCell(with recipe: Recipe) {
+    func showErrorAlert(with text: String) {
+
+    }
+
+    func didTapRecipe(_ recipe: Recipe) {
         showDetail(with: recipe)
     }
 }

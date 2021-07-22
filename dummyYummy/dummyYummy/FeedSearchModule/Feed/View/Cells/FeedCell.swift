@@ -35,6 +35,7 @@ extension FeedCell {
             favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImageFill, for: .normal)
         } else {
             favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImage, for: .normal)
+            favoriteButton.tintColor = BaseRecipeConstants.Cell.Design.buttonTintColor
         }
 
         // set default image if recipe dont have image url and remove shimmer animation

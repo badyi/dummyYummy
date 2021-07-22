@@ -14,56 +14,78 @@ final class FavoritesViewController: RecipesViewController {
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
+        setupView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.viewWillAppear()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        presenter?.viewWillDisappear()
+        configNavigation()
+        presenter?.retriveRecipes()
     }
 }
 
 extension FavoritesViewController: FavoritesViewProtocol {
+}
+
+private extension FavoritesViewController {
     func setupView() {
         title = "Favorite recipes"
         collectionView.delegate = self
-        collectionView.dataSource = presenter as? UICollectionViewDataSource
+        collectionView.dataSource = self
         collectionView.register(FavoriteCell.self, forCellWithReuseIdentifier: FavoriteCell.id)
         view.addSubview(collectionView)
         setupSearchBar()
         setupCollectionView()
     }
-}
 
-private extension FavoritesViewController {
     func setupSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
-        searchController.searchResultsUpdater = presenter as? UISearchResultsUpdating
+        searchController.searchResultsUpdater = self
         navigationItem.searchController = searchController
+    }
+}
+
+extension FavoritesViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        presenter?.recipesCount() ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.id,
+                                                            for: indexPath) as? FavoriteCell else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: "defaultCell", for: indexPath)
+        }
+
+        guard let recipe = presenter?.recipe(at: indexPath.row) else {
+            return cell
+        }
+
+        cell.configView(with: recipe)
+
+        cell.favoriteButtonTapHandle = { [weak self] in
+            self?.presenter?.handleFavoriteTap(at: indexPath.row)
+        }
+        return cell
     }
 }
 
 extension FavoritesViewController: UICollectionViewDelegate {
 
-    func collectionView(_ collectionView: UICollectionView,
-                        willDisplay cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-        presenter?.willDisplayCell(at: indexPath)
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        didEndDisplaying cell: UICollectionViewCell,
-                        forItemAt indexPath: IndexPath) {
-        presenter?.didEndDisplayingCell(at: indexPath)
-    }
+//    func collectionView(_ collectionView: UICollectionView,
+//                        willDisplay cell: UICollectionViewCell,
+//                        forItemAt indexPath: IndexPath) {
+//        presenter?.willDisplayCell(at: indexPath)
+//    }
+//
+//    func collectionView(_ collectionView: UICollectionView,
+//                        didEndDisplaying cell: UICollectionViewCell,
+//                        forItemAt indexPath: IndexPath) {
+//        presenter?.didEndDisplayingCell(at: indexPath)
+//    }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter?.didSelectCell(at: indexPath)
+        presenter?.didSelectRecipe(at: indexPath.row)
     }
 }
 
@@ -77,7 +99,7 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
         /// The calculation is mainly aimed at calculating the size of the title in the cell
         /// based on this, we calculate the entire size of cell
         var title = ""
-        if let recipeTitle = presenter?.recipeTitle(at: indexPath) {
+        if let recipeTitle = presenter?.recipeTitle(at: indexPath.row) {
             title = recipeTitle
         }
 
@@ -91,5 +113,14 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return FeedConstants.ViewController.Layout.minimumLineSpacing
+    }
+}
+
+extension FavoritesViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        presenter?.updateSearchText(text)
     }
 }

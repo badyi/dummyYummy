@@ -5,18 +5,14 @@
 //  Created by badyi on 05.07.2021.
 //
 
-import UIKit
-
-enum DetailSections {
-    case headerSection, characteristics, ingredientsAndInstrusctions
-}
+import Foundation
 
 struct ExpandableCharacteristics {
     var isExpanded: Bool = false
     var values: [String] = []
 }
 
-final class DetailPresenter: NSObject {
+final class DetailPresenter {
 
     weak var view: DetailViewProtocol?
 
@@ -25,10 +21,8 @@ final class DetailPresenter: NSObject {
     private var fileSystemService: FileSystemServiceProtocol
 
     private var recipe: Recipe
-    private let sections: [DetailSections] = [.headerSection, .characteristics, .ingredientsAndInstrusctions]
 
-    var characteristics: ExpandableCharacteristics
-    var currentSelected: Int = 0
+    private var characteristics: ExpandableCharacteristics
 
     init(with view: DetailViewProtocol,
          _ dataBaseService: DataBaseServiceProtocol,
@@ -46,12 +40,16 @@ final class DetailPresenter: NSObject {
 }
 
 extension DetailPresenter: DetailPresenterProtocol {
-    func characteristic(at indexPath: IndexPath) -> String {
-        characteristics.values[indexPath.row]
+    func segmentDidChange() {
+        self.view?.reloadSection(2)
     }
 
-    func currentSelectedSegment() -> Int {
-        return currentSelected
+    func getCharacteristics() -> ExpandableCharacteristics {
+        return characteristics
+    }
+
+    func characteristic(at indexPath: IndexPath) -> String {
+        characteristics.values[indexPath.row]
     }
 
     func ingredientTitle(at indexPath: IndexPath) -> String {
@@ -85,116 +83,27 @@ extension DetailPresenter: DetailPresenterProtocol {
     }
 
     func headerTapped(_ section: Int) {
-        if sections[section] == .characteristics {
+        if section == 1 {
             characteristics.isExpanded = !characteristics.isExpanded
             view?.reloadSection(section)
         }
     }
-}
 
-extension DetailPresenter: UICollectionViewDataSource {
-
-    func collectionView(_ collectionView: UICollectionView,
-                        viewForSupplementaryElementOfKind kind: String,
-                        at indexPath: IndexPath) -> UICollectionReusableView {
-        // use footer as small space between sections
-        if kind == UICollectionView.elementKindSectionFooter {
-            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
-                                                                         withReuseIdentifier: "CVFooterView",
-                                                                         for: indexPath)
-            return footer
-        }
-        #warning("default header")
-        let headerKind = UICollectionView.elementKindSectionHeader
-        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: headerKind,
-                                                                           withReuseIdentifier: DetailHeader.id,
-                                                                           for: indexPath) as? DetailHeader else {
-            return UICollectionReusableView()
-        }
-        header.backgroundColor = .clear
-
-        // header with image and title
-        if sections[indexPath.section] == .headerSection {
-
-            recipe.isFavorite = checkFavoriteStatus()
-            header.configView(with: recipe)
-
-            header.handleFavoriteButtonTap = { [weak self] in
-                self?.handleFavoriteTap()
-                self?.view?.reloadSection(indexPath.section)
-            }
-            return header
-
-        // header with a button to expand
-        } else if sections[indexPath.section] == .characteristics {
-
-            header.configViewWith(title: "Characterisctics")
-            // handle the tap  of button
-            header.isExpanded = characteristics.isExpanded
-            header.headerTapped = { [weak self] in
-                self?.headerTapped(indexPath.section)
-            }
-
-        // header with segment controll
-        } else if sections[indexPath.section] == .ingredientsAndInstrusctions {
-
-            header.configWithSegment(currentSelected)
-            header.segmentSelectedValueChanged = { [weak self] value in
-                self?.currentSelected = value
-                self?.view?.reloadSection(indexPath.section)
-            }
-        }
-        return header
+    func getRecipe() -> Recipe {
+        return recipe
     }
 
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    func handleFavoriteTap(at indexPath: IndexPath) {
+        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
 
-        if sections[section] == .headerSection {
-            return 0
-        } else if sections[section] == .characteristics {
-            if characteristics.isExpanded {
-                return characteristics.values.count
-            }
-            // if the section should not be expanded, return 0
-            return 0
-        } else if sections[section] == .ingredientsAndInstrusctions {
-            if currentSelected == 0 {
-                return recipe.ingredients?.count ?? 0
-            } else if currentSelected == 1 {
-                return recipe.instructions?.count ?? 0
-            }
+        if !dataBaseService.recipes(with: predicate).isEmpty {
+            deleteFromDB()
+            recipe.isFavorite = false
+        } else {
+            saveToDB()
+            recipe.isFavorite = true
         }
-        return 0
-    }
-
-    func numberOfSections(in collectionView: UICollectionView) -> Int {
-        sections.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-
-        #warning("default cell")
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCell.id,
-                                                            for: indexPath) as? DetailCell else {
-            return UICollectionViewCell()
-        }
-
-        // configuring cells for characteristics section
-        if sections[indexPath.section] == .characteristics {
-            cell.config(with: characteristics.values[indexPath.row])
-            return cell
-        // configuring cells for ingredients and instructions section
-        } else if sections[indexPath.section] == .ingredientsAndInstrusctions {
-            // configuring for ingredients
-            if currentSelected == 0 {
-                cell.config(with: recipe.ingredients?[indexPath.row] ?? "")
-            // configuring for instructions
-            } else if currentSelected == 1 {
-                cell.config("Step \(indexPath.row + 1). ", with: recipe.instructions?[indexPath.row] ?? "")
-            }
-        }
-        return cell
+        view?.reloadSection(indexPath.section)
     }
 }
 
@@ -214,7 +123,6 @@ private extension DetailPresenter {
             case let .failure(error):
                 print(error.localizedDescription)
             }
-
         })
     }
 
@@ -247,7 +155,7 @@ private extension DetailPresenter {
         networkService.loadRecipeInfo(recipe.id, completion: { [weak self] result in
             switch result {
             case .success(let result):
-                self?.recipe = Recipe(with: result)
+                self?.recipe.configInfo(with: result)
                 self?.recipeInfoDidLoad()
             case .failure(let error):
                 #warning("alert")
@@ -272,25 +180,18 @@ private extension DetailPresenter {
 }
 
 private extension DetailPresenter {
-    func handleFavoriteTap() {
+
+    func checkFavoriteStatus() -> Bool {
         let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
-
         if !dataBaseService.recipes(with: predicate).isEmpty {
-            dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
-            if recipe.imageData != nil {
-                fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: { status in
-                    switch status {
-                    case let .success(status):
-                        print(status)
-                    case let .failure(error):
-                        #warning("hadnle error")
-                        print(error)
-                    }
-                })
-            }
-            return
+            return true
         }
+        return false
+    }
+}
 
+extension DetailPresenter {
+    private func saveToDB() {
         if let data = recipe.imageData {
             fileSystemService.store(imageData: data, forKey: "\(recipe.id)", completionStatus: { status in
                 switch status {
@@ -302,14 +203,23 @@ private extension DetailPresenter {
                 }
             })
         }
+
         dataBaseService.update(recipes: [RecipeDTO(with: recipe)])
     }
 
-    func checkFavoriteStatus() -> Bool {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
-        if !dataBaseService.recipes(with: predicate).isEmpty {
-            return true
+    private func deleteFromDB() {
+        dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
+
+        if recipe.imageData != nil {
+            fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: { status in
+                switch status {
+                case let .success(status):
+                    print(status)
+                case let .failure(error):
+                    #warning("hadnle error")
+                    print(error)
+                }
+            })
         }
-        return false
     }
 }

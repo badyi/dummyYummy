@@ -9,14 +9,11 @@ import Foundation
 
 protocol FeedViewProtocol: RecipesViewProtocol {
 
-    /// Setup and config all subviews on view controleller
-    func setupView()
-
     /// Config view of navigation bar
     // func configNavigation()
 
     /// Reload collection view
-    func reloadCollection()
+    func reloadCollectionView()
 
     /// Function for reloading collection view at specific indexes
     /// - Parameter indexPaths: indexes of cells to reload

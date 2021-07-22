@@ -8,6 +8,4 @@
 import Foundation
 
 protocol FavoritesViewProtocol: RecipesViewProtocol {
-    func setupView()
-    func reloadCollection()
 }

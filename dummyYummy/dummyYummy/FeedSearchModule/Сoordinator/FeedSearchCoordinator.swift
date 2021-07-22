@@ -51,7 +51,7 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
 
         let searchController = UISearchController(searchResultsController: searchResultViewController)
 
-        searchController.searchResultsUpdater = searchPresenter
+        searchController.searchResultsUpdater = searchResultViewController
         searchController.searchBar.delegate = searchResultViewController
         searchController.searchBar.showsBookmarkButton = true
         searchController.searchBar.setImage(FeedSearchConstants.Image.searchSettingsButtonImage,
@@ -113,7 +113,11 @@ extension FeedSearchCoordinator: SearchNavigationDelegate {
 }
 
 extension FeedSearchCoordinator: RecipesNavigationDelegate {
-    func didTapCell(with recipe: Recipe) {
+    func showErrorAlert(with text: String) {
+        #warning("eroro")
+    }
+
+    func didTapRecipe(_ recipe: Recipe) {
         showDetail(with: recipe)
     }
 }

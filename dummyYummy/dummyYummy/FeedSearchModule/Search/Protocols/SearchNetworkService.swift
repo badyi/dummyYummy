@@ -9,7 +9,11 @@ import UIKit
 
 protocol SearchNetworkServiceProtocol: NetworkServiceProtocol {
     func loadSearch(_ query: String, completion: @escaping(OperationCompletion<SearchResponse>) -> Void)
-    func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> Void)
+    func loadImage(with url: String, completion: @escaping(OperationCompletion<Data>) -> Void)
+
+    func cancelImageLoad(with url: String)
+    func cancelCurrenSearch()
+    func cancelLoadAllImages()
 }
 
 protocol SearchResourceFactoryProtocol: ResourceFactoryProtocol {

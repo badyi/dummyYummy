@@ -26,7 +26,12 @@ final class FridgeViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
+        setupView()
+    }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configNavigationBar()
     }
 
     func setupSearchController(_ searchController: UISearchController) {
@@ -38,7 +43,11 @@ final class FridgeViewController: UIViewController {
 }
 
 extension FridgeViewController: FridgeViewProtocol {
-    func setupView() {
+
+}
+
+extension FridgeViewController {
+    private func setupView() {
         title = "What's in your fridge?"
         view.addSubview(showSearchResultsButton)
         view.addSubview(tableView)
@@ -46,7 +55,7 @@ extension FridgeViewController: FridgeViewProtocol {
         setupTableView()
     }
 
-    func configNavigationBar() {
+    private func configNavigationBar() {
         let textAttributes = [NSAttributedString.Key.foregroundColor:
                                 FeedConstants.ViewController.Design.navigationTextColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
@@ -66,10 +75,8 @@ extension FridgeViewController: FridgeViewProtocol {
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.largeTitleDisplayMode = .always
     }
-}
 
-private extension FridgeViewController {
-    func setupTableView() {
+    private func setupTableView() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -78,7 +85,7 @@ private extension FridgeViewController {
         ])
     }
 
-    func setupSearchButton() {
+    private func setupSearchButton() {
         let buttonHeight = FridgeConstants.ViewController.Layout.searchButtonHeight
         NSLayoutConstraint.activate([
             showSearchResultsButton.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

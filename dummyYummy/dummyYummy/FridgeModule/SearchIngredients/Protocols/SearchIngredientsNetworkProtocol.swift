@@ -11,6 +11,7 @@ protocol SearchIngredientsNetworkProtocol: NetworkServiceProtocol {
     func loadIngredients(_ count: Int,
                          _ query: String,
                          completion: @escaping(OperationCompletion<IngredientsResponse>) -> Void)
+    func cancelSearchTask()
 }
 
 protocol SearchIngredientsResourceFactoryProtocol: ResourceFactoryProtocol {

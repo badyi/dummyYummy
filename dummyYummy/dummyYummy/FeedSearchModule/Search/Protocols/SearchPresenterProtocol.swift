@@ -12,13 +12,13 @@ protocol SearchPresenterProtocol: AnyObject {
 
     init (with view: SearchViewProtocol, _ networkService: SearchNetworkServiceProtocol)
 
-    func viewDidLoad()
-    func viewWillAppear()
-    func willDisplayCell(at index: IndexPath)
-    func didEndDisplayCell(at index: IndexPath)
-    func didSelectCell(at index: IndexPath)
+    func willDisplayRecipe(at index: Int)
+    func didEndDisplayRecipe(at index: Int)
+    func didSelectRecipe(at index: Int)
     func updateRefinements(_ refinements: SearchRefinements)
-    func resultCount() -> Int
-    func updateSearchResult(_ query: String)
+    func loadRecipes(with query: String)
     func searchRefinementsTapped()
+
+    func recipesCount() -> Int
+    func recipe(at index: Int) -> Recipe?
 }

@@ -9,7 +9,7 @@ import Foundation
 
 extension URLRequest {
     // Создание запроса из Resource
-    public init<A>(resource: Resource<A>) {
+    public init<T>(resource: Resource<T>) {
         self.init(url: resource.url)
         httpMethod = resource.method.stringValue
         if case let .post(data) = resource.method {

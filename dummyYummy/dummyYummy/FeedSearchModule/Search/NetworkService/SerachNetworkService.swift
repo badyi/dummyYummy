@@ -7,48 +7,50 @@
 
 import UIKit
 
-enum SearchCancelType {
-    case search, imageLoad, recipe
-}
-
 final class SearchNetworkService {
-    let networkHelper = NetworkHelper(reachability: FakeReachability())
-    var currentSearchRequest: Cancellation?
-    var imageLoadRequests = [IndexPath: Cancellation]()
+    let networkHelper = NetworkHelper(reachability: Reachability())
+
+    private var currentSearchRequest: TaskItem?
+    private var imageLoadRequests = [String: Cancellation]()
 }
 
 extension SearchNetworkService: SearchNetworkServiceProtocol {
     func loadSearch(_ query: String, completion: @escaping(OperationCompletion<SearchResponse>) -> Void) {
+
+        if currentSearchRequest?.query == query, currentSearchRequest?.searchTask != nil {
+            completion(.failure(ServiceError.alreadyLoading))
+            return
+        }
+        currentSearchRequest = TaskItem()
+        currentSearchRequest?.query = query
+
         guard let resource = SearchNetworkResourceFactory().createSearchRecipesResource(query) else {
             completion(.failure(ServiceError.resourceCreatingError))
             return
         }
-        if currentSearchRequest != nil {
-            cancelSearchRequest()
-            cancelLoadAllImages()
-        }
 
-        currentSearchRequest = load(resource, completion: { result in
+        currentSearchRequest?.searchTask = load(resource, completion: { [weak self] result in
             switch result {
             case .success(let result):
                 completion(.success(result))
             case .failure(let error):
                 completion(.failure(error))
             }
+            self?.currentSearchRequest = nil
         })
     }
 
-    func loadImage(at index: IndexPath, with url: String, completion: @escaping(OperationCompletion<Data>) -> Void) {
+    func loadImage(with url: String, completion: @escaping(OperationCompletion<Data>) -> Void) {
         guard let resource = SearchNetworkResourceFactory().createImageResource(url) else {
             completion(.failure(ServiceError.resourceCreatingError))
             return
         }
 
-        if imageLoadRequests[index] != nil {
+        if imageLoadRequests[url] != nil {
             return
         }
 
-        imageLoadRequests[index] = load(resource, completion: { result in
+        imageLoadRequests[url] = load(resource, completion: { result in
             switch result {
             case .success(let result):
                 completion(.success(result))
@@ -58,14 +60,13 @@ extension SearchNetworkService: SearchNetworkServiceProtocol {
         })
     }
 
-}
+    func cancelImageLoad(with url: String) {
+        imageLoadRequests[url]?.cancel()
+        imageLoadRequests[url] = nil
+    }
 
-private extension SearchNetworkService {
-    func cancelSearchRequest() {
-        guard let request = currentSearchRequest else {
-            return
-        }
-        request.cancel()
+    func cancelCurrenSearch() {
+        currentSearchRequest?.searchTask?.cancel()
         currentSearchRequest = nil
     }
 
@@ -73,6 +74,13 @@ private extension SearchNetworkService {
         imageLoadRequests.forEach {
             $0.value.cancel()
         }
-        imageLoadRequests.removeAll()
+        imageLoadRequests = [:]
+    }
+}
+
+private extension SearchNetworkService {
+    struct TaskItem {
+        var query: String?
+        var searchTask: Cancellation?
     }
 }

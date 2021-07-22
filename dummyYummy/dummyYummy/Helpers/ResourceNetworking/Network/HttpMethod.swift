@@ -7,9 +7,9 @@
 
 import Foundation
 
-public enum HttpMethod<Body> {
+public enum HttpMethod<T> {
     case get
-    case post(Body)
+    case post(T)
 }
 
 extension HttpMethod {
@@ -26,12 +26,12 @@ extension HttpMethod {
     ///
     /// - Parameter f: функция трансляции типа Body в тип B
     /// - Returns: возвращает HttpMethod с новым типом B
-    func map<B>(trans: (Body) -> B) -> HttpMethod<B> {
+    func map<B>(transform: (T) -> B) -> HttpMethod<B> {
         switch self {
         case .get:
             return .get
         case .post(let body):
-            return .post(trans(body))
+            return .post(transform(body))
         }
     }
 }

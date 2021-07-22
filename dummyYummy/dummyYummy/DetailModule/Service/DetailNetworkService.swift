@@ -8,7 +8,7 @@
 import UIKit
 
 final class DetailNetworkService {
-    let networkHelper = NetworkHelper(reachability: FakeReachability())
+    let networkHelper = NetworkHelper(reachability: Reachability())
     var imageLoadRequest: Cancellation?
     var infoLoadRequest: Cancellation?
 }

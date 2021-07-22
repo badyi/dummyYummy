@@ -32,4 +32,5 @@ extension NetworkServiceProtocol {
 
 enum ServiceError: Error {
     case resourceCreatingError
+    case alreadyLoading
 }

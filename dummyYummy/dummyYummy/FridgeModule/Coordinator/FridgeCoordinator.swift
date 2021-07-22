@@ -36,10 +36,23 @@ final class FridgeCoordinator: FridgeCoordinatorProtocol {
 
         let searchController = UISearchController(searchResultsController: searchResult)
 
-        searchController.searchResultsUpdater = searchPresenter
+        searchController.searchResultsUpdater = searchResult
 
         fridgeView.setupSearchController(searchController)
 
+        searchResult.willAppear = {
+            searchPresenter.setChosenIngredients(presenter.chosenIngredients)
+        }
+
+        searchResult.willFinish = { ingredients in
+            guard let ingredients = ingredients else { return }
+            presenter.setChosenIngredients(ingredients)
+        }
+
         navigationController.pushViewController(fridgeView, animated: true)
     }
+}
+
+extension FridgeCoordinator {
+
 }

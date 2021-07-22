@@ -16,7 +16,7 @@ protocol RecipesViewProtocol: AnyObject {
     func configNavigation()
 
     /// Reload collection view
-    func reloadCollection()
+    func reloadCollectionView()
 
     /// Function for reloading collection view at specific indexes
     /// - Parameter indexPaths: indexes of cells to reload
@@ -31,5 +31,6 @@ protocol RecipesViewProtocol: AnyObject {
 }
 
 protocol RecipesNavigationDelegate: AnyObject {
-    func didTapCell(with recipe: Recipe)
+    func didTapRecipe(_ recipe: Recipe)
+    func showErrorAlert(with text: String)
 }

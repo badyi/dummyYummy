@@ -7,26 +7,38 @@
 
 import UIKit
 
+enum DetailSections {
+    case headerSection, characteristics, ingredientsAndInstrusctions
+}
+
 final class DetailViewController: UIViewController {
+
+    var currentSelected: Int = 0
 
     private lazy var collectionView: UICollectionView = {
         let collectionView = UICollectionViewBuilder()
             .backgroundColor(DetailConstants.ViewController.Design.backgroundColor)
             .setInsets(DetailConstants.ViewController.Layout.collectionInsets)
             .delegate(self)
-            .dataSource(presenter as? UICollectionViewDataSource)
+            .dataSource(self)
             .build()
         collectionView.register(DetailHeader.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: DetailHeader.id)
         collectionView.register(DetailCell.self,
                                 forCellWithReuseIdentifier: DetailCell.id)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
         collectionView.register(UICollectionReusableView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter,
-                                withReuseIdentifier: "CVFooterView")
+                                withReuseIdentifier: UICollectionReusableView.defaultRVID)
+        collectionView.register(UICollectionReusableView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: UICollectionReusableView.defaultRVID)
         collectionView.accessibilityIdentifier = AccessibilityIdentifiers.DetailViewController.collectionView
         return collectionView
     }()
+
+    private let sections: [DetailSections] = [.headerSection, .characteristics, .ingredientsAndInstrusctions]
 
     var presenter: DetailPresenterProtocol?
 
@@ -61,6 +73,133 @@ extension DetailViewController: DetailViewProtocol {
         let design = DetailConstants.ViewController.Design.self
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.backgroundColor = design.navBarBackgroundColor
+    }
+}
+
+extension DetailViewController: UICollectionViewDataSource {
+
+    func collectionView(_ collectionView: UICollectionView,
+                        viewForSupplementaryElementOfKind kind: String,
+                        at indexPath: IndexPath) -> UICollectionReusableView {
+        // use footer as small space between sections
+        if kind == UICollectionView.elementKindSectionFooter {
+            let id = UICollectionReusableView.defaultRVID
+            let footer = collectionView.dequeueReusableSupplementaryView(ofKind: kind,
+                                                                         withReuseIdentifier: id,
+                                                                         for: indexPath)
+            return footer
+        }
+
+        let headerKind = UICollectionView.elementKindSectionHeader
+        guard let header = collectionView.dequeueReusableSupplementaryView(ofKind: headerKind,
+                                                                           withReuseIdentifier: DetailHeader.id,
+                                                                           for: indexPath) as? DetailHeader else {
+            let id = UICollectionReusableView.defaultRVID
+            return collectionView.dequeueReusableSupplementaryView(ofKind: headerKind,
+                                                                   withReuseIdentifier: id,
+                                                                   for: indexPath)
+        }
+        header.backgroundColor = .clear
+
+        // header with image and title
+        if sections[indexPath.section] == .headerSection {
+
+            // recipe.isFavorite = checkFavoriteStatus()
+            guard let recipe = presenter?.getRecipe() else {
+                return header
+            }
+            header.configView(with: recipe)
+
+            header.handleFavoriteButtonTap = { [weak self] in
+                self?.presenter?.handleFavoriteTap(at: indexPath)
+            }
+            return header
+
+        // header with a button to expand
+        } else if sections[indexPath.section] == .characteristics {
+
+            guard let characteristics = presenter?.getCharacteristics() else {
+                return header
+            }
+            header.configViewWith(title: "Characterisctics")
+            // handle the tap  of button
+            header.isExpanded = characteristics.isExpanded
+            header.headerTapped = { [weak self] in
+                self?.presenter?.headerTapped(indexPath.section)
+            }
+
+        // header with segment controll
+        } else if sections[indexPath.section] == .ingredientsAndInstrusctions {
+
+            header.configWithSegment(currentSelected)
+            header.segmentSelectedValueChanged = { [weak self] value in
+                self?.currentSelected = value
+                self?.presenter?.segmentDidChange()
+            }
+        }
+        return header
+    }
+
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+
+        if sections[section] == .headerSection {
+            return 0
+        } else if sections[section] == .characteristics {
+            guard let characteristics = presenter?.getCharacteristics() else {
+                return 0
+            }
+            if characteristics.isExpanded {
+                return characteristics.values.count
+            }
+            // if the section should not be expanded, return 0
+            return 0
+        } else if sections[section] == .ingredientsAndInstrusctions {
+            guard let recipe = presenter?.getRecipe() else {
+                return 0
+            }
+            if currentSelected == 0 {
+                return recipe.ingredients?.count ?? 0
+            } else if currentSelected == 1 {
+                return recipe.instructions?.count ?? 0
+            }
+        }
+        return 0
+    }
+
+    func numberOfSections(in collectionView: UICollectionView) -> Int {
+        sections.count
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: DetailCell.id,
+                                                            for: indexPath) as? DetailCell else {
+            let id = UICollectionViewCell.defaultID
+            return collectionView.dequeueReusableCell(withReuseIdentifier: id, for: indexPath)
+        }
+
+        guard let characteristics = presenter?.getCharacteristics() else {
+            return cell
+        }
+        // configuring cells for characteristics section
+        if sections[indexPath.section] == .characteristics {
+            cell.config(with: characteristics.values[indexPath.row])
+            return cell
+        // configuring cells for ingredients and instructions section
+        } else if sections[indexPath.section] == .ingredientsAndInstrusctions {
+            guard let recipe = presenter?.getRecipe() else {
+                return cell
+            }
+            // configuring for ingredients
+            if currentSelected == 0 {
+                cell.config(with: recipe.ingredients?[indexPath.row] ?? "")
+            // configuring for instructions
+            } else if currentSelected == 1 {
+                cell.config("Step \(indexPath.row + 1). ", with: recipe.instructions?[indexPath.row] ?? "")
+            }
+        }
+        return cell
     }
 }
 
@@ -113,10 +252,10 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
             let text = presenter?.characteristic(at: indexPath) ?? ""
             let height = DetailCell.heightForCell(with: text, width: width)
             return CGSize(width: width, height: height)
-        } else if indexPath.section == 2, presenter?.currentSelectedSegment() == 0 {
+        } else if indexPath.section == 2, currentSelected == 0 {
             let text = presenter?.ingredientTitle(at: indexPath) ?? ""
             height = DetailCell.heightForCell(with: text, width: width)
-        } else if indexPath.section == 2, presenter?.currentSelectedSegment() == 1 {
+        } else if indexPath.section == 2, currentSelected == 1 {
             let text = presenter?.instructionTitle(at: indexPath) ?? ""
             height = DetailCell.heightForCell(with: text, width: width)
         }

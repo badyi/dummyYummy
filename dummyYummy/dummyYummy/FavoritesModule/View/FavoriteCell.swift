@@ -11,13 +11,6 @@ final class FavoriteCell: RecipeBigCell {
     static let id = "FavoriteCell"
 
     // MARK: - View lifecycle methods
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = nil
-        titleLabel.text = ""
-        minutesLabel.text = ""
-        healthScoreLabel.text = ""
-    }
 
     override func setupView() {
         super.setupView()

@@ -28,12 +28,6 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
 
     // MARK: - View lifecycle methods
 
-    override func prepareForReuse() {
-        super.prepareForReuse()
-        imageView.image = nil
-        title.text = ""
-    }
-
     override func setupView() {
         super.setupView()
         shadowColor = SearchResultConstants.Cell.Design.shadowColor

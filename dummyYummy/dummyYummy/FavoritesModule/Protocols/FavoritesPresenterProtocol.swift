@@ -12,11 +12,11 @@ protocol FavoritesPresenterProtocol {
          _ dataBaseService: DataBaseServiceProtocol,
          _ fileSystemService: FileSystemServiceProtocol)
 
-    func viewDidLoad()
-    func viewWillAppear()
-    func viewWillDisappear()
-    func recipeTitle(at index: IndexPath) -> String?
-    func willDisplayCell(at indexPath: IndexPath)
-    func didEndDisplayingCell(at indexPath: IndexPath)
-    func didSelectCell(at indexPath: IndexPath)
+    func recipeTitle(at index: Int) -> String?
+    func didSelectRecipe(at index: Int)
+    func retriveRecipes()
+    func recipesCount() -> Int
+    func recipe(at index: Int) -> Recipe?
+    func handleFavoriteTap(at index: Int)
+    func updateSearchText(_ text: String)
 }

@@ -5,9 +5,9 @@
 //  Created by badyi on 12.07.2021.
 //
 
-import UIKit
+import Foundation
 
-final class FavoritesPresenter: NSObject {
+final class FavoritesPresenter {
     weak var view: FavoritesViewProtocol?
     private var dataBaseService: DataBaseServiceProtocol
     private var fileSystemService: FileSystemServiceProtocol
@@ -17,6 +17,7 @@ final class FavoritesPresenter: NSObject {
     private var searchText: String = ""
 
     private var _recipes: [Recipe]
+
     var recipes: [Recipe] {
         get {
             if searchText == "" {
@@ -41,78 +42,50 @@ final class FavoritesPresenter: NSObject {
 }
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
-    func recipeTitle(at index: IndexPath) -> String? {
-        recipes[index.row].title
-    }
-
-    func viewDidLoad() {
-        view?.setupView()
-    }
-
-    func viewWillAppear() {
-        view?.configNavigation()
+    func retriveRecipes() {
         recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }
-        view?.reloadCollection()
+        view?.reloadCollectionView()
     }
 
-    func viewWillDisappear() {
-
-    }
-
-    func willDisplayCell(at indexPath: IndexPath) {
-
-    }
-
-    func didEndDisplayingCell(at indexPath: IndexPath) {
-
-    }
-
-    func didSelectCell(at indexPath: IndexPath) {
-        navigationDelegate?.didTapCell(with: recipes[indexPath.row])
-    }
-}
-
-extension FavoritesPresenter: UICollectionViewDataSource {
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        recipes.count
-    }
-
-    func collectionView(_ collectionView: UICollectionView,
-                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FavoriteCell.id,
-                                                            for: indexPath) as? FavoriteCell else {
-            return collectionView.dequeueReusableCell(withReuseIdentifier: "defaultCell", for: indexPath)
+    func retriveImageIfNeeded(at index: Int) {
+        if let image = fileSystemService.retrieveImageData(forKey: "\(recipes[index].id)") {
+            recipes[index].imageData = image
         }
-        if let image = fileSystemService.retrieveImageData(forKey: "\(recipes[indexPath.row].id)") {
-            recipes[indexPath.row].imageData = image
-        }
-        cell.configView(with: recipes[indexPath.row])
-
-        cell.favoriteButtonTapHandle = { [weak self] in
-            self?.handleFavoriteTap(at: indexPath)
-            collectionView.reloadData()
-        }
-        return cell
     }
-}
 
-private extension FavoritesPresenter {
-    func handleFavoriteTap(at indexPath: IndexPath) {
-        let recipe = recipes[indexPath.row]
+    func recipesCount() -> Int {
+        return recipes.count
+    }
+
+    func recipe(at index: Int) -> Recipe? {
+        if index < 0 || index >= recipes.count {
+            return nil
+        }
+        retriveImageIfNeeded(at: index)
+
+        return recipes[index]
+    }
+
+    func recipeTitle(at index: Int) -> String? {
+        recipes[index].title
+    }
+
+    func didSelectRecipe(at index: Int) {
+        navigationDelegate?.didTapRecipe(recipes[index])
+    }
+
+    func handleFavoriteTap(at index: Int) {
+        let recipe = recipes[index]
         dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
         if recipe.imageData != nil {
             fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: nil)
         }
         recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }
+        view?.reloadCollectionView()
     }
-}
 
-extension FavoritesPresenter: UISearchResultsUpdating {
-    func updateSearchResults(for searchController: UISearchController) {
-        guard let text = searchController.searchBar.text else {
-            return
-        }
-         searchText = text
-         view?.reloadCollection()
+    func updateSearchText(_ text: String) {
+        searchText = text
+        view?.reloadCollectionView()
     }
 }

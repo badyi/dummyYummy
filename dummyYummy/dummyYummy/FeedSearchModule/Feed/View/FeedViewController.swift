@@ -14,30 +14,34 @@ final class FeedViewController: RecipesViewController {
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
+        setupView()
+        presenter?.loadRandomRecipes()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.viewWillAppear()
+        configNavigation()
+        reloadVisibleCells()
+        presenter?.loadRandomRecipesIfNeeded()
     }
 
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
-        presenter?.viewWillDisappear()
+        stopVisibleCellsAnimation()
     }
 }
 
 // MARK: - FeedViewProtocol
 extension FeedViewController: FeedViewProtocol {
-
     func setupView() {
         title = "Browes recipes"
+
         collectionView.accessibilityIdentifier = AccessibilityIdentifiers.FeedViewControlller.collectionView
         collectionView.delegate = self
-        collectionView.dataSource = presenter as? UICollectionViewDataSource
-        collectionView.prefetchDataSource = presenter as? UICollectionViewDataSourcePrefetching
+        collectionView.dataSource = self
+        collectionView.prefetchDataSource = self
         collectionView.register(FeedCell.self, forCellWithReuseIdentifier: FeedCell.id)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
 
         view.addSubview(collectionView)
         setupCollectionView()
@@ -51,18 +55,13 @@ extension FeedViewController: FeedViewProtocol {
     }
 }
 
-extension FeedViewController {
-    // MARK: - View setup methods
-
-}
-
 // MARK: - UICollectionViewDelegate
 extension FeedViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        presenter?.willDisplayCell(at: indexPath)
+        presenter?.willDisplayRecipe(at: indexPath.row)
         let accesibilityId = AccessibilityIdentifiers.FeedViewControlller.cell
         let index = "-\(indexPath.section)-\(indexPath.row)"
         cell.accessibilityIdentifier = accesibilityId + index
@@ -71,19 +70,43 @@ extension FeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didEndDisplaying cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        presenter?.didEndDisplayingCell(at: indexPath)
+        presenter?.didEndDisplayingRecipe(at: indexPath.row)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        presenter?.didSelectCell(at: indexPath)
+        presenter?.didSelectRecipe(at: indexPath.row)
     }
 }
 
-extension FeedPresenter: UICollectionViewDataSourcePrefetching {
-    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
-        indexPaths.forEach {
-            willDisplayCell(at: $0)
+extension FeedViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        // in case the recipes haven't loaded yet
+        // we put a few fake cells with animations
+        guard let count = presenter?.recipesCount() else { return 0 }
+        if count < 1 {
+            return FeedConstants.ViewController.Layout.emptyCellsCount
         }
+        return count
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: FeedCell.id,
+                                                            for: indexPath) as? FeedCell else {
+
+            return collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.defaultID,
+                                                      for: indexPath)
+        }
+
+        cell.startAnimation()
+        if let recipe = presenter?.recipe(at: indexPath.row) {
+            cell.configView(with: recipe)
+            cell.stopAnimation()
+            cell.favoriteButtonTapHandle = { [weak self] in
+                self?.presenter?.handleFavoriteTap(at: indexPath.row)
+            }
+        }
+        return cell
     }
 }
 
@@ -97,7 +120,7 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
         /// The calculation is mainly aimed at calculating the size of the title in the cell
         /// based on this, we calculate the entire size of cell
         var title = ""
-        if let recipeTitle = presenter?.recipeTitle(at: indexPath) {
+        if let recipeTitle = presenter?.recipeTitle(at: indexPath.row) {
             title = recipeTitle
         }
 
@@ -111,5 +134,13 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
                         layout collectionViewLayout: UICollectionViewLayout,
                         minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         return FeedConstants.ViewController.Layout.minimumLineSpacing
+    }
+}
+
+extension FeedViewController: UICollectionViewDataSourcePrefetching {
+    func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
+        indexPaths.forEach {
+            presenter?.willDisplayRecipe(at: $0.row)
+        }
     }
 }

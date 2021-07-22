@@ -13,10 +13,11 @@ final class SearchResultViewController: UIViewController {
         let collectionView = UICollectionViewBuilder()
             .backgroundColor(SearchResultConstants.ViewController.Design.backgroundColor)
             .delegate(self)
-            .dataSource(presenter as? UICollectionViewDataSource)
+            .dataSource(self)
             .setInsets(SearchResultConstants.ViewController.Layout.collectionViewInsets)
             .build()
         collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: SearchResultCell.id)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
         return collectionView
     }()
 
@@ -25,38 +26,30 @@ final class SearchResultViewController: UIViewController {
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
+        setupView()
     }
 
-    override func viewDidAppear(_ animated: Bool) {
-        super.viewDidAppear(animated)
-    }
-
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
     }
 }
 
 extension SearchResultViewController: SearchViewProtocol {
-    func setupView() {
-        view.backgroundColor = SearchResultConstants.ViewController.Design.backgroundColor
-        setupCollectionView()
-    }
-
-    func reloadCollection() {
+    func reloadCollectionView() {
         collectionView.reloadData()
     }
 
     func reloadItems(at indexPaths: [IndexPath]) {
         collectionView.reloadItems(at: indexPaths)
     }
-
-    func configNavigation() {
-
-    }
 }
 
 extension SearchResultViewController {
+    private func setupView() {
+        view.backgroundColor = SearchResultConstants.ViewController.Design.backgroundColor
+        setupCollectionView()
+    }
+
     private func setupCollectionView() {
         view.addSubview(collectionView)
         NSLayoutConstraint.activate([
@@ -68,22 +61,44 @@ extension SearchResultViewController {
     }
 }
 
+extension SearchResultViewController: UICollectionViewDataSource {
+    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        presenter?.recipesCount() ?? 0
+    }
+
+    func collectionView(_ collectionView: UICollectionView,
+                        cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCell.id,
+                                                            for: indexPath) as? SearchResultCell else {
+            return collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.defaultID,
+                                                      for: indexPath)
+        }
+
+        guard let recipe = presenter?.recipe(at: indexPath.row) else {
+            return cell
+        }
+        cell.config(with: recipe)
+        return cell
+    }
+}
+
 extension SearchResultViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        presenter?.willDisplayCell(at: indexPath)
+        presenter?.willDisplayRecipe(at: indexPath.row)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         didEndDisplaying cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        presenter?.didEndDisplayCell(at: indexPath)
+        presenter?.didEndDisplayRecipe(at: indexPath.row)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         didSelectItemAt indexPath: IndexPath) {
-        presenter?.didSelectCell(at: indexPath)
+        presenter?.didSelectRecipe(at: indexPath.row)
     }
 }
 
@@ -117,17 +132,17 @@ extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
-// extension SearchResultViewController: UISearchResultsUpdating {
-//    func updateSearchResults(for searchController: UISearchController) {
-//        guard let text = searchController.searchBar.text else {
-//            return
-//        }
-//        presenter?.updateSearchResult(text)
-//    }
-// }
-
 extension SearchResultViewController: UISearchBarDelegate {
     func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
         presenter?.searchRefinementsTapped()
+    }
+}
+
+extension SearchResultViewController: UISearchResultsUpdating {
+    func updateSearchResults(for searchController: UISearchController) {
+        guard let text = searchController.searchBar.text else {
+            return
+        }
+        presenter?.loadRecipes(with: text)
     }
 }
