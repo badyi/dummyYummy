@@ -13,8 +13,8 @@ final class SearchNetworkResourceFactory: ResourceFactoryProtocol {
     func createSearchRecipesResource(_ query: String) -> Resource<SearchResponse>? {
         let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/complexSearch"
 
-        let headers = ["x-rapidapi-key": Constants.xRapidapiKey,
-                       "x-rapidapi-host": Constants.xRapidapiHost]
+        let headers = ["x-rapidapi-key": NetworkConstants.xRapidapiKey,
+                       "x-rapidapi-host": NetworkConstants.xRapidapiHost]
         let parameters = ["query": query]
 
         guard let url = buildURL(urlString, parameters) else {

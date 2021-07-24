@@ -102,7 +102,7 @@
     }
 
     private func isNoConnection(_ error: Error) -> Bool {
-        guard let error = error as? NetworkHelper.Errors else {
+        guard let error = error as? NetworkHelper.NetworkErrors else {
             return false
         }
         return error == .noConnection

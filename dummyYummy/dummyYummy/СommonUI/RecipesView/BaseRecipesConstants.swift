@@ -29,6 +29,30 @@ struct BaseRecipeConstants {
 
     struct Cell {
         struct Layout {
+            /// Shadow and corner
+            static let cornerRadius: CGFloat = 10
+            static let shadowRadius: CGFloat = 6
+            static let shadowOpacity: Float = 0.4
+            static let shadowOffsetWidth: CGFloat = 0
+            static let shadowOffsetHeight: CGFloat = 5
+        }
+
+        struct Design {
+            static var backgroundColor = Colors.eclipse
+            static var titleBackgroundColor = Colors.wisteria.withAlphaComponent(0.5)
+            static var titleColor = Colors.almostPureWhite
+            static var additinalTextColor = Colors.mediumPureWhite
+            static var shadowColor = Colors.pureBlack
+            static var buttonTintColor = Colors.veryLightGray
+        }
+
+        struct Font {
+            static let titleFont: UIFont = UIFont(name: "Helvetica-Bold", size: 17) ?? UIFont()
+        }
+    }
+
+    struct BigCell {
+        struct Layout {
             static let horizontalSpace: CGFloat = 5
             static let verticalSpace: CGFloat = 2
             static let bottomSpace: CGFloat = 10

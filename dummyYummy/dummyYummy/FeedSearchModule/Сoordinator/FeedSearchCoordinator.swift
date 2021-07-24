@@ -9,7 +9,6 @@ import UIKit
 
 protocol FeedSearchCoordinatorProtocol: Coordinator {
     func showFeedSearch()
-    func showRefinements(with refinements: SearchRefinements)
     func showDetail(with recipe: Recipe)
 }
 
@@ -53,34 +52,9 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
 
         searchController.searchResultsUpdater = searchResultViewController
         searchController.searchBar.delegate = searchResultViewController
-        searchController.searchBar.showsBookmarkButton = true
-        searchController.searchBar.setImage(FeedSearchConstants.Image.searchSettingsButtonImage,
-                                            for: .bookmark, state: .normal)
         feedViewController.setSearchController(searchController)
 
         navigationController.pushViewController(feedViewController, animated: true)
-    }
-
-    func showRefinements(with refinements: SearchRefinements) {
-        let refinementsViewController = RefinementsViewController()
-        let presenter = RefinementsPresenter(with: refinementsViewController, refinements)
-
-        refinementsViewController.presenter = presenter
-
-        refinementsViewController.hidesBottomBarWhenPushed = true
-        refinementsViewController.willFinish = { [weak self] refinements in
-            guard let feedVC = self?.navigationController.visibleViewController as? FeedViewController else {
-                return
-            }
-            guard let searchController = feedVC.navigationItem.searchController else {
-                return
-            }
-            guard let searchReslutVC = searchController.searchResultsController as? SearchResultViewController else {
-                return
-            }
-            searchReslutVC.presenter?.updateRefinements(refinements)
-        }
-        navigationController.pushViewController(refinementsViewController, animated: true)
     }
 
     func showDetail(with recipe: Recipe) {
@@ -105,10 +79,6 @@ extension FeedSearchCoordinator: SearchNavigationDelegate {
 
     func searchDidTapCell(with recipe: Recipe) {
         showDetail(with: recipe)
-    }
-
-    func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements) {
-        showRefinements(with: currentRefinements)
     }
 }
 

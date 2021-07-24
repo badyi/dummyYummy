@@ -14,8 +14,8 @@ final class SearchIngredientsResourceFactory: SearchIngredientsResourceFactoryPr
 
         let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/food/ingredients/autocomplete?"
 
-        let headers = ["x-rapidapi-key": Constants.xRapidapiKey,
-                       "x-rapidapi-host": Constants.xRapidapiHost]
+        let headers = ["x-rapidapi-key": NetworkConstants.xRapidapiKey,
+                       "x-rapidapi-host": NetworkConstants.xRapidapiHost]
         let parameters = ["query": query, "number": "\(count)"]
 
         guard let url = buildURL(urlString, parameters) else {

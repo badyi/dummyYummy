@@ -27,8 +27,8 @@ final class FavoritesViewController: RecipesViewController {
 extension FavoritesViewController: FavoritesViewProtocol {
 }
 
-private extension FavoritesViewController {
-    func setupView() {
+extension FavoritesViewController {
+    private func setupView() {
         title = "Favorite recipes"
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -38,9 +38,10 @@ private extension FavoritesViewController {
         setupCollectionView()
     }
 
-    func setupSearchBar() {
+    private func setupSearchBar() {
         let searchController = UISearchController(searchResultsController: nil)
         searchController.searchResultsUpdater = self
+        searchController.searchBar.placeholder = "Search in favorites"
         navigationItem.searchController = searchController
     }
 }
@@ -60,7 +61,7 @@ extension FavoritesViewController: UICollectionViewDataSource {
         guard let recipe = presenter?.recipe(at: indexPath.row) else {
             return cell
         }
-
+        recipe.isFavorite = true
         cell.configView(with: recipe)
 
         cell.favoriteButtonTapHandle = { [weak self] in
@@ -71,19 +72,6 @@ extension FavoritesViewController: UICollectionViewDataSource {
 }
 
 extension FavoritesViewController: UICollectionViewDelegate {
-
-//    func collectionView(_ collectionView: UICollectionView,
-//                        willDisplay cell: UICollectionViewCell,
-//                        forItemAt indexPath: IndexPath) {
-//        presenter?.willDisplayCell(at: indexPath)
-//    }
-//
-//    func collectionView(_ collectionView: UICollectionView,
-//                        didEndDisplaying cell: UICollectionViewCell,
-//                        forItemAt indexPath: IndexPath) {
-//        presenter?.didEndDisplayingCell(at: indexPath)
-//    }
-
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.didSelectRecipe(at: indexPath.row)
     }

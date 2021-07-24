@@ -10,7 +10,6 @@ import Foundation
 // MARK: - SearchResponse
 struct SearchResponse: Codable {
     let results: [SearchResult]
-    let offset, number, totalResults: Int
 }
 
 // MARK: - Result

@@ -7,20 +7,20 @@
 
 import UIKit
 
-final class SearchResultCell: RoundedCollectionCellWithShadow {
-    static let id = "SearchResultCell"
+final class SearchResultRecipeCell: RoundedCollectionCellWithShadow {
+    static let id = "SearchResultRecipeCell"
 
     private var imageView: ShimmerUIImageView = {
         UIImageViewBuilder()
-            .backgroundColor(SearchResultConstants.Cell.Design.backgroundColor)
+            .backgroundColor(BaseRecipeConstants.Cell.Design.backgroundColor)
             .buildWithShimmer()
     }()
 
     private var title: UILabelWithInsets = {
         UILabelBuilder()
-            .backgroundColor(SearchResultConstants.Cell.Design.titleBackgroundColor)
-            .textColor(SearchResultConstants.Cell.Design.titleColor)
-            .setFont(SearchResultConstants.Cell.Font.titleFont)
+            .backgroundColor(BaseRecipeConstants.Cell.Design.titleBackgroundColor)
+            .textColor(BaseRecipeConstants.Cell.Design.titleColor)
+            .setFont(BaseRecipeConstants.Cell.Font.titleFont)
             .buildWithInsets()
     }()
 
@@ -30,12 +30,12 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
 
     override func setupView() {
         super.setupView()
-        shadowColor = SearchResultConstants.Cell.Design.shadowColor
-        cornerRadius = SearchResultConstants.Cell.Layout.cornerRadius
-        shadowRadius = SearchResultConstants.Cell.Layout.shadowRadius
-        shadowOpacity = SearchResultConstants.Cell.Layout.shadowOpacity
-        shadowOffsetWidth = SearchResultConstants.Cell.Layout.shadowOffsetWidth
-        shadowOffsetHeight = SearchResultConstants.Cell.Layout.shadowOffsetHeight
+        shadowColor = BaseRecipeConstants.Cell.Design.shadowColor
+        cornerRadius = BaseRecipeConstants.Cell.Layout.cornerRadius
+        shadowRadius = BaseRecipeConstants.Cell.Layout.shadowRadius
+        shadowOpacity = BaseRecipeConstants.Cell.Layout.shadowOpacity
+        shadowOffsetWidth = BaseRecipeConstants.Cell.Layout.shadowOffsetWidth
+        shadowOffsetHeight = BaseRecipeConstants.Cell.Layout.shadowOffsetHeight
 
         contentView.addSubview(imageView)
         contentView.addSubview(title)
@@ -44,22 +44,25 @@ final class SearchResultCell: RoundedCollectionCellWithShadow {
     }
 }
 
-extension SearchResultCell {
+extension SearchResultRecipeCell {
+    func startShimmerAnimations() {
+        imageView.startShimmerAnimation()
+    }
+
     func config(with recipe: Recipe) {
         self.title.text = recipe.title
         guard let imageData = recipe.imageData else {
-            imageView.startShimmerAnimation()
             return
         }
         guard let image = UIImage(data: imageData) else {
             return
         }
-        imageView.removeShimmerAnimation()
         self.imageView.image = image
+        imageView.removeShimmerAnimation()
     }
 }
 
-private extension SearchResultCell {
+private extension SearchResultRecipeCell {
 
     func setupImageView() {
         NSLayoutConstraint.activate([

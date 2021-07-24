@@ -7,7 +7,7 @@
 
 import UIKit
 
-class RecipesViewController: UIViewController {
+class RecipesViewController: UIViewController, RecipesViewProtocol {
     var collectionView: UICollectionView = {
         let collectionView = UICollectionViewBuilder()
             .backgroundColor(BaseRecipeConstants.ViewController.Design.backgroundColor)
@@ -15,9 +15,6 @@ class RecipesViewController: UIViewController {
             .build()
         return collectionView
     }()
-}
-
-extension RecipesViewController: RecipesViewProtocol {
 
     func setupCollectionView() {
         NSLayoutConstraint.activate([

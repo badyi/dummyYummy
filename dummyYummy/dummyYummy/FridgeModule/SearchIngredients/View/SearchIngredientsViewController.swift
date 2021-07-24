@@ -120,7 +120,3 @@ extension SearchIngredientsViewController: UISearchResultsUpdating {
         presenter?.loadSearch(text)
     }
 }
-
-// extension SearchIngredientsViewController: UISearchBarDelegate {
-//
-// }

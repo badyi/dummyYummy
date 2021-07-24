@@ -24,3 +24,9 @@ extension UITableViewCell {
         return "defaultID"
     }
 }
+
+extension UITableViewHeaderFooterView {
+    static var defaultID: String {
+        return "TableViewHeaderFooterViewID"
+    }
+}

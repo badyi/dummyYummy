@@ -10,6 +10,10 @@ import Foundation
 protocol NetworkServiceProtocol {
     var networkHelper: NetworkHelper { get }
 
+    /// load function
+    /// - Parameters:
+    ///   - resource: Resource for download
+    ///   - completion: complection handler with result of load
     func load<T>( _ resource: Resource<T>,
                  completion: @escaping(OperationCompletion<T>) -> Void) -> Cancellation?
 }

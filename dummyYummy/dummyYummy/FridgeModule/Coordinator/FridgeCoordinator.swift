@@ -8,6 +8,7 @@
 import UIKit
 
 final class FridgeCoordinator: FridgeCoordinatorProtocol {
+
     var navigationController: UINavigationController
 
     var childCoordinators: [Coordinator] = []
@@ -26,6 +27,7 @@ final class FridgeCoordinator: FridgeCoordinatorProtocol {
         let fridgeView = FridgeViewController()
         let networkService = FridgeNetworkService()
         let presenter = FridgePresenter(with: fridgeView, networkService)
+        presenter.navigationDelegate = self
         fridgeView.presenter = presenter
 
         let searchResult = SearchIngredientsViewController()
@@ -51,8 +53,47 @@ final class FridgeCoordinator: FridgeCoordinatorProtocol {
 
         navigationController.pushViewController(fridgeView, animated: true)
     }
+
+    func showSearchResult(_ ingredients: [String]) {
+        let service = FridgeSearchNetworkService()
+        let view = FridgeSearchResultViewController()
+        let presenter = FridgeSearchResultPresenter(with: view, service, ingredients)
+        presenter.navigationDelegate = self
+        view.presenter = presenter
+
+        navigationController.pushViewController(view, animated: true)
+    }
+
+    func showDetail(with recipe: Recipe) {
+        let detailViewController = DetailViewController()
+        let networkService = DetailNetworkService()
+        let dataBaseService = DataBaseService(coreDataStack: CoreDataStack.shared)
+        let fileSystemService = FileSystemService()
+        let presenter = DetailPresenter(with: detailViewController,
+                                        dataBaseService,
+                                        fileSystemService,
+                                        networkService,
+                                        recipe)
+
+        detailViewController.presenter = presenter
+
+        detailViewController.definesPresentationContext = true
+        navigationController.pushViewController(detailViewController, animated: true)
+    }
 }
 
-extension FridgeCoordinator {
+extension FridgeCoordinator: FridgeNavigationDelegate {
+    func didTapSearch(_ ingredients: [String]) {
+        showSearchResult(ingredients)
+    }
+}
 
+extension FridgeCoordinator: RecipesNavigationDelegate {
+    func didTapRecipe(_ recipe: Recipe) {
+        showDetail(with: recipe)
+    }
+
+    func showErrorAlert(with text: String) {
+
+    }
 }

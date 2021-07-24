@@ -16,7 +16,7 @@ final class SearchResultViewController: UIViewController {
             .dataSource(self)
             .setInsets(SearchResultConstants.ViewController.Layout.collectionViewInsets)
             .build()
-        collectionView.register(SearchResultCell.self, forCellWithReuseIdentifier: SearchResultCell.id)
+        collectionView.register(SearchResultRecipeCell.self, forCellWithReuseIdentifier: SearchResultRecipeCell.id)
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
         return collectionView
     }()
@@ -27,10 +27,6 @@ final class SearchResultViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
-    }
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
     }
 }
 
@@ -69,16 +65,17 @@ extension SearchResultViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView,
                         cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
 
-        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultCell.id,
-                                                            for: indexPath) as? SearchResultCell else {
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SearchResultRecipeCell.id,
+                                                            for: indexPath) as? SearchResultRecipeCell else {
             return collectionView.dequeueReusableCell(withReuseIdentifier: UICollectionViewCell.defaultID,
                                                       for: indexPath)
         }
 
-        guard let recipe = presenter?.recipe(at: indexPath.row) else {
-            return cell
+        cell.startShimmerAnimations()
+        if let recipe = presenter?.recipe(at: indexPath.row) {
+            cell.config(with: recipe)
         }
-        cell.config(with: recipe)
+
         return cell
     }
 }
@@ -133,8 +130,8 @@ extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
 }
 
 extension SearchResultViewController: UISearchBarDelegate {
-    func searchBarBookmarkButtonClicked(_ searchBar: UISearchBar) {
-        presenter?.searchRefinementsTapped()
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        presenter?.loadRecipes()
     }
 }
 
@@ -143,6 +140,6 @@ extension SearchResultViewController: UISearchResultsUpdating {
         guard let text = searchController.searchBar.text else {
             return
         }
-        presenter?.loadRecipes(with: text)
+        presenter?.updateSearchText(text)
     }
 }

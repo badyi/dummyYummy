@@ -34,6 +34,17 @@ final class FeedPresenter {
 
 // MARK: - FeedPresenterProtocol
 extension FeedPresenter: FeedPresenterProtocol {
+    func isFavorite(at index: Int) -> Bool {
+        guard let recipe = recipe(at: index) else {
+            return false
+        }
+        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
+        let result = dataBaseService.recipes(with: predicate)
+        if result.isEmpty {
+            return false
+        }
+        return true
+    }
 
     func recipesCount() -> Int {
         recipes.count
@@ -69,7 +80,6 @@ extension FeedPresenter: FeedPresenterProtocol {
         if index < 0 || index >= recipes.count {
             return nil
         }
-
         return recipes[index]
     }
 

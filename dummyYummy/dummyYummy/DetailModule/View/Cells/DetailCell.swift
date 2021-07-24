@@ -21,12 +21,12 @@ final class DetailCell: RoundedCollectionCellWithShadow {
 
     override func setupView() {
         super.setupView()
-        shadowColor = BaseRecipeConstants.Cell.Design.shadowColor
-        cornerRadius = BaseRecipeConstants.Cell.Layout.cornerRadius
-        shadowRadius = BaseRecipeConstants.Cell.Layout.shadowRadius
-        shadowOpacity = BaseRecipeConstants.Cell.Layout.shadowOpacity
-        shadowOffsetWidth = BaseRecipeConstants.Cell.Layout.shadowOffsetWidth
-        shadowOffsetHeight = BaseRecipeConstants.Cell.Layout.shadowOffsetHeight
+        shadowColor = BaseRecipeConstants.BigCell.Design.shadowColor
+        cornerRadius = BaseRecipeConstants.BigCell.Layout.cornerRadius
+        shadowRadius = BaseRecipeConstants.BigCell.Layout.shadowRadius
+        shadowOpacity = BaseRecipeConstants.BigCell.Layout.shadowOpacity
+        shadowOffsetWidth = BaseRecipeConstants.BigCell.Layout.shadowOffsetWidth
+        shadowOffsetHeight = BaseRecipeConstants.BigCell.Layout.shadowOffsetHeight
 
         contentView.addSubview(label)
         contentView.backgroundColor = DetailConstants.DetailCell.Design.backgroundColor

@@ -10,7 +10,7 @@ import UIKit
 struct FridgeConstants {
     struct ViewController {
         struct Layout {
-            static let searchButtonHeight: CGFloat = 70
+            static let searchButtonHeight: CGFloat = 50
         }
 
         struct Design {

@@ -15,8 +15,8 @@ final class FeedResourceFactory: FeedResourceFactoryProtocol {
         let query = "/recipes/random?number=1&tags=vegetarian%2Cdessert"
         let urlString = host + query
 
-        let headers = ["x-rapidapi-key": Constants.xRapidapiKey,
-                       "x-rapidapi-host": Constants.xRapidapiHost]
+        let headers = ["x-rapidapi-key": NetworkConstants.xRapidapiKey,
+                       "x-rapidapi-host": NetworkConstants.xRapidapiHost]
         let parameters = ["number": "\(count)"]
 
         guard let url = buildURL(urlString, parameters) else {

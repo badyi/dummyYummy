@@ -8,14 +8,14 @@
 import UIKit
 
 class RecipeBigCell: RoundedCollectionCellWithShadow {
-    var cellBackgroundColor = BaseRecipeConstants.Cell.Design.backgroundColor
-    var titleFont = BaseRecipeConstants.Cell.Font.titleFont
-    var titleColor = BaseRecipeConstants.Cell.Design.titleColor
-    var additionalTextColor = BaseRecipeConstants.Cell.Design.additinalTextColor
+    var cellBackgroundColor = BaseRecipeConstants.BigCell.Design.backgroundColor
+    var titleFont = BaseRecipeConstants.BigCell.Font.titleFont
+    var titleColor = BaseRecipeConstants.BigCell.Design.titleColor
+    var additionalTextColor = BaseRecipeConstants.BigCell.Design.additinalTextColor
     var largeConfig = true
-    var buttonTintColor = BaseRecipeConstants.Cell.Design.buttonTintColor
-    var shareImage = BaseRecipeConstants.Cell.Image.shareImage
-    var favoriteImage = BaseRecipeConstants.Cell.Image.favoriteImage
+    var buttonTintColor = BaseRecipeConstants.BigCell.Design.buttonTintColor
+    var shareImage = BaseRecipeConstants.BigCell.Image.shareImage
+    var favoriteImage = BaseRecipeConstants.BigCell.Image.favoriteImage
 
     var favoriteButtonTapHandle: (() -> Void)?
     var shareButtonTapHandle: (() -> Void)?
@@ -30,13 +30,13 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
         return UILabelBuilder()
             .setFont(titleFont)
             .backgroundColor(cellBackgroundColor)
-            .textColor(BaseRecipeConstants.Cell.Design.titleColor)
+            .textColor(BaseRecipeConstants.BigCell.Design.titleColor)
             .buildWithShimmer()
     }()
 
     lazy var healthScoreLabel: ShimmerUILabel = {
         return UILabelBuilder()
-            .backgroundColor(BaseRecipeConstants.Cell.Design.backgroundColor)
+            .backgroundColor(BaseRecipeConstants.BigCell.Design.backgroundColor)
             .textColor(titleColor)
             .buildWithShimmer()
     }()
@@ -100,14 +100,14 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
 
         /// config shadow constants
-        shadowColor = BaseRecipeConstants.Cell.Design.shadowColor
-        cornerRadius = BaseRecipeConstants.Cell.Layout.cornerRadius
-        shadowRadius = BaseRecipeConstants.Cell.Layout.shadowRadius
-        shadowOpacity = BaseRecipeConstants.Cell.Layout.shadowOpacity
-        shadowOffsetWidth = BaseRecipeConstants.Cell.Layout.shadowOffsetWidth
-        shadowOffsetHeight = BaseRecipeConstants.Cell.Layout.shadowOffsetHeight
+        shadowColor = BaseRecipeConstants.BigCell.Design.shadowColor
+        cornerRadius = BaseRecipeConstants.BigCell.Layout.cornerRadius
+        shadowRadius = BaseRecipeConstants.BigCell.Layout.shadowRadius
+        shadowOpacity = BaseRecipeConstants.BigCell.Layout.shadowOpacity
+        shadowOffsetWidth = BaseRecipeConstants.BigCell.Layout.shadowOffsetWidth
+        shadowOffsetHeight = BaseRecipeConstants.BigCell.Layout.shadowOffsetHeight
 
-        contentView.backgroundColor = BaseRecipeConstants.Cell.Design.backgroundColor
+        contentView.backgroundColor = BaseRecipeConstants.BigCell.Design.backgroundColor
 
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
@@ -124,12 +124,12 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
 
     static func heightForCell(with title: String, width: CGFloat) -> CGFloat {
         /// insets from left and right edges
-        let layoutConstants = BaseRecipeConstants.Cell.Layout.self
+        let layoutConstants = BaseRecipeConstants.BigCell.Layout.self
         let horizontalInsets = layoutConstants.leadingSpace + layoutConstants.trailingSpace
 
         let attributedString = NSAttributedString(string: title,
                                                   attributes: [NSAttributedString.Key.font:
-                                                                BaseRecipeConstants.Cell.Font.titleFont])
+                                                                BaseRecipeConstants.BigCell.Font.titleFont])
         let rect = attributedString.boundingRect(with:
                 CGSize(width: width - horizontalInsets, height: .greatestFiniteMagnitude),
                 options: .usesLineFragmentOrigin, context: nil)
@@ -148,6 +148,37 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
         }
         return height
     }
+
+    func configView(with recipe: Recipe) {
+        titleLabel.text = recipe.title
+
+        if let score = recipe.healthScore, let time = recipe.readyInMinutes {
+            healthScoreLabel.text = "Health score: \(score)"
+            minutesLabel.text = "Cooking minutes: \(time)"
+        }
+
+        if recipe.isFavorite {
+            favoriteButton.tintColor = FeedConstants.Cell.Design.favoriteButtonTintColor
+            favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImageFill, for: .normal)
+        } else {
+            favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImage, for: .normal)
+            favoriteButton.tintColor = BaseRecipeConstants.BigCell.Design.buttonTintColor
+        }
+
+        // set default image if recipe dont have image url and remove shimmer animation
+        if recipe.imageURL == nil {
+            imageView.image = FeedConstants.Cell.Image.defaultCellImage
+            favoriteButton.isUserInteractionEnabled = true
+            imageView.removeShimmerAnimation()
+            return
+        }
+
+        guard let imageData = recipe.imageData else { return }
+        guard let image = UIImage(data: imageData) else { return }
+        imageView.image = image
+        favoriteButton.isUserInteractionEnabled = true
+        imageView.removeShimmerAnimation()
+    }
 }
 
 extension RecipeBigCell {
@@ -156,12 +187,12 @@ extension RecipeBigCell {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: BaseRecipeConstants.Cell.Layout.imageHeight)
+            imageView.heightAnchor.constraint(equalToConstant: BaseRecipeConstants.BigCell.Layout.imageHeight)
         ])
     }
 
     func setupLabels() {
-        let layout = BaseRecipeConstants.Cell.Layout.self
+        let layout = BaseRecipeConstants.BigCell.Layout.self
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                 constant: layout.leadingSpace),
@@ -195,16 +226,16 @@ extension RecipeBigCell {
         NSLayoutConstraint.activate([
             favoriteButton.topAnchor.constraint(equalTo: healthScoreLabel.topAnchor),
             favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                     constant: -BaseRecipeConstants.Cell.Layout.trailingSpace),
-            favoriteButton.widthAnchor.constraint(equalToConstant: BaseRecipeConstants.Cell.Layout.buttonWidth),
+                                                     constant: -BaseRecipeConstants.BigCell.Layout.trailingSpace),
+            favoriteButton.widthAnchor.constraint(equalToConstant: BaseRecipeConstants.BigCell.Layout.buttonWidth),
             favoriteButton.heightAnchor.constraint(equalTo: favoriteButton.widthAnchor)
         ])
 
         NSLayoutConstraint.activate([
             shareButton.topAnchor.constraint(equalTo: healthScoreLabel.topAnchor),
             shareButton.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor,
-                                                  constant: -BaseRecipeConstants.Cell.Layout.horizontalSpace),
-            shareButton.widthAnchor.constraint(equalToConstant: BaseRecipeConstants.Cell.Layout.buttonWidth),
+                                                  constant: -BaseRecipeConstants.BigCell.Layout.horizontalSpace),
+            shareButton.widthAnchor.constraint(equalToConstant: BaseRecipeConstants.BigCell.Layout.buttonWidth),
             shareButton.heightAnchor.constraint(equalTo: shareButton.widthAnchor)
         ])
     }

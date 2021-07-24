@@ -8,5 +8,4 @@
 import Foundation
 
 protocol SearchNavigationDelegate: RecipesNavigationDelegate {
-    func didTapSearchSettingsButton(_ currentRefinements: SearchRefinements)
 }

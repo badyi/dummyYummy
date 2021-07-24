@@ -11,8 +11,8 @@ final class DetailResourceFactory: DetailResourceFactoryProtocol {
     func createRecipesInfoResource(_ id: Int) -> Resource<RecipeInfoResponse>? {
         let urlString = "https://spoonacular-recipe-food-nutrition-v1.p.rapidapi.com/recipes/\(id)/information"
 
-        let headers = ["x-rapidapi-key": Constants.xRapidapiKey,
-                       "x-rapidapi-host": Constants.xRapidapiHost]
+        let headers = ["x-rapidapi-key": NetworkConstants.xRapidapiKey,
+                       "x-rapidapi-host": NetworkConstants.xRapidapiHost]
         let parameters: [String: Any] = [:]
 
         guard let url = buildURL(urlString, parameters) else {

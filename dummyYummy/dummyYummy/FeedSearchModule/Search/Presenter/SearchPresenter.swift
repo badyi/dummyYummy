@@ -10,21 +10,32 @@ import Foundation
 final class SearchPresenter: NSObject {
     weak var view: SearchViewProtocol?
     private var service: SearchNetworkServiceProtocol
-    public private(set) var refinements: SearchRefinements
 
     weak var navigationDelegate: SearchNavigationDelegate?
 
     var recipes: [Recipe]
+    var searchText: String
 
     init(with view: SearchViewProtocol, _ networkService: SearchNetworkServiceProtocol) {
         self.service = networkService
         self.view = view
-        refinements = SearchRefinements()
+        searchText = ""
         recipes = []
     }
 }
 
 extension SearchPresenter: SearchPresenterProtocol {
+    func updateSearchText(_ query: String) {
+        if query != searchText {
+            service.cancelCurrenSearch()
+            service.cancelLoadAllImages()
+
+            recipes = []
+            view?.reloadCollectionView()
+        }
+        searchText = query
+    }
+
     func recipe(at index: Int) -> Recipe? {
         if index < 0 || index >= recipes.count {
             return nil
@@ -37,16 +48,14 @@ extension SearchPresenter: SearchPresenterProtocol {
         return recipes.count
     }
 
-    func searchRefinementsTapped() {
-        navigationDelegate?.didTapSearchSettingsButton(refinements)
-    }
-
     func resultCount() -> Int {
         recipes.count
     }
 
     func willDisplayRecipe(at index: Int) {
-        loadImageIfNeeded(for: recipes[index], at: index)
+        if let recipe = recipe(at: index) {
+            loadImageIfNeeded(for: recipe, at: index)
+        }
     }
 
     func didEndDisplayRecipe(at index: Int) {
@@ -58,18 +67,14 @@ extension SearchPresenter: SearchPresenterProtocol {
         navigationDelegate?.didTapRecipe(recipes[index])
     }
 
-    func updateRefinements(_ refinements: SearchRefinements) {
-        self.refinements = refinements
-    }
-
-    func loadRecipes(with query: String) {
+    func loadRecipes() {
         service.cancelCurrenSearch()
         service.cancelLoadAllImages()
 
         recipes = []
         view?.reloadCollectionView()
 
-        service.loadSearch(query) { [weak self] result in
+        service.loadSearch(searchText) { [weak self] result in
             switch result {
             case let .success(result):
                 self?.recipes = result.results.map {
@@ -83,8 +88,8 @@ extension SearchPresenter: SearchPresenterProtocol {
     }
 }
 
-private extension SearchPresenter {
-    func reloadCollection() {
+extension SearchPresenter {
+    private func reloadCollection() {
         DispatchQueue.main.async { [weak self] in
             self?.view?.reloadCollectionView()
         }
@@ -92,7 +97,6 @@ private extension SearchPresenter {
 }
 
 extension SearchPresenter {
-
     private func loadImageIfNeeded(for recipe: Recipe, at index: Int) {
         guard let imageURL = recipe.imageURL, recipe.imageData == nil else {
             return
@@ -119,6 +123,7 @@ extension SearchPresenter {
         guard recipe(at: index) != nil else { return }
 
         DispatchQueue.main.async { [weak self] in
+            guard self?.recipe(at: index) != nil else { return }
             self?.view?.reloadItems(at: [IndexPath(row: index, section: 0)])
         }
     }
@@ -132,7 +137,7 @@ extension SearchPresenter {
                 NSLog("resource createtion error")
             }
         } else if error.localizedDescription == "cancelled" {
-            // ok scenario. do nothing
+            return
         } else {
             navigationDelegate?.showErrorAlert(with: error.localizedDescription)
         }

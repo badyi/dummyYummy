@@ -35,7 +35,7 @@ final class FeedViewController: RecipesViewController {
 extension FeedViewController: FeedViewProtocol {
     func setupView() {
         title = "Browes recipes"
-
+        navigationItem.searchController?.searchBar.placeholder = "Search recipes"
         collectionView.accessibilityIdentifier = AccessibilityIdentifiers.FeedViewControlller.collectionView
         collectionView.delegate = self
         collectionView.dataSource = self
@@ -100,6 +100,7 @@ extension FeedViewController: UICollectionViewDataSource {
 
         cell.startAnimation()
         if let recipe = presenter?.recipe(at: indexPath.row) {
+            recipe.isFavorite = presenter?.isFavorite(at: indexPath.row) ?? false
             cell.configView(with: recipe)
             cell.stopAnimation()
             cell.favoriteButtonTapHandle = { [weak self] in
