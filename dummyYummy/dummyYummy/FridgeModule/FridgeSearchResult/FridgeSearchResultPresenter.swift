@@ -27,7 +27,7 @@ final class FridgeSearchResultPresenter {
     var recipes: [Recipe]
     var ingredients: [String]
 
-    var navigationDelegate: RecipesNavigationDelegate?
+    var navigationDelegate: RecipesViewNavigationDelegate?
 
     init(with view: FridgeSearchResultViewProtocol,
          _ networkService: FridgeSearchNetworkServiceProtocol,

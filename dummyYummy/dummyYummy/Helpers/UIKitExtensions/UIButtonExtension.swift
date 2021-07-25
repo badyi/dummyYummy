@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Adding an icon to the right of the button
 extension UIButton {
     func rightIcon(image: UIImage) {
         subviews.forEach {

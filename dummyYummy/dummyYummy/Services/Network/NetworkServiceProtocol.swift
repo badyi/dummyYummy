@@ -12,15 +12,15 @@ protocol NetworkServiceProtocol {
 
     /// load function
     /// - Parameters:
-    ///   - resource: Resource for download
-    ///   - completion: complection handler with result of load
+    ///   - resource: Resource for network task
+    ///   - completion: Сomplection handler with result of network task
     func load<T>( _ resource: Resource<T>,
-                 completion: @escaping(OperationCompletion<T>) -> Void) -> Cancellation?
+                 completion: @escaping(OperationCompletion<T>) -> Void) -> CancellationProtocol?
 }
 
 extension NetworkServiceProtocol {
     func load<T>( _ resource: Resource<T>,
-                 completion: @escaping(OperationCompletion<T>) -> Void) -> Cancellation? {
+                 completion: @escaping(OperationCompletion<T>) -> Void) -> CancellationProtocol? {
 
         let cancel = networkHelper.load(resource: resource, completion: { result in
             switch result {

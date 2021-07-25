@@ -9,11 +9,13 @@ import UIKit
 
 final class FridgeCoordinator: FridgeCoordinatorProtocol {
 
+    var finishDelegate: CoordinatorFinishDelegate?
+
     var navigationController: UINavigationController
 
     var childCoordinators: [Coordinator] = []
 
-    var type: CoordinatorType = .fridge
+    var type: CoordinatorType { .fridge }
 
     init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
@@ -88,12 +90,12 @@ extension FridgeCoordinator: FridgeNavigationDelegate {
     }
 }
 
-extension FridgeCoordinator: RecipesNavigationDelegate {
-    func didTapRecipe(_ recipe: Recipe) {
-        showDetail(with: recipe)
+extension FridgeCoordinator: RecipesViewNavigationDelegate {
+    func error(with description: String) {
+        showErrorAlert(with: description)
     }
 
-    func showErrorAlert(with text: String) {
-
+    func didTapRecipe(_ recipe: Recipe) {
+        showDetail(with: recipe)
     }
 }

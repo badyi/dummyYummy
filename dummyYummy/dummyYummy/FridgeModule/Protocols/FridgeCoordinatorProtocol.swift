@@ -10,4 +10,5 @@ import Foundation
 protocol FridgeCoordinatorProtocol: Coordinator {
     func showFridge()
     func showDetail(with recipe: Recipe)
+    func showErrorAlert(with text: String)
 }

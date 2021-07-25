@@ -8,12 +8,12 @@
 import Foundation
 
 /// Протокол отмены операций
-public protocol Cancellation {
+public protocol CancellationProtocol {
     // Функция отмены запроса
     func cancel()
 }
 
-// URLSessionTask(метод cancel() уже есть)
-// MARK: - Cancellation
-extension URLSessionTask: Cancellation {
+// URLSessionTask(there is already a cancel () method)
+// MARK: - CancellationProtocol
+extension URLSessionTask: CancellationProtocol {
 }

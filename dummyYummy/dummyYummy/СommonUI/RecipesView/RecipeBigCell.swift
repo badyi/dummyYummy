@@ -8,16 +8,16 @@
 import UIKit
 
 class RecipeBigCell: RoundedCollectionCellWithShadow {
-    var cellBackgroundColor = BaseRecipeConstants.BigCell.Design.backgroundColor
-    var titleFont = BaseRecipeConstants.BigCell.Font.titleFont
-    var titleColor = BaseRecipeConstants.BigCell.Design.titleColor
-    var additionalTextColor = BaseRecipeConstants.BigCell.Design.additinalTextColor
+    var cellBackgroundColor = RecipeViewConstants.BigCell.Design.backgroundColor
+    var titleFont = RecipeViewConstants.BigCell.Font.titleFont
+    var titleColor = RecipeViewConstants.BigCell.Design.titleColor
+    var additionalTextColor = RecipeViewConstants.BigCell.Design.additinalTextColor
     var largeConfig = true
-    var buttonTintColor = BaseRecipeConstants.BigCell.Design.buttonTintColor
-    var shareImage = BaseRecipeConstants.BigCell.Image.shareImage
-    var favoriteImage = BaseRecipeConstants.BigCell.Image.favoriteImage
+    var buttonTintColor = RecipeViewConstants.BigCell.Design.buttonTintColor
+    var shareImage = RecipeViewConstants.BigCell.Image.shareImage
+    var favoriteImage = RecipeViewConstants.BigCell.Image.favoriteImage
 
-    var favoriteButtonTapHandle: (() -> Void)?
+    var handleFavoriteButtonTap: (() -> Void)?
     var shareButtonTapHandle: (() -> Void)?
 
     lazy var imageView: ShimmerUIImageView = {
@@ -30,13 +30,13 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
         return UILabelBuilder()
             .setFont(titleFont)
             .backgroundColor(cellBackgroundColor)
-            .textColor(BaseRecipeConstants.BigCell.Design.titleColor)
+            .textColor(RecipeViewConstants.BigCell.Design.titleColor)
             .buildWithShimmer()
     }()
 
     lazy var healthScoreLabel: ShimmerUILabel = {
         return UILabelBuilder()
-            .backgroundColor(BaseRecipeConstants.BigCell.Design.backgroundColor)
+            .backgroundColor(RecipeViewConstants.BigCell.Design.backgroundColor)
             .textColor(titleColor)
             .buildWithShimmer()
     }()
@@ -100,14 +100,14 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
 
         /// config shadow constants
-        shadowColor = BaseRecipeConstants.BigCell.Design.shadowColor
-        cornerRadius = BaseRecipeConstants.BigCell.Layout.cornerRadius
-        shadowRadius = BaseRecipeConstants.BigCell.Layout.shadowRadius
-        shadowOpacity = BaseRecipeConstants.BigCell.Layout.shadowOpacity
-        shadowOffsetWidth = BaseRecipeConstants.BigCell.Layout.shadowOffsetWidth
-        shadowOffsetHeight = BaseRecipeConstants.BigCell.Layout.shadowOffsetHeight
+        shadowColor = RecipeViewConstants.BigCell.Design.shadowColor
+        cornerRadius = RecipeViewConstants.BigCell.Layout.cornerRadius
+        shadowRadius = RecipeViewConstants.BigCell.Layout.shadowRadius
+        shadowOpacity = RecipeViewConstants.BigCell.Layout.shadowOpacity
+        shadowOffsetWidth = RecipeViewConstants.BigCell.Layout.shadowOffsetWidth
+        shadowOffsetHeight = RecipeViewConstants.BigCell.Layout.shadowOffsetHeight
 
-        contentView.backgroundColor = BaseRecipeConstants.BigCell.Design.backgroundColor
+        contentView.backgroundColor = RecipeViewConstants.BigCell.Design.backgroundColor
 
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
@@ -124,12 +124,12 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
 
     static func heightForCell(with title: String, width: CGFloat) -> CGFloat {
         /// insets from left and right edges
-        let layoutConstants = BaseRecipeConstants.BigCell.Layout.self
+        let layoutConstants = RecipeViewConstants.BigCell.Layout.self
         let horizontalInsets = layoutConstants.leadingSpace + layoutConstants.trailingSpace
 
         let attributedString = NSAttributedString(string: title,
                                                   attributes: [NSAttributedString.Key.font:
-                                                                BaseRecipeConstants.BigCell.Font.titleFont])
+                                                                RecipeViewConstants.BigCell.Font.titleFont])
         let rect = attributedString.boundingRect(with:
                 CGSize(width: width - horizontalInsets, height: .greatestFiniteMagnitude),
                 options: .usesLineFragmentOrigin, context: nil)
@@ -162,7 +162,7 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
             favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImageFill, for: .normal)
         } else {
             favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImage, for: .normal)
-            favoriteButton.tintColor = BaseRecipeConstants.BigCell.Design.buttonTintColor
+            favoriteButton.tintColor = RecipeViewConstants.BigCell.Design.buttonTintColor
         }
 
         // set default image if recipe dont have image url and remove shimmer animation
@@ -187,12 +187,12 @@ extension RecipeBigCell {
             imageView.topAnchor.constraint(equalTo: contentView.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
             imageView.widthAnchor.constraint(equalTo: contentView.widthAnchor),
-            imageView.heightAnchor.constraint(equalToConstant: BaseRecipeConstants.BigCell.Layout.imageHeight)
+            imageView.heightAnchor.constraint(equalToConstant: RecipeViewConstants.BigCell.Layout.imageHeight)
         ])
     }
 
     func setupLabels() {
-        let layout = BaseRecipeConstants.BigCell.Layout.self
+        let layout = RecipeViewConstants.BigCell.Layout.self
         NSLayoutConstraint.activate([
             titleLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,
                                                 constant: layout.leadingSpace),
@@ -226,16 +226,16 @@ extension RecipeBigCell {
         NSLayoutConstraint.activate([
             favoriteButton.topAnchor.constraint(equalTo: healthScoreLabel.topAnchor),
             favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
-                                                     constant: -BaseRecipeConstants.BigCell.Layout.trailingSpace),
-            favoriteButton.widthAnchor.constraint(equalToConstant: BaseRecipeConstants.BigCell.Layout.buttonWidth),
+                                                     constant: -RecipeViewConstants.BigCell.Layout.trailingSpace),
+            favoriteButton.widthAnchor.constraint(equalToConstant: RecipeViewConstants.BigCell.Layout.buttonWidth),
             favoriteButton.heightAnchor.constraint(equalTo: favoriteButton.widthAnchor)
         ])
 
         NSLayoutConstraint.activate([
             shareButton.topAnchor.constraint(equalTo: healthScoreLabel.topAnchor),
             shareButton.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor,
-                                                  constant: -BaseRecipeConstants.BigCell.Layout.horizontalSpace),
-            shareButton.widthAnchor.constraint(equalToConstant: BaseRecipeConstants.BigCell.Layout.buttonWidth),
+                                                  constant: -RecipeViewConstants.BigCell.Layout.horizontalSpace),
+            shareButton.widthAnchor.constraint(equalToConstant: RecipeViewConstants.BigCell.Layout.buttonWidth),
             shareButton.heightAnchor.constraint(equalTo: shareButton.widthAnchor)
         ])
     }
@@ -243,6 +243,6 @@ extension RecipeBigCell {
 
 private extension RecipeBigCell {
     @objc func favoriteButtonTapped() {
-        favoriteButtonTapHandle?()
+        handleFavoriteButtonTap?()
     }
 }

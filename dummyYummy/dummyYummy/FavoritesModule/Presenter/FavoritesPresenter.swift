@@ -12,7 +12,7 @@ final class FavoritesPresenter {
     private var dataBaseService: DataBaseServiceProtocol
     private var fileSystemService: FileSystemServiceProtocol
 
-    weak var navigationDelegate: RecipesNavigationDelegate?
+    weak var navigationDelegate: RecipesViewNavigationDelegate?
 
     private var searchText: String = ""
 
@@ -43,7 +43,7 @@ final class FavoritesPresenter {
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
     func retriveRecipes() {
-        recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }
+        recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }.reversed()
         view?.reloadCollectionView()
     }
 
@@ -80,7 +80,7 @@ extension FavoritesPresenter: FavoritesPresenterProtocol {
         if recipe.imageData != nil {
             fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: nil)
         }
-        recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }
+        recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }.reversed()
         view?.reloadCollectionView()
     }
 

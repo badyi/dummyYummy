@@ -56,6 +56,7 @@ class RoundedCollectionCellWithShadow: UICollectionViewCell {
         layer.shadowOffset = CGSize(width: shadowOffsetWidth, height: shadowOffsetHeight)
     }
 
+    // method to override
     func setupView() {
     }
 }

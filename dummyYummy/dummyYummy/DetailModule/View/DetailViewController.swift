@@ -13,6 +13,9 @@ enum DetailSections {
 
 final class DetailViewController: UIViewController {
 
+    var goingForwards: Bool = false
+    var finishClosure: (() -> Void)?
+
     var currentSelected: Int = 0
 
     private lazy var collectionView: UICollectionView = {
@@ -50,6 +53,18 @@ final class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         presenter?.viewWillAppear()
+        goingForwards = false
+    }
+
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+    }
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        if !goingForwards {
+            finishClosure?()
+        }
     }
 }
 
@@ -66,6 +81,7 @@ extension DetailViewController: DetailViewProtocol {
 
     func setupView() {
         view.addSubview(collectionView)
+        definesPresentationContext = true
         setupCollectionView()
     }
 

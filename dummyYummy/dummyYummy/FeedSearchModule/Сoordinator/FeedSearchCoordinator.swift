@@ -7,13 +7,9 @@
 
 import UIKit
 
-protocol FeedSearchCoordinatorProtocol: Coordinator {
-    func showFeedSearch()
-    func showDetail(with recipe: Recipe)
-}
-
 final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
-    // var finishDelegate: CoordinatorFinishDelegate?
+    var finishDelegate: CoordinatorFinishDelegate?
+
     var navigationController: UINavigationController
     var childCoordinators: [Coordinator] = []
     var type: CoordinatorType { .feedSearch }
@@ -58,20 +54,19 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
     }
 
     func showDetail(with recipe: Recipe) {
-        let detailViewController = DetailViewController()
-        let networkService = DetailNetworkService()
-        let dataBaseService = DataBaseService(coreDataStack: CoreDataStack.shared)
-        let fileSystemService = FileSystemService()
-        let presenter = DetailPresenter(with: detailViewController,
-                                        dataBaseService,
-                                        fileSystemService,
-                                        networkService,
-                                        recipe)
+        let detailCoordinator = DetailCoordinator(navigationController)
+        childCoordinators.append(detailCoordinator)
 
-        detailViewController.presenter = presenter
+        detailCoordinator.finishDelegate = self
+        detailCoordinator.recipe = recipe
+        detailCoordinator.start()
+    }
+}
 
-        detailViewController.definesPresentationContext = true
-        navigationController.pushViewController(detailViewController, animated: true)
+extension FeedSearchCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        navigationController.popToRootViewController(animated: true)
+        childCoordinators.removeLast()
     }
 }
 
@@ -82,9 +77,9 @@ extension FeedSearchCoordinator: SearchNavigationDelegate {
     }
 }
 
-extension FeedSearchCoordinator: RecipesNavigationDelegate {
-    func showErrorAlert(with text: String) {
-        #warning("eroro")
+extension FeedSearchCoordinator: RecipesViewNavigationDelegate {
+    func error(with description: String) {
+        showErrorAlert(with: description)
     }
 
     func didTapRecipe(_ recipe: Recipe) {

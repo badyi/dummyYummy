@@ -29,8 +29,3 @@ protocol RecipesViewProtocol: AnyObject {
     /// Reload visible cells on user screen
     func reloadVisibleCells()
 }
-
-protocol RecipesNavigationDelegate: AnyObject {
-    func didTapRecipe(_ recipe: Recipe)
-    func showErrorAlert(with text: String)
-}

@@ -29,6 +29,10 @@ final class FeedViewController: RecipesViewController {
         super.viewWillDisappear(animated)
         stopVisibleCellsAnimation()
     }
+
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .darkContent
+    }
 }
 
 // MARK: - FeedViewProtocol
@@ -49,9 +53,12 @@ extension FeedViewController: FeedViewProtocol {
 
     func setSearchController(_ searchController: UISearchController) {
         searchController.hidesNavigationBarDuringPresentation = true
-        searchController.searchBar.searchBarStyle = .minimal
         searchController.definesPresentationContext = true
+
+        searchController.searchBar.searchBarStyle = .minimal
+
         navigationItem.searchController = searchController
+        navigationItem.searchController?.searchBar.searchTextField.textColor = Colors.white
     }
 }
 
@@ -103,7 +110,7 @@ extension FeedViewController: UICollectionViewDataSource {
             recipe.isFavorite = presenter?.isFavorite(at: indexPath.row) ?? false
             cell.configView(with: recipe)
             cell.stopAnimation()
-            cell.favoriteButtonTapHandle = { [weak self] in
+            cell.handleFavoriteButtonTap = { [weak self] in
                 self?.presenter?.handleFavoriteTap(at: indexPath.row)
             }
         }

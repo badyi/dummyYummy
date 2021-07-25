@@ -64,7 +64,7 @@ extension FavoritesViewController: UICollectionViewDataSource {
         recipe.isFavorite = true
         cell.configView(with: recipe)
 
-        cell.favoriteButtonTapHandle = { [weak self] in
+        cell.handleFavoriteButtonTap = { [weak self] in
             self?.presenter?.handleFavoriteTap(at: indexPath.row)
         }
         return cell

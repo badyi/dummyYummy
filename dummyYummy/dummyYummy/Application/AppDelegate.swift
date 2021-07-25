@@ -22,13 +22,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window?.makeKeyAndVisible()
         window?.rootViewController = navigationController
 
-        // let window = UIApplication.shared.windows.filter { $0.isKeyWindow }.first
+        // config status bar background color
         let window = UIApplication.shared.windows.first(where: { $0.isKeyWindow })
         if let statusBarFrame = window?.windowScene?.statusBarManager?.statusBarFrame {
             let statusBarView = UIView(frame: statusBarFrame)
-            statusBarView.backgroundColor = UIColor(hexString: "#121212")
+            statusBarView.backgroundColor = Colors.black
             self.window?.addSubview(statusBarView)
         }
+        UITextField.appearance().keyboardAppearance = UIKeyboardAppearance.dark
 
         appCoordinator = AppCoordinator(navigationController)
         appCoordinator?.start()

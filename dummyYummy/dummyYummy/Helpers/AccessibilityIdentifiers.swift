@@ -7,6 +7,7 @@
 
 import Foundation
 
+// Accessibility Identifiers for UI tests
 struct AccessibilityIdentifiers {
     struct FeedViewControlller {
         static let collectionView = "feedVC_collection_view"

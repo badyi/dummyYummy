@@ -8,10 +8,11 @@
 import UIKit
 
 class RecipesViewController: UIViewController, RecipesViewProtocol {
+
     var collectionView: UICollectionView = {
         let collectionView = UICollectionViewBuilder()
-            .backgroundColor(BaseRecipeConstants.ViewController.Design.backgroundColor)
-            .setInsets(BaseRecipeConstants.ViewController.Layout.collectionInsets)
+            .backgroundColor(RecipeViewConstants.ViewController.Design.backgroundColor)
+            .setInsets(RecipeViewConstants.ViewController.Layout.collectionInsets)
             .build()
         return collectionView
     }()

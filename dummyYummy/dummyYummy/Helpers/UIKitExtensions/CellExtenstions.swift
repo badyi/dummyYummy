@@ -7,6 +7,8 @@
 
 import UIKit
 
+// Default id's for collection/table views
+
 extension UICollectionViewCell {
     static var defaultID: String {
         return "defaultID"

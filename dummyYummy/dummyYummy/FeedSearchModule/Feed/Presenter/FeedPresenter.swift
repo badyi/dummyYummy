@@ -14,7 +14,7 @@ final class FeedPresenter {
     private var dataBaseService: DataBaseServiceProtocol
     private var fileSystemService: FileSystemServiceProtocol
 
-    weak var navigationDelegate: RecipesNavigationDelegate?
+    weak var navigationDelegate: RecipesViewNavigationDelegate?
 
     var recipes: [Recipe]
     private let randomRecipesCount: Int = 100
@@ -211,8 +211,13 @@ extension FeedPresenter {
             }
         } else if error.localizedDescription == "cancelled" {
             // ok scenario. do nothing
+        } else if let error = error as? NetworkHelper.NetworkErrors {
+            switch error {
+            case .noConnection:
+                navigationDelegate?.error(with: "No connection")
+            }
         } else {
-            navigationDelegate?.showErrorAlert(with: error.localizedDescription)
+            navigationDelegate?.error(with: error.localizedDescription)
         }
     }
 

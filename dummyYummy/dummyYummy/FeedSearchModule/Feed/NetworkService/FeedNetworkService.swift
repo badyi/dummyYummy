@@ -9,8 +9,8 @@ import Foundation
 
 final class FeedNetworkService {
     let networkHelper = NetworkHelper(reachability: Reachability())
-    var loadRandomRecipes: Cancellation?
-    var imageLoadTaskContainer = [String: Cancellation]()
+    var loadRandomRecipes: CancellationProtocol?
+    var imageLoadTaskContainer = [String: CancellationProtocol]()
 }
 
 // MARK: - FeedServiceProtocol

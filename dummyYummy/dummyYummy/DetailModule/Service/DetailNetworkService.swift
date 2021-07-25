@@ -9,8 +9,8 @@ import UIKit
 
 final class DetailNetworkService {
     let networkHelper = NetworkHelper(reachability: Reachability())
-    var imageLoadRequest: Cancellation?
-    var infoLoadRequest: Cancellation?
+    var imageLoadRequest: CancellationProtocol?
+    var infoLoadRequest: CancellationProtocol?
 }
 
 extension DetailNetworkService: DetailNetworkServiceProtocol {

@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Adding UIImage to background of segment control
 extension UISegmentedControl {
     func setImagesToBackground() {
         if let backgroundColor = backgroundColor {

@@ -7,13 +7,13 @@
 
 import Foundation
 
-/// Протокол для работы с сервером на основе ресурсов
+/// Protocol for working with server
 protocol NetworkHelperProtocol: AnyObject {
-    /// Метод загрузки данных на основе Resource(ресурс далее)
+    /// Resource based data loading method
     ///
     /// - Parameters:
-    ///   - resource: ресурс
-    ///   - completion: результат выполнения операции
-    /// - Returns: объект отмены операции загрузки данных
-    func load<T>(resource: Resource<T>, completion: @escaping (OperationCompletion<T>) -> Void) -> Cancellation?
+    ///   - resource: Resource
+    ///   - completion: Result of the operation
+    /// - Returns: Data load cancel object
+    func load<T>(resource: Resource<T>, completion: @escaping (OperationCompletion<T>) -> Void) -> CancellationProtocol?
 }

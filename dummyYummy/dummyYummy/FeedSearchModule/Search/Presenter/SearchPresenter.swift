@@ -139,7 +139,7 @@ extension SearchPresenter {
         } else if error.localizedDescription == "cancelled" {
             return
         } else {
-            navigationDelegate?.showErrorAlert(with: error.localizedDescription)
+            navigationDelegate?.error(with: error.localizedDescription)
         }
     }
 }

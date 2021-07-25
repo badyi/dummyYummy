@@ -22,10 +22,10 @@ extension HttpMethod {
         }
     }
 
-    /// Маппер одного типа тела в другой
+    /// Mapper of one body type to another
     ///
-    /// - Parameter f: функция трансляции типа Body в тип B
-    /// - Returns: возвращает HttpMethod с новым типом B
+    /// - Parameter transform: function of transfrom from T type to B type
+    /// - Returns: returns HttpMethod with new type B
     func map<B>(transform: (T) -> B) -> HttpMethod<B> {
         switch self {
         case .get:

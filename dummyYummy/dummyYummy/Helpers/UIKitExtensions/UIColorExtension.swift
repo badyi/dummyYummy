@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Hex extension for UIColor
 extension UIColor {
     convenience init(hexString: String, alpha: CGFloat = 1.0) {
         var hexString: String = hexString.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)

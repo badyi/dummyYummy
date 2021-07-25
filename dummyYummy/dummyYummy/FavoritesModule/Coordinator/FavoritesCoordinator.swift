@@ -8,7 +8,7 @@
 import UIKit
 
 final class FavoritesCoordinator: FavoritesCoordinatorProtocol {
-   // var finishDelegate: CoordinatorFinishDelegate?
+    var finishDelegate: CoordinatorFinishDelegate?
 
     var navigationController: UINavigationController
 
@@ -51,11 +51,15 @@ final class FavoritesCoordinator: FavoritesCoordinatorProtocol {
         detailViewController.definesPresentationContext = true
         navigationController.pushViewController(detailViewController, animated: true)
     }
-}
 
-extension FavoritesCoordinator: RecipesNavigationDelegate {
     func showErrorAlert(with text: String) {
 
+    }
+}
+
+extension FavoritesCoordinator: RecipesViewNavigationDelegate {
+    func error(with description: String) {
+        showErrorAlert(with: description)
     }
 
     func didTapRecipe(_ recipe: Recipe) {

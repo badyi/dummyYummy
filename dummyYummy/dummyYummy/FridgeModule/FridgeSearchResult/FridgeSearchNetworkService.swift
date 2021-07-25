@@ -17,8 +17,8 @@ protocol FridgeSearchNetworkServiceProtocol: NetworkServiceProtocol {
 final class FridgeSearchNetworkService {
     private(set) var networkHelper: NetworkHelper = NetworkHelper(reachability: Reachability())
     private var searchWithIngredients: [String]?
-    private var searchRequest: Cancellation?
-    private var imageLoad: [String: Cancellation] = [:]
+    private var searchRequest: CancellationProtocol?
+    private var imageLoad: [String: CancellationProtocol] = [:]
 }
 
 extension FridgeSearchNetworkService: FridgeSearchNetworkServiceProtocol {

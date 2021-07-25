@@ -7,6 +7,7 @@
 
 import UIKit
 
+// Highlight some text in UILabel.text
 extension UILabel {
     func highlight(text: String?, font: UIFont? = nil, color: UIColor? = nil) {
         guard let fullText = self.text, let target = text else {

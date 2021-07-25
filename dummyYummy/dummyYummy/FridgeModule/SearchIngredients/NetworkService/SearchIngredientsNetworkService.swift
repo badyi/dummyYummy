@@ -50,6 +50,6 @@ extension SearchIngredientsNetworkService: SearchIngredientsNetworkProtocol {
 extension SearchIngredientsNetworkService {
     struct TaskItem {
         var query: String?
-        var task: Cancellation?
+        var task: CancellationProtocol?
     }
 }

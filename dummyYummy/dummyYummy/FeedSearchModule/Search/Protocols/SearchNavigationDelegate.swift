@@ -7,5 +7,5 @@
 
 import Foundation
 
-protocol SearchNavigationDelegate: RecipesNavigationDelegate {
+protocol SearchNavigationDelegate: RecipesViewNavigationDelegate {
 }

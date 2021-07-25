@@ -8,21 +8,6 @@
 import Foundation
 import CoreData
 
-protocol DataBaseServiceProtocol {
-    init(coreDataStack: CoreDataStackProtocol)
-
-    /// Update recipe in store, if it doesn't exist it will be stored
-    /// - Parameter recipes: recipeDTOs
-    func update(recipes: [RecipeDTO])
-
-    /// Delete from store
-    /// - Parameter recipes: recipeDTOs
-    func delete(recipes: [RecipeDTO]?)
-    func deleteAll()
-    func recipes(with predicate: NSPredicate) -> [RecipeDTO]
-    func allRecipes() -> [RecipeDTO]
-}
-
 final class DataBaseService {
 
     private let stack: CoreDataStackProtocol

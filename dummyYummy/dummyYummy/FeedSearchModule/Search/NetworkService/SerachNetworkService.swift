@@ -11,7 +11,7 @@ final class SearchNetworkService {
     let networkHelper = NetworkHelper(reachability: Reachability())
 
     private var currentSearchRequest: TaskItem?
-    private var imageLoadRequests = [String: Cancellation]()
+    private var imageLoadRequests = [String: CancellationProtocol]()
 }
 
 extension SearchNetworkService: SearchNetworkServiceProtocol {
@@ -81,6 +81,6 @@ extension SearchNetworkService: SearchNetworkServiceProtocol {
 private extension SearchNetworkService {
     struct TaskItem {
         var query: String?
-        var searchTask: Cancellation?
+        var searchTask: CancellationProtocol?
     }
 }

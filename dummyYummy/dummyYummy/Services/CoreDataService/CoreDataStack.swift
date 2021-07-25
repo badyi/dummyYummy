@@ -15,6 +15,7 @@ protocol CoreDataStackProtocol {
     var mainContext: NSManagedObjectContext { get }
     var backgroundContext: NSManagedObjectContext { get }
 
+    /// Save context to persistant store
     func saveContext()
 }
 
@@ -49,9 +50,11 @@ class CoreDataStack: CoreDataStackProtocol {
 
     private var managedObjectModel: NSManagedObjectModel = {
         guard let url = Bundle.main.url(forResource: "dummyYummy", withExtension: "momd") else {
+            NSLog("MOMD url is nil")
             fatalError("CoreData MOMD is nil")
         }
         guard let model = NSManagedObjectModel(contentsOf: url) else {
+            NSLog("CoreData MOMD is nil")
             fatalError("CoreData MOMD is nil")
         }
         return model

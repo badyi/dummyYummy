@@ -28,11 +28,11 @@ enum TabBarPage {
     func pageTitleValue() -> String {
         switch self {
         case .feed:
-            return "Feed"
+            return "Browes recipes"
         case .fridge:
-            return "Fridge"
+            return "What's in your fridge?"
         case .favorites:
-            return "Favorites"
+            return "Favorite recipes"
         }
     }
 
@@ -47,13 +47,23 @@ enum TabBarPage {
         }
     }
 
-    // Add tab icon value
+    func pageImage() -> UIImage {
+        switch self {
+        case .feed:
+            return UIImage(named: "dish") ?? UIImage()
+        case .fridge:
+            return UIImage(named: "fridge") ?? UIImage()
+        case .favorites:
+            return UIImage(named: "favoriteFood") ?? UIImage()
+        }
+    }
 
     // Add tab icon selected / deselected color
 
     // etc
 }
 
+// Define what type of flows can be started from this Coordinator
 protocol TabCoordinatorProtocol: Coordinator {
     var tabBarController: UITabBarController { get set }
 
@@ -65,7 +75,7 @@ protocol TabCoordinatorProtocol: Coordinator {
 }
 
 final class TabCoordinator: NSObject, Coordinator {
-   // weak var finishDelegate: CoordinatorFinishDelegate?
+    var finishDelegate: CoordinatorFinishDelegate?
 
     var childCoordinators: [Coordinator] = []
 
@@ -75,7 +85,7 @@ final class TabCoordinator: NSObject, Coordinator {
 
     var type: CoordinatorType { .tab }
 
-    required init(_ navigationController: UINavigationController) {
+    init(_ navigationController: UINavigationController) {
         self.navigationController = navigationController
         self.tabBarController = .init()
     }
@@ -91,17 +101,24 @@ final class TabCoordinator: NSObject, Coordinator {
         prepareTabBarController(withTabControllers: controllers)
     }
 
+}
+
+extension TabCoordinator {
+
     private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
-        // Set delegate for UITabBarController
+
         tabBarController.delegate = self
         // Assign page's controllers
         tabBarController.setViewControllers(tabControllers, animated: true)
         // Set index
         tabBarController.selectedIndex = TabBarPage.feed.pageOrderNumber()
-        // Styling
-        tabBarController.tabBar.isTranslucent = false
 
-        // In this step, we attach tabBarController to navigation controller associated with this coordanator
+        tabBarController.tabBar.isTranslucent = true
+        tabBarController.tabBar.tintColor = Colors.wisteria
+        tabBarController.tabBar.barTintColor = Colors.nero
+        tabBarController.tabBar.backgroundColor = Colors.nero
+
+        // attach tabBarController to navigation controller associated with this coordanator
         navigationController.viewControllers = [tabBarController]
     }
 
@@ -110,9 +127,9 @@ final class TabCoordinator: NSObject, Coordinator {
         navController.setNavigationBarHidden(false, animated: false)
 
         navController.tabBarItem = UITabBarItem(title: page.pageTitleValue(),
-                                                     image: nil,
+                                                image: page.pageImage(),
                                                      tag: page.pageOrderNumber())
-
+        navController.tabBarController?.tabBar.barTintColor = Colors.wisteria
         switch page {
         case .feed:
             let feedSearchCoordinator = FeedSearchCoordinator(navController)

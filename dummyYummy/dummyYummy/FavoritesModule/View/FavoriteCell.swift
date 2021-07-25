@@ -14,7 +14,7 @@ final class FavoriteCell: RecipeBigCell {
 
     override func setupView() {
         super.setupView()
-        favoriteButton.setImage(BaseRecipeConstants.BigCell.Image.favoriteImageFill, for: .normal)
+        favoriteButton.setImage(RecipeViewConstants.BigCell.Image.favoriteImageFill, for: .normal)
     }
 }
 

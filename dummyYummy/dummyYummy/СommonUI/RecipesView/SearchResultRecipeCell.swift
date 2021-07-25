@@ -12,30 +12,30 @@ final class SearchResultRecipeCell: RoundedCollectionCellWithShadow {
 
     private var imageView: ShimmerUIImageView = {
         UIImageViewBuilder()
-            .backgroundColor(BaseRecipeConstants.Cell.Design.backgroundColor)
+            .backgroundColor(RecipeViewConstants.Cell.Design.backgroundColor)
             .buildWithShimmer()
     }()
 
     private var title: UILabelWithInsets = {
         UILabelBuilder()
-            .backgroundColor(BaseRecipeConstants.Cell.Design.titleBackgroundColor)
-            .textColor(BaseRecipeConstants.Cell.Design.titleColor)
-            .setFont(BaseRecipeConstants.Cell.Font.titleFont)
+            .backgroundColor(RecipeViewConstants.Cell.Design.titleBackgroundColor)
+            .textColor(RecipeViewConstants.Cell.Design.titleColor)
+            .setFont(RecipeViewConstants.Cell.Font.titleFont)
             .buildWithInsets()
     }()
 
-    var isShimmerAnimatin: Bool = false
+    var isAnimated: Bool = false
 
     // MARK: - View lifecycle methods
 
     override func setupView() {
         super.setupView()
-        shadowColor = BaseRecipeConstants.Cell.Design.shadowColor
-        cornerRadius = BaseRecipeConstants.Cell.Layout.cornerRadius
-        shadowRadius = BaseRecipeConstants.Cell.Layout.shadowRadius
-        shadowOpacity = BaseRecipeConstants.Cell.Layout.shadowOpacity
-        shadowOffsetWidth = BaseRecipeConstants.Cell.Layout.shadowOffsetWidth
-        shadowOffsetHeight = BaseRecipeConstants.Cell.Layout.shadowOffsetHeight
+        shadowColor = RecipeViewConstants.Cell.Design.shadowColor
+        cornerRadius = RecipeViewConstants.Cell.Layout.cornerRadius
+        shadowRadius = RecipeViewConstants.Cell.Layout.shadowRadius
+        shadowOpacity = RecipeViewConstants.Cell.Layout.shadowOpacity
+        shadowOffsetWidth = RecipeViewConstants.Cell.Layout.shadowOffsetWidth
+        shadowOffsetHeight = RecipeViewConstants.Cell.Layout.shadowOffsetHeight
 
         contentView.addSubview(imageView)
         contentView.addSubview(title)
@@ -44,6 +44,7 @@ final class SearchResultRecipeCell: RoundedCollectionCellWithShadow {
     }
 }
 
+// MARK: - View config methods
 extension SearchResultRecipeCell {
     func startShimmerAnimations() {
         imageView.startShimmerAnimation()
@@ -62,8 +63,8 @@ extension SearchResultRecipeCell {
     }
 }
 
+// MARK: - Subviews setup methods
 private extension SearchResultRecipeCell {
-
     func setupImageView() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),

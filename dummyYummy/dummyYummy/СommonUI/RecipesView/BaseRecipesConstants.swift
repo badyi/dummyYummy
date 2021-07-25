@@ -7,7 +7,7 @@
 
 import UIKit
 
-struct BaseRecipeConstants {
+struct RecipeViewConstants {
     struct ViewController {
         struct Layout {
             static let collectionInsets: UIEdgeInsets = UIEdgeInsets(top: 20, left: 20, bottom: 20, right: 20)
@@ -29,7 +29,6 @@ struct BaseRecipeConstants {
 
     struct Cell {
         struct Layout {
-            /// Shadow and corner
             static let cornerRadius: CGFloat = 10
             static let shadowRadius: CGFloat = 6
             static let shadowOpacity: Float = 0.4

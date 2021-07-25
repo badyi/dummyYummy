@@ -8,7 +8,15 @@
 import Foundation
 
 protocol ResourceFactoryProtocol {
+
+    /// Create URL
+    /// - Parameters:
+    ///   - baseURL: url string
+    ///   - parameters: parameters
     func buildURL(_ baseURL: String, _ parameters: [String: Any]) -> URL?
+
+    /// Create image Resource
+    /// - Parameter url: url string
     func createImageResource(_ url: String) -> Resource<Data>?
 }
 

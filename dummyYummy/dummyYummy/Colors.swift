@@ -8,7 +8,6 @@
 import UIKit
 
 final class Colors {
-    // static let darkPastelGreen = UIColor(hexString: "#1DB954")
     /// purple color
     static let wisteria = UIColor(hexString: "#BB86FC")
 

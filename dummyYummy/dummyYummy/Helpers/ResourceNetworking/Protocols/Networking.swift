@@ -9,13 +9,13 @@ import Foundation
 
 protocol Networking {
     func execute<A>(_ resource: Resource<A>,
-                    completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> Cancellation?
+                    completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CancellationProtocol?
 }
 
 // MARK: - Networking
 extension URLSession: Networking {
     func execute<A>(_ resource: Resource<A>,
-                    completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> Cancellation? {
+                    completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CancellationProtocol? {
         let request = URLRequest(resource: resource)
         let task = dataTask(with: request, completionHandler: completionHandler)
         task.resume()

@@ -7,16 +7,16 @@
 
 import Foundation
 
-public struct Resource<T> {
-    let url: URL // URL запроса
-    let method: HttpMethod<Data> // Метод запроса
-    let parse: (Data) throws -> T // Парсер ответа от сервара
-    let headers: [String: String]? // Заголовки запроса
+struct Resource<T> {
+    let url: URL
+    let method: HttpMethod<Data>
+    let parse: (Data) throws -> T // Server response parser
+    let headers: [String: String]?
 
-    public init(url: URL,
-                method: HttpMethod<Data>,
-                parse: @escaping (Data) throws -> T,
-                headers: [String: String]? = nil) {
+    init(url: URL,
+        method: HttpMethod<Data>,
+        parse: @escaping (Data) throws -> T,
+        headers: [String: String]? = nil) {
 
         self.url = url
         self.method = method
@@ -26,7 +26,7 @@ public struct Resource<T> {
 }
 
 extension Resource where T: Decodable {
-    public init(url: URL, method: HttpMethod<Data> = .get, headers: [String: String]? = nil) {
+    init(url: URL, method: HttpMethod<Data> = .get, headers: [String: String]? = nil) {
         self.url = url
         self.method = method
         self.parse = { data in
