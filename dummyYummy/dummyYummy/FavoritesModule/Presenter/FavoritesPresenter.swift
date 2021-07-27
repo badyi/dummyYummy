@@ -12,7 +12,7 @@ final class FavoritesPresenter {
     private var dataBaseService: DataBaseServiceProtocol
     private var fileSystemService: FileSystemServiceProtocol
 
-    weak var navigationDelegate: RecipesViewNavigationDelegate?
+    weak var navigationDelegate: FavoritesNavigationDelegate?
 
     private var searchText: String = ""
 
@@ -42,6 +42,13 @@ final class FavoritesPresenter {
 }
 
 extension FavoritesPresenter: FavoritesPresenterProtocol {
+    func handleShareButtonTap(at index: Int) {
+        guard let sourceURL = recipe(at: index)?.sourceURL else {
+            return
+        }
+        navigationDelegate?.activity(with: sourceURL)
+    }
+
     func retriveRecipes() {
         recipes = dataBaseService.allRecipes().map { Recipe(with: $0) }.reversed()
         view?.reloadCollectionView()

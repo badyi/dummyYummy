@@ -51,13 +51,13 @@ final class FavoritesCoordinator: FavoritesCoordinatorProtocol {
         detailViewController.definesPresentationContext = true
         navigationController.pushViewController(detailViewController, animated: true)
     }
-
-    func showErrorAlert(with text: String) {
-
-    }
 }
 
-extension FavoritesCoordinator: RecipesViewNavigationDelegate {
+extension FavoritesCoordinator: FavoritesNavigationDelegate {
+    func activity(with url: String) {
+        showActivity(with: url)
+    }
+
     func error(with description: String) {
         showErrorAlert(with: description)
     }

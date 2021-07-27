@@ -34,6 +34,13 @@ final class FeedPresenter {
 
 // MARK: - FeedPresenterProtocol
 extension FeedPresenter: FeedPresenterProtocol {
+    func handleShareTap(at index: Int) {
+        guard let sourceURL = recipe(at: index)?.sourceURL else {
+            return
+        }
+        navigationDelegate?.activity(with: sourceURL)
+    }
+
     func isFavorite(at index: Int) -> Bool {
         guard let recipe = recipe(at: index) else {
             return false
@@ -220,5 +227,4 @@ extension FeedPresenter {
             navigationDelegate?.error(with: error.localizedDescription)
         }
     }
-
 }

@@ -16,4 +16,8 @@ protocol RecipesViewNavigationDelegate: AnyObject {
     /// Recive error with text
     /// - Parameter description: text of error
     func error(with description: String)
+
+    /// Activity
+    /// - Parameter url: url string
+    func activity(with url: String)
 }

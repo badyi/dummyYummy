@@ -9,6 +9,8 @@ import UIKit
 
 protocol DetailCoordinatorProtocol: Coordinator {
     func showDetail()
+    func showErrorAlert(with text: String)
+    func showActivity(with url: String)
 }
 
 final class DetailCoordinator: DetailCoordinatorProtocol {
@@ -44,11 +46,25 @@ final class DetailCoordinator: DetailCoordinatorProtocol {
                                         fileSystemService,
                                         networkService,
                                         recipe)
-
+        presenter.navigationDelegate = self
         detailViewController.presenter = presenter
         detailViewController.finishClosure = { [weak self] in
             self?.finish()
         }
         navigationController.pushViewController(detailViewController, animated: true)
+    }
+
+    func showActivity(with url: String) {
+
+    }
+}
+
+extension DetailCoordinator: DetailNavigationDelegate {
+    func error(with description: String) {
+        showErrorAlert(with: description)
+    }
+
+    func share(with url: String) {
+        showActivity(with: url)
     }
 }

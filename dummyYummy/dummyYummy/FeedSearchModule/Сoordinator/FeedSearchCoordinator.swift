@@ -78,6 +78,10 @@ extension FeedSearchCoordinator: SearchNavigationDelegate {
 }
 
 extension FeedSearchCoordinator: RecipesViewNavigationDelegate {
+    func activity(with url: String) {
+        showActivity(with: url)
+    }
+
     func error(with description: String) {
         showErrorAlert(with: description)
     }

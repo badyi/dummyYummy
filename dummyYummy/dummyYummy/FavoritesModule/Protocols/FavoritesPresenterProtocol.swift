@@ -18,5 +18,6 @@ protocol FavoritesPresenterProtocol {
     func recipesCount() -> Int
     func recipe(at index: Int) -> Recipe?
     func handleFavoriteTap(at index: Int)
+    func handleShareButtonTap(at index: Int)
     func updateSearchText(_ text: String)
 }

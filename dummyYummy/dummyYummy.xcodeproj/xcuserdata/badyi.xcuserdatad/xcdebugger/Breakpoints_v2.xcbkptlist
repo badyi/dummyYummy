@@ -1764,8 +1764,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "73"
-            endingLineNumber = "73"
+            startingLineNumber = "80"
+            endingLineNumber = "80"
             landmarkName = "didSelectRecipe(at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1812,8 +1812,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/View/FeedViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "74"
-            endingLineNumber = "74"
+            startingLineNumber = "70"
+            endingLineNumber = "70"
             landmarkName = "collectionView(_:willDisplay:forItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1828,8 +1828,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "184"
-            endingLineNumber = "184"
+            startingLineNumber = "191"
+            endingLineNumber = "191"
             landmarkName = "loadImageIfNeeded(at:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1844,8 +1844,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "169"
-            endingLineNumber = "169"
+            startingLineNumber = "176"
+            endingLineNumber = "176"
             landmarkName = "recipesDidLoad()"
             landmarkType = "7">
          </BreakpointContent>

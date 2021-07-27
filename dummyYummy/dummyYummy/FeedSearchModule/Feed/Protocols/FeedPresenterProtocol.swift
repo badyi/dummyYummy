@@ -21,6 +21,7 @@ protocol FeedPresenterProtocol: AnyObject {
     func loadRandomRecipes()
     func loadRandomRecipesIfNeeded()
     func handleFavoriteTap(at index: Int)
+    func handleShareTap(at index: Int)
     func isFavorite(at index: Int) -> Bool
 
     // MARK: - Output

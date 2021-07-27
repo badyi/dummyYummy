@@ -29,6 +29,106 @@
 		8105634A26762DB000106C65 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105634926762DB000106C65 /* Recipe.swift */; };
 		8105635126766BAE00106C65 /* UIImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105635026766BAE00106C65 /* UIImageViewBuilder.swift */; };
 		8115A3AC26AE256C00559331 /* FeedSearchCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8115A3AB26AE256C00559331 /* FeedSearchCoordinatorProtocol.swift */; };
+		8115A3AD26AF052B00559331 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C14267FB86D00F46E1F /* Colors.swift */; };
+		8115A3AE26AF052B00559331 /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562E226752F8700106C65 /* CoordinatorProtocol.swift */; };
+		8115A3AF26AF052B00559331 /* Recipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105634926762DB000106C65 /* Recipe.swift */; };
+		8115A3B026AF052B00559331 /* IngredientsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C7E26A83286004AC8C1 /* IngredientsResponse.swift */; };
+		8115A3B126AF052B00559331 /* RecipesResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562FE2675625500106C65 /* RecipesResponse.swift */; };
+		8115A3B226AF052B00559331 /* NetworkConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81056341267573FD00106C65 /* NetworkConstants.swift */; };
+		8115A3B326AF052B00559331 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810563452675FFFE00106C65 /* Reachability.swift */; };
+		8115A3B426AF052B00559331 /* NetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C7626A787C3004AC8C1 /* NetworkServiceProtocol.swift */; };
+		8115A3B526AF052B00559331 /* ResourceFactoryProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C7826A78B37004AC8C1 /* ResourceFactoryProtocol.swift */; };
+		8115A3B626AF052B00559331 /* DataBaseServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813E39D826AD869C009E7EE1 /* DataBaseServiceProtocol.swift */; };
+		8115A3B726AF052B00559331 /* ShimmerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C16267FD14900F46E1F /* ShimmerProtocol.swift */; };
+		8115A3B826AF052B00559331 /* ShimmerUIButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C00267D247300F46E1F /* ShimmerUIButton.swift */; };
+		8115A3B926AF052B00559331 /* ShimmerUIImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C08267DFAC900F46E1F /* ShimmerUIImageView.swift */; };
+		8115A3BA26AF052B00559331 /* ShimmerUILabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0A267DFAD300F46E1F /* ShimmerUILabel.swift */; };
+		8115A3BB26AF052B00559331 /* UILabelWithInsets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BA832269B917B005752EA /* UILabelWithInsets.swift */; };
+		8115A3BC26AF052B00559331 /* RoundedCollectionWithCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BA836269B9226005752EA /* RoundedCollectionWithCell.swift */; };
+		8115A3BD26AF052B00559331 /* IngredientsCellConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813E39DC26AD8790009E7EE1 /* IngredientsCellConstants.swift */; };
+		8115A3BE26AF052B00559331 /* IngredinentsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C8526A83642004AC8C1 /* IngredinentsCell.swift */; };
+		8115A3BF26AF052B00559331 /* BaseRecipesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B3126A24375004AC8C1 /* BaseRecipesConstants.swift */; };
+		8115A3C026AF052B00559331 /* RecipesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2F26A2307C004AC8C1 /* RecipesViewProtocol.swift */; };
+		8115A3C126AF052B00559331 /* RecipesViewNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813E39DE26AD9380009E7EE1 /* RecipesViewNavigationDelegate.swift */; };
+		8115A3C326AF052B00559331 /* RecipeBigCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BA88A26A0722D005752EA /* RecipeBigCell.swift */; };
+		8115A3C426AF052B00559331 /* SearchResultRecipeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A09764268E0553003E8B61 /* SearchResultRecipeCell.swift */; };
+		8115A3C526AF052B00559331 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B9D26A4763E004AC8C1 /* AccessibilityIdentifiers.swift */; };
+		8115A3D326AF052B00559331 /* FeedConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631D62691DDA8004CF695 /* FeedConstants.swift */; };
+		8115A3D426AF052B00559331 /* FeedSearchCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8115A3AB26AE256C00559331 /* FeedSearchCoordinatorProtocol.swift */; };
+		8115A3D526AF052B00559331 /* FeedSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562EF267537AE00106C65 /* FeedSearchCoordinator.swift */; };
+		8115A3D626AF052B00559331 /* FeedViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A5D267513C5004A8F09 /* FeedViewProtocol.swift */; };
+		8115A3D726AF052B00559331 /* FeedNavigationDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243BBF26A47F51004AC8C1 /* FeedNavigationDelegateProtocol.swift */; };
+		8115A3D826AF052B00559331 /* FeedNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4426A5F0FA004AC8C1 /* FeedNetworkServiceProtocol.swift */; };
+		8115A3D926AF052B00559331 /* FeedPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243BA626A47E29004AC8C1 /* FeedPresenterProtocol.swift */; };
+		8115A3DA26AF052B00559331 /* FeedResourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105633D26756FBC00106C65 /* FeedResourceFactory.swift */; };
+		8115A3DB26AF052B00559331 /* FeedNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105633526756C7C00106C65 /* FeedNetworkService.swift */; };
+		8115A3DC26AF052B00559331 /* FeedPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A592675138A004A8F09 /* FeedPresenter.swift */; };
+		8115A3DE26AF052B00559331 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562DE2675210300106C65 /* FeedCell.swift */; };
+		8115A3DF26AF052B00559331 /* SearchResultConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81A09766268E0586003E8B61 /* SearchResultConstants.swift */; };
+		8115A3E026AF052B00559331 /* SearchNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BEE2682689D0031210C /* SearchNetworkService.swift */; };
+		8115A3E126AF052B00559331 /* SearchPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4026A5D15B004AC8C1 /* SearchPresenterProtocol.swift */; };
+		8115A3E226AF052B00559331 /* SerchViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C3E26A5D117004AC8C1 /* SerchViewProtocol.swift */; };
+		8115A3E326AF052B00559331 /* SearchNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4226A5D205004AC8C1 /* SearchNavigationDelegate.swift */; };
+		8115A3E426AF052B00559331 /* SerachNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4826A5F294004AC8C1 /* SerachNetworkService.swift */; };
+		8115A3E526AF052B00559331 /* SearchNetworkResourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81616AD8268B9D9C002DF12F /* SearchNetworkResourceFactory.swift */; };
+		8115A3E626AF052B00559331 /* SearchResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81616ADA268BA198002DF12F /* SearchResponse.swift */; };
+		8115A3E726AF052B00559331 /* SearchPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81940BEC268268080031210C /* SearchPresenter.swift */; };
+		8115A3E826AF052B00559331 /* SearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C18267FD91C00F46E1F /* SearchResultViewController.swift */; };
+		8115A3E926AF052B00559331 /* FridgeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5826A71EEA004AC8C1 /* FridgeConstants.swift */; };
+		8115A3EA26AF052B00559331 /* FridgeCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6126A7287B004AC8C1 /* FridgeCoordinatorProtocol.swift */; };
+		8115A3ED26AF052B00559331 /* FridgeNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4F26A60E5D004AC8C1 /* FridgeNetworkServiceProtocol.swift */; };
+		8115A3EE26AF052B00559331 /* FridgeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5A26A727F3004AC8C1 /* FridgeCoordinator.swift */; };
+		8115A3EF26AF052B00559331 /* FridgeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6326A7299D004AC8C1 /* FridgeNetworkService.swift */; };
+		8115A3F026AF052B00559331 /* FridgePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5226A60F5E004AC8C1 /* FridgePresenter.swift */; };
+		8115A3F226AF052B00559331 /* SearchIngredientsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C8726A867B7004AC8C1 /* SearchIngredientsConstants.swift */; };
+		8115A3F326AF052B00559331 /* SearchIngredientsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6B26A760E4004AC8C1 /* SearchIngredientsViewProtocol.swift */; };
+		8115A3F426AF052B00559331 /* SearchIngredientsPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6D26A76105004AC8C1 /* SearchIngredientsPresenterProtocol.swift */; };
+		8115A3F526AF052B00559331 /* SearchIngredientsNetworkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6F26A7620F004AC8C1 /* SearchIngredientsNetworkProtocol.swift */; };
+		8115A3F826AF052B00559331 /* SearchIngredientsNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C7426A76D78004AC8C1 /* SearchIngredientsNetworkService.swift */; };
+		8115A3F926AF052B00559331 /* SearchIngredientsResourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C8026A8348D004AC8C1 /* SearchIngredientsResourceFactory.swift */; };
+		8115A3FA26AF052B00559331 /* FridgeSearchResultPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C9B26AAFD85004AC8C1 /* FridgeSearchResultPresenter.swift */; };
+		8115A3FB26AF052B00559331 /* FridgeSearchResultViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C9326AAF457004AC8C1 /* FridgeSearchResultViewController.swift */; };
+		8115A3FC26AF052C00559331 /* FridgeSearchNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C9D26AB0091004AC8C1 /* FridgeSearchNetworkService.swift */; };
+		8115A3FD26AF052C00559331 /* FavoritesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5D26A72822004AC8C1 /* FavoritesViewProtocol.swift */; };
+		8115A3FE26AF052C00559331 /* FavoritesPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BA83F269CA1CF005752EA /* FavoritesPresenterProtocol.swift */; };
+		8115A3FF26AF052C00559331 /* FavoritesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5F26A7285E004AC8C1 /* FavoritesCoordinatorProtocol.swift */; };
+		8115A40026AF052C00559331 /* FavoritesCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BA848269CAAF1005752EA /* FavoritesCoordinator.swift */; };
+		8115A40126AF052C00559331 /* FavoritesPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BA841269CA314005752EA /* FavoritesPresenter.swift */; };
+		8115A40226AF052C00559331 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BA83C269CA19D005752EA /* FavoritesViewController.swift */; };
+		8115A40326AF052C00559331 /* FavoriteCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BA88C26A08649005752EA /* FavoriteCell.swift */; };
+		8115A40426AF052C00559331 /* DetailConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6325726951589004CF695 /* DetailConstants.swift */; };
+		8115A40526AF052C00559331 /* DetailCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 813E39D126ACBFBB009E7EE1 /* DetailCoordinator.swift */; };
+		8115A40626AF052C00559331 /* DetailNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631DE2692127F004CF695 /* DetailNetworkServiceProtocol.swift */; };
+		8115A40726AF052C00559331 /* DetailViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C8F26AA19EF004AC8C1 /* DetailViewProtocol.swift */; };
+		8115A40826AF052C00559331 /* DetailPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C9126AA1A0E004AC8C1 /* DetailPresenterProtocol.swift */; };
+		8115A40926AF052C00559331 /* DetailResourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 816BA83A269BA3EF005752EA /* DetailResourceFactory.swift */; };
+		8115A40A26AF052C00559331 /* DetailNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D6324E2694EE02004CF695 /* DetailNetworkService.swift */; };
+		8115A41226AF0B6600559331 /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815E6E74267418DF00CE6CC1 /* FeedViewController.swift */; };
+		8115A41326AF0B8A00559331 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2826A22E90004AC8C1 /* RecipesViewController.swift */; };
+		8115A41426AF0B8A00559331 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0C267F773700F46E1F /* UIColorExtension.swift */; };
+		8115A41526AF0B8A00559331 /* UISegmentControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8124A9CD269A64750099EA18 /* UISegmentControlExtension.swift */; };
+		8115A41626AF0B8A00559331 /* CellExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C8D26A8A507004AC8C1 /* CellExtenstions.swift */; };
+		8115A41726AF0B8A00559331 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8124AACD269B76F00099EA18 /* UIButtonExtension.swift */; };
+		8115A41826AF0B8A00559331 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B9626A39A4D004AC8C1 /* UILabelExtension.swift */; };
+		8115A41926AF0B8A00559331 /* UICollectionViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562D926751B6D00106C65 /* UICollectionViewBuilder.swift */; };
+		8115A41A26AF0B8A00559331 /* UIImageViewBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105635026766BAE00106C65 /* UIImageViewBuilder.swift */; };
+		8115A41B26AF0B8A00559331 /* UITextFieldBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCD2676CBBE00BD4D95 /* UITextFieldBuilder.swift */; };
+		8115A41C26AF0B8A00559331 /* UILabelBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDCF2676CBF900BD4D95 /* UILabelBuilder.swift */; };
+		8115A41D26AF0B8A00559331 /* UIButtonBuilder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81FFCDD126778C8100BD4D95 /* UIButtonBuilder.swift */; };
+		8115A41E26AF0B8A00559331 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815E6E70267418DF00CE6CC1 /* AppDelegate.swift */; };
+		8115A41F26AF0B8A00559331 /* AppCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562E52675304700106C65 /* AppCoordinator.swift */; };
+		8115A42026AF0B8A00559331 /* TabCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A3D26741ECC004A8F09 /* TabCoordinator.swift */; };
+		8115A42126AF0B8A00559331 /* FridgeViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4B26A60947004AC8C1 /* FridgeViewProtocol.swift */; };
+		8115A42226AF0B8A00559331 /* FridgePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4D26A609A5004AC8C1 /* FridgePresenterProtocol.swift */; };
+		8115A42326AF0B8A00559331 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5526A60FBB004AC8C1 /* FridgeViewController.swift */; };
+		8115A42426AF0B8A00559331 /* SearchIngredientsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6926A760D8004AC8C1 /* SearchIngredientsPresenter.swift */; };
+		8115A42526AF0B8A00559331 /* SearchIngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6626A76056004AC8C1 /* SearchIngredientsViewController.swift */; };
+		8115A42626AF0B8A00559331 /* DetailPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631E02693343D004CF695 /* DetailPresenter.swift */; };
+		8115A42726AF0B8A00559331 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D631DC269211B7004CF695 /* DetailViewController.swift */; };
+		8115A42826AF0B8A00559331 /* DetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D632552694EEF1004CF695 /* DetailHeader.swift */; };
+		8115A42926AF0B8A00559331 /* DetailCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81D632672696574A004CF695 /* DetailCell.swift */; };
+		8115A42B26AF0DED00559331 /* DetailNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8115A42A26AF0DED00559331 /* DetailNavigationDelegate.swift */; };
+		8115A42D26AF6CD200559331 /* FavoritesNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8115A42C26AF6CD200559331 /* FavoritesNavigationDelegate.swift */; };
 		81243B2926A22E90004AC8C1 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2826A22E90004AC8C1 /* RecipesViewController.swift */; };
 		81243B3026A2307C004AC8C1 /* RecipesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2F26A2307C004AC8C1 /* RecipesViewProtocol.swift */; };
 		81243B3226A24375004AC8C1 /* BaseRecipesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B3126A24375004AC8C1 /* BaseRecipesConstants.swift */; };
@@ -202,6 +302,8 @@
 		8105634926762DB000106C65 /* Recipe.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Recipe.swift; sourceTree = "<group>"; };
 		8105635026766BAE00106C65 /* UIImageViewBuilder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UIImageViewBuilder.swift; sourceTree = "<group>"; };
 		8115A3AB26AE256C00559331 /* FeedSearchCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSearchCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		8115A42A26AF0DED00559331 /* DetailNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailNavigationDelegate.swift; sourceTree = "<group>"; };
+		8115A42C26AF6CD200559331 /* FavoritesNavigationDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesNavigationDelegate.swift; sourceTree = "<group>"; };
 		81243B2826A22E90004AC8C1 /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		81243B2F26A2307C004AC8C1 /* RecipesViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewProtocol.swift; sourceTree = "<group>"; };
 		81243B3126A24375004AC8C1 /* BaseRecipesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRecipesConstants.swift; sourceTree = "<group>"; };
@@ -701,12 +803,12 @@
 			path = FridgeSearchResult;
 			sourceTree = "<group>";
 		};
-		813E39D326ACBFC7009E7EE1 /* DetailCoordinator */ = {
+		813E39D326ACBFC7009E7EE1 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
 				813E39D126ACBFBB009E7EE1 /* DetailCoordinator.swift */,
 			);
-			path = DetailCoordinator;
+			path = Coordinator;
 			sourceTree = "<group>";
 		};
 		813E39D726AD8687009E7EE1 /* Service */ = {
@@ -855,6 +957,7 @@
 				81243C5D26A72822004AC8C1 /* FavoritesViewProtocol.swift */,
 				816BA83F269CA1CF005752EA /* FavoritesPresenterProtocol.swift */,
 				81243C5F26A7285E004AC8C1 /* FavoritesCoordinatorProtocol.swift */,
+				8115A42C26AF6CD200559331 /* FavoritesNavigationDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -967,8 +1070,8 @@
 			isa = PBXGroup;
 			children = (
 				81D6325726951589004CF695 /* DetailConstants.swift */,
-				813E39D326ACBFC7009E7EE1 /* DetailCoordinator */,
 				81D632532694EE84004CF695 /* Protocols */,
+				813E39D326ACBFC7009E7EE1 /* Coordinator */,
 				81D632522694EE78004CF695 /* Service */,
 				81D632502694EE65004CF695 /* Presenter */,
 				81D632512694EE6E004CF695 /* View */,
@@ -1008,6 +1111,7 @@
 				81D631DE2692127F004CF695 /* DetailNetworkServiceProtocol.swift */,
 				81243C8F26AA19EF004AC8C1 /* DetailViewProtocol.swift */,
 				81243C9126AA1A0E004AC8C1 /* DetailPresenterProtocol.swift */,
+				8115A42A26AF0DED00559331 /* DetailNavigationDelegate.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1287,6 +1391,104 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8115A41326AF0B8A00559331 /* RecipesViewController.swift in Sources */,
+				8115A41426AF0B8A00559331 /* UIColorExtension.swift in Sources */,
+				8115A41526AF0B8A00559331 /* UISegmentControlExtension.swift in Sources */,
+				8115A41626AF0B8A00559331 /* CellExtenstions.swift in Sources */,
+				8115A41726AF0B8A00559331 /* UIButtonExtension.swift in Sources */,
+				8115A41826AF0B8A00559331 /* UILabelExtension.swift in Sources */,
+				8115A41926AF0B8A00559331 /* UICollectionViewBuilder.swift in Sources */,
+				8115A41A26AF0B8A00559331 /* UIImageViewBuilder.swift in Sources */,
+				8115A41B26AF0B8A00559331 /* UITextFieldBuilder.swift in Sources */,
+				8115A41C26AF0B8A00559331 /* UILabelBuilder.swift in Sources */,
+				8115A41D26AF0B8A00559331 /* UIButtonBuilder.swift in Sources */,
+				8115A41E26AF0B8A00559331 /* AppDelegate.swift in Sources */,
+				8115A41F26AF0B8A00559331 /* AppCoordinator.swift in Sources */,
+				8115A42026AF0B8A00559331 /* TabCoordinator.swift in Sources */,
+				8115A42126AF0B8A00559331 /* FridgeViewProtocol.swift in Sources */,
+				8115A42226AF0B8A00559331 /* FridgePresenterProtocol.swift in Sources */,
+				8115A42326AF0B8A00559331 /* FridgeViewController.swift in Sources */,
+				8115A42426AF0B8A00559331 /* SearchIngredientsPresenter.swift in Sources */,
+				8115A42526AF0B8A00559331 /* SearchIngredientsViewController.swift in Sources */,
+				8115A42626AF0B8A00559331 /* DetailPresenter.swift in Sources */,
+				8115A42726AF0B8A00559331 /* DetailViewController.swift in Sources */,
+				8115A42826AF0B8A00559331 /* DetailHeader.swift in Sources */,
+				8115A42926AF0B8A00559331 /* DetailCell.swift in Sources */,
+				8115A41226AF0B6600559331 /* FeedViewController.swift in Sources */,
+				8115A3AD26AF052B00559331 /* Colors.swift in Sources */,
+				8115A3AE26AF052B00559331 /* CoordinatorProtocol.swift in Sources */,
+				8115A3AF26AF052B00559331 /* Recipe.swift in Sources */,
+				8115A3B026AF052B00559331 /* IngredientsResponse.swift in Sources */,
+				8115A3B126AF052B00559331 /* RecipesResponse.swift in Sources */,
+				8115A3B226AF052B00559331 /* NetworkConstants.swift in Sources */,
+				8115A3B326AF052B00559331 /* Reachability.swift in Sources */,
+				8115A3B426AF052B00559331 /* NetworkServiceProtocol.swift in Sources */,
+				8115A3B526AF052B00559331 /* ResourceFactoryProtocol.swift in Sources */,
+				8115A3B626AF052B00559331 /* DataBaseServiceProtocol.swift in Sources */,
+				8115A3B726AF052B00559331 /* ShimmerProtocol.swift in Sources */,
+				8115A3B826AF052B00559331 /* ShimmerUIButton.swift in Sources */,
+				8115A3B926AF052B00559331 /* ShimmerUIImageView.swift in Sources */,
+				8115A3BA26AF052B00559331 /* ShimmerUILabel.swift in Sources */,
+				8115A3BB26AF052B00559331 /* UILabelWithInsets.swift in Sources */,
+				8115A3BC26AF052B00559331 /* RoundedCollectionWithCell.swift in Sources */,
+				8115A3BD26AF052B00559331 /* IngredientsCellConstants.swift in Sources */,
+				8115A3BE26AF052B00559331 /* IngredinentsCell.swift in Sources */,
+				8115A3BF26AF052B00559331 /* BaseRecipesConstants.swift in Sources */,
+				8115A3C026AF052B00559331 /* RecipesViewProtocol.swift in Sources */,
+				8115A3C126AF052B00559331 /* RecipesViewNavigationDelegate.swift in Sources */,
+				8115A3C326AF052B00559331 /* RecipeBigCell.swift in Sources */,
+				8115A3C426AF052B00559331 /* SearchResultRecipeCell.swift in Sources */,
+				8115A3C526AF052B00559331 /* AccessibilityIdentifiers.swift in Sources */,
+				8115A3D326AF052B00559331 /* FeedConstants.swift in Sources */,
+				8115A3D426AF052B00559331 /* FeedSearchCoordinatorProtocol.swift in Sources */,
+				8115A3D526AF052B00559331 /* FeedSearchCoordinator.swift in Sources */,
+				8115A3D626AF052B00559331 /* FeedViewProtocol.swift in Sources */,
+				8115A3D726AF052B00559331 /* FeedNavigationDelegateProtocol.swift in Sources */,
+				8115A3D826AF052B00559331 /* FeedNetworkServiceProtocol.swift in Sources */,
+				8115A3D926AF052B00559331 /* FeedPresenterProtocol.swift in Sources */,
+				8115A3DA26AF052B00559331 /* FeedResourceFactory.swift in Sources */,
+				8115A3DB26AF052B00559331 /* FeedNetworkService.swift in Sources */,
+				8115A3DC26AF052B00559331 /* FeedPresenter.swift in Sources */,
+				8115A3DE26AF052B00559331 /* FeedCell.swift in Sources */,
+				8115A3DF26AF052B00559331 /* SearchResultConstants.swift in Sources */,
+				8115A3E026AF052B00559331 /* SearchNetworkService.swift in Sources */,
+				8115A3E126AF052B00559331 /* SearchPresenterProtocol.swift in Sources */,
+				8115A3E226AF052B00559331 /* SerchViewProtocol.swift in Sources */,
+				8115A3E326AF052B00559331 /* SearchNavigationDelegate.swift in Sources */,
+				8115A3E426AF052B00559331 /* SerachNetworkService.swift in Sources */,
+				8115A3E526AF052B00559331 /* SearchNetworkResourceFactory.swift in Sources */,
+				8115A3E626AF052B00559331 /* SearchResponse.swift in Sources */,
+				8115A3E726AF052B00559331 /* SearchPresenter.swift in Sources */,
+				8115A3E826AF052B00559331 /* SearchResultViewController.swift in Sources */,
+				8115A3E926AF052B00559331 /* FridgeConstants.swift in Sources */,
+				8115A3EA26AF052B00559331 /* FridgeCoordinatorProtocol.swift in Sources */,
+				8115A3ED26AF052B00559331 /* FridgeNetworkServiceProtocol.swift in Sources */,
+				8115A3EE26AF052B00559331 /* FridgeCoordinator.swift in Sources */,
+				8115A3EF26AF052B00559331 /* FridgeNetworkService.swift in Sources */,
+				8115A3F026AF052B00559331 /* FridgePresenter.swift in Sources */,
+				8115A3F226AF052B00559331 /* SearchIngredientsConstants.swift in Sources */,
+				8115A3F326AF052B00559331 /* SearchIngredientsViewProtocol.swift in Sources */,
+				8115A3F426AF052B00559331 /* SearchIngredientsPresenterProtocol.swift in Sources */,
+				8115A3F526AF052B00559331 /* SearchIngredientsNetworkProtocol.swift in Sources */,
+				8115A3F826AF052B00559331 /* SearchIngredientsNetworkService.swift in Sources */,
+				8115A3F926AF052B00559331 /* SearchIngredientsResourceFactory.swift in Sources */,
+				8115A3FA26AF052B00559331 /* FridgeSearchResultPresenter.swift in Sources */,
+				8115A3FB26AF052B00559331 /* FridgeSearchResultViewController.swift in Sources */,
+				8115A3FC26AF052C00559331 /* FridgeSearchNetworkService.swift in Sources */,
+				8115A3FD26AF052C00559331 /* FavoritesViewProtocol.swift in Sources */,
+				8115A3FE26AF052C00559331 /* FavoritesPresenterProtocol.swift in Sources */,
+				8115A3FF26AF052C00559331 /* FavoritesCoordinatorProtocol.swift in Sources */,
+				8115A40026AF052C00559331 /* FavoritesCoordinator.swift in Sources */,
+				8115A40126AF052C00559331 /* FavoritesPresenter.swift in Sources */,
+				8115A40226AF052C00559331 /* FavoritesViewController.swift in Sources */,
+				8115A40326AF052C00559331 /* FavoriteCell.swift in Sources */,
+				8115A40426AF052C00559331 /* DetailConstants.swift in Sources */,
+				8115A40526AF052C00559331 /* DetailCoordinator.swift in Sources */,
+				8115A40626AF052C00559331 /* DetailNetworkServiceProtocol.swift in Sources */,
+				8115A40726AF052C00559331 /* DetailViewProtocol.swift in Sources */,
+				8115A40826AF052C00559331 /* DetailPresenterProtocol.swift in Sources */,
+				8115A40926AF052C00559331 /* DetailResourceFactory.swift in Sources */,
+				8115A40A26AF052C00559331 /* DetailNetworkService.swift in Sources */,
 				81243B8126A33FB9004AC8C1 /* FakeNetworking.swift in Sources */,
 				81243B7B26A33F1B004AC8C1 /* TestResourceNetworking.swift in Sources */,
 				81243B7626A33B30004AC8C1 /* Resource.swift in Sources */,
@@ -1400,6 +1602,7 @@
 				810563242675671B00106C65 /* NetworkHelperProtocol.swift in Sources */,
 				8105632D267567A800106C65 /* URLRequest+Resource.swift in Sources */,
 				81D6324F2694EE02004CF695 /* DetailNetworkService.swift in Sources */,
+				8115A42B26AF0DED00559331 /* DetailNavigationDelegate.swift in Sources */,
 				81243C9426AAF457004AC8C1 /* FridgeSearchResultViewController.swift in Sources */,
 				81243C7726A787C3004AC8C1 /* NetworkServiceProtocol.swift in Sources */,
 				816BA887269E45D9005752EA /* RecipeDTO.swift in Sources */,
@@ -1410,6 +1613,7 @@
 				816BA850269DDB50005752EA /* dummyYummy.xcdatamodeld in Sources */,
 				8105635126766BAE00106C65 /* UIImageViewBuilder.swift in Sources */,
 				816BA83D269CA19D005752EA /* FavoritesViewController.swift in Sources */,
+				8115A42D26AF6CD200559331 /* FavoritesNavigationDelegate.swift in Sources */,
 				810562F0267537AE00106C65 /* FeedSearchCoordinator.swift in Sources */,
 				815C5A5A2675138A004A8F09 /* FeedPresenter.swift in Sources */,
 				81243C9226AA1A0E004AC8C1 /* DetailPresenterProtocol.swift in Sources */,
@@ -1608,7 +1812,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
@@ -1664,7 +1868,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 14.4;
+				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;

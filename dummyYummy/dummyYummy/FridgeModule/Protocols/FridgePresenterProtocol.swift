@@ -17,6 +17,8 @@ protocol FridgePresenterProtocol {
     func didTapSearchButton()
 }
 
-protocol FridgeNavigationDelegate: AnyObject {
+protocol FridgeNavigationDelegate: RecipesViewNavigationDelegate {
     func didTapSearch(_ ingredients: [String])
+    func activity(with url: String)
+    func error(with description: String)
 }

@@ -29,10 +29,6 @@ final class FeedViewController: RecipesViewController {
         super.viewWillDisappear(animated)
         stopVisibleCellsAnimation()
     }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
 }
 
 // MARK: - FeedViewProtocol
@@ -112,6 +108,9 @@ extension FeedViewController: UICollectionViewDataSource {
             cell.stopAnimation()
             cell.handleFavoriteButtonTap = { [weak self] in
                 self?.presenter?.handleFavoriteTap(at: indexPath.row)
+            }
+            cell.handleShareButtonTap = { [weak self] in
+                self?.presenter?.handleShareTap(at: indexPath.row)
             }
         }
         return cell

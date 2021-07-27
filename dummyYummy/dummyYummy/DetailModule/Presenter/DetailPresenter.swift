@@ -24,6 +24,8 @@ final class DetailPresenter {
 
     private var characteristics: ExpandableCharacteristics
 
+    var navigationDelegate: DetailNavigationDelegate?
+
     init(with view: DetailViewProtocol,
          _ dataBaseService: DataBaseServiceProtocol,
          _ fileSystemService: FileSystemServiceProtocol,
@@ -121,7 +123,7 @@ private extension DetailPresenter {
                 self?.recipe.imageData = result
                 self?.imageDidLoad()
             case let .failure(error):
-                print(error.localizedDescription)
+                self?.handleError(error)
             }
         })
     }
@@ -158,8 +160,7 @@ private extension DetailPresenter {
                 self?.recipe.configInfo(with: result)
                 self?.recipeInfoDidLoad()
             case .failure(let error):
-                #warning("alert")
-                print(error)
+                self?.handleError(error)
             }
         })
     }
@@ -193,13 +194,12 @@ private extension DetailPresenter {
 extension DetailPresenter {
     private func saveToDB() {
         if let data = recipe.imageData {
-            fileSystemService.store(imageData: data, forKey: "\(recipe.id)", completionStatus: { status in
+            fileSystemService.store(imageData: data, forKey: "\(recipe.id)", completionStatus: { [weak self] status in
                 switch status {
-                case let .success(status):
-                    print(status)
+                case .success(_):
+                    break
                 case let .failure(error):
-                    #warning("hadnle error")
-                    print(error.localizedDescription)
+                    self?.handleError(error)
                 }
             })
         }
@@ -211,15 +211,34 @@ extension DetailPresenter {
         dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
 
         if recipe.imageData != nil {
-            fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: { status in
+            fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: { [weak self] status in
                 switch status {
-                case let .success(status):
-                    print(status)
+                case .success(_):
+                    break
                 case let .failure(error):
-                    #warning("hadnle error")
-                    print(error)
+                    self?.handleError(error)
                 }
             })
+        }
+    }
+
+    private func handleError(_ error: Error) {
+        if let error = error as? ServiceError {
+            switch error {
+            case .alreadyLoading:
+                break
+            case .resourceCreatingError:
+                NSLog("resource createtion error")
+            }
+        } else if error.localizedDescription == "cancelled" {
+            // ok scenario. do nothing
+        } else if let error = error as? NetworkHelper.NetworkErrors {
+            switch error {
+            case .noConnection:
+                navigationDelegate?.error(with: "No connection")
+            }
+        } else {
+            navigationDelegate?.error(with: error.localizedDescription)
         }
     }
 }

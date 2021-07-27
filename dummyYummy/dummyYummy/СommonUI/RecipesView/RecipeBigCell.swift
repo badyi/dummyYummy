@@ -8,6 +8,7 @@
 import UIKit
 
 class RecipeBigCell: RoundedCollectionCellWithShadow {
+
     var cellBackgroundColor = RecipeViewConstants.BigCell.Design.backgroundColor
     var titleFont = RecipeViewConstants.BigCell.Font.titleFont
     var titleColor = RecipeViewConstants.BigCell.Design.titleColor
@@ -18,7 +19,7 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
     var favoriteImage = RecipeViewConstants.BigCell.Image.favoriteImage
 
     var handleFavoriteButtonTap: (() -> Void)?
-    var shareButtonTapHandle: (() -> Void)?
+    var handleShareButtonTap: (() -> Void)?
 
     lazy var imageView: ShimmerUIImageView = {
         return UIImageViewBuilder()
@@ -98,6 +99,7 @@ class RecipeBigCell: RoundedCollectionCellWithShadow {
         super.setupView()
 
         favoriteButton.addTarget(self, action: #selector(favoriteButtonTapped), for: .touchUpInside)
+        shareButton.addTarget(self, action: #selector(shareButtonTapHandle), for: .touchUpInside)
 
         /// config shadow constants
         shadowColor = RecipeViewConstants.BigCell.Design.shadowColor
@@ -241,8 +243,14 @@ extension RecipeBigCell {
     }
 }
 
-private extension RecipeBigCell {
-    @objc func favoriteButtonTapped() {
+extension RecipeBigCell {
+    @objc
+    private func favoriteButtonTapped() {
         handleFavoriteButtonTap?()
+    }
+
+    @objc
+    private func shareButtonTapHandle() {
+        handleShareButtonTap?()
     }
 }

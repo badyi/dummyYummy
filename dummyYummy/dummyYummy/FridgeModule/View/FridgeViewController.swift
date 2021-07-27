@@ -15,6 +15,7 @@ final class FridgeViewController: UIViewController {
         tableView.backgroundColor = FridgeConstants.ViewController.Design.backgroundColor
         tableView.delegate = self
         tableView.dataSource = self
+        #warning("add to constants")
         tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
         tableView.register(IngredinentsCell.self, forCellReuseIdentifier: IngredinentsCell.id)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.defaultID)
@@ -25,6 +26,7 @@ final class FridgeViewController: UIViewController {
         let button = UIButtonBuilder()
             .backgroundColor(Colors.wisteria)
             .build()
+        #warning("constants")
         button.layer.cornerRadius = 20
         button.layer.masksToBounds = true
         button.clipsToBounds = true
@@ -88,29 +90,27 @@ extension FridgeViewController {
     }
 
     private func configNavigationBar() {
-        #warning("feed constants")
         let textAttributes = [NSAttributedString.Key.foregroundColor:
-                                FeedConstants.ViewController.Design.navigationTextColor]
+                                FridgeConstants.ViewController.Design.navigationTextColor]
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
-        navigationController?.navigationBar.backgroundColor = FeedConstants.ViewController.Design.navBarBackgroundColor
+        navigationController?.navigationBar.backgroundColor = FridgeConstants.ViewController.Design.navBarBackgroundColor
 
-        navigationController?.navigationBar.barTintColor = FeedConstants.ViewController.Design.navBarBarTintColor
-        navigationController?.navigationBar.tintColor = FeedConstants.ViewController.Design.navBarTintColor
+        navigationController?.navigationBar.barTintColor = FridgeConstants.ViewController.Design.navBarBarTintColor
+        navigationController?.navigationBar.tintColor = FridgeConstants.ViewController.Design.navBarTintColor
         navigationController?.navigationBar.prefersLargeTitles = true
 
         // need nav bar back view image to avoid some ios bag with search result controller frame on search bar tap
-        navigationController?.navigationBar.setBackgroundImage(FeedConstants.ViewController.Image.navBarBackground,
+        navigationController?.navigationBar.setBackgroundImage(FridgeConstants.ViewController.Image.navBarBackground,
                                                                for: .default)
-        navigationController?.navigationBar.shadowImage = FeedConstants.ViewController.Image.navBarShadowImage
-        navigationController?.view.backgroundColor = FeedConstants.ViewController.Design.navBarBarTintColor
+        navigationController?.navigationBar.shadowImage = FridgeConstants.ViewController.Image.navBarShadowImage
+        navigationController?.view.backgroundColor = FridgeConstants.ViewController.Design.navBarBarTintColor
 
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.largeTitleDisplayMode = .always
     }
 
     private func setupTableView() {
-
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),

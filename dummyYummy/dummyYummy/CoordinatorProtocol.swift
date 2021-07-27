@@ -38,6 +38,18 @@ protocol Coordinator: AnyObject {
             self?.navigationController.present(alert, animated: true, completion: nil)
         }
     }
+
+    func showActivity(with url: String) {
+        guard let url = URL(string: url) else {
+            return
+        }
+        let items = [url]
+        let activityViewController = UIActivityViewController(activityItems: items, applicationActivities: nil)
+        activityViewController.isModalInPresentation = true
+        DispatchQueue.main.async { [weak self] in
+            self?.navigationController.present(activityViewController, animated: true, completion: nil)
+        }
+    }
  }
 
 // MARK: - CoordinatorOutput

@@ -10,7 +10,7 @@
 
  class FakeNetworking: Networking {
     func execute<A>(_ resource: Resource<A>,
-                    completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> Cancellation? {
+                    completionHandler: @escaping (Data?, URLResponse?, Error?) -> Void) -> CancellationProtocol? {
         if A.self == SuccessResponse.self {
             let jsonDict = ["id": "one"]
             let json = try? JSONEncoder().encode(jsonDict)

@@ -7,7 +7,7 @@
 
 @testable import dummyYummy
 
-class SimpleCancellation: Cancellation {
+class SimpleCancellation: CancellationProtocol {
     var isCanceled = false
 
     func cancel() {

@@ -85,12 +85,14 @@ final class FridgeCoordinator: FridgeCoordinatorProtocol {
 }
 
 extension FridgeCoordinator: FridgeNavigationDelegate {
+    func activity(with url: String) {
+        showActivity(with: url)
+    }
+
     func didTapSearch(_ ingredients: [String]) {
         showSearchResult(ingredients)
     }
-}
 
-extension FridgeCoordinator: RecipesViewNavigationDelegate {
     func error(with description: String) {
         showErrorAlert(with: description)
     }
