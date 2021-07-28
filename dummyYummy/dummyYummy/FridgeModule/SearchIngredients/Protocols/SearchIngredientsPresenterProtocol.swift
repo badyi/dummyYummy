@@ -14,7 +14,6 @@ protocol SearchIngredientsPresenterProtocol {
          _ networkService: SearchIngredientsNetworkProtocol)
 
     func reloadTable()
-    func didSelectRecipe(at index: Int)
     func title(at index: Int) -> String
     func ingredientsCount() -> Int
     func isChosen(_ ingredient: String) -> Bool

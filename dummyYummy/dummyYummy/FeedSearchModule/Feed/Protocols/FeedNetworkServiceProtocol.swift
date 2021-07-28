@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol FeedServiceProtocol: NetworkServiceProtocol {
+protocol FeedNetworkServiceProtocol: NetworkServiceProtocol {
 
     func clearAndCancelAll()
 

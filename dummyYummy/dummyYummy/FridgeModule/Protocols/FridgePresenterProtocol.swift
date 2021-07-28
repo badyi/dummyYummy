@@ -16,9 +16,3 @@ protocol FridgePresenterProtocol {
     func delete(at index: Int)
     func didTapSearchButton()
 }
-
-protocol FridgeNavigationDelegate: RecipesViewNavigationDelegate {
-    func didTapSearch(_ ingredients: [String])
-    func activity(with url: String)
-    func error(with description: String)
-}

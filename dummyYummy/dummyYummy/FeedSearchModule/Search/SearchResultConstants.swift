@@ -20,5 +20,4 @@ struct SearchResultConstants {
             static var backgroundColor = Colors.nero
         }
     }
-
 }

@@ -14,7 +14,7 @@ final class FeedNetworkService {
 }
 
 // MARK: - FeedServiceProtocol
-extension FeedNetworkService: FeedServiceProtocol {
+extension FeedNetworkService: FeedNetworkServiceProtocol {
     func loadRandomRecipes(_ count: Int, completion: @escaping(OperationCompletion<RecipesResponse>) -> Void) {
 
         if loadRandomRecipes != nil {

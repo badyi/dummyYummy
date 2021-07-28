@@ -7,12 +7,6 @@
 
 import UIKit
 
-protocol DetailCoordinatorProtocol: Coordinator {
-    func showDetail()
-    func showErrorAlert(with text: String)
-    func showActivity(with url: String)
-}
-
 final class DetailCoordinator: DetailCoordinatorProtocol {
 
     var finishDelegate: CoordinatorFinishDelegate?
@@ -37,25 +31,11 @@ final class DetailCoordinator: DetailCoordinatorProtocol {
             return
         }
 
-        let detailViewController = DetailViewController()
-        let networkService = DetailNetworkService()
-        let dataBaseService = DataBaseService(coreDataStack: CoreDataStack.shared)
-        let fileSystemService = FileSystemService()
-        let presenter = DetailPresenter(with: detailViewController,
-                                        dataBaseService,
-                                        fileSystemService,
-                                        networkService,
-                                        recipe)
-        presenter.navigationDelegate = self
-        detailViewController.presenter = presenter
-        detailViewController.finishClosure = { [weak self] in
+        let detailVC = DetailAssembly().createDetailModule(recipe, self)
+        detailVC.finishClosure = { [weak self] in
             self?.finish()
         }
-        navigationController.pushViewController(detailViewController, animated: true)
-    }
-
-    func showActivity(with url: String) {
-
+        navigationController.pushViewController(detailVC, animated: true)
     }
 }
 

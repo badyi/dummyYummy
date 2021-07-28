@@ -62,6 +62,8 @@ final class FridgeViewController: UIViewController {
         searchController.searchBar.searchBarStyle = .minimal
         searchController.definesPresentationContext = true
         navigationItem.searchController = searchController
+        let textColor = FridgeConstants.ViewController.Design.searchTextColor
+        navigationItem.searchController?.searchBar.searchTextField.textColor = textColor
     }
 }
 
@@ -79,9 +81,9 @@ extension FridgeViewController {
     }
 
     private func setupView() {
-        title = "What's in your fridge?"
+        title = "What's in the fridge?"
         view.backgroundColor = FridgeConstants.ViewController.Design.backgroundColor
-        navigationItem.searchController?.searchBar.placeholder = "Search ingredinets "
+        navigationItem.searchController?.searchBar.placeholder = "Search ingredinets"
         view.addSubview(tableView)
         view.addSubview(showSearchResultsButton)
 
@@ -92,9 +94,22 @@ extension FridgeViewController {
     private func configNavigationBar() {
         let textAttributes = [NSAttributedString.Key.foregroundColor:
                                 FridgeConstants.ViewController.Design.navigationTextColor]
+
+        for navItem in(self.navigationController?.navigationBar.subviews)! {
+             for itemSubView in navItem.subviews {
+                 if let largeLabel = itemSubView as? UILabel {
+                     largeLabel.text = self.title
+                     largeLabel.numberOfLines = 0
+                     largeLabel.lineBreakMode = .byWordWrapping
+                 }
+             }
+        }
+
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
-        navigationController?.navigationBar.backgroundColor = FridgeConstants.ViewController.Design.navBarBackgroundColor
+
+        let backgroundColor = FridgeConstants.ViewController.Design.navBarBackgroundColor
+        navigationController?.navigationBar.backgroundColor = backgroundColor
 
         navigationController?.navigationBar.barTintColor = FridgeConstants.ViewController.Design.navBarBarTintColor
         navigationController?.navigationBar.tintColor = FridgeConstants.ViewController.Design.navBarTintColor
@@ -135,6 +150,7 @@ extension FridgeViewController {
 
 // MARK: - UITableViewDataSource
 extension FridgeViewController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter?.ingredientsCount() ?? 0
     }
@@ -155,6 +171,7 @@ extension FridgeViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension FridgeViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let title = presenter?.title(at: indexPath.row) ?? ""
         let height = IngredinentsCell.heightForCell(with: title, width: tableView.bounds.width)

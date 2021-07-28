@@ -10,7 +10,7 @@ import Foundation
 final class FeedPresenter {
 
     weak var view: FeedViewProtocol?
-    private var networkService: FeedServiceProtocol
+    private var networkService: FeedNetworkServiceProtocol
     private var dataBaseService: DataBaseServiceProtocol
     private var fileSystemService: FileSystemServiceProtocol
 
@@ -20,7 +20,7 @@ final class FeedPresenter {
     private let randomRecipesCount: Int = 100
 
     init(with view: FeedViewProtocol,
-         _ networkService: FeedServiceProtocol,
+         _ networkService: FeedNetworkServiceProtocol,
          _ dataBaseService: DataBaseServiceProtocol,
          _ fileSystemService: FileSystemServiceProtocol) {
 
@@ -64,14 +64,14 @@ extension FeedPresenter: FeedPresenterProtocol {
         return recipes[index].title
     }
 
-    func willDisplayRecipe(at index: Int) {
+    func prepareRecipe(at index: Int) {
         if index < 0 || index >= recipes.count {
             return
         }
         loadImageIfNeeded(at: index)
     }
 
-    func didEndDisplayingRecipe(at index: Int) {
+    func noNeedPrepearRecipe(at index: Int) {
         guard let imageURL = recipe(at: index)?.imageURL else { return }
         self.cancelLoad(with: imageURL)
     }
@@ -102,17 +102,6 @@ extension FeedPresenter: FeedPresenterProtocol {
             saveToDB(at: index)
         }
         view?.reloadItems(at: [IndexPath(row: index, section: 0)])
-    }
-
-    func checkFavoriteStatus(at index: Int) -> Bool {
-        guard let recipe = recipe(at: index) else {
-            return false
-        }
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
-        if !dataBaseService.recipes(with: predicate).isEmpty {
-            return true
-        }
-        return false
     }
 
     func loadRandomRecipes() {

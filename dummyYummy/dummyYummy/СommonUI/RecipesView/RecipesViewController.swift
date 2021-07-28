@@ -52,10 +52,7 @@ class RecipesViewController: UIViewController, RecipesViewProtocol {
                 reloadIndexes.append($0)
             }
         }
-
-        collectionView.performBatchUpdates({
-            collectionView.reloadItems(at: reloadIndexes)
-        }, completion: nil)
+        collectionView.reloadItems(at: reloadIndexes)
     }
 
     func configNavigation() {

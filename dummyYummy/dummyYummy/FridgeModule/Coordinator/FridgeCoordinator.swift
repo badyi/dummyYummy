@@ -26,61 +26,31 @@ final class FridgeCoordinator: FridgeCoordinatorProtocol {
     }
 
     func showFridge() {
-        let fridgeView = FridgeViewController()
-        let networkService = FridgeNetworkService()
-        let presenter = FridgePresenter(with: fridgeView, networkService)
-        presenter.navigationDelegate = self
-        fridgeView.presenter = presenter
-
-        let searchResult = SearchIngredientsViewController()
-        let searchService = SearchIngredientsNetworkService()
-        let searchPresenter = SearchIngredientsPresenter(with: searchResult, searchService)
-
-        searchResult.presenter = searchPresenter
-
-        let searchController = UISearchController(searchResultsController: searchResult)
-
-        searchController.searchResultsUpdater = searchResult
-
-        fridgeView.setupSearchController(searchController)
-
-        searchResult.willAppear = {
-            searchPresenter.setChosenIngredients(presenter.chosenIngredients)
-        }
-
-        searchResult.willFinish = { ingredients in
-            guard let ingredients = ingredients else { return }
-            presenter.setChosenIngredients(ingredients)
-        }
-
-        navigationController.pushViewController(fridgeView, animated: true)
+        let fridgeVC = FridgeAssembly().createFridgeModule(self)
+        navigationController.pushViewController(fridgeVC, animated: true)
     }
 
     func showSearchResult(_ ingredients: [String]) {
-        let service = FridgeSearchNetworkService()
-        let view = FridgeSearchResultViewController()
-        let presenter = FridgeSearchResultPresenter(with: view, service, ingredients)
-        presenter.navigationDelegate = self
-        view.presenter = presenter
-
-        navigationController.pushViewController(view, animated: true)
+        let searchResultVC = FridgeAssembly().createSearchResultModule(ingredients, self)
+        navigationController.pushViewController(searchResultVC, animated: true)
     }
 
     func showDetail(with recipe: Recipe) {
-        let detailViewController = DetailViewController()
-        let networkService = DetailNetworkService()
-        let dataBaseService = DataBaseService(coreDataStack: CoreDataStack.shared)
-        let fileSystemService = FileSystemService()
-        let presenter = DetailPresenter(with: detailViewController,
-                                        dataBaseService,
-                                        fileSystemService,
-                                        networkService,
-                                        recipe)
+        let detailCoordinator = DetailCoordinator(navigationController)
+        childCoordinators.append(detailCoordinator)
 
-        detailViewController.presenter = presenter
+        detailCoordinator.finishDelegate = self
+        detailCoordinator.recipe = recipe
+        detailCoordinator.start()
+    }
+}
 
-        detailViewController.definesPresentationContext = true
-        navigationController.pushViewController(detailViewController, animated: true)
+extension FridgeCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        if let childCoordinator = childCoordinators.last, childCoordinator.type == .detail {
+            navigationController.popToRootViewController(animated: true)
+            childCoordinators.removeLast()
+        }
     }
 }
 

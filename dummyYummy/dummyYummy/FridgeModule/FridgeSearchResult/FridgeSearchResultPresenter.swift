@@ -60,7 +60,7 @@ extension FridgeSearchResultPresenter: FridgeSearchResultPresenterProtocol {
                 self?.setImageData(at: index, result)
                 self?.reloadRecipe(at: index)
             case let .failure(error):
-                print(error)
+                self?.handleError(error)
             }
         })
     }
@@ -88,7 +88,7 @@ extension FridgeSearchResultPresenter: FridgeSearchResultPresenterProtocol {
                 self?.recipes = result.map { Recipe(with: $0) }
                 self?.reloadCollection()
             case let .failure(error):
-                print(error)
+                self?.handleError(error)
             }
         })
     }
@@ -109,5 +109,25 @@ extension FridgeSearchResultPresenter {
 
     private func setImageData(at index: Int, _ data: Data) {
         recipe(at: index)?.imageData = data
+    }
+
+    private func handleError(_ error: Error) {
+        if let error = error as? ServiceError {
+            switch error {
+            case .alreadyLoading:
+                break
+            case .resourceCreatingError:
+                NSLog("resource createtion error")
+            }
+        } else if error.localizedDescription == "cancelled" {
+            // ok scenario. do nothing
+        } else if let error = error as? NetworkHelper.NetworkErrors {
+            switch error {
+            case .noConnection:
+                navigationDelegate?.error(with: "No connection")
+            }
+        } else {
+            navigationDelegate?.error(with: error.localizedDescription)
+        }
     }
 }

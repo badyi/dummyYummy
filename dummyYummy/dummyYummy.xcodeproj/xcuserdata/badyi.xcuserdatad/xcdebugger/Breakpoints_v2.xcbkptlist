@@ -14,8 +14,8 @@
             filePath = "dummyYummy/Application/AppCoordinator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "38"
-            endingLineNumber = "38"
+            startingLineNumber = "43"
+            endingLineNumber = "43"
             landmarkName = "showMainFlow()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1812,8 +1812,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/View/FeedViewController.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "70"
-            endingLineNumber = "70"
+            startingLineNumber = "72"
+            endingLineNumber = "72"
             landmarkName = "collectionView(_:willDisplay:forItemAt:)"
             landmarkType = "7">
          </BreakpointContent>
@@ -1828,10 +1828,42 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "191"
-            endingLineNumber = "191"
+            startingLineNumber = "181"
+            endingLineNumber = "181"
             landmarkName = "loadImageIfNeeded(at:)"
             landmarkType = "7">
+            <Locations>
+               <Location
+                  uuid = "0BD03BD8-7E1E-4E9F-9FE3-1E2EF64A404D - 3c7944f8db3bd200"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "dummyYummyTests.FeedPresenter.loadImageIfNeeded(at: Swift.Int) -&gt; ()"
+                  moduleName = "dummyYummyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/badyi/dummyYummy/dummyYummy/dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "876">
+               </Location>
+               <Location
+                  uuid = "0BD03BD8-7E1E-4E9F-9FE3-1E2EF64A404D - 3c4fccdc0ea0b908"
+                  shouldBeEnabled = "Yes"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "closure #1 (dummyYummyTests.OperationCompletion&lt;Foundation.Data&gt;) -&gt; () in dummyYummyTests.FeedPresenter.loadImageIfNeeded(at: Swift.Int) -&gt; ()"
+                  moduleName = "dummyYummyTests"
+                  usesParentBreakpointCondition = "Yes"
+                  urlString = "file:///Users/badyi/dummyYummy/dummyYummy/dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "181"
+                  endingLineNumber = "181"
+                  offsetFromSymbolStart = "184">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
       <BreakpointProxy
@@ -1844,8 +1876,8 @@
             filePath = "dummyYummy/FeedSearchModule/Feed/Presenter/FeedPresenter.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "176"
-            endingLineNumber = "176"
+            startingLineNumber = "166"
+            endingLineNumber = "166"
             landmarkName = "recipesDidLoad()"
             landmarkType = "7">
          </BreakpointContent>
@@ -1972,8 +2004,8 @@
             filePath = "dummyYummy/FavoritesModule/Coordinator/FavoritesCoordinator.swift"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "35"
-            endingLineNumber = "35"
+            startingLineNumber = "29"
+            endingLineNumber = "29"
             landmarkName = "showFavorite()"
             landmarkType = "7">
          </BreakpointContent>

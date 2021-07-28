@@ -120,7 +120,6 @@ extension DetailViewController: UICollectionViewDataSource {
         // header with image and title
         if sections[indexPath.section] == .headerSection {
 
-            // recipe.isFavorite = checkFavoriteStatus()
             guard let recipe = presenter?.getRecipe() else {
                 return header
             }
@@ -128,6 +127,10 @@ extension DetailViewController: UICollectionViewDataSource {
 
             header.handleFavoriteButtonTap = { [weak self] in
                 self?.presenter?.handleFavoriteTap(at: indexPath)
+            }
+
+            header.handleShareButtonTap = { [weak self] in
+                self?.presenter?.handleShareTap(at: indexPath)
             }
             return header
 

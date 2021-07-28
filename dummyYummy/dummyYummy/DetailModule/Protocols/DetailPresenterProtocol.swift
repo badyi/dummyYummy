@@ -24,5 +24,6 @@ protocol DetailPresenterProtocol {
     func headerTapped(_ section: Int)
     func getRecipe() -> Recipe
     func handleFavoriteTap(at indexPath: IndexPath)
+    func handleShareTap(at indexPath: IndexPath)
     func segmentDidChange()
 }

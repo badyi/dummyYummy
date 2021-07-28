@@ -28,9 +28,9 @@ enum TabBarPage {
     func pageTitleValue() -> String {
         switch self {
         case .feed:
-            return "Browes recipes"
+            return "Browse recipes"
         case .fridge:
-            return "What's in your fridge?"
+            return "What's in the fridge?"
         case .favorites:
             return "Favorite recipes"
         }

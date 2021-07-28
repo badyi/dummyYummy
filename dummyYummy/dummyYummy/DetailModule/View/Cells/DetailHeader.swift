@@ -16,12 +16,13 @@ final class DetailHeader: UICollectionReusableView {
 
     var headerTapped: (() -> Void)?
     var segmentSelectedValueChanged: ((Int) -> Void)?
+
     var isExpanded: Bool? = nil {
         willSet {
             if newValue == true {
-                button.rightIcon(image: DetailConstants.Header.Image.chevronDown)
+                headerButton.rightIcon(image: DetailConstants.Header.Image.chevronDown)
             } else if newValue == false {
-                button.rightIcon(image: DetailConstants.Header.Image.chevronRight)
+                headerButton.rightIcon(image: DetailConstants.Header.Image.chevronRight)
             }
         }
     }
@@ -39,12 +40,13 @@ final class DetailHeader: UICollectionReusableView {
             .buildWithShimmer()
     }()
 
-    private lazy var button: UIButton = {
+    private lazy var headerButton: UIButton = {
         let button = UIButtonBuilder()
                         .backgroundColor(DetailConstants.Header.Design.backgroundColor)
                         .setFont(DetailConstants.Header.Font.titleFont)
                         .build()
-        button.addTarget(self, action: #selector(tap), for: .touchUpInside)
+        button.addTarget(self, action: #selector(headerButtonTap), for: .touchUpInside)
+        #warning("fix color")
         button.tintColor = Colors.wisteria
         return button
     }()
@@ -57,7 +59,7 @@ final class DetailHeader: UICollectionReusableView {
             .build()
     }()
 
-    private lazy var favorite: ShimmerUIButton = {
+    private lazy var favoriteButton: ShimmerUIButton = {
         let button = UIButtonBuilder()
             .backgroundColor(DetailConstants.Header.Design.backgroundColor)
             .setImage(DetailConstants.Header.Image.favoriteImage)
@@ -68,13 +70,15 @@ final class DetailHeader: UICollectionReusableView {
         return button
     }()
 
-    private lazy var share: ShimmerUIButton = {
-        return UIButtonBuilder()
+    private lazy var shareButton: ShimmerUIButton = {
+        let button = UIButtonBuilder()
             .backgroundColor(DetailConstants.Header.Design.backgroundColor)
             .largeConfig(true)
             .tintColor(DetailConstants.Header.Design.buttonTintColor)
             .setImage(DetailConstants.Header.Image.shareImage)
             .buildWithShimmer()
+        button.addTarget(self, action: #selector(shareDidTap), for: .touchUpInside)
+        return button
     }()
 
     var segmentItems = ["Ingredients", "Instructions"]
@@ -145,9 +149,9 @@ final class DetailHeader: UICollectionReusableView {
         super.prepareForReuse()
         imageView.removeFromSuperview()
         titleLabel.removeFromSuperview()
-        share.removeFromSuperview()
-        favorite.removeFromSuperview()
-        button.removeFromSuperview()
+        shareButton.removeFromSuperview()
+        favoriteButton.removeFromSuperview()
+        headerButton.removeFromSuperview()
         segmentControll.removeFromSuperview()
     }
 }
@@ -178,11 +182,11 @@ extension DetailHeader {
 
         titleLabel.text = recipe.title
         if recipe.isFavorite {
-            favorite.tintColor = DetailConstants.Header.Design.buttonFavoriteColor
-            favorite.setImage(DetailConstants.Header.Image.favoriteImageFill, for: .normal)
+            favoriteButton.tintColor = DetailConstants.Header.Design.buttonFavoriteColor
+            favoriteButton.setImage(DetailConstants.Header.Image.favoriteImageFill, for: .normal)
         } else {
-            favorite.tintColor = DetailConstants.Header.Design.buttonTintColor
-            favorite.setImage(DetailConstants.Header.Image.favoriteImage, for: .normal)
+            favoriteButton.tintColor = DetailConstants.Header.Design.buttonTintColor
+            favoriteButton.setImage(DetailConstants.Header.Image.favoriteImage, for: .normal)
         }
 
         guard let imageData = recipe.imageData else {
@@ -196,7 +200,7 @@ extension DetailHeader {
 
     func configViewWith(title: String) {
         setupWithTitle()
-        button.setTitle(title, for: .normal)
+        headerButton.setTitle(title, for: .normal)
     }
 
     func configWithSegment(_ currentSelected: Int) {
@@ -205,16 +209,19 @@ extension DetailHeader {
     }
 }
 
-private extension DetailHeader {
-    @objc func segmentChange(sender: UISegmentedControl) {
+extension DetailHeader {
+    @objc
+    private func segmentChange(sender: UISegmentedControl) {
         segmentSelectedValueChanged?(sender.selectedSegmentIndex)
     }
 
-    @objc func favoriteDidTap() {
+    @objc
+    private func favoriteDidTap() {
         handleFavoriteButtonTap?()
     }
 
-    @objc func shareDidTap() {
+    @objc
+    private func shareDidTap() {
         handleShareButtonTap?()
     }
 
@@ -225,8 +232,8 @@ private extension DetailHeader {
 
         contentView.addSubview(imageView)
         contentView.addSubview(titleLabel)
-        contentView.addSubview(share)
-        contentView.addSubview(favorite)
+        contentView.addSubview(shareButton)
+        contentView.addSubview(favoriteButton)
 
         setupImageView()
         setupTitleLabel()
@@ -235,14 +242,14 @@ private extension DetailHeader {
 
     func setupWithTitle() {
         addSubview(contentView)
-        contentView.addSubview(button)
+        contentView.addSubview(headerButton)
         setupContentView()
 
         NSLayoutConstraint.activate([
-            button.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
-            button.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
-            button.topAnchor.constraint(equalTo: contentView.topAnchor),
-            button.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
+            headerButton.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
+            headerButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor),
+            headerButton.topAnchor.constraint(equalTo: contentView.topAnchor),
+            headerButton.bottomAnchor.constraint(equalTo: contentView.bottomAnchor)
         ])
     }
 
@@ -258,7 +265,8 @@ private extension DetailHeader {
         ])
     }
 
-    @objc func tap() {
+    @objc
+    private func headerButtonTap() {
         headerTapped?()
     }
 
@@ -294,19 +302,19 @@ private extension DetailHeader {
 
     func setupButtons() {
         NSLayoutConstraint.activate([
-            favorite.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
+            favoriteButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
                                           constant: DetailConstants.Header.Layout.verticalSpace),
-            favorite.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
+            favoriteButton.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,
                                                constant: -DetailConstants.Header.Layout.horizontalSpace),
-            favorite.heightAnchor.constraint(equalToConstant: DetailConstants.Header.Layout.buttonHeight),
-            favorite.widthAnchor.constraint(equalTo: favorite.heightAnchor)
+            favoriteButton.heightAnchor.constraint(equalToConstant: DetailConstants.Header.Layout.buttonHeight),
+            favoriteButton.widthAnchor.constraint(equalTo: favoriteButton.heightAnchor)
         ])
 
         NSLayoutConstraint.activate([
-            share.topAnchor.constraint(equalTo: favorite.topAnchor),
-            share.widthAnchor.constraint(equalTo: share.widthAnchor),
-            share.heightAnchor.constraint(equalToConstant: DetailConstants.Header.Layout.buttonHeight),
-            share.trailingAnchor.constraint(equalTo: favorite.leadingAnchor,
+            shareButton.topAnchor.constraint(equalTo: favoriteButton.topAnchor),
+            shareButton.widthAnchor.constraint(equalTo: shareButton.widthAnchor),
+            shareButton.heightAnchor.constraint(equalToConstant: DetailConstants.Header.Layout.buttonHeight),
+            shareButton.trailingAnchor.constraint(equalTo: favoriteButton.leadingAnchor,
                                             constant: -DetailConstants.Header.Layout.spaceBetweenButtons)
         ])
     }

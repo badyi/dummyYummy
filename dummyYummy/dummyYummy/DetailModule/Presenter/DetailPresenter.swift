@@ -42,6 +42,13 @@ final class DetailPresenter {
 }
 
 extension DetailPresenter: DetailPresenterProtocol {
+    func handleShareTap(at indexPath: IndexPath) {
+        guard let url = recipe.sourceURL else {
+            return
+        }
+        navigationDelegate?.share(with: url)
+    }
+
     func segmentDidChange() {
         self.view?.reloadSection(2)
     }

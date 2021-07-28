@@ -68,7 +68,3 @@ extension DetailCell {
         return height
     }
 }
-
-private extension DetailCell {
-
-}

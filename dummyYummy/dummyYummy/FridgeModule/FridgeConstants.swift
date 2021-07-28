@@ -19,11 +19,16 @@ struct FridgeConstants {
             static var navBarBackgroundColor = Colors.black
             static var navBarBarTintColor = Colors.black
             static var navBarTintColor = Colors.wisteria
+            static var searchTextColor = Colors.white
         }
 
         struct Image {
             static let navBarBackground = UIImage()
             static let navBarShadowImage = UIImage()
+        }
+
+        struct Font {
+            static let navBarTitleFont: UIFont = UIFont(name: "Helvetica-Bold", size: 19) ?? UIFont()
         }
     }
 

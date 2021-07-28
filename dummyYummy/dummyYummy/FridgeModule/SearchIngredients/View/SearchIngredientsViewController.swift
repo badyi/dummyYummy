@@ -85,6 +85,16 @@ extension SearchIngredientsViewController: UITableViewDelegate {
 
 // MARK: - SearchIngredientsViewProtocol
 extension SearchIngredientsViewController: SearchIngredientsViewProtocol {
+    func removed(at indexPath: IndexPath) {
+        tableView.beginUpdates()
+        tableView.deleteRows(at: [indexPath], with: .automatic)
+        tableView.endUpdates()
+    }
+
+    func appended() {
+        tableView.reloadData()
+    }
+
     func reloadTable() {
         tableView.reloadData()
     }

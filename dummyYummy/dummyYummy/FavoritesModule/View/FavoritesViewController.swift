@@ -43,6 +43,7 @@ extension FavoritesViewController {
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Search in favorites"
         navigationItem.searchController = searchController
+        navigationItem.searchController?.searchBar.searchTextField.textColor = Colors.white
     }
 }
 

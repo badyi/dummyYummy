@@ -7,9 +7,9 @@
 
 import Foundation
 
-protocol FeedNavigationDelegate: AnyObject {
-
-    /// Handle tap on cell
-    /// - Parameter recipe: the recipe that was touched
-    func feedDidTapCell(with recipe: Recipe)
-}
+// protocol FeedNavigationDelegate: AnyObject {
+//
+//    /// Handle tap on cell
+//    /// - Parameter recipe: the recipe that was touched
+//    func feedDidTapCell(with recipe: Recipe)
+// }

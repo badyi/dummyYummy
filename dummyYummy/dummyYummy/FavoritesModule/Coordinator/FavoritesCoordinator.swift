@@ -25,31 +25,26 @@ final class FavoritesCoordinator: FavoritesCoordinatorProtocol {
     }
 
     func showFavorite() {
-        let favoriteViewController = FavoritesViewController()
-        let dataBaseService = DataBaseService(coreDataStack: CoreDataStack.shared)
-        let fileSystemService = FileSystemService()
-
-        let presenter = FavoritesPresenter(with: favoriteViewController, dataBaseService, fileSystemService)
-        presenter.navigationDelegate = self
-        favoriteViewController.presenter = presenter
-        navigationController.pushViewController(favoriteViewController, animated: true)
+        let favoritesVC = FavoritesAssembly().createFavoriteModule(self)
+        navigationController.pushViewController(favoritesVC, animated: true)
     }
 
     func showDetail(with recipe: Recipe) {
-        let detailViewController = DetailViewController()
-        let networkService = DetailNetworkService()
-        let dataBaseService = DataBaseService(coreDataStack: CoreDataStack.shared)
-        let fileSystemService = FileSystemService()
-        let presenter = DetailPresenter(with: detailViewController,
-                                        dataBaseService,
-                                        fileSystemService,
-                                        networkService,
-                                        recipe)
+        let detailCoordinator = DetailCoordinator(navigationController)
+        childCoordinators.append(detailCoordinator)
 
-        detailViewController.presenter = presenter
+        detailCoordinator.finishDelegate = self
+        detailCoordinator.recipe = recipe
+        detailCoordinator.start()
+    }
+}
 
-        detailViewController.definesPresentationContext = true
-        navigationController.pushViewController(detailViewController, animated: true)
+extension FavoritesCoordinator: CoordinatorFinishDelegate {
+    func coordinatorDidFinish(childCoordinator: Coordinator) {
+        if let childCoordinator = childCoordinators.last, childCoordinator.type == .detail {
+            navigationController.popToRootViewController(animated: true)
+            childCoordinators.removeLast()
+        }
     }
 }
 
