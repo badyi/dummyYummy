@@ -1,5 +1,5 @@
 //
-//  FakeReachability.swift
+//  Reachability.swift
 //  dummyYummy
 //
 //  Created by badyi on 13.06.2021.

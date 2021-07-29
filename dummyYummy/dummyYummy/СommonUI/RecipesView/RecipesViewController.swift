@@ -10,18 +10,34 @@ import UIKit
 class RecipesViewController: UIViewController, RecipesViewProtocol {
 
     var collectionView: UICollectionView = {
+        // layout.sectionInset = RecipeViewConstants.ViewController.Layout.collectionInsets
         let collectionView = UICollectionViewBuilder()
             .backgroundColor(RecipeViewConstants.ViewController.Design.backgroundColor)
+            // .layout(layout)
             .setInsets(RecipeViewConstants.ViewController.Layout.collectionInsets)
             .build()
         return collectionView
     }()
 
+    var refreshControl: UIRefreshControl = {
+        UIRefreshControl()
+    }()
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        reloadVisibleCells()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopVisibleCellsAnimation()
+    }
+
     func setupCollectionView() {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -41,6 +57,7 @@ class RecipesViewController: UIViewController, RecipesViewProtocol {
     }
 
     func reloadCollectionView() {
+        refreshControl.endRefreshing()
         collectionView.reloadData()
     }
 
@@ -74,5 +91,10 @@ class RecipesViewController: UIViewController, RecipesViewProtocol {
 
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.largeTitleDisplayMode = .always
+    }
+
+    func setupRefresh() {
+        refreshControl.tintColor = Colors.wisteria
+        collectionView.refreshControl = refreshControl
     }
 }

@@ -11,6 +11,8 @@ struct FridgeConstants {
     struct ViewController {
         struct Layout {
             static let searchButtonHeight: CGFloat = 50
+            static let tableViewInsets = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+            static let buttonCornerRaius: CGFloat = 20
         }
 
         struct Design {

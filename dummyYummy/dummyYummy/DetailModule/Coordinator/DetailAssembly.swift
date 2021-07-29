@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol DetailAssemblyProtocol {
-    func createDetailModule(_ recipe: Recipe, _ navigationDelegate: DetailNavigationDelegate) -> DetailViewController
-}
-
 final class DetailAssembly: DetailAssemblyProtocol {
     func createDetailModule(_ recipe: Recipe, _ navigationDelegate: DetailNavigationDelegate) -> DetailViewController {
         let detailViewController = DetailViewController()

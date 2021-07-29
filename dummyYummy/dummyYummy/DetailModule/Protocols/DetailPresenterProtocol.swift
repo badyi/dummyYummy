@@ -14,8 +14,10 @@ protocol DetailPresenterProtocol {
          _ networkService: DetailNetworkServiceProtocol,
          _ recipe: Recipe)
 
-    func viewDidLoad()
-    func viewWillAppear()
+    func checkFavoriteStatus()
+    func prepareIngredientsAndInstructions()
+    func prepareCharacteristics()
+    func loadImageIfNeeded()
     func headerTitle() -> String
     func ingredientTitle(at indexPath: IndexPath) -> String
     func instructionTitle(at indexPath: IndexPath) -> String

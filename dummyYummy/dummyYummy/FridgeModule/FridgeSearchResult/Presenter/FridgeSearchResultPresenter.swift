@@ -7,20 +7,6 @@
 
 import Foundation
 
-protocol FridgeSearchResultPresenterProtocol {
-
-    init(with view: FridgeSearchResultViewProtocol,
-         _ networkService: FridgeSearchNetworkServiceProtocol,
-         _ ingredients: [String])
-
-    func didSelectRecipe(at index: Int)
-    func loadImageIfNeeded(at index: Int)
-    func cancelLoadImageIfNeeded(at index: Int)
-    func recipe(at index: Int) -> Recipe?
-    func recipesCount() -> Int
-    func loadRecipes()
-}
-
 final class FridgeSearchResultPresenter {
     weak var view: FridgeSearchResultViewProtocol?
     var networkService: FridgeSearchNetworkServiceProtocol
@@ -120,12 +106,9 @@ extension FridgeSearchResultPresenter {
                 NSLog("resource createtion error")
             }
         } else if error.localizedDescription == "cancelled" {
-            // ok scenario. do nothing
+
         } else if let error = error as? NetworkHelper.NetworkErrors {
-            switch error {
-            case .noConnection:
-                navigationDelegate?.error(with: "No connection")
-            }
+            NSLog(error.localizedDescription)
         } else {
             navigationDelegate?.error(with: error.localizedDescription)
         }

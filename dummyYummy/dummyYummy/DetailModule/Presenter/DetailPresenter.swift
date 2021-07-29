@@ -41,7 +41,66 @@ final class DetailPresenter {
     }
 }
 
+// MARK: - DetailPresenterProtocol
 extension DetailPresenter: DetailPresenterProtocol {
+    func checkFavoriteStatus() {
+        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
+        if !dataBaseService.recipes(with: predicate).isEmpty {
+            recipe.isFavorite = true
+            return
+        }
+        recipe.isFavorite = false
+    }
+
+    func prepareIngredientsAndInstructions() {
+        if recipe.ingredients == nil || recipe.instructions == nil {
+            loadRecipeInfo()
+        }
+    }
+
+    func prepareCharacteristics() {
+        guard let boolCharacteristics = recipe.boolCharacteristics else {
+            loadRecipeInfo()
+            return
+        }
+
+        if let healthScore = recipe.healthScore {
+            characteristics.values.append("Health score: \(healthScore)")
+        }
+
+        if let readyInMinutes = recipe.readyInMinutes {
+            characteristics.values.append("Ready in minutes:  \(readyInMinutes)")
+        }
+
+        if let servings = recipe.servings {
+            characteristics.values.append("Servings: \(servings)")
+        }
+
+        boolCharacteristics.forEach { item in
+            if item.value {
+                characteristics.values.append(item.key)
+            }
+        }
+    }
+
+    func loadImageIfNeeded() {
+        if recipe.imageData != nil {
+            return
+        }
+        guard let url = recipe.imageURL else {
+            return
+        }
+        networkService.loadImage(url, completion: { [weak self] result in
+            switch result {
+            case let .success(result):
+                self?.recipe.imageData = result
+                self?.imageDidLoad()
+            case let .failure(error):
+                self?.handleError(error)
+            }
+        })
+    }
+
     func handleShareTap(at indexPath: IndexPath) {
         guard let url = recipe.sourceURL else {
             return
@@ -75,18 +134,6 @@ extension DetailPresenter: DetailPresenterProtocol {
         return instruction
     }
 
-    func viewDidLoad() {
-        loadImageIfNeeded()
-        prepareCharacteristics()
-        prepareIngredientsAndInstructions()
-        recipe.isFavorite = checkFavoriteStatus()
-        view?.setupView()
-    }
-
-    func viewWillAppear() {
-        view?.configNavigationBar()
-    }
-
     func headerTitle() -> String {
         return recipe.title
     }
@@ -117,49 +164,6 @@ extension DetailPresenter: DetailPresenterProtocol {
 }
 
 private extension DetailPresenter {
-    func loadImageIfNeeded() {
-        if recipe.imageData != nil {
-            return
-        }
-        guard let url = recipe.imageURL else {
-            return
-        }
-        networkService.loadImage(url, completion: { [weak self] result in
-            switch result {
-            case let .success(result):
-                self?.recipe.imageData = result
-                self?.imageDidLoad()
-            case let .failure(error):
-                self?.handleError(error)
-            }
-        })
-    }
-
-    func prepareCharacteristics() {
-        guard let boolCharacteristics = recipe.boolCharacteristics else {
-            loadRecipeInfo()
-            return
-        }
-
-        if let healthScore = recipe.healthScore {
-            characteristics.values.append("Health score: \(healthScore)")
-        }
-        if let readyInMinutes = recipe.readyInMinutes {
-            characteristics.values.append("Ready in minutes:  \(readyInMinutes)")
-        }
-        boolCharacteristics.forEach { item in
-            if item.value {
-                characteristics.values.append(item.key)
-            }
-        }
-    }
-
-    func prepareIngredientsAndInstructions() {
-        if recipe.ingredients == nil || recipe.instructions == nil {
-            loadRecipeInfo()
-        }
-    }
-
     func loadRecipeInfo() {
         networkService.loadRecipeInfo(recipe.id, completion: { [weak self] result in
             switch result {
@@ -184,17 +188,6 @@ private extension DetailPresenter {
         DispatchQueue.main.async { [weak self] in
             self?.view?.reloadCollection()
         }
-    }
-}
-
-private extension DetailPresenter {
-
-    func checkFavoriteStatus() -> Bool {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
-        if !dataBaseService.recipes(with: predicate).isEmpty {
-            return true
-        }
-        return false
     }
 }
 
@@ -238,12 +231,9 @@ extension DetailPresenter {
                 NSLog("resource createtion error")
             }
         } else if error.localizedDescription == "cancelled" {
-            // ok scenario. do nothing
+
         } else if let error = error as? NetworkHelper.NetworkErrors {
-            switch error {
-            case .noConnection:
-                navigationDelegate?.error(with: "No connection")
-            }
+            NSLog(error.localizedDescription)
         } else {
             navigationDelegate?.error(with: error.localizedDescription)
         }

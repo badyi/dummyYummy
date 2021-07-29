@@ -15,7 +15,8 @@ final class DetailCoordinator: DetailCoordinatorProtocol {
 
     var childCoordinators: [Coordinator] = []
 
-    var type: CoordinatorType = .detail
+    var type: CoordinatorType { .detail }
+
     var recipe: Recipe?
 
     func start() {

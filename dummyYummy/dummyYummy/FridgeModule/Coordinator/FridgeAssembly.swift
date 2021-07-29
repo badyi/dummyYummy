@@ -30,8 +30,7 @@ final class FridgeAssembly {
     func createFridgeModule(_ navigationDelegate: FridgeNavigationDelegate) -> FridgeViewController {
 
         let fridgeView = FridgeViewController()
-        let networkService = FridgeNetworkService()
-        let presenter = FridgePresenter(with: fridgeView, networkService)
+        let presenter = FridgePresenter(with: fridgeView)
         presenter.navigationDelegate = navigationDelegate
         fridgeView.presenter = presenter
 

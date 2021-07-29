@@ -9,6 +9,12 @@ import UIKit
 
 final class DetailHeader: UICollectionReusableView {
 
+    let cornerRadius: CGFloat = DetailConstants.Header.Layout.cornerRadius
+    let shadowRadius: CGFloat = DetailConstants.Header.Layout.shadowRadius
+    let shadowOpacity: Float = DetailConstants.Header.Layout.shadowOpacity
+    let shadowOffsetWidth: CGFloat = DetailConstants.Header.Layout.shadowOffsetWidth
+    let shadowOffsetHeight: CGFloat = DetailConstants.Header.Layout.healthScoreHeight
+
     static let id = "DetailHeader"
 
     var handleShareButtonTap: (() -> Void)?
@@ -46,8 +52,7 @@ final class DetailHeader: UICollectionReusableView {
                         .setFont(DetailConstants.Header.Font.titleFont)
                         .build()
         button.addTarget(self, action: #selector(headerButtonTap), for: .touchUpInside)
-        #warning("fix color")
-        button.tintColor = Colors.wisteria
+        button.tintColor = DetailConstants.Header.Design.headerButtonTintColor
         return button
     }()
 
@@ -110,12 +115,6 @@ final class DetailHeader: UICollectionReusableView {
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
-
-    let cornerRadius: CGFloat = 10
-    let shadowRadius: CGFloat = 6
-    let shadowOpacity: Float = 0.4
-    let shadowOffsetWidth: CGFloat = 0
-    let shadowOffsetHeight: CGFloat = 2
 
     override func layoutSubviews() {
         super.layoutSubviews()
@@ -189,10 +188,14 @@ extension DetailHeader {
             favoriteButton.setImage(DetailConstants.Header.Image.favoriteImage, for: .normal)
         }
 
-        guard let imageData = recipe.imageData else {
+        if recipe.imageURL == nil {
+            imageView.image = DetailConstants.Header.Image.defaultCellImage
             return
         }
-        guard let image = UIImage(data: imageData) else {
+
+        guard let imageData = recipe.imageData,
+              let image = UIImage(data: imageData) else {
+            imageView.image = DetailConstants.Header.Image.defaultCellImage
             return
         }
         imageView.image = image
@@ -225,7 +228,7 @@ extension DetailHeader {
         handleShareButtonTap?()
     }
 
-    func setupView() {
+    private func setupView() {
         addSubview(contentView)
 
         setupContentView()
@@ -240,7 +243,7 @@ extension DetailHeader {
         setupButtons()
     }
 
-    func setupWithTitle() {
+    private func setupWithTitle() {
         addSubview(contentView)
         contentView.addSubview(headerButton)
         setupContentView()
@@ -253,7 +256,7 @@ extension DetailHeader {
         ])
     }
 
-    func setupWithSegment() {
+    private func setupWithSegment() {
         addSubview(contentView)
         contentView.addSubview(segmentControll)
         setupContentView()
@@ -270,7 +273,7 @@ extension DetailHeader {
         headerTapped?()
     }
 
-    func setupContentView() {
+    private func setupContentView() {
         NSLayoutConstraint.activate([
             contentView.topAnchor.constraint(equalTo: safeAreaLayoutGuide.topAnchor),
             contentView.leadingAnchor.constraint(equalTo: safeAreaLayoutGuide.leadingAnchor),
@@ -280,7 +283,7 @@ extension DetailHeader {
         ])
     }
 
-    func setupImageView() {
+    private func setupImageView() {
         NSLayoutConstraint.activate([
             imageView.topAnchor.constraint(equalTo: contentView.safeAreaLayoutGuide.topAnchor),
             imageView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor),
@@ -289,7 +292,7 @@ extension DetailHeader {
         ])
     }
 
-    func setupTitleLabel() {
+    private func setupTitleLabel() {
         NSLayoutConstraint.activate([
             titleLabel.topAnchor.constraint(equalTo: imageView.safeAreaLayoutGuide.bottomAnchor,
                                             constant: DetailConstants.Header.Layout.verticalSpace),
@@ -300,7 +303,7 @@ extension DetailHeader {
         ])
     }
 
-    func setupButtons() {
+    private func setupButtons() {
         NSLayoutConstraint.activate([
             favoriteButton.topAnchor.constraint(equalTo: titleLabel.bottomAnchor,
                                           constant: DetailConstants.Header.Layout.verticalSpace),
@@ -319,7 +322,7 @@ extension DetailHeader {
         ])
     }
 
-    func addArrowImageToButton(button: UIButton, arrowImage: UIImage) {
+    private func addArrowImageToButton(button: UIButton, arrowImage: UIImage) {
         let btnSize: CGFloat = 32
         let imageView = UIImageView(image: arrowImage)
         let btnFrame = button.frame

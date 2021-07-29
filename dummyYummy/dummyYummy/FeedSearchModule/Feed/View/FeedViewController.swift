@@ -14,6 +14,7 @@ final class FeedViewController: RecipesViewController {
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRefresh()
         setupView()
         presenter?.loadRandomRecipes()
     }
@@ -21,13 +22,7 @@ final class FeedViewController: RecipesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configNavigation()
-        reloadVisibleCells()
         presenter?.loadRandomRecipesIfNeeded()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        stopVisibleCellsAnimation()
     }
 }
 
@@ -44,6 +39,7 @@ extension FeedViewController: FeedViewProtocol {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
 
         view.addSubview(collectionView)
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         setupCollectionView()
     }
 
@@ -83,6 +79,7 @@ extension FeedViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension FeedViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // in case the recipes haven't loaded yet
@@ -146,10 +143,18 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UICollectionViewDataSourcePrefetching
 extension FeedViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         indexPaths.forEach {
             presenter?.prepareRecipe(at: $0.row)
         }
+    }
+}
+
+extension FeedViewController {
+    @objc
+    private func refresh(_ sender: AnyObject) {
+        presenter?.loadRandomRecipes()
     }
 }

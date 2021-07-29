@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol FridgeSearchResultViewProtocol: RecipesViewProtocol {
-
-}
-
 final class FridgeSearchResultViewController: RecipesViewController {
     var presenter: FridgeSearchResultPresenterProtocol?
 
@@ -24,11 +20,9 @@ final class FridgeSearchResultViewController: RecipesViewController {
         super.viewWillAppear(animated)
         navigationItem.largeTitleDisplayMode = .never
     }
-
 }
 
 extension FridgeSearchResultViewController: FridgeSearchResultViewProtocol {
-
 }
 
 extension FridgeSearchResultViewController: UICollectionViewDelegate {

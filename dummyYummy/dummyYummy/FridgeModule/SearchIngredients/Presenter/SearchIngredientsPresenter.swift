@@ -98,12 +98,9 @@ extension SearchIngredientsPresenter {
                 NSLog("resource createtion error")
             }
         } else if error.localizedDescription == "cancelled" {
-            // ok scenario. do nothing
+
         } else if let error = error as? NetworkHelper.NetworkErrors {
-            switch error {
-            case .noConnection:
-                navigationDelegate?.error(with: "No connection")
-            }
+            NSLog(error.localizedDescription)
         } else {
             navigationDelegate?.error(with: error.localizedDescription)
         }

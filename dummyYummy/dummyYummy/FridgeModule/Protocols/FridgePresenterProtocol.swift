@@ -8,7 +8,7 @@
 import Foundation
 
 protocol FridgePresenterProtocol {
-    init (with view: FridgeViewProtocol, _ networkService: FridgeNetworkServiceProtocol)
+    init (with view: FridgeViewProtocol)
 
     func ingredientsCount() -> Int
     func setChosenIngredients(_ ingredients: [String])

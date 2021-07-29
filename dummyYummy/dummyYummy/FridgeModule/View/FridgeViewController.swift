@@ -15,8 +15,7 @@ final class FridgeViewController: UIViewController {
         tableView.backgroundColor = FridgeConstants.ViewController.Design.backgroundColor
         tableView.delegate = self
         tableView.dataSource = self
-        #warning("add to constants")
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+        tableView.contentInset = FridgeConstants.ViewController.Layout.tableViewInsets
         tableView.register(IngredinentsCell.self, forCellReuseIdentifier: IngredinentsCell.id)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.defaultID)
         return tableView
@@ -25,12 +24,11 @@ final class FridgeViewController: UIViewController {
     private lazy var showSearchResultsButton: UIButton = {
         let button = UIButtonBuilder()
             .backgroundColor(Colors.wisteria)
+            .cornerRadius(FridgeConstants.ViewController.Layout.buttonCornerRaius)
+            .title("Search recipes")
             .build()
-        #warning("constants")
-        button.layer.cornerRadius = 20
         button.layer.masksToBounds = true
         button.clipsToBounds = true
-        button.setTitle("Search recipes", for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
@@ -45,16 +43,6 @@ final class FridgeViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configNavigationBar()
-    }
-
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
-
-        if editingStyle == .delete {
-            presenter?.delete(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
     }
 
     func setupSearchController(_ searchController: UISearchController) {
@@ -95,15 +83,15 @@ extension FridgeViewController {
         let textAttributes = [NSAttributedString.Key.foregroundColor:
                                 FridgeConstants.ViewController.Design.navigationTextColor]
 
-        for navItem in(self.navigationController?.navigationBar.subviews)! {
-             for itemSubView in navItem.subviews {
-                 if let largeLabel = itemSubView as? UILabel {
-                     largeLabel.text = self.title
-                     largeLabel.numberOfLines = 0
-                     largeLabel.lineBreakMode = .byWordWrapping
-                 }
-             }
-        }
+//        for navItem in(self.navigationController?.navigationBar.subviews)! {
+//             for itemSubView in navItem.subviews {
+//                 if let largeLabel = itemSubView as? UILabel {
+//                     largeLabel.text = self.title
+//                     largeLabel.numberOfLines = 0
+//                     largeLabel.lineBreakMode = .byWordWrapping
+//                 }
+//             }
+//        }
 
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
@@ -178,5 +166,15 @@ extension FridgeViewController: UITableViewDelegate {
         let minimalHeight = SearchIngredientsConstants.ViewController.Layout.mimimalCellHeight
 
         return height < minimalHeight ? minimalHeight : height
+    }
+
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+
+        if editingStyle == .delete {
+            presenter?.delete(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }

@@ -13,6 +13,7 @@ final class DetailNetworkService {
     var infoLoadRequest: CancellationProtocol?
 }
 
+// MARK: - DetailNetworkServiceProtocol
 extension DetailNetworkService: DetailNetworkServiceProtocol {
     func loadRecipeInfo(_ id: Int, completion: @escaping(OperationCompletion<RecipeInfoResponse>) -> Void) {
         if infoLoadRequest != nil {

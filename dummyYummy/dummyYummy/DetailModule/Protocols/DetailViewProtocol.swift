@@ -8,8 +8,6 @@
 import Foundation
 
 protocol DetailViewProtocol: AnyObject {
-    func setupView()
-    func configNavigationBar()
     func reloadSection(_ section: Int)
     func reloadCollection()
 }

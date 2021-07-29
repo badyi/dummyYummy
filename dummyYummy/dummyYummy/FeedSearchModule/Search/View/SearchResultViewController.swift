@@ -7,19 +7,7 @@
 
 import UIKit
 
-final class SearchResultViewController: UIViewController {
-
-    private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionViewBuilder()
-            .backgroundColor(SearchResultConstants.ViewController.Design.backgroundColor)
-            .delegate(self)
-            .dataSource(self)
-            .setInsets(SearchResultConstants.ViewController.Layout.collectionViewInsets)
-            .build()
-        collectionView.register(SearchResultRecipeCell.self, forCellWithReuseIdentifier: SearchResultRecipeCell.id)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
-        return collectionView
-    }()
+final class SearchResultViewController: RecipesViewController {
 
     var presenter: SearchPresenterProtocol?
 
@@ -31,29 +19,17 @@ final class SearchResultViewController: UIViewController {
 }
 
 extension SearchResultViewController: SearchViewProtocol {
-    func reloadCollectionView() {
-        collectionView.reloadData()
-    }
-
-    func reloadItems(at indexPaths: [IndexPath]) {
-        collectionView.reloadItems(at: indexPaths)
-    }
 }
 
 extension SearchResultViewController {
     private func setupView() {
+        view.addSubview(collectionView)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
+        collectionView.register(SearchResultRecipeCell.self, forCellWithReuseIdentifier: SearchResultRecipeCell.id)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         view.backgroundColor = SearchResultConstants.ViewController.Design.backgroundColor
         setupCollectionView()
-    }
-
-    private func setupCollectionView() {
-        view.addSubview(collectionView)
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
-        ])
     }
 }
 

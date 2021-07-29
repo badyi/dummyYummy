@@ -7,7 +7,7 @@
 
 import Foundation
 
-final class SearchPresenter: NSObject {
+final class SearchPresenter {
     weak var view: SearchViewProtocol?
     private var service: SearchNetworkServiceProtocol
 
@@ -137,7 +137,9 @@ extension SearchPresenter {
                 NSLog("resource createtion error")
             }
         } else if error.localizedDescription == "cancelled" {
-            return
+
+        } else if let error = error as? NetworkHelper.NetworkErrors {
+            NSLog(error.localizedDescription)
         } else {
             navigationDelegate?.error(with: error.localizedDescription)
         }

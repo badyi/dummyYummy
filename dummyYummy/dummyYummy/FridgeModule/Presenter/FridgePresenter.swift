@@ -9,14 +9,12 @@ import Foundation
 
 final class FridgePresenter {
     weak var view: FridgeViewProtocol?
-    private var networkService: FridgeNetworkServiceProtocol
     private(set) var chosenIngredients: [String]
 
     var navigationDelegate: FridgeNavigationDelegate?
 
-    init(with view: FridgeViewProtocol, _ networkService: FridgeNetworkServiceProtocol) {
+    init(with view: FridgeViewProtocol) {
         self.view = view
-        self.networkService = networkService
         chosenIngredients = []
     }
 }

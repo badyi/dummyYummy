@@ -118,7 +118,6 @@
 		8115A48A26B0AE3F00559331 /* FridgeNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8115A43026B0581900559331 /* FridgeNavigationDelegate.swift */; };
 		8115A48B26B0AE3F00559331 /* FridgeNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4F26A60E5D004AC8C1 /* FridgeNetworkServiceProtocol.swift */; };
 		8115A48C26B0AE3F00559331 /* FridgeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5A26A727F3004AC8C1 /* FridgeCoordinator.swift */; };
-		8115A48D26B0AE3F00559331 /* FridgeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6326A7299D004AC8C1 /* FridgeNetworkService.swift */; };
 		8115A48E26B0AE3F00559331 /* FridgePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5226A60F5E004AC8C1 /* FridgePresenter.swift */; };
 		8115A48F26B0AE3F00559331 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5526A60FBB004AC8C1 /* FridgeViewController.swift */; };
 		8115A49026B0AE3F00559331 /* SearchIngredientsConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C8726A867B7004AC8C1 /* SearchIngredientsConstants.swift */; };
@@ -181,6 +180,24 @@
 		8118A3E626B1AEC800BBB17F /* FridgeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3E526B1AEC800BBB17F /* FridgeAssembly.swift */; };
 		8118A3E826B1B53500BBB17F /* FavoritesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3E726B1B53500BBB17F /* FavoritesAssembly.swift */; };
 		8118A3EA26B1BECF00BBB17F /* DetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3E926B1BECF00BBB17F /* DetailAssembly.swift */; };
+		8118A3EC26B1E99E00BBB17F /* FridgeSearchResultPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3EB26B1E99E00BBB17F /* FridgeSearchResultPresenterProtocol.swift */; };
+		8118A3EE26B1E9D900BBB17F /* FridgeSearchResultViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3ED26B1E9D900BBB17F /* FridgeSearchResultViewProtocol.swift */; };
+		8118A3F026B1EA0E00BBB17F /* FridgeSearchNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3EF26B1EA0E00BBB17F /* FridgeSearchNetworkServiceProtocol.swift */; };
+		8118A3F626B1EA6100BBB17F /* FridgeSearchRescoureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3F526B1EA6100BBB17F /* FridgeSearchRescoureFactory.swift */; };
+		8118A3F726B2F76100BBB17F /* AppAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3E126B19A2D00BBB17F /* AppAssembly.swift */; };
+		8118A3F826B2F76100BBB17F /* GuidePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3D826B199A800BBB17F /* GuidePresenterProtocol.swift */; };
+		8118A3F926B2F76100BBB17F /* GuideNavigationDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3DA26B199C600BBB17F /* GuideNavigationDelegateProtocol.swift */; };
+		8118A3FA26B2F76100BBB17F /* GuidePageViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3DD26B199E800BBB17F /* GuidePageViewProtocol.swift */; };
+		8118A3FB26B2F76100BBB17F /* FeedSearchAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3E326B1AC3800BBB17F /* FeedSearchAssembly.swift */; };
+		8118A3FC26B2F7CF00BBB17F /* FridgeAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3E526B1AEC800BBB17F /* FridgeAssembly.swift */; };
+		8118A3FD26B2F7D800BBB17F /* FridgeSearchResultViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3ED26B1E9D900BBB17F /* FridgeSearchResultViewProtocol.swift */; };
+		8118A3FE26B2F7DD00BBB17F /* FridgeSearchNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3EF26B1EA0E00BBB17F /* FridgeSearchNetworkServiceProtocol.swift */; };
+		8118A3FF26B2F7E800BBB17F /* FridgeSearchResultPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3EB26B1E99E00BBB17F /* FridgeSearchResultPresenterProtocol.swift */; };
+		8118A40026B2F7F400BBB17F /* FridgeSearchRescoureFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3F526B1EA6100BBB17F /* FridgeSearchRescoureFactory.swift */; };
+		8118A40126B2F7F400BBB17F /* FavoritesAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3E726B1B53500BBB17F /* FavoritesAssembly.swift */; };
+		8118A40226B2F7F400BBB17F /* DetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3E926B1BECF00BBB17F /* DetailAssembly.swift */; };
+		8118A40426B3087500BBB17F /* DetailAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A40326B3087500BBB17F /* DetailAssemblyProtocol.swift */; };
+		8118A40C26B30ED700BBB17F /* dummyYummySnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A40B26B30ED700BBB17F /* dummyYummySnapshotTests.swift */; };
 		81243B2926A22E90004AC8C1 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2826A22E90004AC8C1 /* RecipesViewController.swift */; };
 		81243B3026A2307C004AC8C1 /* RecipesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2F26A2307C004AC8C1 /* RecipesViewProtocol.swift */; };
 		81243B3226A24375004AC8C1 /* BaseRecipesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B3126A24375004AC8C1 /* BaseRecipesConstants.swift */; };
@@ -207,7 +224,6 @@
 		81243C5E26A72822004AC8C1 /* FavoritesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5D26A72822004AC8C1 /* FavoritesViewProtocol.swift */; };
 		81243C6026A7285E004AC8C1 /* FavoritesCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5F26A7285E004AC8C1 /* FavoritesCoordinatorProtocol.swift */; };
 		81243C6226A7287B004AC8C1 /* FridgeCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6126A7287B004AC8C1 /* FridgeCoordinatorProtocol.swift */; };
-		81243C6426A7299D004AC8C1 /* FridgeNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6326A7299D004AC8C1 /* FridgeNetworkService.swift */; };
 		81243C6726A76056004AC8C1 /* SearchIngredientsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6626A76056004AC8C1 /* SearchIngredientsViewController.swift */; };
 		81243C6A26A760D8004AC8C1 /* SearchIngredientsPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6926A760D8004AC8C1 /* SearchIngredientsPresenter.swift */; };
 		81243C6C26A760E4004AC8C1 /* SearchIngredientsViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C6B26A760E4004AC8C1 /* SearchIngredientsViewProtocol.swift */; };
@@ -286,6 +302,13 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
+		8118A40E26B30ED700BBB17F /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = 815E6E65267418DE00CE6CC1 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = 815E6E6C267418DE00CE6CC1;
+			remoteInfo = dummyYummy;
+		};
 		81243B6726A33AF3004AC8C1 /* PBXContainerItemProxy */ = {
 			isa = PBXContainerItemProxy;
 			containerPortal = 815E6E65267418DE00CE6CC1 /* Project object */;
@@ -351,6 +374,14 @@
 		8118A3E526B1AEC800BBB17F /* FridgeAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeAssembly.swift; sourceTree = "<group>"; };
 		8118A3E726B1B53500BBB17F /* FavoritesAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesAssembly.swift; sourceTree = "<group>"; };
 		8118A3E926B1BECF00BBB17F /* DetailAssembly.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAssembly.swift; sourceTree = "<group>"; };
+		8118A3EB26B1E99E00BBB17F /* FridgeSearchResultPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeSearchResultPresenterProtocol.swift; sourceTree = "<group>"; };
+		8118A3ED26B1E9D900BBB17F /* FridgeSearchResultViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeSearchResultViewProtocol.swift; sourceTree = "<group>"; };
+		8118A3EF26B1EA0E00BBB17F /* FridgeSearchNetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeSearchNetworkServiceProtocol.swift; sourceTree = "<group>"; };
+		8118A3F526B1EA6100BBB17F /* FridgeSearchRescoureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeSearchRescoureFactory.swift; sourceTree = "<group>"; };
+		8118A40326B3087500BBB17F /* DetailAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAssemblyProtocol.swift; sourceTree = "<group>"; };
+		8118A40926B30ED700BBB17F /* dummyYummySnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dummyYummySnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		8118A40B26B30ED700BBB17F /* dummyYummySnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummyYummySnapshotTests.swift; sourceTree = "<group>"; };
+		8118A40D26B30ED700BBB17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81243B2826A22E90004AC8C1 /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		81243B2F26A2307C004AC8C1 /* RecipesViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewProtocol.swift; sourceTree = "<group>"; };
 		81243B3126A24375004AC8C1 /* BaseRecipesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRecipesConstants.swift; sourceTree = "<group>"; };
@@ -388,7 +419,6 @@
 		81243C5D26A72822004AC8C1 /* FavoritesViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewProtocol.swift; sourceTree = "<group>"; };
 		81243C5F26A7285E004AC8C1 /* FavoritesCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesCoordinatorProtocol.swift; sourceTree = "<group>"; };
 		81243C6126A7287B004AC8C1 /* FridgeCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeCoordinatorProtocol.swift; sourceTree = "<group>"; };
-		81243C6326A7299D004AC8C1 /* FridgeNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeNetworkService.swift; sourceTree = "<group>"; };
 		81243C6626A76056004AC8C1 /* SearchIngredientsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchIngredientsViewController.swift; sourceTree = "<group>"; };
 		81243C6926A760D8004AC8C1 /* SearchIngredientsPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchIngredientsPresenter.swift; sourceTree = "<group>"; };
 		81243C6B26A760E4004AC8C1 /* SearchIngredientsViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchIngredientsViewProtocol.swift; sourceTree = "<group>"; };
@@ -469,6 +499,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		8118A40626B30ED700BBB17F /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81243B5F26A33AF3004AC8C1 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -682,6 +719,50 @@
 			path = Presenter;
 			sourceTree = "<group>";
 		};
+		8118A3F126B1EA2500BBB17F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				8118A3EB26B1E99E00BBB17F /* FridgeSearchResultPresenterProtocol.swift */,
+				8118A3ED26B1E9D900BBB17F /* FridgeSearchResultViewProtocol.swift */,
+				8118A3EF26B1EA0E00BBB17F /* FridgeSearchNetworkServiceProtocol.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		8118A3F226B1EA2E00BBB17F /* Presenter */ = {
+			isa = PBXGroup;
+			children = (
+				81243C9B26AAFD85004AC8C1 /* FridgeSearchResultPresenter.swift */,
+			);
+			path = Presenter;
+			sourceTree = "<group>";
+		};
+		8118A3F326B1EA3500BBB17F /* View */ = {
+			isa = PBXGroup;
+			children = (
+				81243C9326AAF457004AC8C1 /* FridgeSearchResultViewController.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		8118A3F426B1EA3D00BBB17F /* NetworkService */ = {
+			isa = PBXGroup;
+			children = (
+				81243C9D26AB0091004AC8C1 /* FridgeSearchNetworkService.swift */,
+				8118A3F526B1EA6100BBB17F /* FridgeSearchRescoureFactory.swift */,
+			);
+			path = NetworkService;
+			sourceTree = "<group>";
+		};
+		8118A40A26B30ED700BBB17F /* dummyYummySnapshotTests */ = {
+			isa = PBXGroup;
+			children = (
+				8118A40B26B30ED700BBB17F /* dummyYummySnapshotTests.swift */,
+				8118A40D26B30ED700BBB17F /* Info.plist */,
+			);
+			path = dummyYummySnapshotTests;
+			sourceTree = "<group>";
+		};
 		8122B647269B8F0E00820A04 /* UIKitExtensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -791,7 +872,6 @@
 				81243C5826A71EEA004AC8C1 /* FridgeConstants.swift */,
 				81243C5126A60F37004AC8C1 /* Protocols */,
 				81243C5C26A727FC004AC8C1 /* Coordinator */,
-				81243C6526A729A0004AC8C1 /* NetoworkService */,
 				81243C5426A60F68004AC8C1 /* Presenter */,
 				81243C5726A60FCF004AC8C1 /* View */,
 				81243C6826A76093004AC8C1 /* SearchIngredients */,
@@ -835,14 +915,6 @@
 				8118A3E526B1AEC800BBB17F /* FridgeAssembly.swift */,
 			);
 			path = Coordinator;
-			sourceTree = "<group>";
-		};
-		81243C6526A729A0004AC8C1 /* NetoworkService */ = {
-			isa = PBXGroup;
-			children = (
-				81243C6326A7299D004AC8C1 /* FridgeNetworkService.swift */,
-			);
-			path = NetoworkService;
 			sourceTree = "<group>";
 		};
 		81243C6826A76093004AC8C1 /* SearchIngredients */ = {
@@ -907,9 +979,10 @@
 		81243C9526AAF966004AC8C1 /* FridgeSearchResult */ = {
 			isa = PBXGroup;
 			children = (
-				81243C9B26AAFD85004AC8C1 /* FridgeSearchResultPresenter.swift */,
-				81243C9326AAF457004AC8C1 /* FridgeSearchResultViewController.swift */,
-				81243C9D26AB0091004AC8C1 /* FridgeSearchNetworkService.swift */,
+				8118A3F126B1EA2500BBB17F /* Protocols */,
+				8118A3F226B1EA2E00BBB17F /* Presenter */,
+				8118A3F326B1EA3500BBB17F /* View */,
+				8118A3F426B1EA3D00BBB17F /* NetworkService */,
 			);
 			path = FridgeSearchResult;
 			sourceTree = "<group>";
@@ -986,6 +1059,7 @@
 				815E6E6F267418DF00CE6CC1 /* dummyYummy */,
 				81243B6326A33AF3004AC8C1 /* dummyYummyTests */,
 				81243C1626A48203004AC8C1 /* dummyYummyUITests */,
+				8118A40A26B30ED700BBB17F /* dummyYummySnapshotTests */,
 				815E6E6E267418DF00CE6CC1 /* Products */,
 				2A9C5FEF4FAB9E69890B2501 /* Pods */,
 				92CDD1648521968EDF735C16 /* Frameworks */,
@@ -998,6 +1072,7 @@
 				815E6E6D267418DF00CE6CC1 /* dummyYummy.app */,
 				81243B6226A33AF3004AC8C1 /* dummyYummyTests.xctest */,
 				81243C1526A48203004AC8C1 /* dummyYummyUITests.xctest */,
+				8118A40926B30ED700BBB17F /* dummyYummySnapshotTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -1185,7 +1260,7 @@
 				81D6325726951589004CF695 /* DetailConstants.swift */,
 				81D632532694EE84004CF695 /* Protocols */,
 				813E39D326ACBFC7009E7EE1 /* Coordinator */,
-				81D632522694EE78004CF695 /* Service */,
+				81D632522694EE78004CF695 /* NetworkService */,
 				81D632502694EE65004CF695 /* Presenter */,
 				81D632512694EE6E004CF695 /* View */,
 			);
@@ -1209,13 +1284,13 @@
 			path = View;
 			sourceTree = "<group>";
 		};
-		81D632522694EE78004CF695 /* Service */ = {
+		81D632522694EE78004CF695 /* NetworkService */ = {
 			isa = PBXGroup;
 			children = (
 				816BA83A269BA3EF005752EA /* DetailResourceFactory.swift */,
 				81D6324E2694EE02004CF695 /* DetailNetworkService.swift */,
 			);
-			path = Service;
+			path = NetworkService;
 			sourceTree = "<group>";
 		};
 		81D632532694EE84004CF695 /* Protocols */ = {
@@ -1226,6 +1301,7 @@
 				81243C9126AA1A0E004AC8C1 /* DetailPresenterProtocol.swift */,
 				8115A42A26AF0DED00559331 /* DetailNavigationDelegate.swift */,
 				8115A43226B059EB00559331 /* DetailCoordinatorProtocol.swift */,
+				8118A40326B3087500BBB17F /* DetailAssemblyProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1252,6 +1328,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		8118A40826B30ED700BBB17F /* dummyYummySnapshotTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 8118A41026B30ED700BBB17F /* Build configuration list for PBXNativeTarget "dummyYummySnapshotTests" */;
+			buildPhases = (
+				8118A40526B30ED700BBB17F /* Sources */,
+				8118A40626B30ED700BBB17F /* Frameworks */,
+				8118A40726B30ED700BBB17F /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				8118A40F26B30ED700BBB17F /* PBXTargetDependency */,
+			);
+			name = dummyYummySnapshotTests;
+			productName = dummyYummySnapshotTests;
+			productReference = 8118A40926B30ED700BBB17F /* dummyYummySnapshotTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		81243B6126A33AF3004AC8C1 /* dummyYummyTests */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = 81243B6926A33AF3004AC8C1 /* Build configuration list for PBXNativeTarget "dummyYummyTests" */;
@@ -1320,6 +1414,10 @@
 				LastSwiftUpdateCheck = 1250;
 				LastUpgradeCheck = 1240;
 				TargetAttributes = {
+					8118A40826B30ED700BBB17F = {
+						CreatedOnToolsVersion = 12.5;
+						TestTargetID = 815E6E6C267418DE00CE6CC1;
+					};
 					81243B6126A33AF3004AC8C1 = {
 						CreatedOnToolsVersion = 12.5;
 					};
@@ -1348,11 +1446,19 @@
 				815E6E6C267418DE00CE6CC1 /* dummyYummy */,
 				81243B6126A33AF3004AC8C1 /* dummyYummyTests */,
 				81243C1426A48203004AC8C1 /* dummyYummyUITests */,
+				8118A40826B30ED700BBB17F /* dummyYummySnapshotTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		8118A40726B30ED700BBB17F /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81243B6026A33AF3004AC8C1 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -1502,13 +1608,30 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		8118A40526B30ED700BBB17F /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				8118A40C26B30ED700BBB17F /* dummyYummySnapshotTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		81243B5E26A33AF3004AC8C1 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8118A40026B2F7F400BBB17F /* FridgeSearchRescoureFactory.swift in Sources */,
+				8118A40126B2F7F400BBB17F /* FavoritesAssembly.swift in Sources */,
+				8118A40226B2F7F400BBB17F /* DetailAssembly.swift in Sources */,
+				8118A3F726B2F76100BBB17F /* AppAssembly.swift in Sources */,
+				8118A3F826B2F76100BBB17F /* GuidePresenterProtocol.swift in Sources */,
+				8118A3F926B2F76100BBB17F /* GuideNavigationDelegateProtocol.swift in Sources */,
+				8118A3FA26B2F76100BBB17F /* GuidePageViewProtocol.swift in Sources */,
+				8118A3FB26B2F76100BBB17F /* FeedSearchAssembly.swift in Sources */,
 				8115A4B226B0B03700559331 /* TestResourceNetworking.swift in Sources */,
 				8115A4B326B0B03700559331 /* SimpleCancelation.swift in Sources */,
 				8115A4B426B0B03700559331 /* FakeNetworking.swift in Sources */,
+				8118A3FD26B2F7D800BBB17F /* FridgeSearchResultViewProtocol.swift in Sources */,
 				8115A4B526B0B03700559331 /* FakeReachability.swift in Sources */,
 				8115A4B626B0B03700559331 /* TestDataBaseService.swift in Sources */,
 				8115A4B726B0B03700559331 /* MockCoreDataStack.swift in Sources */,
@@ -1531,6 +1654,7 @@
 				8115A44626B0AE3E00559331 /* CoreDataStack.swift in Sources */,
 				8115A44726B0AE3E00559331 /* RecipeDTO.swift in Sources */,
 				8115A44826B0AE3E00559331 /* dummyYummy.xcdatamodeld in Sources */,
+				8118A3FE26B2F7DD00BBB17F /* FridgeSearchNetworkServiceProtocol.swift in Sources */,
 				8115A44926B0AE3E00559331 /* DataBaseServiceProtocol.swift in Sources */,
 				8115A44A26B0AE3E00559331 /* DataBaseService.swift in Sources */,
 				8115A44B26B0AE3E00559331 /* ShimmerProtocol.swift in Sources */,
@@ -1561,6 +1685,7 @@
 				8115A46126B0AE3E00559331 /* Resource.swift in Sources */,
 				8115A46226B0AE3E00559331 /* URLRequest+Resource.swift in Sources */,
 				8115A46326B0AE3E00559331 /* UIColorExtension.swift in Sources */,
+				8118A3FF26B2F7E800BBB17F /* FridgeSearchResultPresenterProtocol.swift in Sources */,
 				8115A46426B0AE3E00559331 /* UISegmentControlExtension.swift in Sources */,
 				8115A4C526B0C21100559331 /* StubFeedNetworkService.swift in Sources */,
 				8115A46526B0AE3E00559331 /* CellExtenstions.swift in Sources */,
@@ -1604,7 +1729,6 @@
 				8115A48A26B0AE3F00559331 /* FridgeNavigationDelegate.swift in Sources */,
 				8115A48B26B0AE3F00559331 /* FridgeNetworkServiceProtocol.swift in Sources */,
 				8115A48C26B0AE3F00559331 /* FridgeCoordinator.swift in Sources */,
-				8115A48D26B0AE3F00559331 /* FridgeNetworkService.swift in Sources */,
 				8115A48E26B0AE3F00559331 /* FridgePresenter.swift in Sources */,
 				8115A48F26B0AE3F00559331 /* FridgeViewController.swift in Sources */,
 				8115A49026B0AE3F00559331 /* SearchIngredientsConstants.swift in Sources */,
@@ -1622,6 +1746,7 @@
 				8115A49C26B0AE3F00559331 /* FavoritesViewProtocol.swift in Sources */,
 				8115A49D26B0AE3F00559331 /* FavoritesPresenterProtocol.swift in Sources */,
 				8115A49E26B0AE3F00559331 /* FavoritesCoordinatorProtocol.swift in Sources */,
+				8118A3FC26B2F7CF00BBB17F /* FridgeAssembly.swift in Sources */,
 				8115A49F26B0AE3F00559331 /* FavoritesNavigationDelegate.swift in Sources */,
 				8115A4A026B0AE3F00559331 /* FavoritesCoordinator.swift in Sources */,
 				8115A4A126B0AE3F00559331 /* FavoritesPresenter.swift in Sources */,
@@ -1693,6 +1818,7 @@
 				81D6325826951589004CF695 /* DetailConstants.swift in Sources */,
 				8118A3E626B1AEC800BBB17F /* FridgeAssembly.swift in Sources */,
 				81243C7526A76D78004AC8C1 /* SearchIngredientsNetworkService.swift in Sources */,
+				8118A40426B3087500BBB17F /* DetailAssemblyProtocol.swift in Sources */,
 				8118A3E226B19A2D00BBB17F /* AppAssembly.swift in Sources */,
 				816BA854269DDD0B005752EA /* MORecipe+CoreDataProperties.swift in Sources */,
 				8115A3AC26AE256C00559331 /* FeedSearchCoordinatorProtocol.swift in Sources */,
@@ -1701,7 +1827,6 @@
 				814A8C19267FD91C00F46E1F /* SearchResultViewController.swift in Sources */,
 				81D632562694EEF1004CF695 /* DetailHeader.swift in Sources */,
 				81243B3026A2307C004AC8C1 /* RecipesViewProtocol.swift in Sources */,
-				81243C6426A7299D004AC8C1 /* FridgeNetworkService.swift in Sources */,
 				815E6E75267418DF00CE6CC1 /* FeedViewController.swift in Sources */,
 				81243C5926A71EEA004AC8C1 /* FridgeConstants.swift in Sources */,
 				816BA88B26A0722D005752EA /* RecipeBigCell.swift in Sources */,
@@ -1710,6 +1835,7 @@
 				8118A3DE26B199E800BBB17F /* GuidePageViewProtocol.swift in Sources */,
 				814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */,
 				816BA885269E4418005752EA /* DataBaseService.swift in Sources */,
+				8118A3EE26B1E9D900BBB17F /* FridgeSearchResultViewProtocol.swift in Sources */,
 				81243C5E26A72822004AC8C1 /* FavoritesViewProtocol.swift in Sources */,
 				8105630A267564A400106C65 /* Networking.swift in Sources */,
 				815E6E71267418DF00CE6CC1 /* AppDelegate.swift in Sources */,
@@ -1742,6 +1868,7 @@
 				8115A42B26AF0DED00559331 /* DetailNavigationDelegate.swift in Sources */,
 				81243C9426AAF457004AC8C1 /* FridgeSearchResultViewController.swift in Sources */,
 				81243C7726A787C3004AC8C1 /* NetworkServiceProtocol.swift in Sources */,
+				8118A3F626B1EA6100BBB17F /* FridgeSearchRescoureFactory.swift in Sources */,
 				816BA887269E45D9005752EA /* RecipeDTO.swift in Sources */,
 				8118A3D926B199A800BBB17F /* GuidePresenterProtocol.swift in Sources */,
 				81243C9026AA19EF004AC8C1 /* DetailViewProtocol.swift in Sources */,
@@ -1752,6 +1879,7 @@
 				8105635126766BAE00106C65 /* UIImageViewBuilder.swift in Sources */,
 				816BA83D269CA19D005752EA /* FavoritesViewController.swift in Sources */,
 				8115A42D26AF6CD200559331 /* FavoritesNavigationDelegate.swift in Sources */,
+				8118A3EC26B1E99E00BBB17F /* FridgeSearchResultPresenterProtocol.swift in Sources */,
 				810562F0267537AE00106C65 /* FeedSearchCoordinator.swift in Sources */,
 				815C5A5A2675138A004A8F09 /* FeedPresenter.swift in Sources */,
 				81243C9226AA1A0E004AC8C1 /* DetailPresenterProtocol.swift in Sources */,
@@ -1782,6 +1910,7 @@
 				81243C5326A60F5E004AC8C1 /* FridgePresenter.swift in Sources */,
 				813E39D226ACBFBB009E7EE1 /* DetailCoordinator.swift in Sources */,
 				8105631A2675661D00106C65 /* OperationCompletion.swift in Sources */,
+				8118A3F026B1EA0E00BBB17F /* FridgeSearchNetworkServiceProtocol.swift in Sources */,
 				81243BA726A47E29004AC8C1 /* FeedPresenterProtocol.swift in Sources */,
 				8115A43326B059EB00559331 /* DetailCoordinatorProtocol.swift in Sources */,
 				814A8C0D267F773700F46E1F /* UIColorExtension.swift in Sources */,
@@ -1796,6 +1925,11 @@
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXTargetDependency section */
+		8118A40F26B30ED700BBB17F /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = 815E6E6C267418DE00CE6CC1 /* dummyYummy */;
+			targetProxy = 8118A40E26B30ED700BBB17F /* PBXContainerItemProxy */;
+		};
 		81243B6826A33AF3004AC8C1 /* PBXTargetDependency */ = {
 			isa = PBXTargetDependency;
 			target = 815E6E6C267418DE00CE6CC1 /* dummyYummy */;
@@ -1820,6 +1954,52 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
+		8118A41126B30ED700BBB17F /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ADC59L5NT;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = dummyYummySnapshotTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = badyi7.dummyYummySnapshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dummyYummy.app/dummyYummy";
+			};
+			name = Debug;
+		};
+		8118A41226B30ED700BBB17F /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				DEVELOPMENT_TEAM = 2ADC59L5NT;
+				INFOPLIST_FILE = dummyYummySnapshotTests/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 14.5;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+					"@loader_path/Frameworks",
+				);
+				PRODUCT_BUNDLE_IDENTIFIER = badyi7.dummyYummySnapshotTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/dummyYummy.app/dummyYummy";
+			};
+			name = Release;
+		};
 		81243B6A26A33AF3004AC8C1 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 17DFF5FF7C1F9CA5EC1E4260 /* Pods-dummyYummyTests.debug.xcconfig */;
@@ -2065,6 +2245,15 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		8118A41026B30ED700BBB17F /* Build configuration list for PBXNativeTarget "dummyYummySnapshotTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				8118A41126B30ED700BBB17F /* Debug */,
+				8118A41226B30ED700BBB17F /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
 		81243B6926A33AF3004AC8C1 /* Build configuration list for PBXNativeTarget "dummyYummyTests" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
