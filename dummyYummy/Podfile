@@ -16,6 +16,11 @@ target 'dummyYummy' do
 
   target 'dummyYummyUITests' do
     # Pods for testing
+  end
+
+  target 'dummyYummySnapshotTests' do
+    inherit! :search_paths
+    # Pods for testing
     pod 'SnapshotTesting', '~> 1.9.0'
   end
 

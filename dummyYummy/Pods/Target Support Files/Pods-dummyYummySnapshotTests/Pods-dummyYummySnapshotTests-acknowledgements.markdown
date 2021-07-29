@@ -1,11 +1,11 @@
 # Acknowledgements
 This application makes use of the following third party libraries:
 
-## SwiftLint
+## SnapshotTesting
 
-The MIT License (MIT)
+MIT License
 
-Copyright (c) 2020 Realm Inc.
+Copyright (c) 2019 Point-Free, Inc.
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal

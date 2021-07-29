@@ -6,27 +6,23 @@
 //
 
 import XCTest
+import SnapshotTesting
+@testable import dummyYummy
 
-class dummyYummySnapshotTests: XCTestCase {
+class FavoritesViewControllerTests: XCTestCase {
+    func testFavoriteViewController() {
 
-    override func setUpWithError() throws {
-        // Put setup code here. This method is called before the invocation of each test method in the class.
+        let fridge = FridgeAssembly().createFridgeModule(self)
+        assertSnapshot(matching: fridge, as: .image(on: .iPhone8))
     }
+}
 
-    override func tearDownWithError() throws {
-        // Put teardown code here. This method is called after the invocation of each test method in the class.
-    }
+extension FavoritesViewControllerTests: FridgeNavigationDelegate {
+    func didTapSearch(_ ingredients: [String]) {}
 
-    func testExample() throws {
-        // This is an example of a functional test case.
-        // Use XCTAssert and related functions to verify your tests produce the correct results.
-    }
+    func activity(with url: String) {}
 
-    func testPerformanceExample() throws {
-        // This is an example of a performance test case.
-        measure {
-            // Put the code you want to measure the time of here.
-        }
-    }
+    func error(with description: String) {}
 
+    func didTapRecipe(_ recipe: Recipe) {}
 }
