@@ -22,12 +22,19 @@ final class FeedViewController: RecipesViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configNavigation()
+        reloadVisibleCells()
         presenter?.loadRandomRecipesIfNeeded()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopVisibleCellsAnimation()
     }
 }
 
 // MARK: - FeedViewProtocol
 extension FeedViewController: FeedViewProtocol {
+
     func setupView() {
         title = "Browse recipes"
         navigationItem.searchController?.searchBar.placeholder = "Search recipes"
@@ -81,6 +88,7 @@ extension FeedViewController: UICollectionViewDelegate {
 
 // MARK: - UICollectionViewDataSource
 extension FeedViewController: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // in case the recipes haven't loaded yet
         // we put a few fake cells with animations
@@ -152,6 +160,7 @@ extension FeedViewController: UICollectionViewDataSourcePrefetching {
     }
 }
 
+// MARK: - Private methods
 extension FeedViewController {
     @objc
     private func refresh(_ sender: AnyObject) {

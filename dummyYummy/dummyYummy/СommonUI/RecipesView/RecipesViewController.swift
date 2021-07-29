@@ -10,10 +10,8 @@ import UIKit
 class RecipesViewController: UIViewController, RecipesViewProtocol {
 
     var collectionView: UICollectionView = {
-        // layout.sectionInset = RecipeViewConstants.ViewController.Layout.collectionInsets
         let collectionView = UICollectionViewBuilder()
             .backgroundColor(RecipeViewConstants.ViewController.Design.backgroundColor)
-            // .layout(layout)
             .setInsets(RecipeViewConstants.ViewController.Layout.collectionInsets)
             .build()
         return collectionView
@@ -22,16 +20,6 @@ class RecipesViewController: UIViewController, RecipesViewProtocol {
     var refreshControl: UIRefreshControl = {
         UIRefreshControl()
     }()
-
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        reloadVisibleCells()
-    }
-
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
-        stopVisibleCellsAnimation()
-    }
 
     func setupCollectionView() {
         NSLayoutConstraint.activate([
@@ -57,7 +45,9 @@ class RecipesViewController: UIViewController, RecipesViewProtocol {
     }
 
     func reloadCollectionView() {
-        refreshControl.endRefreshing()
+        if let refresh = collectionView.refreshControl, refresh.isRefreshing == true {
+            refreshControl.endRefreshing()
+        }
         collectionView.reloadData()
     }
 

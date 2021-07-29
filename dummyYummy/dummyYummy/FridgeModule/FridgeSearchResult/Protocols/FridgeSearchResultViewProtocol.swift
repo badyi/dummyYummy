@@ -7,4 +7,7 @@
 
 import Foundation
 
-protocol FridgeSearchResultViewProtocol: RecipesViewProtocol {}
+protocol FridgeSearchResultViewProtocol: RecipesViewProtocol {
+    func startActivityIndicator()
+    func stopActivityIndicator()
+}

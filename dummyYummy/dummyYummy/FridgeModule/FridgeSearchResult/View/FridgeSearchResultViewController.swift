@@ -8,33 +8,63 @@
 import UIKit
 
 final class FridgeSearchResultViewController: RecipesViewController {
+
     var presenter: FridgeSearchResultPresenterProtocol?
+
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.hidesWhenStopped = true
+        activity.color = SearchResultConstants.ViewController.Design.activityIndicatorColor
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
 
     override func viewDidLoad() {
         super.viewDidLoad()
+
         setupView()
         presenter?.loadRecipes()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+
+        reloadVisibleCells()
         navigationItem.largeTitleDisplayMode = .never
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+
+        stopVisibleCellsAnimation()
     }
 }
 
+// MARK: - FridgeSearchResultViewProtocol
 extension FridgeSearchResultViewController: FridgeSearchResultViewProtocol {
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
+    }
+
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
+    }
 }
 
+// MARK: - UICollectionViewDelegate
 extension FridgeSearchResultViewController: UICollectionViewDelegate {
+
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
+
         presenter?.loadImageIfNeeded(at: indexPath.row)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         didEndDisplaying cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
+
         presenter?.cancelLoadImageIfNeeded(at: indexPath.row)
     }
 
@@ -43,7 +73,9 @@ extension FridgeSearchResultViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension FridgeSearchResultViewController: UICollectionViewDelegateFlowLayout {
+
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
                         sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -73,7 +105,9 @@ extension FridgeSearchResultViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension FridgeSearchResultViewController: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return presenter?.recipesCount() ?? 0
     }
@@ -94,6 +128,7 @@ extension FridgeSearchResultViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - Private methods
 extension FridgeSearchResultViewController {
     private func setupView() {
         view.addSubview(collectionView)
@@ -102,5 +137,11 @@ extension FridgeSearchResultViewController {
         collectionView.delegate = self
         collectionView.dataSource = self
         setupCollectionView()
+        view.addSubview(activityIndicator)
+
+        NSLayoutConstraint.activate([
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
     }
 }

@@ -8,6 +8,11 @@
 import Foundation
 
 protocol FeedSearchCoordinatorProtocol: Coordinator {
+
+    /// Show feed search flow
     func showFeedSearch()
+
+    /// Show detail flow
+    /// - Parameter recipe: recipe for showing detail
     func showDetail(with recipe: Recipe)
 }

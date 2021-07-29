@@ -8,7 +8,8 @@
 import Foundation
 
 protocol FridgeNavigationDelegate: RecipesViewNavigationDelegate {
+
+    /// Handle tap on search button
+    /// - Parameter ingredients: ingredients
     func didTapSearch(_ ingredients: [String])
-    func activity(with url: String)
-    func error(with description: String)
 }

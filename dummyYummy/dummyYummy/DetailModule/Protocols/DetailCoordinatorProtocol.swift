@@ -8,7 +8,7 @@
 import Foundation
 
 protocol DetailCoordinatorProtocol: Coordinator {
+
+    /// Show detail flow
     func showDetail()
-    func showErrorAlert(with text: String)
-    func showActivity(with url: String)
 }

@@ -7,10 +7,6 @@
 
 import UIKit
 
-protocol FavoritesAssemblyProtoocl {
-    func createFavoritesModule(_ navigationDelegate: FavoritesNavigationDelegate) -> FavoritesViewController
-}
-
 final class FavoritesAssembly {
     func createFavoriteModule(_ navigationDelegate: FavoritesNavigationDelegate) -> FavoritesViewController {
         let favoritesViewController = FavoritesViewController()

@@ -17,6 +17,7 @@ struct SearchResultConstants {
         }
 
         struct Design {
+            static var activityIndicatorColor = Colors.wisteria
             static var backgroundColor = Colors.nero
         }
     }

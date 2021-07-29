@@ -8,6 +8,6 @@
 import Foundation
 
 protocol SearchViewProtocol: RecipesViewProtocol {
-//    func reloadCollectionView()
-//    func reloadItems(at indexPaths: [IndexPath])
+    func startActivityIndicator()
+    func stopActivityIndicator()
 }

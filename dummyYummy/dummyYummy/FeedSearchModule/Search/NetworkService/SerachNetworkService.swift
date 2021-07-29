@@ -14,6 +14,7 @@ final class SearchNetworkService {
     private var imageLoadRequests = [String: CancellationProtocol]()
 }
 
+// MARK: - SearchNetworkServiceProtocol
 extension SearchNetworkService: SearchNetworkServiceProtocol {
     func loadSearch(_ query: String, completion: @escaping(OperationCompletion<SearchResponse>) -> Void) {
 

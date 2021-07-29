@@ -57,21 +57,6 @@ enum TabBarPage {
             return UIImage(named: "favoriteFood") ?? UIImage()
         }
     }
-
-    // Add tab icon selected / deselected color
-
-    // etc
-}
-
-// Define what type of flows can be started from this Coordinator
-protocol TabCoordinatorProtocol: Coordinator {
-    var tabBarController: UITabBarController { get set }
-
-    func selectPage(_ page: TabBarPage)
-
-    func setSelectedIndex(_ index: Int)
-
-    func currentPage() -> TabBarPage?
 }
 
 final class TabCoordinator: NSObject, Coordinator {
@@ -107,7 +92,6 @@ extension TabCoordinator {
 
     private func prepareTabBarController(withTabControllers tabControllers: [UIViewController]) {
 
-        tabBarController.delegate = self
         // Assign page's controllers
         tabBarController.setViewControllers(tabControllers, animated: true)
         // Set index
@@ -158,12 +142,5 @@ extension TabCoordinator {
         guard let page = TabBarPage(index: index) else { return }
 
         tabBarController.selectedIndex = page.pageOrderNumber()
-    }
-}
-
-// MARK: - UITabBarControllerDelegate
-extension TabCoordinator: UITabBarControllerDelegate {
-    func tabBarController(_ tabBarController: UITabBarController,
-                          didSelect viewController: UIViewController) {
     }
 }

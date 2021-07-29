@@ -24,10 +24,12 @@ final class FavoritesViewController: RecipesViewController {
     }
 }
 
-extension FavoritesViewController: FavoritesViewProtocol {
-}
+// MARK: - FavoritesViewProtocol
+extension FavoritesViewController: FavoritesViewProtocol {}
 
+// MARK: - Private methods
 extension FavoritesViewController {
+
     private func setupView() {
         title = "Favorite recipes"
         collectionView.delegate = self
@@ -47,7 +49,9 @@ extension FavoritesViewController {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension FavoritesViewController: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         presenter?.recipesCount() ?? 0
     }
@@ -76,6 +80,7 @@ extension FavoritesViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension FavoritesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.didSelectRecipe(at: indexPath.row)
@@ -109,7 +114,9 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UISearchResultsUpdating
 extension FavoritesViewController: UISearchResultsUpdating {
+
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
             return

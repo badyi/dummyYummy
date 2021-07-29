@@ -68,6 +68,7 @@ extension FridgeSearchResultPresenter: FridgeSearchResultPresenterProtocol {
     }
 
     func loadRecipes() {
+        view?.startActivityIndicator()
         networkService.loadRecipes(ingredients, 10, completion: { [weak self] result in
             switch result {
             case let .success(result):
@@ -75,6 +76,9 @@ extension FridgeSearchResultPresenter: FridgeSearchResultPresenterProtocol {
                 self?.reloadCollection()
             case let .failure(error):
                 self?.handleError(error)
+            }
+            DispatchQueue.main.async {
+                self?.view?.stopActivityIndicator()
             }
         })
     }

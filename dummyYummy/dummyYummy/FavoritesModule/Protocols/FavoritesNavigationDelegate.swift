@@ -8,5 +8,4 @@
 import Foundation
 
 protocol FavoritesNavigationDelegate: RecipesViewNavigationDelegate {
-    func error(with description: String)
 }

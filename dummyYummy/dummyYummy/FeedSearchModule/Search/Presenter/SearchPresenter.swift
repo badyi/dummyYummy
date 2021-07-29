@@ -24,6 +24,7 @@ final class SearchPresenter {
     }
 }
 
+// MARK: - SearchPresenterProtocol
 extension SearchPresenter: SearchPresenterProtocol {
     func updateSearchText(_ query: String) {
         if query != searchText {
@@ -52,13 +53,13 @@ extension SearchPresenter: SearchPresenterProtocol {
         recipes.count
     }
 
-    func willDisplayRecipe(at index: Int) {
+    func prepareRecipe(at index: Int) {
         if let recipe = recipe(at: index) {
             loadImageIfNeeded(for: recipe, at: index)
         }
     }
 
-    func didEndDisplayRecipe(at index: Int) {
+    func noNeedPrepearRecipe(at index: Int) {
         guard let url = recipe(at: index)?.imageURL else { return }
         service.cancelImageLoad(with: url)
     }
@@ -68,6 +69,7 @@ extension SearchPresenter: SearchPresenterProtocol {
     }
 
     func loadRecipes() {
+        view?.startActivityIndicator()
         service.cancelCurrenSearch()
         service.cancelLoadAllImages()
 
@@ -84,19 +86,21 @@ extension SearchPresenter: SearchPresenterProtocol {
             case let .failure(error):
                 self?.handleError(error)
             }
+            DispatchQueue.main.async {
+                self?.view?.stopActivityIndicator()
+            }
         }
     }
 }
 
+// MARK: - Private methods
 extension SearchPresenter {
     private func reloadCollection() {
         DispatchQueue.main.async { [weak self] in
             self?.view?.reloadCollectionView()
         }
     }
-}
 
-extension SearchPresenter {
     private func loadImageIfNeeded(for recipe: Recipe, at index: Int) {
         guard let imageURL = recipe.imageURL, recipe.imageData == nil else {
             return

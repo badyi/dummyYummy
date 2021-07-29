@@ -13,7 +13,7 @@ enum DetailSections {
 
 final class DetailViewController: UIViewController {
 
-    var goingForwards: Bool = false
+    var goingForwards: Bool = true
     var finishClosure: (() -> Void)?
 
     var currentSelected: Int = 0
@@ -57,7 +57,7 @@ final class DetailViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         configNavigationBar()
-        goingForwards = false
+        goingForwards = true
     }
 
     override func viewWillDisappear(_ animated: Bool) {

@@ -7,13 +7,6 @@
 
 import UIKit
 
-protocol FridgeAssemblyProtocol {
-    func createSearchResultModule(_ ingredients: [String],
-                                  _ navigationDelegate: FridgeNavigationDelegate) -> FridgeSearchResultViewController
-
-    func createFridgeModule(_ navigationDelegate: FridgeNavigationDelegate)
-}
-
 final class FridgeAssembly {
     func createSearchResultModule(_ ingredients: [String],
                                   _ navigationDelegate: FridgeNavigationDelegate) -> FridgeSearchResultViewController {

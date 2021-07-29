@@ -9,6 +9,7 @@ import Foundation
 
 protocol FeedNetworkServiceProtocol: NetworkServiceProtocol {
 
+    /// Cancel all tasks
     func clearAndCancelAll()
 
     /// Load random recipes from api
@@ -30,5 +31,8 @@ protocol FeedNetworkServiceProtocol: NetworkServiceProtocol {
 }
 
 protocol FeedResourceFactoryProtocol: ResourceFactoryProtocol {
+
+    /// Creating resourcr for networking
+    /// - Parameter count: count of recipes
     func createRandomRecipesResource(_ count: Int) -> Resource<RecipesResponse>?
 }

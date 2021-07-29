@@ -93,7 +93,6 @@
 		8115A47126B0AE3E00559331 /* FeedSearchCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8115A3AB26AE256C00559331 /* FeedSearchCoordinatorProtocol.swift */; };
 		8115A47226B0AE3E00559331 /* FeedSearchCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562EF267537AE00106C65 /* FeedSearchCoordinator.swift */; };
 		8115A47326B0AE3E00559331 /* FeedViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 815C5A5D267513C5004A8F09 /* FeedViewProtocol.swift */; };
-		8115A47426B0AE3E00559331 /* FeedNavigationDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243BBF26A47F51004AC8C1 /* FeedNavigationDelegateProtocol.swift */; };
 		8115A47526B0AE3E00559331 /* FeedNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4426A5F0FA004AC8C1 /* FeedNetworkServiceProtocol.swift */; };
 		8115A47626B0AE3E00559331 /* FeedPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243BA626A47E29004AC8C1 /* FeedPresenterProtocol.swift */; };
 		8115A47726B0AE3E00559331 /* FeedResourceFactory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105633D26756FBC00106C65 /* FeedResourceFactory.swift */; };
@@ -116,7 +115,6 @@
 		8115A48826B0AE3F00559331 /* FridgeViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4B26A60947004AC8C1 /* FridgeViewProtocol.swift */; };
 		8115A48926B0AE3F00559331 /* FridgePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4D26A609A5004AC8C1 /* FridgePresenterProtocol.swift */; };
 		8115A48A26B0AE3F00559331 /* FridgeNavigationDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8115A43026B0581900559331 /* FridgeNavigationDelegate.swift */; };
-		8115A48B26B0AE3F00559331 /* FridgeNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4F26A60E5D004AC8C1 /* FridgeNetworkServiceProtocol.swift */; };
 		8115A48C26B0AE3F00559331 /* FridgeCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5A26A727F3004AC8C1 /* FridgeCoordinator.swift */; };
 		8115A48E26B0AE3F00559331 /* FridgePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5226A60F5E004AC8C1 /* FridgePresenter.swift */; };
 		8115A48F26B0AE3F00559331 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5526A60FBB004AC8C1 /* FridgeViewController.swift */; };
@@ -199,6 +197,11 @@
 		8118A40426B3087500BBB17F /* DetailAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A40326B3087500BBB17F /* DetailAssemblyProtocol.swift */; };
 		8118A41526B3116A00BBB17F /* DetailAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A40326B3087500BBB17F /* DetailAssemblyProtocol.swift */; };
 		8118A49D26B3167700BBB17F /* dummyYummySnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A40B26B30ED700BBB17F /* dummyYummySnapshotTests.swift */; };
+		8118A49F26B31AF500BBB17F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C14267FB86D00F46E1F /* Colors.swift */; };
+		8118A4A026B31AF500BBB17F /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562E226752F8700106C65 /* CoordinatorProtocol.swift */; };
+		8118A4A226B31B5F00BBB17F /* TabCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A126B31B5F00BBB17F /* TabCoordinatorProtocol.swift */; };
+		8118A4A426B3286000BBB17F /* FridgeAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A326B3286000BBB17F /* FridgeAssemblyProtocol.swift */; };
+		8118A4A626B3613B00BBB17F /* FavoritesAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A526B3613B00BBB17F /* FavoritesAssemblyProtocol.swift */; };
 		81243B2926A22E90004AC8C1 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2826A22E90004AC8C1 /* RecipesViewController.swift */; };
 		81243B3026A2307C004AC8C1 /* RecipesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2F26A2307C004AC8C1 /* RecipesViewProtocol.swift */; };
 		81243B3226A24375004AC8C1 /* BaseRecipesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B3126A24375004AC8C1 /* BaseRecipesConstants.swift */; };
@@ -206,7 +209,6 @@
 		81243B9726A39A4D004AC8C1 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B9626A39A4D004AC8C1 /* UILabelExtension.swift */; };
 		81243B9E26A4763F004AC8C1 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B9D26A4763E004AC8C1 /* AccessibilityIdentifiers.swift */; };
 		81243BA726A47E29004AC8C1 /* FeedPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243BA626A47E29004AC8C1 /* FeedPresenterProtocol.swift */; };
-		81243BC026A47F51004AC8C1 /* FeedNavigationDelegateProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243BBF26A47F51004AC8C1 /* FeedNavigationDelegateProtocol.swift */; };
 		81243C1826A48203004AC8C1 /* dummyYummyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C1726A48203004AC8C1 /* dummyYummyUITests.swift */; };
 		81243C3A26A5BF70004AC8C1 /* FeedSearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C3926A5BF70004AC8C1 /* FeedSearchPage.swift */; };
 		81243C3C26A5BF8D004AC8C1 /* PageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C3B26A5BF8D004AC8C1 /* PageProtocol.swift */; };
@@ -217,7 +219,6 @@
 		81243C4926A5F294004AC8C1 /* SerachNetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4826A5F294004AC8C1 /* SerachNetworkService.swift */; };
 		81243C4C26A60947004AC8C1 /* FridgeViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4B26A60947004AC8C1 /* FridgeViewProtocol.swift */; };
 		81243C4E26A609A6004AC8C1 /* FridgePresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4D26A609A5004AC8C1 /* FridgePresenterProtocol.swift */; };
-		81243C5026A60E5D004AC8C1 /* FridgeNetworkServiceProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C4F26A60E5D004AC8C1 /* FridgeNetworkServiceProtocol.swift */; };
 		81243C5326A60F5E004AC8C1 /* FridgePresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5226A60F5E004AC8C1 /* FridgePresenter.swift */; };
 		81243C5626A60FBB004AC8C1 /* FridgeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5526A60FBB004AC8C1 /* FridgeViewController.swift */; };
 		81243C5926A71EEA004AC8C1 /* FridgeConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C5826A71EEA004AC8C1 /* FridgeConstants.swift */; };
@@ -388,6 +389,9 @@
 		8118A40B26B30ED700BBB17F /* dummyYummySnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummyYummySnapshotTests.swift; sourceTree = "<group>"; };
 		8118A40D26B30ED700BBB17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8118A41326B310EC00BBB17F /* Pods_dummyYummySnapshotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_dummyYummySnapshotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		8118A4A126B31B5F00BBB17F /* TabCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinatorProtocol.swift; sourceTree = "<group>"; };
+		8118A4A326B3286000BBB17F /* FridgeAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeAssemblyProtocol.swift; sourceTree = "<group>"; };
+		8118A4A526B3613B00BBB17F /* FavoritesAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesAssemblyProtocol.swift; sourceTree = "<group>"; };
 		81243B2826A22E90004AC8C1 /* RecipesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewController.swift; sourceTree = "<group>"; };
 		81243B2F26A2307C004AC8C1 /* RecipesViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecipesViewProtocol.swift; sourceTree = "<group>"; };
 		81243B3126A24375004AC8C1 /* BaseRecipesConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRecipesConstants.swift; sourceTree = "<group>"; };
@@ -404,7 +408,6 @@
 		81243B9826A39B69004AC8C1 /* TestFileSystemService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestFileSystemService.swift; sourceTree = "<group>"; };
 		81243B9D26A4763E004AC8C1 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		81243BA626A47E29004AC8C1 /* FeedPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenterProtocol.swift; sourceTree = "<group>"; };
-		81243BBF26A47F51004AC8C1 /* FeedNavigationDelegateProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedNavigationDelegateProtocol.swift; sourceTree = "<group>"; };
 		81243C1526A48203004AC8C1 /* dummyYummyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dummyYummyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		81243C1726A48203004AC8C1 /* dummyYummyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummyYummyUITests.swift; sourceTree = "<group>"; };
 		81243C1926A48203004AC8C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -417,7 +420,6 @@
 		81243C4826A5F294004AC8C1 /* SerachNetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SerachNetworkService.swift; sourceTree = "<group>"; };
 		81243C4B26A60947004AC8C1 /* FridgeViewProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewProtocol.swift; sourceTree = "<group>"; };
 		81243C4D26A609A5004AC8C1 /* FridgePresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgePresenterProtocol.swift; sourceTree = "<group>"; };
-		81243C4F26A60E5D004AC8C1 /* FridgeNetworkServiceProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeNetworkServiceProtocol.swift; sourceTree = "<group>"; };
 		81243C5226A60F5E004AC8C1 /* FridgePresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgePresenter.swift; sourceTree = "<group>"; };
 		81243C5526A60FBB004AC8C1 /* FridgeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeViewController.swift; sourceTree = "<group>"; };
 		81243C5826A71EEA004AC8C1 /* FridgeConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeConstants.swift; sourceTree = "<group>"; };
@@ -896,7 +898,7 @@
 				81243C4B26A60947004AC8C1 /* FridgeViewProtocol.swift */,
 				81243C4D26A609A5004AC8C1 /* FridgePresenterProtocol.swift */,
 				8115A43026B0581900559331 /* FridgeNavigationDelegate.swift */,
-				81243C4F26A60E5D004AC8C1 /* FridgeNetworkServiceProtocol.swift */,
+				8118A4A326B3286000BBB17F /* FridgeAssemblyProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1018,6 +1020,7 @@
 			isa = PBXGroup;
 			children = (
 				81243C7E26A83286004AC8C1 /* IngredientsResponse.swift */,
+				81616ADA268BA198002DF12F /* SearchResponse.swift */,
 				810562FE2675625500106C65 /* RecipesResponse.swift */,
 			);
 			path = ServiceModels;
@@ -1046,6 +1049,7 @@
 		815C5A562675134D004A8F09 /* TabCoordinator */ = {
 			isa = PBXGroup;
 			children = (
+				8118A4A126B31B5F00BBB17F /* TabCoordinatorProtocol.swift */,
 				815C5A3D26741ECC004A8F09 /* TabCoordinator.swift */,
 			);
 			path = TabCoordinator;
@@ -1089,8 +1093,6 @@
 		815E6E6F267418DF00CE6CC1 /* dummyYummy */ = {
 			isa = PBXGroup;
 			children = (
-				814A8C14267FB86D00F46E1F /* Colors.swift */,
-				810562E226752F8700106C65 /* CoordinatorProtocol.swift */,
 				8105634C26762DB500106C65 /* Model */,
 				81243C3D26A5D0AF004AC8C1 /* Services */,
 				816BA830269B9136005752EA /* СommonUI */,
@@ -1155,6 +1157,7 @@
 				816BA83F269CA1CF005752EA /* FavoritesPresenterProtocol.swift */,
 				81243C5F26A7285E004AC8C1 /* FavoritesCoordinatorProtocol.swift */,
 				8115A42C26AF6CD200559331 /* FavoritesNavigationDelegate.swift */,
+				8118A4A526B3613B00BBB17F /* FavoritesAssemblyProtocol.swift */,
 			);
 			path = Protocols;
 			sourceTree = "<group>";
@@ -1197,7 +1200,6 @@
 			isa = PBXGroup;
 			children = (
 				815C5A5D267513C5004A8F09 /* FeedViewProtocol.swift */,
-				81243BBF26A47F51004AC8C1 /* FeedNavigationDelegateProtocol.swift */,
 				81243C4426A5F0FA004AC8C1 /* FeedNetworkServiceProtocol.swift */,
 				81243BA626A47E29004AC8C1 /* FeedPresenterProtocol.swift */,
 			);
@@ -1228,7 +1230,6 @@
 			children = (
 				81243C4826A5F294004AC8C1 /* SerachNetworkService.swift */,
 				81616AD8268B9D9C002DF12F /* SearchNetworkResourceFactory.swift */,
-				81616ADA268BA198002DF12F /* SearchResponse.swift */,
 			);
 			path = NetworkService;
 			sourceTree = "<group>";
@@ -1255,6 +1256,8 @@
 		81A09762268E0438003E8B61 /* Helpers */ = {
 			isa = PBXGroup;
 			children = (
+				814A8C14267FB86D00F46E1F /* Colors.swift */,
+				810562E226752F8700106C65 /* CoordinatorProtocol.swift */,
 				81243B9D26A4763E004AC8C1 /* AccessibilityIdentifiers.swift */,
 				810563082675646400106C65 /* ResourceNetworking */,
 				8122B647269B8F0E00820A04 /* UIKitExtensions */,
@@ -1737,7 +1740,6 @@
 				8115A47126B0AE3E00559331 /* FeedSearchCoordinatorProtocol.swift in Sources */,
 				8115A47226B0AE3E00559331 /* FeedSearchCoordinator.swift in Sources */,
 				8115A47326B0AE3E00559331 /* FeedViewProtocol.swift in Sources */,
-				8115A47426B0AE3E00559331 /* FeedNavigationDelegateProtocol.swift in Sources */,
 				8115A47526B0AE3E00559331 /* FeedNetworkServiceProtocol.swift in Sources */,
 				8115A47626B0AE3E00559331 /* FeedPresenterProtocol.swift in Sources */,
 				8115A47726B0AE3E00559331 /* FeedResourceFactory.swift in Sources */,
@@ -1761,7 +1763,6 @@
 				8115A48826B0AE3F00559331 /* FridgeViewProtocol.swift in Sources */,
 				8115A48926B0AE3F00559331 /* FridgePresenterProtocol.swift in Sources */,
 				8115A48A26B0AE3F00559331 /* FridgeNavigationDelegate.swift in Sources */,
-				8115A48B26B0AE3F00559331 /* FridgeNetworkServiceProtocol.swift in Sources */,
 				8115A48C26B0AE3F00559331 /* FridgeCoordinator.swift in Sources */,
 				8115A48E26B0AE3F00559331 /* FridgePresenter.swift in Sources */,
 				8115A48F26B0AE3F00559331 /* FridgeViewController.swift in Sources */,
@@ -1809,6 +1810,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				81243C3C26A5BF8D004AC8C1 /* PageProtocol.swift in Sources */,
+				8118A49F26B31AF500BBB17F /* Colors.swift in Sources */,
+				8118A4A026B31AF500BBB17F /* CoordinatorProtocol.swift in Sources */,
 				81243C1826A48203004AC8C1 /* dummyYummyUITests.swift in Sources */,
 				81243C3A26A5BF70004AC8C1 /* FeedSearchPage.swift in Sources */,
 				81243C7B26A7915E004AC8C1 /* AccessibilityIdentifiers.swift in Sources */,
@@ -1871,6 +1874,7 @@
 				814A8C07267D45FA00F46E1F /* CancelationProtocol.swift in Sources */,
 				816BA885269E4418005752EA /* DataBaseService.swift in Sources */,
 				8118A3EE26B1E9D900BBB17F /* FridgeSearchResultViewProtocol.swift in Sources */,
+				8118A4A226B31B5F00BBB17F /* TabCoordinatorProtocol.swift in Sources */,
 				81243C5E26A72822004AC8C1 /* FavoritesViewProtocol.swift in Sources */,
 				8105630A267564A400106C65 /* Networking.swift in Sources */,
 				815E6E71267418DF00CE6CC1 /* AppDelegate.swift in Sources */,
@@ -1880,7 +1884,6 @@
 				8118A3D326B167C100BBB17F /* GuideViewController.swift in Sources */,
 				81243C6026A7285E004AC8C1 /* FavoritesCoordinatorProtocol.swift in Sources */,
 				8105634A26762DB000106C65 /* Recipe.swift in Sources */,
-				81243BC026A47F51004AC8C1 /* FeedNavigationDelegateProtocol.swift in Sources */,
 				8105633E26756FBC00106C65 /* FeedResourceFactory.swift in Sources */,
 				810562E326752F8700106C65 /* CoordinatorProtocol.swift in Sources */,
 				816BA83B269BA3EF005752EA /* DetailResourceFactory.swift in Sources */,
@@ -1898,6 +1901,7 @@
 				81FFCDCE2676CBBE00BD4D95 /* UITextFieldBuilder.swift in Sources */,
 				81056321267566F300106C65 /* NetworkHelper.swift in Sources */,
 				810563242675671B00106C65 /* NetworkHelperProtocol.swift in Sources */,
+				8118A4A626B3613B00BBB17F /* FavoritesAssemblyProtocol.swift in Sources */,
 				8105632D267567A800106C65 /* URLRequest+Resource.swift in Sources */,
 				81D6324F2694EE02004CF695 /* DetailNetworkService.swift in Sources */,
 				8115A42B26AF0DED00559331 /* DetailNavigationDelegate.swift in Sources */,
@@ -1905,6 +1909,7 @@
 				81243C7726A787C3004AC8C1 /* NetworkServiceProtocol.swift in Sources */,
 				8118A3F626B1EA6100BBB17F /* FridgeSearchRescoureFactory.swift in Sources */,
 				816BA887269E45D9005752EA /* RecipeDTO.swift in Sources */,
+				8118A4A426B3286000BBB17F /* FridgeAssemblyProtocol.swift in Sources */,
 				8118A3D926B199A800BBB17F /* GuidePresenterProtocol.swift in Sources */,
 				81243C9026AA19EF004AC8C1 /* DetailViewProtocol.swift in Sources */,
 				810562DA26751B6D00106C65 /* UICollectionViewBuilder.swift in Sources */,
@@ -1933,7 +1938,6 @@
 				810563462675FFFE00106C65 /* Reachability.swift in Sources */,
 				81243C5B26A727F3004AC8C1 /* FridgeCoordinator.swift in Sources */,
 				816BA857269DDD94005752EA /* CoreDataStack.swift in Sources */,
-				81243C5026A60E5D004AC8C1 /* FridgeNetworkServiceProtocol.swift in Sources */,
 				81243C8126A8348D004AC8C1 /* SearchIngredientsResourceFactory.swift in Sources */,
 				814A8C0B267DFAD300F46E1F /* ShimmerUILabel.swift in Sources */,
 				81A09765268E0553003E8B61 /* SearchResultRecipeCell.swift in Sources */,

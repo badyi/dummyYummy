@@ -20,6 +20,7 @@ protocol Coordinator: AnyObject {
     func finish()
 
     func showErrorAlert(with text: String)
+    func showActivity(with url: String)
 
     init(_ navigationController: UINavigationController)
 }
