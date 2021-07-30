@@ -47,7 +47,7 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+
         presenter?.loadImageIfNeeded()
         presenter?.prepareCharacteristics()
         presenter?.prepareIngredientsAndInstructions()
@@ -57,7 +57,7 @@ final class DetailViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+
         configNavigationBar()
         goingForwards = false
         presenter?.checkFavoriteStatus()
