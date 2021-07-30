@@ -29,10 +29,10 @@ final class AppCoordinator: AppCoordinatorProtocol {
     }
 
     func start() {
-        if isFirstLaunch() {
-            showGuide()
-        } else {
+        if hasBeenLaunchdBefore() {
             showMainFlow()
+        } else {
+            showGuide()
         }
     }
 
@@ -59,15 +59,14 @@ extension AppCoordinator: CoordinatorFinishDelegate {
 }
 
 extension AppCoordinator {
-    private func isFirstLaunch() -> Bool {
+    private func hasBeenLaunchdBefore() -> Bool {
         let defaults = UserDefaults.standard
-        let key = "isFirstLaunchFlag"
+        let key = "hasBeenLaunchdBeforeFlag"
         if defaults.bool(forKey: key) == true {
-            defaults.setValue(true, forKey: key)
-            return false
+            return true
         } else {
             defaults.setValue(true, forKey: key)
-            return true
+            return false
         }
     }
 }

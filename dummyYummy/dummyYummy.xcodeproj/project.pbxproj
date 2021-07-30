@@ -76,7 +76,6 @@
 		8115A46026B0AE3E00559331 /* NetworkHelperProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810563232675671B00106C65 /* NetworkHelperProtocol.swift */; };
 		8115A46126B0AE3E00559331 /* Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810563102675657200106C65 /* Resource.swift */; };
 		8115A46226B0AE3E00559331 /* URLRequest+Resource.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8105632C267567A800106C65 /* URLRequest+Resource.swift */; };
-		8115A46326B0AE3E00559331 /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0C267F773700F46E1F /* UIColorExtension.swift */; };
 		8115A46426B0AE3E00559331 /* UISegmentControlExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8124A9CD269A64750099EA18 /* UISegmentControlExtension.swift */; };
 		8115A46526B0AE3E00559331 /* CellExtenstions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C8D26A8A507004AC8C1 /* CellExtenstions.swift */; };
 		8115A46626B0AE3E00559331 /* UIButtonExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8124AACD269B76F00099EA18 /* UIButtonExtension.swift */; };
@@ -202,6 +201,11 @@
 		8118A4A226B31B5F00BBB17F /* TabCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A126B31B5F00BBB17F /* TabCoordinatorProtocol.swift */; };
 		8118A4A426B3286000BBB17F /* FridgeAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A326B3286000BBB17F /* FridgeAssemblyProtocol.swift */; };
 		8118A4A626B3613B00BBB17F /* FavoritesAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A526B3613B00BBB17F /* FavoritesAssemblyProtocol.swift */; };
+		8118A4A726B3758700BBB17F /* TabCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A126B31B5F00BBB17F /* TabCoordinatorProtocol.swift */; };
+		8118A4A826B3758700BBB17F /* FridgeAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A326B3286000BBB17F /* FridgeAssemblyProtocol.swift */; };
+		8118A4A926B3758700BBB17F /* FavoritesAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A526B3613B00BBB17F /* FavoritesAssemblyProtocol.swift */; };
+		8118A4AA26B375B400BBB17F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0C267F773700F46E1F /* UIColorExtension.swift */; };
+		8118A4AC26B375C900BBB17F /* UIColorExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C0C267F773700F46E1F /* UIColorExtension.swift */; };
 		81243B2926A22E90004AC8C1 /* RecipesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2826A22E90004AC8C1 /* RecipesViewController.swift */; };
 		81243B3026A2307C004AC8C1 /* RecipesViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B2F26A2307C004AC8C1 /* RecipesViewProtocol.swift */; };
 		81243B3226A24375004AC8C1 /* BaseRecipesConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B3126A24375004AC8C1 /* BaseRecipesConstants.swift */; };
@@ -209,7 +213,7 @@
 		81243B9726A39A4D004AC8C1 /* UILabelExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B9626A39A4D004AC8C1 /* UILabelExtension.swift */; };
 		81243B9E26A4763F004AC8C1 /* AccessibilityIdentifiers.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243B9D26A4763E004AC8C1 /* AccessibilityIdentifiers.swift */; };
 		81243BA726A47E29004AC8C1 /* FeedPresenterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243BA626A47E29004AC8C1 /* FeedPresenterProtocol.swift */; };
-		81243C1826A48203004AC8C1 /* dummyYummyUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C1726A48203004AC8C1 /* dummyYummyUITests.swift */; };
+		81243C1826A48203004AC8C1 /* FeedTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C1726A48203004AC8C1 /* FeedTests.swift */; };
 		81243C3A26A5BF70004AC8C1 /* FeedSearchPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C3926A5BF70004AC8C1 /* FeedSearchPage.swift */; };
 		81243C3C26A5BF8D004AC8C1 /* PageProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C3B26A5BF8D004AC8C1 /* PageProtocol.swift */; };
 		81243C3F26A5D117004AC8C1 /* SerchViewProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 81243C3E26A5D117004AC8C1 /* SerchViewProtocol.swift */; };
@@ -409,7 +413,7 @@
 		81243B9D26A4763E004AC8C1 /* AccessibilityIdentifiers.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityIdentifiers.swift; sourceTree = "<group>"; };
 		81243BA626A47E29004AC8C1 /* FeedPresenterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedPresenterProtocol.swift; sourceTree = "<group>"; };
 		81243C1526A48203004AC8C1 /* dummyYummyUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dummyYummyUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		81243C1726A48203004AC8C1 /* dummyYummyUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummyYummyUITests.swift; sourceTree = "<group>"; };
+		81243C1726A48203004AC8C1 /* FeedTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedTests.swift; sourceTree = "<group>"; };
 		81243C1926A48203004AC8C1 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		81243C3926A5BF70004AC8C1 /* FeedSearchPage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FeedSearchPage.swift; sourceTree = "<group>"; };
 		81243C3B26A5BF8D004AC8C1 /* PageProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PageProtocol.swift; sourceTree = "<group>"; };
@@ -851,7 +855,7 @@
 		81243C1626A48203004AC8C1 /* dummyYummyUITests */ = {
 			isa = PBXGroup;
 			children = (
-				81243C1726A48203004AC8C1 /* dummyYummyUITests.swift */,
+				81243C1726A48203004AC8C1 /* FeedTests.swift */,
 				81243C3B26A5BF8D004AC8C1 /* PageProtocol.swift */,
 				81243C3926A5BF70004AC8C1 /* FeedSearchPage.swift */,
 				81243C1926A48203004AC8C1 /* Info.plist */,
@@ -1657,6 +1661,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				8118A4A726B3758700BBB17F /* TabCoordinatorProtocol.swift in Sources */,
+				8118A4A826B3758700BBB17F /* FridgeAssemblyProtocol.swift in Sources */,
+				8118A4A926B3758700BBB17F /* FavoritesAssemblyProtocol.swift in Sources */,
 				8118A40026B2F7F400BBB17F /* FridgeSearchRescoureFactory.swift in Sources */,
 				8118A40126B2F7F400BBB17F /* FavoritesAssembly.swift in Sources */,
 				8118A40226B2F7F400BBB17F /* DetailAssembly.swift in Sources */,
@@ -1721,7 +1728,6 @@
 				8115A46026B0AE3E00559331 /* NetworkHelperProtocol.swift in Sources */,
 				8115A46126B0AE3E00559331 /* Resource.swift in Sources */,
 				8115A46226B0AE3E00559331 /* URLRequest+Resource.swift in Sources */,
-				8115A46326B0AE3E00559331 /* UIColorExtension.swift in Sources */,
 				8118A3FF26B2F7E800BBB17F /* FridgeSearchResultPresenterProtocol.swift in Sources */,
 				8115A46426B0AE3E00559331 /* UISegmentControlExtension.swift in Sources */,
 				8115A4C526B0C21100559331 /* StubFeedNetworkService.swift in Sources */,
@@ -1774,6 +1780,7 @@
 				8115A49526B0AE3F00559331 /* SearchIngredientsPresenter.swift in Sources */,
 				8115A49626B0AE3F00559331 /* SearchIngredientsViewController.swift in Sources */,
 				8115A49726B0AE3F00559331 /* SearchIngredientsNetworkService.swift in Sources */,
+				8118A4AA26B375B400BBB17F /* UIColorExtension.swift in Sources */,
 				8115A49826B0AE3F00559331 /* SearchIngredientsResourceFactory.swift in Sources */,
 				8115A49926B0AE3F00559331 /* FridgeSearchResultPresenter.swift in Sources */,
 				8115A49A26B0AE3F00559331 /* FridgeSearchResultViewController.swift in Sources */,
@@ -1810,9 +1817,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				81243C3C26A5BF8D004AC8C1 /* PageProtocol.swift in Sources */,
+				8118A4AC26B375C900BBB17F /* UIColorExtension.swift in Sources */,
 				8118A49F26B31AF500BBB17F /* Colors.swift in Sources */,
 				8118A4A026B31AF500BBB17F /* CoordinatorProtocol.swift in Sources */,
-				81243C1826A48203004AC8C1 /* dummyYummyUITests.swift in Sources */,
+				81243C1826A48203004AC8C1 /* FeedTests.swift in Sources */,
 				81243C3A26A5BF70004AC8C1 /* FeedSearchPage.swift in Sources */,
 				81243C7B26A7915E004AC8C1 /* AccessibilityIdentifiers.swift in Sources */,
 			);
