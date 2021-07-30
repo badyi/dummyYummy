@@ -7,7 +7,7 @@
 
 import Foundation
 
-/// Manager for sending network requests, implements NetworkHelperProtocol
+/// Manager for sending network requests
 final class NetworkHelper {
     /// - noConnection: No network error
     enum NetworkErrors: Error {

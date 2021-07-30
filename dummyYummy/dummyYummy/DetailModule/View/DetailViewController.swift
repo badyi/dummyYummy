@@ -13,7 +13,7 @@ enum DetailSections {
 
 final class DetailViewController: UIViewController {
 
-    var goingForwards: Bool = true
+    var goingForwards: Bool = false
     var finishClosure: (() -> Void)?
 
     var currentSelected: Int = 0
@@ -47,6 +47,7 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         presenter?.loadImageIfNeeded()
         presenter?.prepareCharacteristics()
         presenter?.prepareIngredientsAndInstructions()
@@ -56,12 +57,15 @@ final class DetailViewController: UIViewController {
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        
         configNavigationBar()
-        goingForwards = true
+        goingForwards = false
+        presenter?.checkFavoriteStatus()
+        reloadCollection()
     }
 
-    override func viewWillDisappear(_ animated: Bool) {
-        super.viewWillDisappear(animated)
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
         if !goingForwards {
             finishClosure?()
         }
@@ -86,6 +90,7 @@ extension DetailViewController {
     private func setupView() {
         view.addSubview(collectionView)
         definesPresentationContext = true
+        navigationController?.tabBarController?.delegate = self
         setupCollectionView()
     }
 
@@ -309,5 +314,17 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
         }
 
         return CGSize(width: width, height: height)
+    }
+}
+
+// MARK: - UITabBarControllerDelegate
+extension DetailViewController: UITabBarControllerDelegate {
+    func tabBarController(_ tabBarController: UITabBarController, didSelect viewController: UIViewController) {
+
+        if viewController == navigationController {
+            goingForwards = false
+            return
+        }
+        goingForwards = true
     }
 }

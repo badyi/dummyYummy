@@ -11,9 +11,6 @@ import SnapshotTesting
 
 class FavoritesViewControllerTests: XCTestCase {
     func testFavoriteViewController() {
-        let defaults = UserDefaults.standard
-        let key = "isFirstLaunchFlag"
-        defaults.setValue(false, forKey: key)
 
         let fridge = FridgeAssembly().createFridgeModule(self)
         assertSnapshot(matching: fridge, as: .image(on: .iPhone8))

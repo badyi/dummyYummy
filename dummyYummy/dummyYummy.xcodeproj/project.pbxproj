@@ -195,7 +195,7 @@
 		8118A40226B2F7F400BBB17F /* DetailAssembly.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A3E926B1BECF00BBB17F /* DetailAssembly.swift */; };
 		8118A40426B3087500BBB17F /* DetailAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A40326B3087500BBB17F /* DetailAssemblyProtocol.swift */; };
 		8118A41526B3116A00BBB17F /* DetailAssemblyProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A40326B3087500BBB17F /* DetailAssemblyProtocol.swift */; };
-		8118A49D26B3167700BBB17F /* dummyYummySnapshotTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A40B26B30ED700BBB17F /* dummyYummySnapshotTests.swift */; };
+		8118A49D26B3167700BBB17F /* FavoritesViewControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A40B26B30ED700BBB17F /* FavoritesViewControllerTests.swift */; };
 		8118A49F26B31AF500BBB17F /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 814A8C14267FB86D00F46E1F /* Colors.swift */; };
 		8118A4A026B31AF500BBB17F /* CoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 810562E226752F8700106C65 /* CoordinatorProtocol.swift */; };
 		8118A4A226B31B5F00BBB17F /* TabCoordinatorProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8118A4A126B31B5F00BBB17F /* TabCoordinatorProtocol.swift */; };
@@ -390,7 +390,7 @@
 		8118A3F526B1EA6100BBB17F /* FridgeSearchRescoureFactory.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FridgeSearchRescoureFactory.swift; sourceTree = "<group>"; };
 		8118A40326B3087500BBB17F /* DetailAssemblyProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DetailAssemblyProtocol.swift; sourceTree = "<group>"; };
 		8118A40926B30ED700BBB17F /* dummyYummySnapshotTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = dummyYummySnapshotTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
-		8118A40B26B30ED700BBB17F /* dummyYummySnapshotTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummyYummySnapshotTests.swift; sourceTree = "<group>"; };
+		8118A40B26B30ED700BBB17F /* FavoritesViewControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewControllerTests.swift; sourceTree = "<group>"; };
 		8118A40D26B30ED700BBB17F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8118A41326B310EC00BBB17F /* Pods_dummyYummySnapshotTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = Pods_dummyYummySnapshotTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		8118A4A126B31B5F00BBB17F /* TabCoordinatorProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TabCoordinatorProtocol.swift; sourceTree = "<group>"; };
@@ -772,7 +772,7 @@
 		8118A40A26B30ED700BBB17F /* dummyYummySnapshotTests */ = {
 			isa = PBXGroup;
 			children = (
-				8118A40B26B30ED700BBB17F /* dummyYummySnapshotTests.swift */,
+				8118A40B26B30ED700BBB17F /* FavoritesViewControllerTests.swift */,
 				8118A40D26B30ED700BBB17F /* Info.plist */,
 			);
 			path = dummyYummySnapshotTests;
@@ -1653,7 +1653,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				8118A49D26B3167700BBB17F /* dummyYummySnapshotTests.swift in Sources */,
+				8118A49D26B3167700BBB17F /* FavoritesViewControllerTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
