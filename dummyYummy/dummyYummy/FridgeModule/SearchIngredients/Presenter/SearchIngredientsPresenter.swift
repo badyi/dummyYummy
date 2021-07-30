@@ -13,6 +13,8 @@ final class SearchIngredientsPresenter: NSObject {
     private var ingredients: [String]
     private(set) var chosenIngredinets: [String]
 
+    var navigationDelegate: SearchIngredientsNavigationDelegate?
+
     init(with view: SearchIngredientsViewProtocol,
          _ networkService: SearchIngredientsNetworkProtocol) {
         self.view = view
@@ -34,13 +36,11 @@ extension SearchIngredientsPresenter: SearchIngredientsPresenterProtocol {
 
     func handleChooseTap(at ingredient: String) {
         if self.chosenIngredinets.contains(ingredient),
-           let index = self.chosenIngredinets.firstIndex(of: ingredient) {
-            self.chosenIngredinets.remove(at: index)
+            let index = self.chosenIngredinets.firstIndex(of: ingredient) {
+            delete(at: index)
         } else {
-            self.chosenIngredinets.append(ingredient)
+            append(ingredient)
         }
-        #warning("reload rows")
-        view?.reloadTable()
     }
 
     func ingredientsCount() -> Int {
@@ -51,10 +51,6 @@ extension SearchIngredientsPresenter: SearchIngredientsPresenterProtocol {
         DispatchQueue.main.async { [weak self] in
             self?.view?.reloadTable()
         }
-    }
-
-    func didSelectRecipe(at index: Int) {
-
     }
 
     func title(at index: Int) -> String {
@@ -71,8 +67,42 @@ extension SearchIngredientsPresenter: SearchIngredientsPresenterProtocol {
                 self?.ingredients = result.map({ $0.name })
                 self?.reloadTable()
             case let .failure(error):
-                print(error.localizedDescription)
+                self?.handleError(error)
             }
         })
+    }
+}
+
+extension SearchIngredientsPresenter {
+
+    private func delete(at index: Int) {
+        DispatchQueue.main.async { [weak self] in
+            self?.chosenIngredinets.remove(at: index)
+            self?.view?.removed(at: IndexPath(row: index, section: 0))
+        }
+    }
+
+    private func append(_ ingredient: String) {
+        DispatchQueue.main.async { [weak self] in
+            self?.chosenIngredinets.append(ingredient)
+            self?.view?.reloadTable()
+        }
+    }
+
+    private func handleError(_ error: Error) {
+        if let error = error as? ServiceError {
+            switch error {
+            case .alreadyLoading:
+                break
+            case .resourceCreatingError:
+                NSLog("resource createtion error")
+            }
+        } else if error.localizedDescription == "cancelled" {
+
+        } else if let error = error as? NetworkHelper.NetworkErrors {
+            NSLog(error.localizedDescription)
+        } else {
+            navigationDelegate?.error(with: error.localizedDescription)
+        }
     }
 }

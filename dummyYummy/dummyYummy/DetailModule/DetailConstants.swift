@@ -26,6 +26,12 @@ struct DetailConstants {
 
     struct Header {
         struct Layout {
+            static let cornerRadius: CGFloat = 10
+            static let shadowRadius: CGFloat = 6
+            static let shadowOpacity: Float = 0.4
+            static let shadowOffsetWidth: CGFloat = 1
+            static let shadowOffsetHeight: CGFloat = 2
+
             static let horizontalSpace: CGFloat = 10
             static let verticalSpace: CGFloat = 10
             static let spaceBetweenButtons: CGFloat = 5
@@ -50,7 +56,7 @@ struct DetailConstants {
             static let chevronRight = {
                 UIImage(systemName: "chevron.right.circle")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
             }()
-
+            static let defaultCellImage = UIImage(named: "defaultFoodImage") ?? UIImage()
             static let chevronDown = {
                 UIImage(systemName: "chevron.down.circle")?.withRenderingMode(.alwaysTemplate) ?? UIImage()
             }()
@@ -64,6 +70,7 @@ struct DetailConstants {
             static let shadowColor = Colors.pureBlack
             static let buttonTintColor = Colors.veryLightGray
             static let buttonFavoriteColor = UIColor.red
+            static let headerButtonTintColor = Colors.wisteria
         }
     }
 

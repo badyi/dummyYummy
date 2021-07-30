@@ -18,38 +18,3 @@ final class FeedCell: RecipeBigCell {
         favoriteButton.isUserInteractionEnabled = false
     }
 }
-
-// MARK: - View setup methods
-extension FeedCell {
-//    func configView(with recipe: Recipe) {
-//        titleLabel.text = recipe.title
-//
-//        if let score = recipe.healthScore, let time = recipe.readyInMinutes {
-//            healthScoreLabel.text = "Health score: \(score)"
-//            minutesLabel.text = "Cooking minutes: \(time)"
-//        }
-//
-//        if recipe.isFavorite {
-//            favoriteButton.tintColor = FeedConstants.Cell.Design.favoriteButtonTintColor
-//
-//            favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImageFill, for: .normal)
-//        } else {
-//            favoriteButton.setImage(FeedConstants.Cell.Image.favoriteImage, for: .normal)
-//            favoriteButton.tintColor = BaseRecipeConstants.BigCell.Design.buttonTintColor
-//        }
-//
-//        // set default image if recipe dont have image url and remove shimmer animation
-//        if recipe.imageURL == nil {
-//            imageView.image = FeedConstants.Cell.Image.defaultCellImage
-//            favoriteButton.isUserInteractionEnabled = true
-//            imageView.removeShimmerAnimation()
-//            return
-//        }
-//
-//        guard let imageData = recipe.imageData else { return }
-//        guard let image = UIImage(data: imageData) else { return }
-//        imageView.image = image
-//        favoriteButton.isUserInteractionEnabled = true
-//        imageView.removeShimmerAnimation()
-//    }
-}

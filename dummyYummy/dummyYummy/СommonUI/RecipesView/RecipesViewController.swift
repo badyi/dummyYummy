@@ -17,11 +17,15 @@ class RecipesViewController: UIViewController, RecipesViewProtocol {
         return collectionView
     }()
 
+    var refreshControl: UIRefreshControl = {
+        UIRefreshControl()
+    }()
+
     func setupCollectionView() {
         NSLayoutConstraint.activate([
             collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
             collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
             collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
         ])
     }
@@ -41,6 +45,9 @@ class RecipesViewController: UIViewController, RecipesViewProtocol {
     }
 
     func reloadCollectionView() {
+        if let refresh = collectionView.refreshControl, refresh.isRefreshing == true {
+            refreshControl.endRefreshing()
+        }
         collectionView.reloadData()
     }
 
@@ -52,10 +59,7 @@ class RecipesViewController: UIViewController, RecipesViewProtocol {
                 reloadIndexes.append($0)
             }
         }
-
-        collectionView.performBatchUpdates({
-            collectionView.reloadItems(at: reloadIndexes)
-        }, completion: nil)
+        collectionView.reloadItems(at: reloadIndexes)
     }
 
     func configNavigation() {
@@ -77,5 +81,10 @@ class RecipesViewController: UIViewController, RecipesViewProtocol {
 
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.largeTitleDisplayMode = .always
+    }
+
+    func setupRefresh() {
+        refreshControl.tintColor = Colors.wisteria
+        collectionView.refreshControl = refreshControl
     }
 }

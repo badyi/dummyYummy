@@ -17,6 +17,12 @@ final class UIImageViewBuilder {
 
 extension UIImageViewBuilder {
     @discardableResult
+    public func contentMode(_ mode: UIView.ContentMode) -> UIImageViewBuilder {
+        contentMode = mode
+        return self
+    }
+
+    @discardableResult
     public func cornerRadius(_ radius: CGFloat) -> UIImageViewBuilder {
         cornerRadius = radius
         return self

@@ -14,6 +14,7 @@ final class FeedViewController: RecipesViewController {
     // MARK: - View lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupRefresh()
         setupView()
         presenter?.loadRandomRecipes()
     }
@@ -29,16 +30,13 @@ final class FeedViewController: RecipesViewController {
         super.viewWillDisappear(animated)
         stopVisibleCellsAnimation()
     }
-
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .darkContent
-    }
 }
 
 // MARK: - FeedViewProtocol
 extension FeedViewController: FeedViewProtocol {
+
     func setupView() {
-        title = "Browes recipes"
+        title = "Browse recipes"
         navigationItem.searchController?.searchBar.placeholder = "Search recipes"
         collectionView.accessibilityIdentifier = AccessibilityIdentifiers.FeedViewControlller.collectionView
         collectionView.delegate = self
@@ -48,6 +46,7 @@ extension FeedViewController: FeedViewProtocol {
         collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
 
         view.addSubview(collectionView)
+        refreshControl.addTarget(self, action: #selector(refresh(_:)), for: .valueChanged)
         setupCollectionView()
     }
 
@@ -58,7 +57,9 @@ extension FeedViewController: FeedViewProtocol {
         searchController.searchBar.searchBarStyle = .minimal
 
         navigationItem.searchController = searchController
-        navigationItem.searchController?.searchBar.searchTextField.textColor = Colors.white
+
+        let textColor = FeedConstants.ViewController.Design.searchTextColor
+        navigationItem.searchController?.searchBar.searchTextField.textColor = textColor
     }
 }
 
@@ -68,7 +69,7 @@ extension FeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        presenter?.willDisplayRecipe(at: indexPath.row)
+        presenter?.prepareRecipe(at: indexPath.row)
         let accesibilityId = AccessibilityIdentifiers.FeedViewControlller.cell
         let index = "-\(indexPath.section)-\(indexPath.row)"
         cell.accessibilityIdentifier = accesibilityId + index
@@ -77,7 +78,7 @@ extension FeedViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         didEndDisplaying cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        presenter?.didEndDisplayingRecipe(at: indexPath.row)
+        presenter?.noNeedPrepearRecipe(at: indexPath.row)
     }
 
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -85,7 +86,9 @@ extension FeedViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension FeedViewController: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         // in case the recipes haven't loaded yet
         // we put a few fake cells with animations
@@ -112,6 +115,9 @@ extension FeedViewController: UICollectionViewDataSource {
             cell.stopAnimation()
             cell.handleFavoriteButtonTap = { [weak self] in
                 self?.presenter?.handleFavoriteTap(at: indexPath.row)
+            }
+            cell.handleShareButtonTap = { [weak self] in
+                self?.presenter?.handleShareTap(at: indexPath.row)
             }
         }
         return cell
@@ -145,10 +151,19 @@ extension FeedViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UICollectionViewDataSourcePrefetching
 extension FeedViewController: UICollectionViewDataSourcePrefetching {
     func collectionView(_ collectionView: UICollectionView, prefetchItemsAt indexPaths: [IndexPath]) {
         indexPaths.forEach {
-            presenter?.willDisplayRecipe(at: $0.row)
+            presenter?.prepareRecipe(at: $0.row)
         }
+    }
+}
+
+// MARK: - Private methods
+extension FeedViewController {
+    @objc
+    private func refresh(_ sender: AnyObject) {
+        presenter?.loadRandomRecipes()
     }
 }

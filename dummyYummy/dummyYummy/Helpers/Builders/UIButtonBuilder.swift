@@ -14,9 +14,23 @@ final class UIButtonBuilder {
     public private(set) var largeConfig: Bool = false
     public private(set) var tintColor: UIColor = .systemBlue
     public private(set) var font: UIFont?
+    public private(set) var cornerRadius: CGFloat = 0
+    public private(set) var title = ""
 }
 
 extension UIButtonBuilder {
+    @discardableResult
+    public func title(_ text: String) -> UIButtonBuilder {
+        self.title = text
+        return self
+    }
+
+    @discardableResult
+    public func cornerRadius(_ radius: CGFloat) -> UIButtonBuilder {
+        self.cornerRadius = radius
+        return self
+    }
+
     @discardableResult
     public func setFont(_ font: UIFont) -> UIButtonBuilder {
         self.font = font
@@ -67,7 +81,10 @@ private extension UIButtonBuilder {
         button.translatesAutoresizingMaskIntoConstraints = false
         button.backgroundColor = backgroundColor
         button.tintColor = tintColor
-
+        button.layer.cornerRadius = cornerRadius
+        if title != "" {
+            button.setTitle(title, for: .normal)
+        }
         if let font = font {
             button.titleLabel?.font = font
         }

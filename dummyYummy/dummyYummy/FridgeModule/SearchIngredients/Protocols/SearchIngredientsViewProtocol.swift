@@ -9,4 +9,6 @@ import Foundation
 
 protocol SearchIngredientsViewProtocol: AnyObject {
     func reloadTable()
+    func removed(at indexPath: IndexPath)
+    func appended()
 }

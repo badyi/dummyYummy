@@ -8,5 +8,7 @@
 import UIKit
 
 protocol FridgeViewProtocol: AnyObject {
+
+    /// reload table view rows
     func reloadTable()
 }

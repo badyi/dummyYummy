@@ -24,6 +24,8 @@ final class DetailPresenter {
 
     private var characteristics: ExpandableCharacteristics
 
+    var navigationDelegate: DetailNavigationDelegate?
+
     init(with view: DetailViewProtocol,
          _ dataBaseService: DataBaseServiceProtocol,
          _ fileSystemService: FileSystemServiceProtocol,
@@ -39,7 +41,73 @@ final class DetailPresenter {
     }
 }
 
+// MARK: - DetailPresenterProtocol
 extension DetailPresenter: DetailPresenterProtocol {
+    func checkFavoriteStatus() {
+        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
+        if !dataBaseService.recipes(with: predicate).isEmpty {
+            recipe.isFavorite = true
+            return
+        }
+        recipe.isFavorite = false
+    }
+
+    func prepareIngredientsAndInstructions() {
+        if recipe.ingredients == nil || recipe.instructions == nil {
+            loadRecipeInfo()
+        }
+    }
+
+    func prepareCharacteristics() {
+        guard let boolCharacteristics = recipe.boolCharacteristics else {
+            loadRecipeInfo()
+            return
+        }
+
+        if let healthScore = recipe.healthScore {
+            characteristics.values.append("Health score: \(healthScore)")
+        }
+
+        if let readyInMinutes = recipe.readyInMinutes {
+            characteristics.values.append("Ready in minutes:  \(readyInMinutes)")
+        }
+
+        if let servings = recipe.servings {
+            characteristics.values.append("Servings: \(servings)")
+        }
+
+        boolCharacteristics.forEach { item in
+            if item.value {
+                characteristics.values.append(item.key)
+            }
+        }
+    }
+
+    func loadImageIfNeeded() {
+        if recipe.imageData != nil {
+            return
+        }
+        guard let url = recipe.imageURL else {
+            return
+        }
+        networkService.loadImage(url, completion: { [weak self] result in
+            switch result {
+            case let .success(result):
+                self?.recipe.imageData = result
+                self?.imageDidLoad()
+            case let .failure(error):
+                self?.handleError(error)
+            }
+        })
+    }
+
+    func handleShareTap(at indexPath: IndexPath) {
+        guard let url = recipe.sourceURL else {
+            return
+        }
+        navigationDelegate?.share(with: url)
+    }
+
     func segmentDidChange() {
         self.view?.reloadSection(2)
     }
@@ -64,18 +132,6 @@ extension DetailPresenter: DetailPresenterProtocol {
             return ""
         }
         return instruction
-    }
-
-    func viewDidLoad() {
-        loadImageIfNeeded()
-        prepareCharacteristics()
-        prepareIngredientsAndInstructions()
-        recipe.isFavorite = checkFavoriteStatus()
-        view?.setupView()
-    }
-
-    func viewWillAppear() {
-        view?.configNavigationBar()
     }
 
     func headerTitle() -> String {
@@ -108,49 +164,6 @@ extension DetailPresenter: DetailPresenterProtocol {
 }
 
 private extension DetailPresenter {
-    func loadImageIfNeeded() {
-        if recipe.imageData != nil {
-            return
-        }
-        guard let url = recipe.imageURL else {
-            return
-        }
-        networkService.loadImage(url, completion: { [weak self] result in
-            switch result {
-            case let .success(result):
-                self?.recipe.imageData = result
-                self?.imageDidLoad()
-            case let .failure(error):
-                print(error.localizedDescription)
-            }
-        })
-    }
-
-    func prepareCharacteristics() {
-        guard let boolCharacteristics = recipe.boolCharacteristics else {
-            loadRecipeInfo()
-            return
-        }
-
-        if let healthScore = recipe.healthScore {
-            characteristics.values.append("Health score: \(healthScore)")
-        }
-        if let readyInMinutes = recipe.readyInMinutes {
-            characteristics.values.append("Ready in minutes:  \(readyInMinutes)")
-        }
-        boolCharacteristics.forEach { item in
-            if item.value {
-                characteristics.values.append(item.key)
-            }
-        }
-    }
-
-    func prepareIngredientsAndInstructions() {
-        if recipe.ingredients == nil || recipe.instructions == nil {
-            loadRecipeInfo()
-        }
-    }
-
     func loadRecipeInfo() {
         networkService.loadRecipeInfo(recipe.id, completion: { [weak self] result in
             switch result {
@@ -158,8 +171,7 @@ private extension DetailPresenter {
                 self?.recipe.configInfo(with: result)
                 self?.recipeInfoDidLoad()
             case .failure(let error):
-                #warning("alert")
-                print(error)
+                self?.handleError(error)
             }
         })
     }
@@ -179,27 +191,15 @@ private extension DetailPresenter {
     }
 }
 
-private extension DetailPresenter {
-
-    func checkFavoriteStatus() -> Bool {
-        let predicate = NSPredicate(format: "id == %@", NSNumber(value: recipe.id))
-        if !dataBaseService.recipes(with: predicate).isEmpty {
-            return true
-        }
-        return false
-    }
-}
-
 extension DetailPresenter {
     private func saveToDB() {
         if let data = recipe.imageData {
-            fileSystemService.store(imageData: data, forKey: "\(recipe.id)", completionStatus: { status in
+            fileSystemService.store(imageData: data, forKey: "\(recipe.id)", completionStatus: { [weak self] status in
                 switch status {
-                case let .success(status):
-                    print(status)
+                case .success(_):
+                    break
                 case let .failure(error):
-                    #warning("hadnle error")
-                    print(error.localizedDescription)
+                    self?.handleError(error)
                 }
             })
         }
@@ -211,15 +211,31 @@ extension DetailPresenter {
         dataBaseService.delete(recipes: [RecipeDTO(with: recipe)])
 
         if recipe.imageData != nil {
-            fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: { status in
+            fileSystemService.delete(forKey: "\(recipe.id)", completionStatus: { [weak self] status in
                 switch status {
-                case let .success(status):
-                    print(status)
+                case .success(_):
+                    break
                 case let .failure(error):
-                    #warning("hadnle error")
-                    print(error)
+                    self?.handleError(error)
                 }
             })
+        }
+    }
+
+    private func handleError(_ error: Error) {
+        if let error = error as? ServiceError {
+            switch error {
+            case .alreadyLoading:
+                break
+            case .resourceCreatingError:
+                NSLog("resource createtion error")
+            }
+        } else if error.localizedDescription == "cancelled" {
+
+        } else if let error = error as? NetworkHelper.NetworkErrors {
+            NSLog(error.localizedDescription)
+        } else {
+            navigationDelegate?.error(with: error.localizedDescription)
         }
     }
 }

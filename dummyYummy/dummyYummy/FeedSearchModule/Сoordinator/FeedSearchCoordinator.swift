@@ -8,6 +8,7 @@
 import UIKit
 
 final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
+
     var finishDelegate: CoordinatorFinishDelegate?
 
     var navigationController: UINavigationController
@@ -23,34 +24,9 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
     }
 
     func showFeedSearch() {
-        let feedNetworkService = FeedNetworkService()
-        let dataBaseService = DataBaseService(coreDataStack: CoreDataStack.shared)
-        let fileSystemService = FileSystemService()
+        let feedSearchVC = FeedSearchAssembly().createFeedSearchModule(self, self)
 
-        let feedViewController = FeedViewController()
-        let feedPresenter = FeedPresenter(with: feedViewController,
-                                          feedNetworkService,
-                                          dataBaseService,
-                                          fileSystemService)
-
-        feedViewController.presenter = feedPresenter
-        feedPresenter.view = feedViewController
-        feedPresenter.navigationDelegate = self
-
-        let searchNetworkService = SearchNetworkService()
-        let searchResultViewController = SearchResultViewController()
-        let searchPresenter = SearchPresenter(with: searchResultViewController, searchNetworkService)
-
-        searchPresenter.navigationDelegate = self
-        searchResultViewController.presenter = searchPresenter
-
-        let searchController = UISearchController(searchResultsController: searchResultViewController)
-
-        searchController.searchResultsUpdater = searchResultViewController
-        searchController.searchBar.delegate = searchResultViewController
-        feedViewController.setSearchController(searchController)
-
-        navigationController.pushViewController(feedViewController, animated: true)
+        navigationController.pushViewController(feedSearchVC, animated: true)
     }
 
     func showDetail(with recipe: Recipe) {
@@ -65,8 +41,10 @@ final class FeedSearchCoordinator: FeedSearchCoordinatorProtocol {
 
 extension FeedSearchCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
-        navigationController.popToRootViewController(animated: true)
-        childCoordinators.removeLast()
+        if let childCoordinator = childCoordinators.last, childCoordinator.type == .detail {
+            navigationController.popToRootViewController(animated: true)
+            childCoordinators.removeLast()
+        }
     }
 }
 
@@ -78,6 +56,10 @@ extension FeedSearchCoordinator: SearchNavigationDelegate {
 }
 
 extension FeedSearchCoordinator: RecipesViewNavigationDelegate {
+    func activity(with url: String) {
+        showActivity(with: url)
+    }
+
     func error(with description: String) {
         showErrorAlert(with: description)
     }

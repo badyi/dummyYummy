@@ -9,9 +9,6 @@ import Foundation
 
 protocol FeedViewProtocol: RecipesViewProtocol {
 
-    /// Config view of navigation bar
-    // func configNavigation()
-
     /// Reload collection view
     func reloadCollectionView()
 

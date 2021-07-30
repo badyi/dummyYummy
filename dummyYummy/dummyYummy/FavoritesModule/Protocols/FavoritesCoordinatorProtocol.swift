@@ -8,6 +8,11 @@
 import Foundation
 
 protocol FavoritesCoordinatorProtocol: Coordinator {
+
+    /// Show favoite flow
     func showFavorite()
+
+    /// Show detail flow
+    /// - Parameter recipe: recipe for detail
     func showDetail(with recipe: Recipe)
 }

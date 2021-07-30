@@ -8,6 +8,7 @@
 import UIKit
 
 final class SearchResultRecipeCell: RoundedCollectionCellWithShadow {
+
     static let id = "SearchResultRecipeCell"
 
     private var imageView: ShimmerUIImageView = {

@@ -15,7 +15,7 @@ final class FridgeViewController: UIViewController {
         tableView.backgroundColor = FridgeConstants.ViewController.Design.backgroundColor
         tableView.delegate = self
         tableView.dataSource = self
-        tableView.contentInset = UIEdgeInsets(top: 0, left: 0, bottom: 70, right: 0)
+        tableView.contentInset = FridgeConstants.ViewController.Layout.tableViewInsets
         tableView.register(IngredinentsCell.self, forCellReuseIdentifier: IngredinentsCell.id)
         tableView.register(UITableViewCell.self, forCellReuseIdentifier: UITableViewCell.defaultID)
         return tableView
@@ -24,11 +24,11 @@ final class FridgeViewController: UIViewController {
     private lazy var showSearchResultsButton: UIButton = {
         let button = UIButtonBuilder()
             .backgroundColor(Colors.wisteria)
+            .cornerRadius(FridgeConstants.ViewController.Layout.buttonCornerRaius)
+            .title("Search recipes")
             .build()
-        button.layer.cornerRadius = 20
         button.layer.masksToBounds = true
         button.clipsToBounds = true
-        button.setTitle("Search recipes", for: .normal)
         button.addTarget(self, action: #selector(buttonTapped), for: .touchUpInside)
         return button
     }()
@@ -45,21 +45,13 @@ final class FridgeViewController: UIViewController {
         configNavigationBar()
     }
 
-    func tableView(_ tableView: UITableView,
-                   commit editingStyle: UITableViewCell.EditingStyle,
-                   forRowAt indexPath: IndexPath) {
-
-        if editingStyle == .delete {
-            presenter?.delete(at: indexPath.row)
-            tableView.deleteRows(at: [indexPath], with: .fade)
-        }
-    }
-
     func setupSearchController(_ searchController: UISearchController) {
         searchController.hidesNavigationBarDuringPresentation = true
         searchController.searchBar.searchBarStyle = .minimal
         searchController.definesPresentationContext = true
         navigationItem.searchController = searchController
+        let textColor = FridgeConstants.ViewController.Design.searchTextColor
+        navigationItem.searchController?.searchBar.searchTextField.textColor = textColor
     }
 }
 
@@ -77,9 +69,9 @@ extension FridgeViewController {
     }
 
     private func setupView() {
-        title = "What's in your fridge?"
+        title = "What's in the fridge?"
         view.backgroundColor = FridgeConstants.ViewController.Design.backgroundColor
-        navigationItem.searchController?.searchBar.placeholder = "Search ingredinets "
+        navigationItem.searchController?.searchBar.placeholder = "Search ingredinets"
         view.addSubview(tableView)
         view.addSubview(showSearchResultsButton)
 
@@ -88,29 +80,30 @@ extension FridgeViewController {
     }
 
     private func configNavigationBar() {
-        #warning("feed constants")
         let textAttributes = [NSAttributedString.Key.foregroundColor:
-                                FeedConstants.ViewController.Design.navigationTextColor]
+                                FridgeConstants.ViewController.Design.navigationTextColor]
+
         navigationController?.navigationBar.titleTextAttributes = textAttributes
         navigationController?.navigationBar.largeTitleTextAttributes = textAttributes
-        navigationController?.navigationBar.backgroundColor = FeedConstants.ViewController.Design.navBarBackgroundColor
 
-        navigationController?.navigationBar.barTintColor = FeedConstants.ViewController.Design.navBarBarTintColor
-        navigationController?.navigationBar.tintColor = FeedConstants.ViewController.Design.navBarTintColor
+        let backgroundColor = FridgeConstants.ViewController.Design.navBarBackgroundColor
+        navigationController?.navigationBar.backgroundColor = backgroundColor
+
+        navigationController?.navigationBar.barTintColor = FridgeConstants.ViewController.Design.navBarBarTintColor
+        navigationController?.navigationBar.tintColor = FridgeConstants.ViewController.Design.navBarTintColor
         navigationController?.navigationBar.prefersLargeTitles = true
 
         // need nav bar back view image to avoid some ios bag with search result controller frame on search bar tap
-        navigationController?.navigationBar.setBackgroundImage(FeedConstants.ViewController.Image.navBarBackground,
+        navigationController?.navigationBar.setBackgroundImage(FridgeConstants.ViewController.Image.navBarBackground,
                                                                for: .default)
-        navigationController?.navigationBar.shadowImage = FeedConstants.ViewController.Image.navBarShadowImage
-        navigationController?.view.backgroundColor = FeedConstants.ViewController.Design.navBarBarTintColor
+        navigationController?.navigationBar.shadowImage = FridgeConstants.ViewController.Image.navBarShadowImage
+        navigationController?.view.backgroundColor = FridgeConstants.ViewController.Design.navBarBarTintColor
 
         navigationItem.hidesSearchBarWhenScrolling = false
         navigationItem.largeTitleDisplayMode = .always
     }
 
     private func setupTableView() {
-
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
@@ -135,6 +128,7 @@ extension FridgeViewController {
 
 // MARK: - UITableViewDataSource
 extension FridgeViewController: UITableViewDataSource {
+
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         presenter?.ingredientsCount() ?? 0
     }
@@ -155,11 +149,22 @@ extension FridgeViewController: UITableViewDataSource {
 
 // MARK: - UITableViewDelegate
 extension FridgeViewController: UITableViewDelegate {
+
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let title = presenter?.title(at: indexPath.row) ?? ""
         let height = IngredinentsCell.heightForCell(with: title, width: tableView.bounds.width)
         let minimalHeight = SearchIngredientsConstants.ViewController.Layout.mimimalCellHeight
 
         return height < minimalHeight ? minimalHeight : height
+    }
+
+    func tableView(_ tableView: UITableView,
+                   commit editingStyle: UITableViewCell.EditingStyle,
+                   forRowAt indexPath: IndexPath) {
+
+        if editingStyle == .delete {
+            presenter?.delete(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
     }
 }

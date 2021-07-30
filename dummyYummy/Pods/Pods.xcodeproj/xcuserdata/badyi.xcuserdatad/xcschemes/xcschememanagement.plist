@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Pods-dummyYummySnapshotTests.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-dummyYummyTests.xcscheme</key>
 		<dict>
 			<key>isShown</key>

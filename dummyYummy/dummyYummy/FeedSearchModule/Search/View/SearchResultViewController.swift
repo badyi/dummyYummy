@@ -7,56 +7,67 @@
 
 import UIKit
 
-final class SearchResultViewController: UIViewController {
-
-    private lazy var collectionView: UICollectionView = {
-        let collectionView = UICollectionViewBuilder()
-            .backgroundColor(SearchResultConstants.ViewController.Design.backgroundColor)
-            .delegate(self)
-            .dataSource(self)
-            .setInsets(SearchResultConstants.ViewController.Layout.collectionViewInsets)
-            .build()
-        collectionView.register(SearchResultRecipeCell.self, forCellWithReuseIdentifier: SearchResultRecipeCell.id)
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
-        return collectionView
-    }()
+final class SearchResultViewController: RecipesViewController {
 
     var presenter: SearchPresenterProtocol?
+
+    lazy var activityIndicator: UIActivityIndicatorView = {
+        let activity = UIActivityIndicatorView(style: .large)
+        activity.hidesWhenStopped = true
+        activity.color = SearchResultConstants.ViewController.Design.activityIndicatorColor
+        activity.translatesAutoresizingMaskIntoConstraints = false
+        return activity
+    }()
 
     // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         setupView()
     }
+
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        configNavigation()
+        reloadVisibleCells()
+    }
+
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        stopVisibleCellsAnimation()
+    }
 }
 
+// MARK: - SearchViewProtocol
 extension SearchResultViewController: SearchViewProtocol {
-    func reloadCollectionView() {
-        collectionView.reloadData()
+    func stopActivityIndicator() {
+        activityIndicator.stopAnimating()
     }
 
-    func reloadItems(at indexPaths: [IndexPath]) {
-        collectionView.reloadItems(at: indexPaths)
+    func startActivityIndicator() {
+        activityIndicator.startAnimating()
     }
 }
 
+// MARK: Private methods
 extension SearchResultViewController {
     private func setupView() {
+        view.addSubview(collectionView)
+        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: UICollectionViewCell.defaultID)
+        collectionView.register(SearchResultRecipeCell.self, forCellWithReuseIdentifier: SearchResultRecipeCell.id)
+        collectionView.delegate = self
+        collectionView.dataSource = self
         view.backgroundColor = SearchResultConstants.ViewController.Design.backgroundColor
         setupCollectionView()
-    }
+        view.addSubview(activityIndicator)
 
-    private func setupCollectionView() {
-        view.addSubview(collectionView)
         NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
+            activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor)
         ])
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension SearchResultViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         presenter?.recipesCount() ?? 0
@@ -80,17 +91,18 @@ extension SearchResultViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension SearchResultViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView,
                         willDisplay cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        presenter?.willDisplayRecipe(at: indexPath.row)
+        presenter?.prepareRecipe(at: indexPath.row)
     }
 
     func collectionView(_ collectionView: UICollectionView,
                         didEndDisplaying cell: UICollectionViewCell,
                         forItemAt indexPath: IndexPath) {
-        presenter?.didEndDisplayRecipe(at: indexPath.row)
+        presenter?.noNeedPrepearRecipe(at: indexPath.row)
     }
 
     func collectionView(_ collectionView: UICollectionView,
@@ -99,6 +111,7 @@ extension SearchResultViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -129,12 +142,14 @@ extension SearchResultViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UISearchBarDelegate
 extension SearchResultViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         presenter?.loadRecipes()
     }
 }
 
+// MARK: - UISearchResultsUpdating
 extension SearchResultViewController: UISearchResultsUpdating {
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {

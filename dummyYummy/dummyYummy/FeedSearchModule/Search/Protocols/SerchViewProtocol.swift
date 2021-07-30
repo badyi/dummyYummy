@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol SearchViewProtocol: AnyObject {
-    func reloadCollectionView()
-    func reloadItems(at indexPaths: [IndexPath])
+protocol SearchViewProtocol: RecipesViewProtocol {
+    func startActivityIndicator()
+    func stopActivityIndicator()
 }

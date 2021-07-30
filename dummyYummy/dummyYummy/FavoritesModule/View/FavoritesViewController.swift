@@ -24,10 +24,12 @@ final class FavoritesViewController: RecipesViewController {
     }
 }
 
-extension FavoritesViewController: FavoritesViewProtocol {
-}
+// MARK: - FavoritesViewProtocol
+extension FavoritesViewController: FavoritesViewProtocol {}
 
+// MARK: - Private methods
 extension FavoritesViewController {
+
     private func setupView() {
         title = "Favorite recipes"
         collectionView.delegate = self
@@ -43,10 +45,13 @@ extension FavoritesViewController {
         searchController.searchResultsUpdater = self
         searchController.searchBar.placeholder = "Search in favorites"
         navigationItem.searchController = searchController
+        navigationItem.searchController?.searchBar.searchTextField.textColor = Colors.white
     }
 }
 
+// MARK: - UICollectionViewDataSource
 extension FavoritesViewController: UICollectionViewDataSource {
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         presenter?.recipesCount() ?? 0
     }
@@ -61,16 +66,21 @@ extension FavoritesViewController: UICollectionViewDataSource {
         guard let recipe = presenter?.recipe(at: indexPath.row) else {
             return cell
         }
+
         recipe.isFavorite = true
         cell.configView(with: recipe)
 
         cell.handleFavoriteButtonTap = { [weak self] in
             self?.presenter?.handleFavoriteTap(at: indexPath.row)
         }
+        cell.handleShareButtonTap = { [weak self] in
+            self?.presenter?.handleShareButtonTap(at: indexPath.row)
+        }
         return cell
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension FavoritesViewController: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         presenter?.didSelectRecipe(at: indexPath.row)
@@ -104,7 +114,9 @@ extension FavoritesViewController: UICollectionViewDelegateFlowLayout {
     }
 }
 
+// MARK: - UISearchResultsUpdating
 extension FavoritesViewController: UISearchResultsUpdating {
+
     func updateSearchResults(for searchController: UISearchController) {
         guard let text = searchController.searchBar.text else {
             return

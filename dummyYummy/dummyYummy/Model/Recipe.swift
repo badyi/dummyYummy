@@ -38,43 +38,7 @@ final class Recipe {
     init(with responseRecipe: RecipeInfoResponse) {
         id = responseRecipe.id
         title = responseRecipe.title
-//
-//        boolCharacteristics = [:]
-//        boolCharacteristics?["Vegeterian"] = responseRecipe.vegetarian
-//        boolCharacteristics?["Gluten free"] = responseRecipe.glutenFree
-//        boolCharacteristics?["Vegan"] = responseRecipe.vegan
-//        boolCharacteristics?["Dairy free"] = responseRecipe.dairyFree
-//        boolCharacteristics?["Very healthy"] = responseRecipe.veryHealthy
-//        boolCharacteristics?["Cheap"] = responseRecipe.cheap
-//        boolCharacteristics?["Very popular"] = responseRecipe.veryPopular
-//        boolCharacteristics?["Sustainable"] = responseRecipe.sustainable
-//        boolCharacteristics?["Low fodmap"] = responseRecipe.lowFodmap
-//
-//        ingredients = []
-//        responseRecipe.extendedIngredients.forEach {
-//            ingredients?.append($0.original)
-//        }
-//
-//        instructions = []
-//        if !responseRecipe.analyzedInstructions.isEmpty {
-//            responseRecipe.analyzedInstructions[0].steps.forEach {
-//                instructions?.append($0.step)
-//            }
-//        }
-//
-//        healthScore = responseRecipe.healthScore
-//
-//        pricePerServing = responseRecipe.pricePerServing
-//        readyInMinutes = responseRecipe.readyInMinutes
-//        servings = responseRecipe.servings
-//
-//        cuisines = responseRecipe.cuisines
-//        dishTypes = responseRecipe.dishTypes
-//        diets = responseRecipe.diets
-//
-//        sourceURL = responseRecipe.sourceUrl
         imageURL = responseRecipe.image
-//        spoonacularSourceURL = responseRecipe.spoonacularSourceURL
         configInfo(with: responseRecipe)
     }
 

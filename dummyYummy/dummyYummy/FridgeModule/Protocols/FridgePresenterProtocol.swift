@@ -8,15 +8,23 @@
 import Foundation
 
 protocol FridgePresenterProtocol {
-    init (with view: FridgeViewProtocol, _ networkService: FridgeNetworkServiceProtocol)
+    init (with view: FridgeViewProtocol)
 
+    /// Count of all ingredients
     func ingredientsCount() -> Int
-    func setChosenIngredients(_ ingredients: [String])
-    func title(at index: Int) -> String
-    func delete(at index: Int)
-    func didTapSearchButton()
-}
 
-protocol FridgeNavigationDelegate: AnyObject {
-    func didTapSearch(_ ingredients: [String])
+    /// Set chosen ingredients
+    /// - Parameter ingredients: array of ingredients
+    func setChosenIngredients(_ ingredients: [String])
+
+    /// Get title at index
+    /// - Parameter index: index of ingredient
+    func title(at index: Int) -> String
+
+    /// Delete ingredient at index
+    /// - Parameter index: index of ingredinet
+    func delete(at index: Int)
+
+    /// Search button was tapped
+    func didTapSearchButton()
 }

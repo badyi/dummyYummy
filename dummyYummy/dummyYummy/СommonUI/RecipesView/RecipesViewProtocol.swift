@@ -9,12 +9,6 @@ import UIKit
 
 protocol RecipesViewProtocol: AnyObject {
 
-    /// Setup collection view
-    func setupCollectionView()
-
-    /// Config view of navigation bar
-    func configNavigation()
-
     /// Reload collection view
     func reloadCollectionView()
 

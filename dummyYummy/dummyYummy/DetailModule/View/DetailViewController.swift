@@ -13,7 +13,7 @@ enum DetailSections {
 
 final class DetailViewController: UIViewController {
 
-    var goingForwards: Bool = false
+    var goingForwards: Bool = true
     var finishClosure: (() -> Void)?
 
     var currentSelected: Int = 0
@@ -47,19 +47,19 @@ final class DetailViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        presenter?.viewDidLoad()
+        presenter?.loadImageIfNeeded()
+        presenter?.prepareCharacteristics()
+        presenter?.prepareIngredientsAndInstructions()
+        presenter?.checkFavoriteStatus()
+        setupView()
     }
 
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        presenter?.viewWillAppear()
-        goingForwards = false
+        configNavigationBar()
+        goingForwards = true
     }
 
-    override func viewDidDisappear(_ animated: Bool) {
-        super.viewDidDisappear(animated)
-
-    }
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         if !goingForwards {
@@ -68,6 +68,7 @@ final class DetailViewController: UIViewController {
     }
 }
 
+// MARK: - DetailViewProtocol
 extension DetailViewController: DetailViewProtocol {
     func reloadCollection() {
         collectionView.reloadData()
@@ -78,20 +79,33 @@ extension DetailViewController: DetailViewProtocol {
             collectionView.reloadSections(IndexSet(integer: section))
         }, completion: nil)
     }
+}
 
-    func setupView() {
+// MARK: - Private methods
+extension DetailViewController {
+    private func setupView() {
         view.addSubview(collectionView)
         definesPresentationContext = true
         setupCollectionView()
     }
 
-    func configNavigationBar() {
+    private func configNavigationBar() {
         let design = DetailConstants.ViewController.Design.self
         navigationItem.largeTitleDisplayMode = .never
         navigationController?.navigationBar.backgroundColor = design.navBarBackgroundColor
     }
+
+    private func setupCollectionView() {
+        NSLayoutConstraint.activate([
+            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
+            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
+            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
+        ])
+    }
 }
 
+// MARK: - UICollectionViewDataSource
 extension DetailViewController: UICollectionViewDataSource {
 
     func collectionView(_ collectionView: UICollectionView,
@@ -120,7 +134,6 @@ extension DetailViewController: UICollectionViewDataSource {
         // header with image and title
         if sections[indexPath.section] == .headerSection {
 
-            // recipe.isFavorite = checkFavoriteStatus()
             guard let recipe = presenter?.getRecipe() else {
                 return header
             }
@@ -128,6 +141,10 @@ extension DetailViewController: UICollectionViewDataSource {
 
             header.handleFavoriteButtonTap = { [weak self] in
                 self?.presenter?.handleFavoriteTap(at: indexPath)
+            }
+
+            header.handleShareButtonTap = { [weak self] in
+                self?.presenter?.handleShareTap(at: indexPath)
             }
             return header
 
@@ -161,6 +178,7 @@ extension DetailViewController: UICollectionViewDataSource {
         if sections[section] == .headerSection {
             return 0
         } else if sections[section] == .characteristics {
+
             guard let characteristics = presenter?.getCharacteristics() else {
                 return 0
             }
@@ -170,6 +188,7 @@ extension DetailViewController: UICollectionViewDataSource {
             // if the section should not be expanded, return 0
             return 0
         } else if sections[section] == .ingredientsAndInstrusctions {
+
             guard let recipe = presenter?.getRecipe() else {
                 return 0
             }
@@ -200,10 +219,12 @@ extension DetailViewController: UICollectionViewDataSource {
         }
         // configuring cells for characteristics section
         if sections[indexPath.section] == .characteristics {
+
             cell.config(with: characteristics.values[indexPath.row])
             return cell
         // configuring cells for ingredients and instructions section
         } else if sections[indexPath.section] == .ingredientsAndInstrusctions {
+
             guard let recipe = presenter?.getRecipe() else {
                 return cell
             }
@@ -219,6 +240,7 @@ extension DetailViewController: UICollectionViewDataSource {
     }
 }
 
+// MARK: - UICollectionViewDelegate
 extension DetailViewController: UICollectionViewDelegate {
 
     func collectionView(_ collectionView: UICollectionView,
@@ -226,12 +248,16 @@ extension DetailViewController: UICollectionViewDelegate {
                         referenceSizeForHeaderInSection section: Int) -> CGSize {
         let width = collectionView.bounds.width - collectionView.contentInset.left - collectionView.contentInset.right
         if section == 0 {
+
             let title = presenter?.headerTitle() ?? ""
             let height = DetailHeader.heightForHeaderCellWithImage(with: title, width: width)
             return CGSize(width: width, height: height)
+
         } else if section == 1 || section == 2 {
+
             return CGSize(width: width, height: DetailConstants.ViewController.Layout.headerWithTitleHeight)
         }
+
         return CGSize(width: 0, height: 0)
     }
 
@@ -256,6 +282,7 @@ extension DetailViewController: UICollectionViewDelegate {
     }
 }
 
+// MARK: - UICollectionViewDelegateFlowLayout
 extension DetailViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView,
                         layout collectionViewLayout: UICollectionViewLayout,
@@ -265,27 +292,22 @@ extension DetailViewController: UICollectionViewDelegateFlowLayout {
 
         var height: CGFloat = 0
         if indexPath.section == 1 {
+
             let text = presenter?.characteristic(at: indexPath) ?? ""
             let height = DetailCell.heightForCell(with: text, width: width)
             return CGSize(width: width, height: height)
+
         } else if indexPath.section == 2, currentSelected == 0 {
+
             let text = presenter?.ingredientTitle(at: indexPath) ?? ""
             height = DetailCell.heightForCell(with: text, width: width)
+
         } else if indexPath.section == 2, currentSelected == 1 {
+
             let text = presenter?.instructionTitle(at: indexPath) ?? ""
             height = DetailCell.heightForCell(with: text, width: width)
         }
-        return CGSize(width: width, height: height)
-    }
-}
 
-private extension DetailViewController {
-    func setupCollectionView() {
-        NSLayoutConstraint.activate([
-            collectionView.leadingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.leadingAnchor),
-            collectionView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
-            collectionView.trailingAnchor.constraint(equalTo: view.safeAreaLayoutGuide.trailingAnchor),
-            collectionView.bottomAnchor.constraint(equalTo: view.safeAreaLayoutGuide.bottomAnchor)
-        ])
+        return CGSize(width: width, height: height)
     }
 }
