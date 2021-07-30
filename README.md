@@ -53,6 +53,8 @@
 
 ## Детали реализации
 
+### Deployment Target: iOS 13
+
 ### Архитектура приложения
 
 Архитектура **MVP+Coordinator+MicroServices**.<br>
