@@ -1,3 +1,15 @@
 # dummyYummy
 
-<div style="width:260px;max-width:100%;"><div style="height:0;padding-bottom:177.69%;position:relative;"><iframe width="260" height="462" style="position:absolute;top:0;left:0;width:100%;height:100%;" frameBorder="0" src="https://imgflip.com/embed/5i2wz8"></iframe></div><p><a href="https://imgflip.com/gif/5i2wz8">via Imgflip</a></p></div>
+<p align="center">
+    <img src="https://i.postimg.cc/SKn5Y5RR/ice.png">
+</p>
+
+С приложением dummyYummy вы можете искать иссдедовать случайные рецепты или же искать их по названию, по ингредиентам, также вы можете искать рецепты по ингредиентам, а понравившиеся сохранить на устройство 
+
+## Сценарии приложения
+### First Launch
+При первом запуске вы увидите небольшой guide по приложению
+
+[![ezgif-com-video-to-gif.gif](https://i.postimg.cc/2yZh4jY3/ezgif-com-video-to-gif.gif)](https://postimg.cc/303khTdH)
+
+![Alt Text](https://media.giphy.com/media/vFKqnCdLPNOKc/giphy.gif)
