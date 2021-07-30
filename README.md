@@ -103,7 +103,7 @@
 
 ### API link
 
-- **Thanks sponacular** - https://spoonacular.com/food-api
+- **Thanks to spoonacular** - https://spoonacular.com/food-api
 
 ## Subscribe, Like & Share.
 
