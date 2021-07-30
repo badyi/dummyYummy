@@ -51,6 +51,10 @@
 
 [![5i3lyy.gif](https://i.postimg.cc/WzP2sygF/5i3lyy.gif)](https://postimg.cc/7GmvVmBw)
 
+## Installation
+
+***У вас должны быть установлены Swiftlint и SnapshotTesting, но если вы хотите запустить без них, то можете удалить их из проекта***
+
 ## Детали реализации
 
 ### Deployment Target: iOS 13
