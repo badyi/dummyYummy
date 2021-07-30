@@ -99,9 +99,9 @@
 
 [![2021-07-30-20-35-35.png](https://i.postimg.cc/QdPqmFPb/2021-07-30-20-35-35.png)](https://postimg.cc/ts3PC49Z)
 
-### Api link
+### API link
 
-- https://spoonacular.com/food-api
+- **Thanks sponacular** - https://spoonacular.com/food-api
 
 ## Subscribe, Like & Share.
 
