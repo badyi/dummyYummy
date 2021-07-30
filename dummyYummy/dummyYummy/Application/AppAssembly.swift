@@ -21,10 +21,10 @@ final class AppAssembly {
         let page2 = GuideViewController()
         let page3 = GuideViewController()
         let page4 = GuideViewController()
-        page1.setImage(UIImage(named: "feedGuide") ?? UIImage())
-        page2.setImage(UIImage(named: "detailGuide") ?? UIImage())
-        page3.setImage(UIImage(named: "fridgeGuide") ?? UIImage())
-        page4.setImage(UIImage(named: "favoritesGuide") ?? UIImage())
+        page1.setImage(UIImage(named: "feedGuideImage") ?? UIImage())
+        page2.setImage(UIImage(named: "detailGuideImage") ?? UIImage())
+        page3.setImage(UIImage(named: "fridgeGuideImage") ?? UIImage())
+        page4.setImage(UIImage(named: "favoritesGuideImage") ?? UIImage())
         let pages: [GuideViewController] = [page1, page2, page3, page4]
         let guidePresenter = GuidePresenter(with: pageViewController, pages)
         guidePresenter.navigationDelegate = navigationDelegate
