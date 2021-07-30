@@ -97,6 +97,10 @@
 - **Swiftlint**
 - **SnapshotTesting**
 
+### Note
+
+Если будете запускать ночью, то иногда примерно в час ночи по мск ненадолго обновляется API т.е оно не работает
+
 ### All tests code coverage
 
 [![2021-07-30-20-53-32.png](https://i.postimg.cc/g0jTkwLF/2021-07-30-20-53-32.png)](https://postimg.cc/JywqpzQP)
