@@ -78,7 +78,7 @@ extension SearchIngredientsPresenter {
     private func delete(at index: Int) {
         DispatchQueue.main.async { [weak self] in
             self?.chosenIngredinets.remove(at: index)
-            self?.view?.removed(at: IndexPath(row: index, section: 0))
+            self?.view?.reloadTable()
         }
     }
 

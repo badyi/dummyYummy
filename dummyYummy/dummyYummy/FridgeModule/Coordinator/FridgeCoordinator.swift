@@ -48,7 +48,9 @@ final class FridgeCoordinator: FridgeCoordinatorProtocol {
 extension FridgeCoordinator: CoordinatorFinishDelegate {
     func coordinatorDidFinish(childCoordinator: Coordinator) {
         if let childCoordinator = childCoordinators.last, childCoordinator.type == .detail {
-            navigationController.popToRootViewController(animated: true)
+            if (navigationController.viewControllers.last as? DetailViewController) != nil {
+                navigationController.popToRootViewController(animated: true)
+            }
             childCoordinators.removeLast()
         }
     }

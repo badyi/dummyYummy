@@ -87,7 +87,6 @@ extension SearchIngredientsViewController: UITableViewDelegate {
 extension SearchIngredientsViewController: SearchIngredientsViewProtocol {
     func removed(at indexPath: IndexPath) {
         tableView.beginUpdates()
-        tableView.deleteRows(at: [indexPath], with: .automatic)
         tableView.endUpdates()
     }
 
@@ -105,10 +104,6 @@ extension SearchIngredientsViewController {
         view.backgroundColor = .red
         view.addSubview(tableView)
         setupTableView()
-    }
-
-    private func configNavigation() {
-
     }
 
     private func setupTableView() {
