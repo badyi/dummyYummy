@@ -1,5 +1,9 @@
 # dummyYummy
 
+## UPD
+- *API key expired* 
+- Ключ api истек, для корректной работы вам необходимо получить новый ключ на сайте https://rapidapi.com/spoonacular/api/recipe-food-nutrition/pricing
+
 <p align="center">
     <img src="https://i.postimg.cc/SKn5Y5RR/ice.png">
 </p>
